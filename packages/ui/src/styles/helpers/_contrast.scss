@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use 'sass:math';
+
+@function lx-contrast-colour($background, $light: #ffffff, $dark: #000000, $threshold: 0.56) {
+	$red: math.div(color.channel($background, 'red', $space: rgb), 255);
+	$green: math.div(color.channel($background, 'green', $space: rgb), 255);
+	$blue: math.div(color.channel($background, 'blue', $space: rgb), 255);
+
+	$adjust-red: null;
+	$adjust-green: null;
+	$adjust-blue: null;
+
+	@if $red <= 0.03928 {
+		$adjust-red: math.div($red, 12.92);
+	} @else {
+		$adjust-red: math.pow(math.div($red + 0.055, 1.055), 2);
+	}
+
+	@if $green <= 0.03928 {
+		$adjust-green: math.div($green, 12.92);
+	} @else {
+		$adjust-green: math.pow(math.div($green + 0.055, 1.055), 2);
+	}
+
+	@if $blue <= 0.03928 {
+		$adjust-blue: math.div($blue, 12.92);
+	} @else {
+		$adjust-blue: math.pow(math.div($blue + 0.055, 1.055), 2);
+	}
+
+	$luminance: (0.2126 * $adjust-red) + (0.7152 * $adjust-green) + (0.0722 * $adjust-blue);
+
+	@if $luminance > $threshold {
+		@return $dark;
+	}
+
+	@return $light;
+}

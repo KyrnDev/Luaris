@@ -1,0 +1,60 @@
+@use './helpers/emit-variables' as helpers;
+@use './themes/light';
+@use './themes/dark';
+@use './themes/high-contrast';
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;500;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+:root,
+html,
+html[data-theme='light'] {
+	@include helpers.lx-emit-variables(light.$theme-light);
+}
+
+html[data-theme='dark'] {
+	@include helpers.lx-emit-variables(dark.$theme-dark);
+}
+
+html[data-theme='high-contrast'] {
+	@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
+}
+
+@media (prefers-color-scheme: dark) {
+	html:not([data-theme]) {
+		@include helpers.lx-emit-variables(dark.$theme-dark);
+	}
+}
+
+@media (prefers-contrast: more) {
+	html:not([data-theme]) {
+		@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
+	}
+}
+
+html,
+body {
+	background-color: var(--lx-colour-surface-base);
+	color: var(--lx-colour-surface-text);
+	font-size: var(--lx-font-size-md);
+	line-height: var(--lx-font-line-height-normal);
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	font-family: var(--lx-font-family-primary);
+}
+
+code,
+pre,
+kbd,
+samp {
+	font-family: var(--lx-font-family-mono);
+}
+
+@layer lx-token-classes {
+	@include helpers.lx-emit-token-classes(light.$theme-light);
+}

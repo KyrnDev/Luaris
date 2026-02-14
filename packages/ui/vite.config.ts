@@ -1,0 +1,59 @@
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+	plugins: [vue()],
+	build: {
+		lib: {
+			entry: {
+				'index': resolve(__dirname, 'src/index.ts'),
+				'components/avatar': resolve(__dirname, 'src/components/avatar/index.ts'),
+				'components/badge': resolve(__dirname, 'src/components/badge/index.ts'),
+				'components/input': resolve(__dirname, 'src/components/input/index.ts'),
+				'components/button': resolve(__dirname, 'src/components/button/index.ts'),
+				'components/breadcrumbs': resolve(__dirname, 'src/components/breadcrumbs/index.ts'),
+				'components/card': resolve(__dirname, 'src/components/card/index.ts'),
+				'components/carousel': resolve(__dirname, 'src/components/carousel/index.ts'),
+				'components/comparison': resolve(__dirname, 'src/components/comparison/index.ts'),
+				'components/colour-picker': resolve(__dirname, 'src/components/colour-picker/index.ts'),
+				'components/combobox': resolve(__dirname, 'src/components/combobox/index.ts'),
+				'components/date-picker': resolve(__dirname, 'src/components/date-picker/index.ts'),
+				'components/date-range-picker': resolve(__dirname, 'src/components/date-range-picker/index.ts'),
+				'components/divider': resolve(__dirname, 'src/components/divider/index.ts'),
+				'components/drawer': resolve(__dirname, 'src/components/drawer/index.ts'),
+				'components/dropdown': resolve(__dirname, 'src/components/dropdown/index.ts'),
+				'components/icon': resolve(__dirname, 'src/components/icon/index.ts'),
+				'components/page': resolve(__dirname, 'src/components/page/index.ts'),
+				'components/label': resolve(__dirname, 'src/components/label/index.ts'),
+				'components/number-input': resolve(__dirname, 'src/components/number-input/index.ts'),
+				'components/progress': resolve(__dirname, 'src/components/progress/index.ts'),
+				'components/radio': resolve(__dirname, 'src/components/radio/index.ts'),
+				'components/radios': resolve(__dirname, 'src/components/radios/index.ts'),
+				'components/rating': resolve(__dirname, 'src/components/rating/index.ts'),
+				'components/select': resolve(__dirname, 'src/components/select/index.ts'),
+				'components/skeleton': resolve(__dirname, 'src/components/skeleton/index.ts'),
+				'components/slider': resolve(__dirname, 'src/components/slider/index.ts'),
+				'components/spinner': resolve(__dirname, 'src/components/spinner/index.ts'),
+				'components/switch': resolve(__dirname, 'src/components/switch/index.ts'),
+				'components/tag': resolve(__dirname, 'src/components/tag/index.ts'),
+				'components/textarea': resolve(__dirname, 'src/components/textarea/index.ts'),
+				'components/theme-selector': resolve(__dirname, 'src/components/theme-selector/index.ts'),
+			},
+			formats: ['es'],
+			cssFileName: 'styles',
+			fileName: (_, entryName) =>
+				entryName === 'index' ? 'index.js' : `${entryName}/index.js`,
+		},
+		rollupOptions: {
+			external: ['vue'],
+			output: {
+				exports: 'named',
+			},
+		},
+		sourcemap: true,
+		cssMinify: false,
+		emptyOutDir: true,
+		copyPublicDir: false,
+	},
+});

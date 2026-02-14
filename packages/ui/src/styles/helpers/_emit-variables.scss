@@ -1,0 +1,76 @@
+@use 'sass:meta';
+@use 'sass:string';
+
+@mixin lx-emit-variables($tokens, $prefix: null) {
+	@each $token, $value in $tokens {
+		$token-name: null;
+
+		@if $prefix == null {
+			$token-name: $token;
+		} @else {
+			$token-name: '#{$prefix}-#{$token}';
+		}
+
+		@if meta.type-of($value) == 'map' {
+			@include lx-emit-variables($value, $token-name);
+		} @else {
+			--lx-#{$token-name}: #{$value};
+		}
+	}
+}
+
+@function lx-token-class-property($token-name) {
+	@if string.index($token-name, 'colour-') == 1 {
+		@return color;
+	}
+
+	@if string.index($token-name, 'font-family-') == 1 {
+		@return font-family;
+	}
+
+	@if string.index($token-name, 'font-size-') == 1 {
+		@return font-size;
+	}
+
+	@if string.index($token-name, 'font-line-height-') == 1 {
+		@return line-height;
+	}
+
+	@if string.index($token-name, 'font-weight-') == 1 {
+		@return font-weight;
+	}
+
+	@if string.index($token-name, 'size-radius-') == 1 {
+		@return border-radius;
+	}
+
+	@if string.index($token-name, 'size-control-height-') == 1 {
+		@return height;
+	}
+
+	@return null;
+}
+
+@mixin lx-emit-token-classes($tokens, $prefix: null) {
+	@each $token, $value in $tokens {
+		$token-name: null;
+
+		@if $prefix == null {
+			$token-name: $token;
+		} @else {
+			$token-name: '#{$prefix}-#{$token}';
+		}
+
+		@if meta.type-of($value) == 'map' {
+			@include lx-emit-token-classes($value, $token-name);
+		} @else {
+			$property: lx-token-class-property($token-name);
+
+			@if $property != null {
+				.lx-#{$token-name} {
+					#{$property}: var(--lx-#{$token-name});
+				}
+			}
+		}
+	}
+}

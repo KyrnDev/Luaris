@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use '../helpers/contrast' as contrast;
+@use './dark';
+
+$colour-primary: #9bc0ff;
+$colour-secondary: #d1d5db;
+$colour-accent: #ffb300;
+$colour-info: #00d4ff;
+$colour-success: #00e05a;
+$colour-warning: #ffd800;
+$colour-danger: #ff1f1f;
+
+$theme-high-contrast: map.deep-merge(dark.$theme-dark, (
+	'colour': (
+		'primary': $colour-primary,
+		'secondary': $colour-secondary,
+		'accent': $colour-accent,
+		'info': $colour-info,
+		'success': $colour-success,
+		'warning': $colour-warning,
+		'danger': $colour-danger,
+		'focus-ring': #ffffff,
+		'on': (
+			'primary': contrast.lx-contrast-colour($colour-primary),
+			'secondary': contrast.lx-contrast-colour($colour-secondary),
+			'accent': contrast.lx-contrast-colour($colour-accent),
+			'info': contrast.lx-contrast-colour($colour-info),
+			'success': contrast.lx-contrast-colour($colour-success),
+			'warning': contrast.lx-contrast-colour($colour-warning),
+			'danger': contrast.lx-contrast-colour($colour-danger),
+		),
+		'surface': (
+			'base': #000000,
+			'raised': #000000,
+			'sunken': #000000,
+			'overlay': rgb(0 0 0 / 0.9),
+			'border': #ffffff,
+			'text': #ffffff,
+			'text-muted': #f8fafc,
+			'inverse': #000000,
+		),
+	),
+	'size': (
+		'border-width': (
+			'hairline': 2px,
+			'standard': 3px,
+		),
+	),
+));

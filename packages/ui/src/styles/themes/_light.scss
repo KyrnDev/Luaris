@@ -1,0 +1,121 @@
+@use '../helpers/contrast' as contrast;
+
+$colour-primary: #2c415a;
+$colour-secondary: #445a75;
+$colour-accent: #d97706;
+$colour-info: #0284c7;
+$colour-success: #15803d;
+$colour-warning: #ca8a04;
+$colour-danger: #b91c1c;
+
+$colour-surface-base: #f2f5fb;
+$colour-surface-raised: #fbfcff;
+$colour-surface-sunken: #e6ecf6;
+$colour-surface-overlay: rgb(15 23 42 / 0.58);
+$colour-surface-border: #c8d3e5;
+$colour-surface-text: #121a2b;
+$colour-surface-text-muted: #4a5977;
+$colour-surface-inverse: #ffffff;
+
+$theme-light: (
+	'colour': (
+		'primary': $colour-primary,
+		'secondary': $colour-secondary,
+		'accent': $colour-accent,
+		'info': $colour-info,
+		'success': $colour-success,
+		'warning': $colour-warning,
+		'danger': $colour-danger,
+		'focus-ring': #1d4ed8,
+		'on': (
+			'primary': contrast.lx-contrast-colour($colour-primary),
+			'secondary': contrast.lx-contrast-colour($colour-secondary),
+			'accent': contrast.lx-contrast-colour($colour-accent),
+			'info': contrast.lx-contrast-colour($colour-info),
+			'success': contrast.lx-contrast-colour($colour-success),
+			'warning': contrast.lx-contrast-colour($colour-warning),
+			'danger': contrast.lx-contrast-colour($colour-danger),
+		),
+		'surface': (
+			'base': $colour-surface-base,
+			'raised': $colour-surface-raised,
+			'sunken': $colour-surface-sunken,
+			'overlay': $colour-surface-overlay,
+			'border': $colour-surface-border,
+			'text': $colour-surface-text,
+			'text-muted': $colour-surface-text-muted,
+			'inverse': $colour-surface-inverse,
+		),
+	),
+	'size': (
+		'space': (
+			'2xs': 0.125rem,
+			'xs': 0.25rem,
+			'sm': 0.5rem,
+			'md': 0.75rem,
+			'lg': 1rem,
+			'xl': 1.5rem,
+			'2xl': 2rem,
+			'3xl': 3rem,
+		),
+		'radius': (
+			'sm': 0.25rem,
+			'md': 0.5rem,
+			'lg': 0.75rem,
+			'pill': 9999px,
+		),
+		'border-width': (
+			'hairline': 1px,
+			'standard': 2px,
+		),
+		'control': (
+			'height-2xs': 1.5rem,
+			'height-xs': 1.75rem,
+			'height-sm': 2rem,
+			'height-md': 2.5rem,
+			'height-lg': 3rem,
+			'height-xl': 3.5rem,
+			'height-2xl': 4rem,
+		),
+		'layout': (
+			'content-max': 72rem,
+			'sidebar-width': 18rem,
+		),
+	),
+	'font': (
+		'family': (
+			'primary': ('Nunito', 'Inter', 'Segoe UI', sans-serif),
+			'secondary': ('Fraunces', 'Georgia', 'Times New Roman', serif),
+			'mono': ('JetBrains Mono', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace),
+		),
+		'size': (
+			'xs': 0.75rem,
+			'sm': 0.875rem,
+			'md': 1rem,
+			'lg': 1.125rem,
+			'xl': 1.25rem,
+		),
+		'line-height': (
+			'tight': 1.2,
+			'normal': 1.5,
+			'relaxed': 1.7,
+		),
+		'weight': (
+			'regular': 400,
+			'medium': 500,
+			'semibold': 600,
+			'bold': 700,
+		),
+	),
+	'motion': (
+		'duration': (
+			'fast': 120ms,
+			'normal': 180ms,
+			'slow': 260ms,
+		),
+		'easing': (
+			'standard': cubic-bezier(0.2, 0, 0, 1),
+			'emphasised': cubic-bezier(0.2, 0, 0, 1.2),
+		),
+	),
+);
