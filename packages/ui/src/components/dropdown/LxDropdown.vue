@@ -5,9 +5,17 @@
 		</summary>
 		<ul class="lx-dropdown__menu" role="menu" :aria-label="props.label" @keydown.esc="open = false">
 			<li v-for="option in props.options" :key="String(option.value)">
-				<button type="button" role="menuitem" :disabled="option.disabled" @click="onSelect(option.value)">
+				<LxButton
+					class="lx-dropdown__item"
+					type="button"
+					variant="plain"
+					size="sm"
+					role="menuitem"
+					:disabled="option.disabled"
+					@click="onSelect(option.value)"
+				>
 					{{ option.label }}
-				</button>
+				</LxButton>
 			</li>
 		</ul>
 	</details>
@@ -17,6 +25,7 @@
 	import type { ILxDropdownProps, TLxDropdownValue } from './types';
 	import { ref } from 'vue';
 	import { vClickOutside as vClickOutsideDirective } from '../../directives/clickOutside';
+	import { LxButton } from '../button';
 
 	const props = withDefaults(defineProps<ILxDropdownProps>(), {
 		label: 'Options',
@@ -79,19 +88,17 @@
 		z-index: 40;
 	}
 
-	.lx-dropdown__menu button {
-		appearance: none;
+	.lx-dropdown__item {
 		background: transparent;
-		border: none;
 		border-radius: var(--lx-size-radius-sm);
 		color: var(--lx-colour-surface-text);
-		cursor: pointer;
+		justify-content: flex-start;
 		padding: var(--lx-size-space-sm);
 		text-align: left;
 		width: 100%;
 	}
 
-	.lx-dropdown__menu button:hover:not(:disabled) {
+	.lx-dropdown__item:hover:not(:disabled) {
 		background: var(--lx-colour-surface-sunken);
 	}
 </style>

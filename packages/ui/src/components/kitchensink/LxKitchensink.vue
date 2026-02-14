@@ -484,6 +484,17 @@
 						/>
 					</template>
 				</LxLabel>
+				<LxLabel text="Colour (Popup)">
+					<template #default="{ controlId, controlName }">
+						<LxColourPicker
+							:id="controlId"
+							v-model="colourValue"
+							:name="controlName"
+							:popup="true"
+							popup-title="Pick Accent Colour"
+						/>
+					</template>
+				</LxLabel>
 				<LxLabel text="Textarea">
 					<template #default="{ controlId, controlName }">
 						<LxTextarea
@@ -517,12 +528,48 @@
 			<h3>
 				Drawer
 			</h3>
+			<div class="lx-kitchen-sink__drawer-controls">
+				<LxLabel text="Side">
+					<template #default="{ controlId, controlName }">
+						<LxSelect
+							:id="controlId"
+							v-model="drawerSide"
+							:name="controlName"
+							:options="drawerSideOptions"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Animation">
+					<template #default="{ controlId, controlName }">
+						<LxSelect
+							:id="controlId"
+							v-model="drawerAnimation"
+							:name="controlName"
+							:options="drawerAnimationOptions"
+						/>
+					</template>
+				</LxLabel>
+			</div>
 			<div class="lx-kitchen-sink__button-row">
 				<LxButton variant="accent" size="sm" @click="drawerOpen = true">
 					Open Drawer
 				</LxButton>
+				<LxButton variant="plain" size="sm" @click="openDrawerPreset('left', 'slide')">
+					Left Slide
+				</LxButton>
+				<LxButton variant="plain" size="sm" @click="openDrawerPreset('top', 'fade')">
+					Top Fade
+				</LxButton>
+				<LxButton variant="plain" size="sm" @click="openDrawerPreset('bottom', 'none')">
+					Bottom Instant
+				</LxButton>
 			</div>
-			<LxDrawer v-model="drawerOpen" title="Drawer Example">
+			<LxDrawer
+				v-model="drawerOpen"
+				title="Drawer Example"
+				:side="drawerSide"
+				:animation="drawerAnimation"
+			>
 				<p>
 					Use drawers for secondary flows without changing page context.
 				</p>
@@ -539,6 +586,63 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Modal
+			</h3>
+			<div class="lx-kitchen-sink__drawer-controls">
+				<LxLabel text="Position">
+					<template #default="{ controlId, controlName }">
+						<LxSelect
+							:id="controlId"
+							v-model="modalPosition"
+							:name="controlName"
+							:options="modalPositionOptions"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Animation">
+					<template #default="{ controlId, controlName }">
+						<LxSelect
+							:id="controlId"
+							v-model="modalAnimation"
+							:name="controlName"
+							:options="modalAnimationOptions"
+						/>
+					</template>
+				</LxLabel>
+			</div>
+			<div class="lx-kitchen-sink__button-row">
+				<LxButton variant="accent" size="sm" @click="modalOpen = true">
+					Open Modal
+				</LxButton>
+			</div>
+			<LxModal
+				v-model="modalOpen"
+				title="Reusable Modal"
+				:position="modalPosition"
+				:animation="modalAnimation"
+				:show-close="true"
+				width="min(92vw, 36rem)"
+				max-width="36rem"
+				max-height="min(80dvh, 34rem)"
+			>
+				<p>
+					This shared modal powers popup behaviour across the framework, including drawer, icon picker, and colour picker.
+				</p>
+				<template #footer>
+					<div class="lx-kitchen-sink__button-row">
+						<LxButton variant="ghost" size="sm" @click="modalOpen = false">
+							Cancel
+						</LxButton>
+						<LxButton variant="primary" size="sm" @click="modalOpen = false">
+							Confirm
+						</LxButton>
+					</div>
+				</template>
+			</LxModal>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Icons (Font Awesome)
 			</h3>
 			<div class="lx-kitchen-sink__icon-row">
@@ -549,9 +653,35 @@
 				<LxIcon name="spinner" spin size="xl" />
 			</div>
 			<p class="lx-kitchen-sink__muted">
-				Selected icon: {{ selectedIconChoice?.name || 'none' }} ({{ selectedIconChoice?.style || 'n/a' }})
+				Inline picker: {{ selectedIconChoice?.name || 'none' }} ({{ selectedIconChoice?.style || 'n/a' }})
 			</p>
 			<LxIconPicker v-model="selectedIconChoice" />
+			<p class="lx-kitchen-sink__muted">
+				Popup picker: {{ selectedPopupIconChoice?.name || 'none' }} ({{ selectedPopupIconChoice?.style || 'n/a' }})
+			</p>
+			<LxIconPicker
+				v-model="selectedPopupIconChoice"
+				:popup="true"
+				popup-title="Select an icon"
+			/>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Popup Pickers
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxIconPicker
+					v-model="selectedPopupIconChoice"
+					:popup="true"
+					popup-title="Select an icon"
+				/>
+				<LxColourPicker
+					v-model="colourValue"
+					:popup="true"
+					popup-title="Pick Accent Colour"
+				/>
+			</div>
 		</section>
 
 		<section class="lx-kitchen-sink__section">
@@ -689,6 +819,7 @@
 	import { LxDateRangePicker } from '../date-range-picker';
 	import { LxDivider } from '../divider';
 	import { LxDrawer } from '../drawer';
+	import type { TLxDrawerAnimation, TLxDrawerSide } from '../drawer';
 	import { LxDropdown } from '../dropdown';
 	import { LxFlex } from '../flex';
 	import { LxIcon } from '../icon';
@@ -696,6 +827,8 @@
 	import type { ILxIconPickerValue } from '../icon-picker';
 	import { LxInput } from '../input';
 	import { LxLabel } from '../label';
+	import { LxModal } from '../modal';
+	import type { TLxModalAnimation, TLxModalPosition } from '../modal';
 	import { LxNumberInput } from '../number-input';
 	import { LxSelect } from '../select';
 	import { LxSkeleton } from '../skeleton';
@@ -711,7 +844,7 @@
 	import { LxRadios } from '../radios';
 
 	const variants: TLxButtonVariant[] = ['primary', 'secondary', 'ghost', 'accent', 'info', 'success', 'warning', 'danger'];
-	const semanticVariants = variants.filter(variant => variant !== 'ghost');
+	const semanticVariants = variants.filter((variant): variant is Exclude<TLxButtonVariant, 'ghost' | 'plain'> => variant !== 'ghost' && variant !== 'plain');
 	const buttonSizes: TLxButtonSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 
 	const breadcrumbItems = [
@@ -734,6 +867,25 @@
 		{ label: 'Archive', value: 'archive' },
 		{ label: 'Delete', value: 'delete' },
 	];
+	const drawerSideOptions = [
+		{ label: 'Right', value: 'right' },
+		{ label: 'Left', value: 'left' },
+		{ label: 'Top', value: 'top' },
+		{ label: 'Bottom', value: 'bottom' },
+	];
+	const drawerAnimationOptions = [
+		{ label: 'None', value: 'none' },
+		{ label: 'Fade', value: 'fade' },
+		{ label: 'Slide', value: 'slide' },
+	];
+	const modalPositionOptions = [
+		{ label: 'Center', value: 'center' },
+		{ label: 'Left', value: 'left' },
+		{ label: 'Right', value: 'right' },
+		{ label: 'Top', value: 'top' },
+		{ label: 'Bottom', value: 'bottom' },
+	];
+	const modalAnimationOptions = [...drawerAnimationOptions];
 
 	const radioOptions = [
 		{ label: 'Option A', value: 'a' },
@@ -788,10 +940,19 @@
 	const emailEnabled = ref(true);
 	const pushEnabled = ref(false);
 	const drawerOpen = ref(false);
+	const drawerSide = ref<TLxDrawerSide>('right');
+	const drawerAnimation = ref<TLxDrawerAnimation>('none');
+	const modalOpen = ref(false);
+	const modalPosition = ref<TLxModalPosition>('center');
+	const modalAnimation = ref<TLxModalAnimation>('fade');
 	const selectedAction = ref('none');
 	const selectedIconChoice = ref<ILxIconPickerValue | null>({
 		name: 'house',
 		style: 'solid',
+	});
+	const selectedPopupIconChoice = ref<ILxIconPickerValue | null>({
+		name: 'bell',
+		style: 'regular',
 	});
 	const carouselIndex = ref(0);
 	const comparisonSplit = ref(50);
@@ -816,6 +977,12 @@
 
 	const onTagRemove = (): void => {
 		selectedAction.value = 'tag removed';
+	};
+
+	const openDrawerPreset = (side: TLxDrawerSide, animation: TLxDrawerAnimation): void => {
+		drawerSide.value = side;
+		drawerAnimation.value = animation;
+		drawerOpen.value = true;
 	};
 </script>
 
@@ -992,6 +1159,12 @@
 	.lx-kitchen-sink__spacing-grid {
 		display: grid;
 		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__drawer-controls {
+		display: grid;
+		gap: var(--lx-size-space-md);
+		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
 	}
 
 	.lx-kitchen-sink__surface-item,

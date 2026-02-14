@@ -179,6 +179,25 @@
 		filter: none;
 	}
 
+	.lx-button--plain {
+		--lx-button-background: transparent;
+		--lx-button-border: transparent;
+		--lx-button-text: var(--lx-colour-surface-text);
+		border: none;
+	}
+
+	.lx-button--plain:hover:not(:disabled) {
+		background-color: transparent;
+		filter: none;
+		transform: none;
+	}
+
+	.lx-button--plain:active:not(:disabled) {
+		background-color: transparent;
+		filter: none;
+		transform: none;
+	}
+
 	.lx-button--accent {
 		--lx-button-background: var(--lx-colour-accent);
 		--lx-button-border: var(--lx-colour-accent);

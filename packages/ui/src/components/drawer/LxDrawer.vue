@@ -1,44 +1,48 @@
 <template>
-	<Teleport to="body">
-		<div v-if="props.modelValue" class="lx-drawer" :class="[`lx-drawer--${props.side}`]">
-			<button
-				v-if="props.closeOnBackdrop"
-				class="lx-drawer__backdrop"
-				type="button"
+	<LxModal
+		v-model="open"
+		:position="props.side"
+		:animation="props.animation"
+		:show-backdrop="props.closeOnBackdrop"
+		:close-on-backdrop="props.closeOnBackdrop"
+		:close-on-escape="props.closeOnEscape"
+		:show-close="false"
+		:panel-class="panelClass"
+		:width="panelWidth"
+		:max-width="panelMaxWidth"
+		:max-height="panelMaxHeight"
+		@close="emit('close')"
+	>
+		<header v-if="$slots.header || props.title" :id="headerId" class="lx-drawer__header">
+			<slot name="header">
+				{{ props.title }}
+			</slot>
+			<LxButton
+				class="lx-drawer__close-button"
+				variant="plain"
+				size="xs"
+				icon="xmark"
 				aria-label="Close drawer"
 				@click="close"
 			/>
-			<aside
-				class="lx-drawer__panel"
-				role="dialog"
-				aria-modal="true"
-				:aria-labelledby="$slots.header || props.title ? headerId : undefined"
-				tabindex="-1"
-			>
-				<header v-if="$slots.header || props.title" :id="headerId" class="lx-drawer__header">
-					<slot name="header">
-						{{ props.title }}
-					</slot>
-					<button class="lx-drawer__close" type="button" aria-label="Close drawer" @click="close">
-						×
-					</button>
-				</header>
-				<div class="lx-drawer__body">
-					<slot />
-				</div>
-			</aside>
+		</header>
+		<div class="lx-drawer__body">
+			<slot />
 		</div>
-	</Teleport>
+	</LxModal>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
+	import { computed } from 'vue';
+	import { LxButton } from '../button';
+	import { LxModal } from '../modal';
 	import type { ILxDrawerProps } from './types';
-	import { onMounted, onUnmounted } from 'vue';
 
 	const props = withDefaults(defineProps<ILxDrawerProps>(), {
 		modelValue: false,
 		title: '',
 		side: 'right',
+		animation: 'none',
 		closeOnBackdrop: true,
 		closeOnEscape: true,
 	});
@@ -50,63 +54,62 @@
 
 	const headerId = `lx-drawer-${Math.random().toString(36).slice(2, 9)}-header`;
 
+	const open = computed({
+		get: () => props.modelValue,
+		set: (value: boolean) => {
+			emit('update:modelValue', value);
+		},
+	});
+
+	const panelClass = computed(() => `lx-drawer__panel lx-drawer__panel--${props.side}`);
+	const panelWidth = computed(() => {
+		if (props.side === 'top' || props.side === 'bottom') {
+			return 'min(100vw - (var(--lx-size-space-md) * 2), 76rem)';
+		}
+
+		return 'min(92vw, 26rem)';
+	});
+	const panelMaxWidth = computed(() => {
+		if (props.side === 'top' || props.side === 'bottom') {
+			return 'min(100vw - (var(--lx-size-space-md) * 2), 76rem)';
+		}
+
+		return '26rem';
+	});
+	const panelMaxHeight = computed(() => {
+		if (props.side === 'top' || props.side === 'bottom') {
+			return 'min(58vh, 24rem)';
+		}
+
+		return 'calc(100dvh - (var(--lx-size-space-md) * 2))';
+	});
+
 	const close = (): void => {
-		emit('update:modelValue', false);
+		open.value = false;
 		emit('close');
 	};
-
-	const onEscape = (event: KeyboardEvent): void => {
-		if (event.key === 'Escape' && props.modelValue && props.closeOnEscape) {
-			close();
-		}
-	};
-
-	onMounted(() => {
-		window.addEventListener('keydown', onEscape);
-	});
-
-	onUnmounted(() => {
-		window.removeEventListener('keydown', onEscape);
-	});
 </script>
 
-<style scoped lang="scss">
-	.lx-drawer {
-		inset: 0;
-		position: fixed;
-		z-index: 80;
-	}
-
-	.lx-drawer__backdrop {
-		background: var(--lx-colour-surface-overlay);
-		border: none;
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-	}
-
-	.lx-drawer__panel {
-		background: var(--lx-colour-surface-raised);
-		border-left: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+<style scoped lang='scss'>
+	:deep(.lx-drawer__panel) {
 		display: grid;
 		grid-template-rows: auto 1fr;
-		height: 100%;
-		max-width: 26rem;
-		position: absolute;
-		top: 0;
-		width: min(92vw, 26rem);
 	}
 
-	.lx-drawer--left .lx-drawer__panel {
-		border-left: none;
+	:deep(.lx-drawer__panel--left) {
 		border-right: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		left: 0;
 	}
 
-	.lx-drawer--right .lx-drawer__panel {
-		right: 0;
+	:deep(.lx-drawer__panel--right) {
+		border-left: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+	}
+
+	:deep(.lx-drawer__panel--top) {
+		border-bottom: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+	}
+
+	:deep(.lx-drawer__panel--bottom) {
+		border-top: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
 	}
 
 	.lx-drawer__header {
@@ -118,13 +121,8 @@
 		padding: var(--lx-size-space-md) var(--lx-size-space-lg);
 	}
 
-	.lx-drawer__close {
-		appearance: none;
-		background: transparent;
-		border: none;
-		cursor: pointer;
-		font-size: 1.4rem;
-		line-height: 1;
+	.lx-drawer__close-button {
+		flex-shrink: 0;
 	}
 
 	.lx-drawer__body {

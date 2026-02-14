@@ -1,4 +1,5 @@
 import type { TLxIconStyle } from '../icon/types';
+import type { TLxModalAnimation, TLxModalPosition } from '../modal/types';
 
 export type TLxIconPickerLicence = 'free' | 'pro';
 export type TLxIconPickerFamily = 'classic' | 'sharp' | 'brands';
@@ -26,5 +27,10 @@ export interface ILxIconPickerProps {
 	rows?: number,
 	popup?: boolean,
 	popupTitle?: string,
+	popupPosition?: TLxModalPosition,
+	popupAnimation?: TLxModalAnimation,
+	popupWidth?: string,
+	popupMaxWidth?: string,
+	popupMaxHeight?: string,
 	closeOnSelect?: boolean,
 }

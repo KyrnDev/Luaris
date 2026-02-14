@@ -33,6 +33,10 @@
 			"types": "./dist/components/label/index.d.ts",
 			"import": "./dist/components/label/index.js"
 		},
+		"./components/modal": {
+			"types": "./dist/components/modal/index.d.ts",
+			"import": "./dist/components/modal/index.js"
+		},
 		"./components/button": {
 			"types": "./dist/components/button/index.d.ts",
 			"import": "./dist/components/button/index.js"

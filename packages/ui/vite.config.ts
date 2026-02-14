@@ -28,6 +28,7 @@ export default defineConfig({
 				'components/icon-picker': resolve(__dirname, 'src/components/icon-picker/index.ts'),
 				'components/page': resolve(__dirname, 'src/components/page/index.ts'),
 				'components/label': resolve(__dirname, 'src/components/label/index.ts'),
+				'components/modal': resolve(__dirname, 'src/components/modal/index.ts'),
 				'components/number-input': resolve(__dirname, 'src/components/number-input/index.ts'),
 				'components/progress': resolve(__dirname, 'src/components/progress/index.ts'),
 				'components/radio': resolve(__dirname, 'src/components/radio/index.ts'),

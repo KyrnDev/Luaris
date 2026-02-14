@@ -2,12 +2,21 @@
 	<span class="lx-tag" :class="[`lx-tag--${variant}`, `lx-tag--${size}`]">
 		<span v-if="$slots.leading" class="lx-tag__leading"><slot name="leading" /></span>
 		<slot>{{ label }}</slot>
-		<button v-if="removable" class="lx-tag__remove" type="button" aria-label="Remove tag" @click="emit('remove')">×</button>
+		<LxButton
+			v-if="removable"
+			class="lx-tag__remove"
+			variant="plain"
+			size="xs"
+			icon="xmark"
+			aria-label="Remove tag"
+			@click="emit('remove')"
+		/>
 	</span>
 </template>
 
 <script setup lang="ts">
 	import type { ILxTagProps } from './types';
+	import { LxButton } from '../button';
 
 	const props = withDefaults(defineProps<ILxTagProps>(), {
 		label: '',
@@ -42,14 +51,11 @@
 	.lx-tag--lg { font-size: var(--lx-font-size-md); padding: 0.2rem 0.6rem; }
 
 	.lx-tag__remove {
-		appearance: none;
 		background: transparent;
-		border: none;
 		color: inherit;
-		cursor: pointer;
-		font-size: 1em;
-		line-height: 1;
+		height: auto;
 		padding: 0;
+		min-width: auto;
 	}
 
 	.lx-tag--primary { --lx-tag-colour: var(--lx-colour-primary); }

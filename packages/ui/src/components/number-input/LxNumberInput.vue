@@ -1,15 +1,17 @@
 <template>
 	<div class="lx-number-input">
 		<div class="lx-number-input__field">
-			<button
+			<LxButton
 				v-if="props.showControls"
 				type="button"
+				variant="plain"
+				size="xs"
+				icon="minus"
+				class="lx-number-input__control"
 				:disabled="props.disabled"
 				aria-label="Decrease value"
 				@click="nudge(-1)"
-			>
-				-
-			</button>
+			/>
 			<input
 				v-bind="attrs"
 				:id="inputId"
@@ -23,15 +25,17 @@
 				:placeholder="props.placeholder"
 				:aria-label="inputAriaLabel"
 			>
-			<button
+			<LxButton
 				v-if="props.showControls"
 				type="button"
+				variant="plain"
+				size="xs"
+				icon="plus"
+				class="lx-number-input__control"
 				:disabled="props.disabled"
 				aria-label="Increase value"
 				@click="nudge(1)"
-			>
-				+
-			</button>
+			/>
 		</div>
 	</div>
 </template>
@@ -39,6 +43,7 @@
 <script setup lang='ts'>
 	import type { ILxNumberInputProps } from './types';
 	import { computed, useAttrs, useId, watch } from 'vue';
+	import { LxButton } from '../button';
 
 	defineOptions({
 		inheritAttrs: false,
@@ -114,14 +119,12 @@
 		padding: var(--lx-size-space-sm);
 	}
 
-	.lx-number-input button {
-		appearance: none;
+	.lx-number-input__control {
 		background: var(--lx-colour-surface-base);
-		border: none;
 		color: var(--lx-colour-surface-text);
-		cursor: pointer;
-		font-size: var(--lx-font-size-md);
+		border-radius: 0;
 		height: 100%;
-		padding: 0 var(--lx-size-space-sm);
+		min-width: var(--lx-size-control-height-sm);
+		padding: 0 var(--lx-size-space-xs);
 	}
 </style>

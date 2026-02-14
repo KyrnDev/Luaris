@@ -21,14 +21,14 @@ const buildRegistry = (count: number): ILxIconRegistryEntry[] => {
 };
 
 describe('LxIconPicker', () => {
-	it('renders 25 icons in a 5x5 page by default', () => {
+	it('renders enough icons to fill at least 3 rows in inline mode', () => {
 		const wrapper = mount(LxIconPicker, {
 			props: {
 				registry: buildRegistry(30),
 			},
 		});
 
-		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(25);
+		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(15);
 		expect(wrapper.text()).toContain('30 results');
 	});
 
@@ -98,6 +98,7 @@ describe('LxIconPicker', () => {
 
 		expect(wrapper.find('.lx-icon-picker__panel').exists()).toBe(false);
 		await wrapper.find('.lx-icon-picker__trigger').trigger('click');
-		expect(wrapper.find('.lx-icon-picker__panel--popup').exists()).toBe(true);
+		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
+		expect(document.body.querySelector('.lx-icon-picker__panel--modal')).not.toBeNull();
 	});
 });

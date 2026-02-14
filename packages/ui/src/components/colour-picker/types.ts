@@ -1,3 +1,5 @@
+import type { TLxModalAnimation, TLxModalPosition } from '../modal/types';
+
 export interface ILxColourValue {
 	hex: string,
 	alpha: number,
@@ -10,4 +12,11 @@ export interface ILxColourPickerProps {
 	showAlpha?: boolean,
 	formats?: TLxColourFormat[],
 	defaultFormat?: TLxColourFormat,
+	popup?: boolean,
+	popupTitle?: string,
+	popupPosition?: TLxModalPosition,
+	popupAnimation?: TLxModalAnimation,
+	popupWidth?: string,
+	popupMaxWidth?: string,
+	popupMaxHeight?: string,
 }

@@ -1,23 +1,17 @@
 <template>
-	<section ref="pickerRoot" v-click-outside="onClickOutside" class="lx-icon-picker" :class="{ 'lx-icon-picker--popup': props.popup }">
-		<button
+	<section class="lx-icon-picker" :class="{ 'lx-icon-picker--popup': props.popup }">
+		<LxButton
 			v-if="props.popup"
-			type="button"
 			class="lx-icon-picker__trigger"
+			variant="secondary"
+			size="sm"
+			:aria-label="selectedName ? `Selected icon: ${toTitle(selectedName)}` : 'Choose icon'"
 			@click="togglePopup"
 		>
 			<LxIcon :name="selectedName || 'circle-question'" :icon-style="modelStyle" />
-			<span>{{ selectedName || 'Choose icon' }}</span>
-		</button>
+		</LxButton>
 
-		<div
-			v-if="!props.popup || popupOpen"
-			ref="panelRef"
-			class="lx-icon-picker__panel"
-			:class="{ 'lx-icon-picker__panel--popup': props.popup }"
-			:style="panelStyle"
-			@keydown.esc="closePopup"
-		>
+		<div v-if="!props.popup" class="lx-icon-picker__panel">
 			<div class="lx-icon-picker__search-row">
 				<input
 					v-model.trim="query"
@@ -73,6 +67,7 @@
 			</details>
 
 			<div
+				ref="gridRef"
 				class="lx-icon-picker__grid"
 				:style="gridStyle"
 				role="listbox"
@@ -93,13 +88,13 @@
 			</div>
 
 			<div class="lx-icon-picker__pagination">
-				<button type="button" :disabled="currentPage <= 1" @click="currentPage -= 1">
+				<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="currentPage -= 1">
 					Previous
-				</button>
+				</LxButton>
 				<span>Page {{ currentPage }} / {{ totalPages }}</span>
-				<button type="button" :disabled="currentPage >= totalPages" @click="currentPage += 1">
+				<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="currentPage += 1">
 					Next
-				</button>
+				</LxButton>
 			</div>
 
 			<section v-if="selectedIcon" class="lx-icon-picker__style-section">
@@ -119,14 +114,131 @@
 				</div>
 			</section>
 		</div>
+
+		<LxModal
+			v-if="props.popup"
+			v-model="popupOpen"
+			:title="props.popupTitle"
+			:position="props.popupPosition"
+			:animation="props.popupAnimation"
+			:width="props.popupWidth"
+			:max-width="props.popupMaxWidth"
+			:max-height="props.popupMaxHeight"
+			:show-close="true"
+		>
+			<div class="lx-icon-picker__panel lx-icon-picker__panel--modal">
+				<div class="lx-icon-picker__search-row">
+					<input
+						v-model.trim="query"
+						type="search"
+						class="lx-icon-picker__search"
+						:placeholder="props.placeholder"
+						aria-label="Search icons"
+					>
+					<span class="lx-icon-picker__meta">
+						{{ filteredIcons.length }} results
+					</span>
+				</div>
+
+				<details v-if="props.showSettings" class="lx-icon-picker__settings">
+					<summary>Display Settings</summary>
+					<div class="lx-icon-picker__settings-grid">
+						<fieldset class="lx-icon-picker__filter-group">
+							<legend>Licences</legend>
+							<label v-for="licence in licenceOptions" :key="licence">
+								<input
+									v-model="selectedLicences"
+									type="checkbox"
+									:value="licence"
+								>
+								{{ licence }}
+							</label>
+						</fieldset>
+
+						<fieldset class="lx-icon-picker__filter-group">
+							<legend>Families</legend>
+							<label v-for="family in familyOptions" :key="family">
+								<input
+									v-model="selectedFamilies"
+									type="checkbox"
+									:value="family"
+								>
+								{{ family }}
+							</label>
+						</fieldset>
+
+						<fieldset class="lx-icon-picker__filter-group">
+							<legend>Styles</legend>
+							<label v-for="style in styleOptions" :key="style">
+								<input
+									v-model="selectedStyles"
+									type="checkbox"
+									:value="style"
+								>
+								{{ style }}
+							</label>
+						</fieldset>
+					</div>
+				</details>
+
+				<div
+					ref="gridRef"
+					class="lx-icon-picker__grid"
+					:style="gridStyle"
+					role="listbox"
+					aria-label="Icon results"
+				>
+					<button
+						v-for="icon in pagedIcons"
+						:key="icon.name"
+						type="button"
+						class="lx-icon-picker__tile"
+						:class="{ 'is-selected': icon.name === selectedName }"
+						:aria-selected="icon.name === selectedName"
+						:title="toTitle(icon.name)"
+						@click="selectIcon(icon)"
+					>
+						<LxIcon :name="icon.name" :icon-style="activeStyleFor(icon)" size="lg" />
+					</button>
+				</div>
+
+				<div class="lx-icon-picker__pagination">
+					<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="currentPage -= 1">
+						Previous
+					</LxButton>
+					<span>Page {{ currentPage }} / {{ totalPages }}</span>
+					<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="currentPage += 1">
+						Next
+					</LxButton>
+				</div>
+
+				<section v-if="selectedIcon" class="lx-icon-picker__style-section">
+					<h4>Styles for {{ toTitle(selectedIcon.name) }}</h4>
+					<div class="lx-icon-picker__styles">
+						<button
+							v-for="style in selectedIconStyles"
+							:key="style"
+							type="button"
+							class="lx-icon-picker__style-chip"
+							:class="{ 'is-selected': style === modelStyle }"
+							:title="toTitle(style)"
+							@click="selectStyle(style)"
+						>
+							<LxIcon :name="selectedIcon.name" :icon-style="style" />
+						</button>
+					</div>
+				</section>
+			</div>
+		</LxModal>
 	</section>
 </template>
 
-<script setup lang="ts">
-	import { computed, nextTick, ref, watch } from 'vue';
+<script setup lang='ts'>
+	import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 	import faRegistry from '../../data/fa-registry.json';
-	import { vClickOutside as vClickOutsideDirective } from '../../directives/clickOutside';
+	import { LxButton } from '../button';
 	import { LxIcon } from '../icon';
+	import { LxModal } from '../modal';
 	import type { TLxIconStyle } from '../icon/types';
 	import type {
 		ILxIconPickerProps,
@@ -140,15 +252,17 @@
 		registry: () => faRegistry as ILxIconRegistryEntry[],
 		placeholder: 'Search icons',
 		showSettings: true,
-		pageSize: 25,
 		columns: 5,
 		rows: 5,
 		popup: false,
 		popupTitle: 'Choose icon',
+		popupPosition: 'center',
+		popupAnimation: 'fade',
+		popupWidth: 'min(80vw, 28rem)',
+		popupMaxWidth: '28rem',
+		popupMaxHeight: '80vh',
 		closeOnSelect: true,
 	});
-
-	const vClickOutside = vClickOutsideDirective;
 
 	const model = defineModel<ILxIconPickerValue | null>({
 		default: null,
@@ -168,13 +282,10 @@
 		'sharp-duotone',
 	];
 
-	const pickerRoot = ref<HTMLElement | null>(null);
-	const panelRef = ref<HTMLElement | null>(null);
 	const popupOpen = ref(false);
-	const popupTop = ref(72);
-	const popupLeft = ref(12);
-	const popupWidth = ref(760);
-
+	const gridRef = ref<HTMLElement | null>(null);
+	const gridColumns = ref(Math.max(1, props.columns));
+	let resizeObserver: ResizeObserver | null = null;
 	const query = ref('');
 	const currentPage = ref(1);
 	const selectedLicences = ref<TLxIconPickerLicence[]>(['free', 'pro']);
@@ -188,6 +299,55 @@
 	const registry = computed(() => props.registry || []);
 	const selectedName = computed(() => model.value?.name || '');
 	const modelStyle = computed(() => model.value?.style || 'solid');
+	const minimumRows = computed(() => props.popup ? 5 : 3);
+	const resolvedPageSize = computed(() => {
+		const dynamicTarget = gridColumns.value * minimumRows.value;
+		return Math.max(props.pageSize ?? 0, dynamicTarget);
+	});
+	const gridStyle = computed(() => {
+		return {
+			'--lx-icon-picker-columns': `${gridColumns.value}`,
+		};
+	});
+
+	const updateGridColumns = (): void => {
+		const gridElement = gridRef.value;
+		if (!gridElement) {
+			return;
+		}
+
+		const minTileSize = 56;
+		const styles = window.getComputedStyle(gridElement);
+		const gap = Number.parseFloat(styles.columnGap || styles.gap || '8') || 8;
+		const availableWidth = gridElement.clientWidth;
+		const calculatedColumns = Math.max(1, Math.floor((availableWidth + gap) / (minTileSize + gap)));
+		const maxColumns = props.popup ? 5 : 8;
+		gridColumns.value = Math.min(calculatedColumns, maxColumns);
+	};
+
+	const stopGridObserver = (): void => {
+		resizeObserver?.disconnect();
+		resizeObserver = null;
+		window.removeEventListener('resize', updateGridColumns);
+	};
+
+	const startGridObserver = async (): Promise<void> => {
+		stopGridObserver();
+		await nextTick();
+		updateGridColumns();
+
+		if (!gridRef.value) {
+			return;
+		}
+
+		if (typeof ResizeObserver !== 'undefined') {
+			resizeObserver = new ResizeObserver(() => {
+				updateGridColumns();
+			});
+			resizeObserver.observe(gridRef.value);
+		}
+		window.addEventListener('resize', updateGridColumns);
+	};
 
 	const iconStylesFor = (icon: ILxIconRegistryEntry): TLxIconStyle[] => {
 		return icon.styles.filter(style => {
@@ -228,12 +388,12 @@
 	});
 
 	const totalPages = computed(() => {
-		return Math.max(1, Math.ceil(filteredIcons.value.length / props.pageSize));
+		return Math.max(1, Math.ceil(filteredIcons.value.length / resolvedPageSize.value));
 	});
 
 	const pagedIcons = computed(() => {
-		const start = (currentPage.value - 1) * props.pageSize;
-		return filteredIcons.value.slice(start, start + props.pageSize);
+		const start = (currentPage.value - 1) * resolvedPageSize.value;
+		return filteredIcons.value.slice(start, start + resolvedPageSize.value);
 	});
 
 	const selectedIcon = computed(() => {
@@ -252,30 +412,6 @@
 		return iconStylesFor(selectedIcon.value);
 	});
 
-	const gridStyle = computed(() => {
-		if (props.popup) {
-			return {
-				'--lx-icon-picker-columns': '5',
-			};
-		}
-
-		return {
-			'--lx-icon-picker-columns': `${props.columns}`,
-		};
-	});
-
-	const panelStyle = computed(() => {
-		if (!props.popup) {
-			return {};
-		}
-
-		return {
-			top: `${popupTop.value}px`,
-			left: `${popupLeft.value}px`,
-			width: `${popupWidth.value}px`,
-		};
-	});
-
 	const activeStyleFor = (icon: ILxIconRegistryEntry): TLxIconStyle => {
 		const availableStyles = iconStylesFor(icon);
 		if (icon.name === selectedName.value && availableStyles.includes(modelStyle.value)) {
@@ -289,62 +425,16 @@
 		return value.split('-').map(part => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join(' ');
 	};
 
-	const updatePopupPosition = (): void => {
-		if (!props.popup || !pickerRoot.value) {
-			return;
-		}
-
-		const rect = pickerRoot.value.getBoundingClientRect();
-		const viewportPadding = 12;
-		const desiredWidth = Math.min(860, Math.max(560, window.innerWidth - (viewportPadding * 2)));
-		const unclampedLeft = rect.left;
-		const clampedLeft = Math.min(
-			Math.max(unclampedLeft, viewportPadding),
-			window.innerWidth - desiredWidth - viewportPadding,
-		);
-		const belowTop = rect.bottom + 8;
-		const top = Math.min(
-			Math.max(belowTop, viewportPadding),
-			window.innerHeight - 12,
-		);
-
-		popupWidth.value = desiredWidth;
-		popupLeft.value = clampedLeft;
-		popupTop.value = top;
-	};
-
-	const openPopup = async (): Promise<void> => {
-		if (!props.popup) {
-			return;
-		}
-
-		popupOpen.value = true;
-		await nextTick();
-		updatePopupPosition();
-		panelRef.value?.focus();
-	};
-
 	const closePopup = (): void => {
 		popupOpen.value = false;
 	};
 
-	const togglePopup = async (): Promise<void> => {
+	const togglePopup = (): void => {
 		if (!props.popup) {
 			return;
 		}
 
-		if (popupOpen.value) {
-			closePopup();
-			return;
-		}
-
-		await openPopup();
-	};
-
-	const onClickOutside = (): void => {
-		if (props.popup) {
-			closePopup();
-		}
+		popupOpen.value = !popupOpen.value;
 	};
 
 	const selectIcon = (icon: ILxIconRegistryEntry): void => {
@@ -388,6 +478,13 @@
 		{ deep: true },
 	);
 
+	watch(
+		() => popupOpen.value,
+		() => {
+			void startGridObserver();
+		},
+	);
+
 	watch(totalPages, nextPageCount => {
 		if (currentPage.value > nextPageCount) {
 			currentPage.value = nextPageCount;
@@ -416,46 +513,36 @@
 		},
 		{ immediate: true },
 	);
+
+	onMounted(() => {
+		void startGridObserver();
+	});
+
+	onUnmounted(() => {
+		stopGridObserver();
+	});
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 	.lx-icon-picker {
-		position: relative;
+		--lx-icon-picker-tile-size: 3.75rem;
+		display: grid;
+		gap: var(--lx-size-space-sm);
 	}
 
 	.lx-icon-picker__trigger {
-		align-items: center;
-		appearance: none;
-		background: var(--lx-colour-surface-raised);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		border-radius: var(--lx-size-radius-sm);
-		color: var(--lx-colour-surface-text);
-		cursor: pointer;
-		display: inline-flex;
-		font: inherit;
-		gap: var(--lx-size-space-sm);
-		height: var(--lx-size-control-height-md);
-		padding: 0 var(--lx-size-space-md);
+		justify-self: start;
+		width: auto;
 	}
 
 	.lx-icon-picker__panel {
-		background: var(--lx-colour-surface-base);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		border-radius: var(--lx-size-radius-md);
+		align-content: start;
 		display: grid;
 		gap: var(--lx-size-space-sm);
-		padding: var(--lx-size-space-md);
 	}
 
-	.lx-icon-picker__panel--popup {
-		box-shadow: 0 1.25rem 3.2rem rgb(0 0 0 / 0.3);
-		inset: auto auto auto 0;
-		max-height: min(82vh, 46rem);
-		overflow: auto;
-		overscroll-behavior: contain;
-		position: fixed;
-		scrollbar-gutter: stable both-edges;
-		z-index: 120;
+	.lx-icon-picker__panel--modal {
+		min-height: 20rem;
 	}
 
 	.lx-icon-picker__search-row {
@@ -522,11 +609,12 @@
 	.lx-icon-picker__grid {
 		display: grid;
 		gap: var(--lx-size-space-xs);
-		grid-template-columns: repeat(var(--lx-icon-picker-columns), minmax(0, 1fr));
+		grid-template-columns: repeat(var(--lx-icon-picker-columns, 1), minmax(0, 1fr));
+		width: 100%;
 	}
 
 	.lx-icon-picker:not(.lx-icon-picker--popup) .lx-icon-picker__grid {
-		grid-template-columns: repeat(auto-fill, minmax(3.75rem, 1fr));
+		min-height: calc((var(--lx-icon-picker-tile-size) * 3) + (var(--lx-size-space-xs) * 2));
 	}
 
 	.lx-icon-picker__tile,
@@ -546,7 +634,12 @@
 	.lx-icon-picker__tile {
 		aspect-ratio: 1 / 1;
 		font-size: var(--lx-font-size-lg);
-		padding: var(--lx-size-space-sm);
+		height: auto;
+		justify-self: center;
+		padding: var(--lx-size-space-xs);
+		max-height: var(--lx-icon-picker-tile-size);
+		max-width: var(--lx-icon-picker-tile-size);
+		width: 100%;
 	}
 
 	.lx-icon-picker__tile.is-selected,
@@ -556,9 +649,7 @@
 	}
 
 	.lx-icon-picker__tile:focus-visible,
-	.lx-icon-picker__style-chip:focus-visible,
-	.lx-icon-picker__pagination button:focus-visible,
-	.lx-icon-picker__trigger:focus-visible {
+	.lx-icon-picker__style-chip:focus-visible {
 		outline: var(--lx-size-border-width-standard) solid var(--lx-colour-focus-ring);
 		outline-offset: 2px;
 	}
@@ -568,22 +659,6 @@
 		display: flex;
 		gap: var(--lx-size-space-sm);
 		justify-content: space-between;
-	}
-
-	.lx-icon-picker__pagination button {
-		appearance: none;
-		background: var(--lx-colour-surface-raised);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		border-radius: var(--lx-size-radius-sm);
-		color: var(--lx-colour-surface-text);
-		cursor: pointer;
-		font: inherit;
-		padding: 0.25rem 0.55rem;
-	}
-
-	.lx-icon-picker__pagination button:disabled {
-		cursor: not-allowed;
-		opacity: 0.6;
 	}
 
 	.lx-icon-picker__style-section {
@@ -607,12 +682,5 @@
 	.lx-icon-picker__style-chip {
 		height: 2.25rem;
 		padding: 0 var(--lx-size-space-md);
-	}
-
-	@media (max-width: 50rem) {
-		.lx-icon-picker__panel--popup {
-			left: 0.75rem !important;
-			width: calc(100vw - 1.5rem) !important;
-		}
 	}
 </style>

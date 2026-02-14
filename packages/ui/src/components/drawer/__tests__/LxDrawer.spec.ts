@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import LxDrawer from '../LxDrawer.vue';
 
 describe('LxDrawer', () => {
-	it('renders when open and emits close on backdrop click', async () => {
+	it('renders when open and emits close on outside click', async () => {
 		const wrapper = mount(LxDrawer, {
 			attachTo: globalThis.document.body,
 			props: {
@@ -12,9 +12,9 @@ describe('LxDrawer', () => {
 			},
 		});
 
-		const backdrop = document.body.querySelector('.lx-drawer__backdrop');
+		const backdrop = document.body.querySelector('.lx-modal__backdrop');
 		expect(backdrop).not.toBeNull();
-		(backdrop as HTMLButtonElement).click();
+		(backdrop as HTMLButtonElement).dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
 		await wrapper.vm.$nextTick();
 
 		expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(false);
@@ -61,7 +61,7 @@ describe('LxDrawer', () => {
 			},
 		});
 
-		expect(document.body.querySelector('.lx-drawer')).toBeNull();
+		expect(document.body.querySelector('.lx-modal')).toBeNull();
 		wrapper.unmount();
 	});
 
@@ -73,9 +73,44 @@ describe('LxDrawer', () => {
 			},
 		});
 
-		expect(document.body.querySelector('.lx-drawer')).toBeNull();
+		expect(document.body.querySelector('.lx-modal')).toBeNull();
 		await wrapper.setProps({ modelValue: true });
-		expect(document.body.querySelector('.lx-drawer')).not.toBeNull();
+		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
+		wrapper.unmount();
+	});
+
+	it('emits close when close button is clicked', async () => {
+		const wrapper = mount(LxDrawer, {
+			attachTo: document.body,
+			props: {
+				modelValue: true,
+				title: 'Drawer',
+			},
+		});
+
+		const closeButton = document.body.querySelector('.lx-drawer__close-button');
+		expect(closeButton).not.toBeNull();
+		(closeButton as HTMLButtonElement).click();
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(false);
+		expect(wrapper.emitted('close')).toHaveLength(1);
+		wrapper.unmount();
+	});
+
+	it('applies side and animation classes', () => {
+		const wrapper = mount(LxDrawer, {
+			attachTo: document.body,
+			props: {
+				modelValue: true,
+				side: 'top',
+				animation: 'slide',
+			},
+		});
+
+		const drawer = document.body.querySelector('.lx-modal');
+		expect(drawer?.className).toContain('lx-modal--top');
+		expect(drawer?.className).toContain('lx-modal--slide');
 		wrapper.unmount();
 	});
 });

@@ -1,4 +1,4 @@
-export type TLxButtonVariant = 'primary' | 'secondary' | 'ghost' | 'accent' | 'info' | 'success' | 'warning' | 'danger';
+export type TLxButtonVariant = 'primary' | 'secondary' | 'ghost' | 'plain' | 'accent' | 'info' | 'success' | 'warning' | 'danger';
 
 export type TLxButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 

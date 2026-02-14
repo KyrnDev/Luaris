@@ -277,7 +277,10 @@ const main = async (): Promise<void> => {
 	const registry = Object.entries(metadata)
 		.map(([name, entry]) => buildRegistryEntry(name, entry))
 		.filter(Boolean)
-		.sort((left, right) => left.name.localeCompare(right.name));
+		.sort((left, right) => {
+			if (!left || !right) return 0;
+			return left.name.localeCompare(right.name);
+		});
 
 	await mkdir(dirname(OUTPUT_FILE), { recursive: true });
 	await writeFile(OUTPUT_FILE, `${JSON.stringify(registry, null, '\t')}\n`, 'utf8');

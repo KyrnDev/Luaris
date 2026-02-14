@@ -5,11 +5,13 @@
 		</p>
 
 		<div class="lx-theme-selector__options" role="radiogroup" aria-label="Themes">
-			<button
+			<LxButton
 				v-for="theme in themes"
 				:key="theme.value"
 				class="lx-theme-selector__option"
 				type="button"
+				:variant="theme.value === selectedTheme ? 'primary' : 'plain'"
+				size="sm"
 				role="radio"
 				:aria-checked="theme.value === selectedTheme"
 				:class="{
@@ -18,7 +20,7 @@
 				@click="setTheme(theme.value)"
 			>
 				{{ theme.label }}
-			</button>
+			</LxButton>
 		</div>
 	</section>
 </template>
@@ -26,6 +28,7 @@
 <script setup lang="ts">
 	import type { ILxThemeSelectorProps, TLxTheme } from './types';
 	import { onMounted, ref } from 'vue';
+	import { LxButton } from '../button';
 
 	const props = withDefaults(defineProps<ILxThemeSelectorProps>(), {
 		themes: () => [
@@ -108,15 +111,14 @@
 	}
 
 	.lx-theme-selector__option {
-		appearance: none;
 		background: transparent;
 		border: none;
 		border-radius: var(--lx-size-radius-pill);
 		color: var(--lx-colour-surface-text-muted);
-		cursor: pointer;
 		font-size: var(--lx-font-size-sm);
 		font-weight: var(--lx-font-weight-semibold);
-		padding: var(--lx-size-space-sm) var(--lx-size-space-lg);
+		height: auto;
+		padding: 0.35rem 0.85rem;
 		transition:
 			color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
 			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);

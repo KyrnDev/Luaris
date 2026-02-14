@@ -96,4 +96,15 @@ describe('LxButton', () => {
 		expect(lastClass).toContain('lx-button__icon');
 		expect(wrapper.find('.fa-arrow-right').exists()).toBe(true);
 	});
+
+	it('supports plain variant', () => {
+		const wrapper = mount(LxButton, {
+			props: {
+				variant: 'plain',
+				icon: 'xmark',
+			},
+		});
+
+		expect(wrapper.classes()).toContain('lx-button--plain');
+	});
 });

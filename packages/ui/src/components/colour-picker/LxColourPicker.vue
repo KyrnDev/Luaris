@@ -1,64 +1,147 @@
 <template>
 	<div class="lx-colour-picker">
-		<div class="lx-colour-picker__top">
-			<input
-				v-bind="attrs"
-				:id="inputId"
-				v-model="hexValue"
-				:name="inputName"
-				type="color"
-				:disabled="props.disabled"
-				:aria-label="colourAriaLabel"
-			>
-			<div class="lx-colour-picker__preview" :style="{ background: previewBackground }">
-				<span class="lx-colour-picker__sample-text" :style="{ color: previewTextColour }">Aa</span>
+		<button
+			v-if="props.popup"
+			type="button"
+			class="lx-colour-picker__trigger"
+			:disabled="props.disabled"
+			@click="popupOpen = true"
+		>
+			<span class="lx-colour-picker__trigger-swatch" :style="{ background: previewBackground }" />
+			<span class="lx-colour-picker__trigger-text">{{ colourText }}</span>
+		</button>
+
+		<div v-if="!props.popup" class="lx-colour-picker__panel">
+			<div class="lx-colour-picker__top">
+				<input
+					v-bind="attrs"
+					:id="inputId"
+					v-model="hexValue"
+					:name="inputName"
+					type="color"
+					:disabled="props.disabled"
+					:aria-label="colourAriaLabel"
+				>
+				<div class="lx-colour-picker__preview" :style="{ background: previewBackground }">
+					<span class="lx-colour-picker__sample-text" :style="{ color: previewTextColour }">Aa</span>
+				</div>
 			</div>
-		</div>
 
-		<label v-if="props.showAlpha" class="lx-colour-picker__alpha">
-			<span>Alpha</span>
-			<input
-				v-model.number="alphaValue"
-				type="range"
-				min="0"
-				max="1"
-				step="0.01"
-				:disabled="props.disabled"
-				aria-label="Alpha"
-			>
-			<span>{{ Math.round(alphaValue * 100) }}%</span>
-		</label>
+			<label v-if="props.showAlpha" class="lx-colour-picker__alpha">
+				<span>Alpha</span>
+				<input
+					v-model.number="alphaValue"
+					type="range"
+					min="0"
+					max="1"
+					step="0.01"
+					:disabled="props.disabled"
+					aria-label="Alpha"
+				>
+				<span>{{ Math.round(alphaValue * 100) }}%</span>
+			</label>
 
-		<div class="lx-colour-picker__formats">
+			<div class="lx-colour-picker__formats">
+				<button
+					v-for="format in availableFormats"
+					:key="format"
+					type="button"
+					class="lx-colour-picker__format"
+					:class="{ 'is-active': activeFormat === format }"
+					:disabled="props.disabled"
+					@click="activeFormat = format"
+				>
+					{{ format.toUpperCase() }}
+				</button>
+			</div>
+
 			<button
-				v-for="format in availableFormats"
-				:key="format"
 				type="button"
-				class="lx-colour-picker__format"
-				:class="{ 'is-active': activeFormat === format }"
+				class="lx-colour-picker__output"
 				:disabled="props.disabled"
-				@click="activeFormat = format"
+				@click="copyColourText"
 			>
-				{{ format.toUpperCase() }}
+				<span>{{ colourText }}</span>
+				<LxTooltip :text="copyHint" placement="top" :disabled="props.disabled">
+					<span class="lx-colour-picker__hint" aria-hidden="true">?</span>
+				</LxTooltip>
 			</button>
 		</div>
 
-		<button
-			type="button"
-			class="lx-colour-picker__output"
-			:disabled="props.disabled"
-			@click="copyColourText"
+		<LxModal
+			v-if="props.popup"
+			v-model="popupOpen"
+			:title="props.popupTitle"
+			:position="props.popupPosition"
+			:animation="props.popupAnimation"
+			:width="props.popupWidth"
+			:max-width="props.popupMaxWidth"
+			:max-height="props.popupMaxHeight"
+			:show-close="true"
 		>
-			<span>{{ colourText }}</span>
-			<LxTooltip :text="copyHint" placement="top" :disabled="props.disabled">
-				<span class="lx-colour-picker__hint" aria-hidden="true">?</span>
-			</LxTooltip>
-		</button>
+			<div class="lx-colour-picker__panel">
+				<div class="lx-colour-picker__top">
+					<input
+						v-bind="attrs"
+						:id="inputId"
+						v-model="hexValue"
+						:name="inputName"
+						type="color"
+						:disabled="props.disabled"
+						:aria-label="colourAriaLabel"
+					>
+					<div class="lx-colour-picker__preview" :style="{ background: previewBackground }">
+						<span class="lx-colour-picker__sample-text" :style="{ color: previewTextColour }">Aa</span>
+					</div>
+				</div>
+
+				<label v-if="props.showAlpha" class="lx-colour-picker__alpha">
+					<span>Alpha</span>
+					<input
+						v-model.number="alphaValue"
+						type="range"
+						min="0"
+						max="1"
+						step="0.01"
+						:disabled="props.disabled"
+						aria-label="Alpha"
+					>
+					<span>{{ Math.round(alphaValue * 100) }}%</span>
+				</label>
+
+				<div class="lx-colour-picker__formats">
+					<button
+						v-for="format in availableFormats"
+						:key="format"
+						type="button"
+						class="lx-colour-picker__format"
+						:class="{ 'is-active': activeFormat === format }"
+						:disabled="props.disabled"
+						@click="activeFormat = format"
+					>
+						{{ format.toUpperCase() }}
+					</button>
+				</div>
+
+				<button
+					type="button"
+					class="lx-colour-picker__output"
+					:disabled="props.disabled"
+					@click="copyColourText"
+				>
+					<span>{{ colourText }}</span>
+					<LxTooltip :text="copyHint" placement="top" :disabled="props.disabled">
+						<span class="lx-colour-picker__hint" aria-hidden="true">?</span>
+					</LxTooltip>
+				</button>
+			</div>
+		</LxModal>
 	</div>
 </template>
 
 <script setup lang='ts'>
 	import { computed, ref, useAttrs, useId, watch } from 'vue';
+	import { LxModal } from '../modal';
 	import { LxTooltip } from '../tooltip';
 	import type { ILxColourPickerProps, ILxColourValue, TLxColourFormat } from './types';
 
@@ -71,6 +154,13 @@
 		showAlpha: true,
 		formats: () => ['hex', 'rgb', 'rgba', 'hsl', 'hsla'],
 		defaultFormat: 'rgba',
+		popup: false,
+		popupTitle: 'Pick a colour',
+		popupPosition: 'center',
+		popupAnimation: 'fade',
+		popupWidth: 'min(92vw, 30rem)',
+		popupMaxWidth: '30rem',
+		popupMaxHeight: 'min(82dvh, 32rem)',
 	});
 
 	const emit = defineEmits<{
@@ -98,6 +188,7 @@
 		return typeof attrAriaLabel === 'string' && attrAriaLabel.length > 0 ? attrAriaLabel : 'Colour';
 	});
 
+	const popupOpen = ref(false);
 	const hexValue = computed({
 		get: () => value.value.hex,
 		set: hex => {
@@ -228,11 +319,51 @@
 	.lx-colour-picker {
 		display: grid;
 		gap: var(--lx-size-space-sm);
+		min-width: 0;
+	}
+
+	.lx-colour-picker__trigger {
+		align-items: center;
+		appearance: none;
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		color: var(--lx-colour-surface-text);
+		cursor: pointer;
+		display: inline-flex;
+		font: inherit;
+		gap: var(--lx-size-space-sm);
+		height: var(--lx-size-control-height-md);
+		padding: 0 var(--lx-size-space-sm);
+	}
+
+	.lx-colour-picker__trigger:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.lx-colour-picker__trigger-swatch {
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-xs);
+		height: 1rem;
+		width: 1.6rem;
+	}
+
+	.lx-colour-picker__trigger-text {
+		font-family: var(--lx-font-family-mono);
+		font-size: var(--lx-font-size-xs);
+	}
+
+	.lx-colour-picker__panel {
+		display: grid;
+		gap: var(--lx-size-space-sm);
+		min-width: 0;
 	}
 
 	.lx-colour-picker__top {
 		align-items: center;
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--lx-size-space-sm);
 	}
 
@@ -280,6 +411,7 @@
 		display: grid;
 		gap: var(--lx-size-space-sm);
 		grid-template-columns: auto 1fr auto;
+		min-width: 0;
 	}
 
 	.lx-colour-picker input[type='range'] {
@@ -315,6 +447,7 @@
 		background: transparent;
 		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
 		border-radius: var(--lx-size-radius-sm);
+		box-sizing: border-box;
 		color: var(--lx-colour-surface-text);
 		cursor: copy;
 		display: inline-flex;

@@ -19,6 +19,7 @@ export * from './components/icon';
 export * from './components/icon-picker';
 export * from './components/input';
 export * from './components/label';
+export * from './components/modal';
 export * from './components/number-input';
 export * from './components/page';
 export * from './components/progress';
