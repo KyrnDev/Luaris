@@ -1,0 +1,518 @@
+[
+	{
+		"name": "house",
+		"keywords": ["home", "building", "property"],
+		"styles": ["solid", "regular", "light", "thin", "duotone", "sharp-solid", "sharp-regular"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"],
+			"sharp-solid": ["pro"],
+			"sharp-regular": ["pro"]
+		}
+	},
+	{
+		"name": "bell",
+		"keywords": ["notification", "alert", "alarm"],
+		"styles": ["solid", "regular", "light", "thin", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "github",
+		"keywords": ["code", "repository", "brands"],
+		"styles": ["brands"],
+		"families": ["brands"],
+		"licences": ["free"],
+		"styleSources": {
+			"brands": ["free"]
+		}
+	},
+	{
+		"name": "sparkles",
+		"keywords": ["magic", "highlight", "accent"],
+		"styles": ["solid", "regular", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["pro"],
+		"styleSources": {
+			"solid": ["pro"],
+			"regular": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "spinner",
+		"keywords": ["loading", "busy", "progress"],
+		"styles": ["solid", "regular", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "download",
+		"keywords": ["save", "arrow", "import"],
+		"styles": ["solid", "regular", "light", "thin", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "arrow-right",
+		"keywords": ["next", "forward", "navigation"],
+		"styles": ["solid", "regular", "light", "thin"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"]
+		}
+	},
+	{
+		"name": "floppy-disk",
+		"keywords": ["save", "disk", "storage"],
+		"styles": ["solid", "regular", "light"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"]
+		}
+	},
+	{
+		"name": "chevron-left",
+		"keywords": ["previous", "back", "navigation"],
+		"styles": ["solid", "regular", "light", "thin", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "chevron-right",
+		"keywords": ["next", "forward", "navigation"],
+		"styles": ["solid", "regular", "light", "thin", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "circle-info",
+		"keywords": ["info", "help", "details"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "circle-question",
+		"keywords": ["help", "question", "support"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "star",
+		"keywords": ["rating", "favourite", "bookmark"],
+		"styles": ["solid", "regular", "light", "thin", "duotone", "sharp-solid", "sharp-regular"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"],
+			"sharp-solid": ["pro"],
+			"sharp-regular": ["pro"]
+		}
+	},
+	{
+		"name": "heart",
+		"keywords": ["like", "favourite", "love"],
+		"styles": ["solid", "regular", "light", "thin", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "camera",
+		"keywords": ["photo", "image", "media"],
+		"styles": ["solid", "regular", "light", "thin", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "magnifying-glass",
+		"keywords": ["search", "find", "zoom"],
+		"styles": ["solid", "regular", "light", "thin", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "user",
+		"keywords": ["profile", "person", "account"],
+		"styles": ["solid", "regular", "light", "thin"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"]
+		}
+	},
+	{
+		"name": "users",
+		"keywords": ["group", "team", "people"],
+		"styles": ["solid", "regular", "light"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"]
+		}
+	},
+	{
+		"name": "gear",
+		"keywords": ["settings", "cog", "configuration"],
+		"styles": ["solid", "regular", "light", "duotone", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "check",
+		"keywords": ["success", "done", "confirm"],
+		"styles": ["solid", "regular", "light", "thin", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "xmark",
+		"keywords": ["close", "cancel", "remove"],
+		"styles": ["solid", "regular", "light", "thin", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "plus",
+		"keywords": ["add", "create", "new"],
+		"styles": ["solid", "regular", "light", "thin"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"]
+		}
+	},
+	{
+		"name": "minus",
+		"keywords": ["remove", "subtract", "collapse"],
+		"styles": ["solid", "regular", "light", "thin"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"thin": ["pro"]
+		}
+	},
+	{
+		"name": "trash",
+		"keywords": ["delete", "remove", "bin"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "envelope",
+		"keywords": ["mail", "email", "message"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "calendar",
+		"keywords": ["date", "event", "schedule"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "clock",
+		"keywords": ["time", "watch", "schedule"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "code",
+		"keywords": ["development", "programming", "markup"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "terminal",
+		"keywords": ["command", "shell", "console"],
+		"styles": ["solid", "regular", "light"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"]
+		}
+	},
+	{
+		"name": "cloud",
+		"keywords": ["weather", "storage", "server"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "database",
+		"keywords": ["storage", "data", "server"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "folder",
+		"keywords": ["files", "documents", "directory"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "file",
+		"keywords": ["document", "paper", "content"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "bolt",
+		"keywords": ["power", "electric", "flash"],
+		"styles": ["solid", "regular", "light", "duotone", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	},
+	{
+		"name": "globe",
+		"keywords": ["world", "internet", "global"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "location-dot",
+		"keywords": ["map", "pin", "place"],
+		"styles": ["solid", "regular", "light"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"]
+		}
+	},
+	{
+		"name": "lock",
+		"keywords": ["secure", "security", "private"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["free", "pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "unlock",
+		"keywords": ["open", "security", "access"],
+		"styles": ["solid", "regular", "light", "duotone"],
+		"families": ["classic"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"]
+		}
+	},
+	{
+		"name": "car",
+		"keywords": ["vehicle", "auto", "transport", "travel"],
+		"styles": ["solid", "regular", "light", "duotone", "sharp-solid"],
+		"families": ["classic", "sharp"],
+		"licences": ["free", "pro"],
+		"styleSources": {
+			"solid": ["free", "pro"],
+			"regular": ["pro"],
+			"light": ["pro"],
+			"duotone": ["pro"],
+			"sharp-solid": ["pro"]
+		}
+	}
+]

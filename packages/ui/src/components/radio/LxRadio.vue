@@ -1,25 +1,53 @@
 <template>
-	<label class="lx-radio" :class="{ 'is-disabled': props.disabled }">
+	<div class="lx-radio" :class="{ 'is-disabled': props.disabled }">
 		<input
+			v-bind="attrs"
+			:id="inputId"
 			v-model="model"
 			type="radio"
-			:name="props.name"
+			:name="inputName"
 			:value="props.value"
 			:disabled="props.disabled"
 		>
-		<span class="lx-radio__dot" aria-hidden="true" />
-		<span>{{ props.label }}</span>
-	</label>
+		<label class="lx-radio__label" :for="inputId">
+			<span class="lx-radio__dot" aria-hidden="true" />
+			<span>{{ props.label }}</span>
+		</label>
+	</div>
 </template>
 
 <script setup lang='ts'>
+	import { computed, useAttrs, useId } from 'vue';
 	import type { TFormValue } from '../../types/form';
 	import type { ILxRadioProps } from './types';
+
+	defineOptions({
+		inheritAttrs: false,
+	});
 
 	const props = withDefaults(defineProps<ILxRadioProps>(), {
 		label: '',
 		disabled: false,
 		name: '',
+		id: '',
+	});
+	const attrs = useAttrs();
+	const generatedId = `lx-radio-${useId().replace(/:/g, '')}`;
+	const inputId = computed(() => {
+		const attrId = attrs.id;
+		if (typeof attrId === 'string' && attrId.length > 0) {
+			return attrId;
+		}
+
+		return props.id || generatedId;
+	});
+	const inputName = computed(() => {
+		const attrName = attrs.name;
+		if (typeof attrName === 'string' && attrName.length > 0) {
+			return attrName;
+		}
+
+		return props.name || inputId.value;
 	});
 
 	const model = defineModel<TFormValue>();
@@ -29,6 +57,13 @@
 	.lx-radio {
 		align-items: center;
 		cursor: pointer;
+		display: inline-flex;
+		gap: var(--lx-size-space-xs);
+	}
+
+	.lx-radio__label {
+		align-items: center;
+		cursor: inherit;
 		display: inline-flex;
 		gap: var(--lx-size-space-xs);
 	}
@@ -47,7 +82,7 @@
 		width: 1rem;
 	}
 
-	.lx-radio input:checked + .lx-radio__dot {
+	.lx-radio input:checked + .lx-radio__label .lx-radio__dot {
 		background: radial-gradient(circle, var(--lx-colour-primary) 45%, transparent 46%);
 		border-color: var(--lx-colour-primary);
 	}

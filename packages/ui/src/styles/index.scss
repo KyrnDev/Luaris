@@ -41,9 +41,9 @@ body {
 	padding: 0;
 }
 
-*,
-*::before,
-*::after {
+*:not(i),
+*:not(i)::before,
+*:not(i)::after {
 	box-sizing: border-box;
 	font-family: var(--lx-font-family-primary);
 }

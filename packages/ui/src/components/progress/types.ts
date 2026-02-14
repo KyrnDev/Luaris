@@ -1,6 +1,7 @@
 import type { TVariant } from '../../types/variants';
 
 export type TLxProgressOrientation = 'horizontal' | 'vertical' | 'ring';
+export type TLxProgressSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface ILxProgressProps {
 	value?: number,
@@ -9,5 +10,5 @@ export interface ILxProgressProps {
 	orientation?: TLxProgressOrientation,
 	showLabel?: boolean,
 	indeterminate?: boolean,
-	size?: number,
+	size?: TLxProgressSize | number,
 }

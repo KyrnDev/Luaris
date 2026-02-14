@@ -1,5 +1,5 @@
 <template>
-	<details class="lx-dropdown" :open="open" @toggle="onToggle">
+	<details v-click-outside="onClickOutside" class="lx-dropdown" :open="open" @toggle="onToggle">
 		<summary class="lx-dropdown__trigger" role="button" aria-haspopup="menu" :aria-expanded="open">
 			{{ props.label }}
 		</summary>
@@ -16,6 +16,7 @@
 <script setup lang="ts">
 	import type { ILxDropdownProps, TLxDropdownValue } from './types';
 	import { ref } from 'vue';
+	import { vClickOutside as vClickOutsideDirective } from '../../directives/clickOutside';
 
 	const props = withDefaults(defineProps<ILxDropdownProps>(), {
 		label: 'Options',
@@ -27,6 +28,7 @@
 	}>();
 
 	const open = ref(false);
+	const vClickOutside = vClickOutsideDirective;
 
 	const onToggle = (event: Event): void => {
 		const target = event.currentTarget as HTMLDetailsElement | null;
@@ -35,6 +37,10 @@
 
 	const onSelect = (value: TLxDropdownValue): void => {
 		emit('select', value);
+		open.value = false;
+	};
+
+	const onClickOutside = (): void => {
 		open.value = false;
 	};
 </script>

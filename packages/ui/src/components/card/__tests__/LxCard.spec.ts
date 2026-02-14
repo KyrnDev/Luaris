@@ -38,4 +38,16 @@ describe('LxCard', () => {
 		expect(wrapper.find('.lx-card__header').text()).toContain('Custom Header');
 		expect(wrapper.find('.lx-card__footer').text()).toContain('Custom Footer');
 	});
+
+	it('supports selected state and configurable padding', () => {
+		const wrapper = mount(LxCard, {
+			props: {
+				selected: true,
+				padding: '0',
+			},
+		});
+
+		expect(wrapper.classes()).toContain('lx-card--selected');
+		expect(wrapper.attributes('style')).toContain('--lx-card-padding: 0;');
+	});
 });

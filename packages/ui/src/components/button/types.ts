@@ -3,6 +3,7 @@ export type TLxButtonVariant = 'primary' | 'secondary' | 'ghost' | 'accent' | 'i
 export type TLxButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export type TLxButtonType = 'button' | 'submit' | 'reset';
+export type TLxButtonIconOrder = 'left' | 'right';
 
 export interface ILxButtonProps {
 	variant?: TLxButtonVariant,
@@ -13,4 +14,6 @@ export interface ILxButtonProps {
 	fullWidth?: boolean,
 	label?: string,
 	ariaLabel?: string,
+	icon?: string,
+	iconOrder?: TLxButtonIconOrder,
 }

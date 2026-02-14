@@ -81,9 +81,17 @@
 			"types": "./dist/components/dropdown/index.d.ts",
 			"import": "./dist/components/dropdown/index.js"
 		},
+		"./components/flex": {
+			"types": "./dist/components/flex/index.d.ts",
+			"import": "./dist/components/flex/index.js"
+		},
 		"./components/icon": {
 			"types": "./dist/components/icon/index.d.ts",
 			"import": "./dist/components/icon/index.js"
+		},
+		"./components/icon-picker": {
+			"types": "./dist/components/icon-picker/index.d.ts",
+			"import": "./dist/components/icon-picker/index.js"
 		},
 		"./components/page": {
 			"types": "./dist/components/page/index.d.ts",
@@ -141,6 +149,10 @@
 			"types": "./dist/components/theme-selector/index.d.ts",
 			"import": "./dist/components/theme-selector/index.js"
 		},
+		"./components/tooltip": {
+			"types": "./dist/components/tooltip/index.d.ts",
+			"import": "./dist/components/tooltip/index.js"
+		},
 		"./styles": "./dist/styles.css",
 		"./styles.css": "./dist/styles.css",
 		"./package.json": "./package.json"
@@ -149,6 +161,7 @@
 		"dev": "vite",
 		"build": "rm -rf dist && vite build && vue-tsc -p tsconfig.build.json",
 		"preview": "vite preview",
+		"fa:registry": "bun run scripts/generate-fa-registry.ts",
 		"test": "vitest",
 		"test:run": "vitest run",
 		"test:coverage": "vitest run --coverage"
@@ -165,12 +178,9 @@
 		"jsdom": "^28.0.0",
 		"sass-embedded": "^1.97.3",
 		"typescript": "~5.9.3",
-		"vite": "^8.0.0-beta.13",
+		"vite": "^7.3.1",
 		"vitest": "^4.0.18",
 		"vue": "^3.5.25",
 		"vue-tsc": "^3.1.5"
-	},
-	"overrides": {
-		"vite": "^8.0.0-beta.13"
 	}
 }

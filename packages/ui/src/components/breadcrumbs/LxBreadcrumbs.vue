@@ -43,7 +43,19 @@
 
 	.lx-breadcrumbs__item a {
 		color: var(--lx-colour-primary);
-		text-decoration: none;
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		text-decoration-thickness: 0.08em;
+		text-underline-offset: 0.18em;
+		transition:
+			color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
+			text-decoration-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);
+	}
+
+	.lx-breadcrumbs__item a:hover,
+	.lx-breadcrumbs__item a:focus-visible {
+		color: color-mix(in srgb, var(--lx-colour-primary) 82%, var(--lx-colour-surface-text));
+		text-decoration-color: currentColor;
 	}
 
 	.lx-breadcrumbs__item.is-current {

@@ -14,5 +14,6 @@ describe('LxRadio', () => {
 
 		await wrapper.find('input').setValue(true);
 		expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe('b');
+		expect(wrapper.find('label').attributes('for')).toBe(wrapper.find('input').attributes('id'));
 	});
 });

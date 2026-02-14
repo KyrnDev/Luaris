@@ -11,6 +11,60 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Semantic Colours
+			</h3>
+			<div class="lx-kitchen-sink__swatches">
+				<article
+					v-for="swatch in semanticSwatches"
+					:key="swatch.key"
+					class="lx-kitchen-sink__swatch"
+				>
+					<div class="lx-kitchen-sink__swatch-sample" :style="{ background: `var(${swatch.token})` }" />
+					<p>
+						{{ swatch.label }}
+					</p>
+					<code>
+						{{ swatch.token }}
+					</code>
+				</article>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Design Foundations
+			</h3>
+			<div class="lx-kitchen-sink__token-layout">
+				<article class="lx-kitchen-sink__token-block">
+					<h4>
+						Surfaces
+					</h4>
+					<div class="lx-kitchen-sink__surface-grid">
+						<div v-for="surface in surfaceTokens" :key="surface.token" class="lx-kitchen-sink__surface-item">
+							<div class="lx-kitchen-sink__surface-swatch" :style="{ background: `var(${surface.token})` }" />
+							<code>{{ surface.token }}</code>
+						</div>
+					</div>
+				</article>
+				<article class="lx-kitchen-sink__token-block">
+					<h4>
+						Spacing
+					</h4>
+					<div class="lx-kitchen-sink__spacing-grid">
+						<div v-for="space in spacingTokens" :key="space.token" class="lx-kitchen-sink__spacing-item">
+							<span>{{ space.label }}</span>
+							<div class="lx-kitchen-sink__spacing-bar">
+								<div :style="{ width: `var(${space.token})` }" />
+							</div>
+							<code>{{ space.token }}</code>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Buttons
 			</h3>
 			<div class="lx-kitchen-sink__button-row">
@@ -28,6 +82,100 @@
 				<LxButton variant="ghost" size="md">
 					Ghost Action
 				</LxButton>
+			</div>
+			<div class="lx-kitchen-sink__button-row">
+				<LxButton variant="primary" icon="download">
+					Icon Left
+				</LxButton>
+				<LxButton variant="secondary" icon="arrow-right" icon-order="right">
+					Icon Right
+				</LxButton>
+				<LxButton variant="accent" :disabled="true">
+					Disabled
+				</LxButton>
+				<LxButton variant="ghost" icon="floppy-disk" :disabled="true">
+					Disabled With Icon
+				</LxButton>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Flex
+			</h3>
+			<div class="lx-kitchen-sink__flex-grid">
+				<article class="lx-kitchen-sink__demo-card">
+					<p class="lx-kitchen-sink__demo-title">
+						Row + Gap
+					</p>
+					<LxFlex gap="1rem" class="lx-kitchen-sink__flex-surface">
+						<div class="lx-kitchen-sink__flex-box">
+							A
+						</div>
+						<div class="lx-kitchen-sink__flex-box">
+							B
+						</div>
+						<div class="lx-kitchen-sink__flex-box">
+							C
+						</div>
+					</LxFlex>
+				</article>
+				<article class="lx-kitchen-sink__demo-card">
+					<p class="lx-kitchen-sink__demo-title">
+						Wrap
+					</p>
+					<LxFlex wrap gap="0.75rem" class="lx-kitchen-sink__flex-surface">
+						<div v-for="item in 8" :key="`wrap-${item}`" class="lx-kitchen-sink__flex-box">
+							{{ item }}
+						</div>
+					</LxFlex>
+				</article>
+				<article class="lx-kitchen-sink__demo-card">
+					<p class="lx-kitchen-sink__demo-title">
+						Column Reverse
+					</p>
+					<LxFlex column reverse gap="0.75rem" class="lx-kitchen-sink__flex-surface">
+						<div class="lx-kitchen-sink__flex-box">
+							Top
+						</div>
+						<div class="lx-kitchen-sink__flex-box">
+							Middle
+						</div>
+						<div class="lx-kitchen-sink__flex-box">
+							Bottom
+						</div>
+					</LxFlex>
+				</article>
+				<article class="lx-kitchen-sink__demo-card">
+					<p class="lx-kitchen-sink__demo-title">
+						Justify + Align
+					</p>
+					<LxFlex justify="between" align="center" full-width class="lx-kitchen-sink__flex-surface">
+						<div class="lx-kitchen-sink__flex-box">
+							Left
+						</div>
+						<div class="lx-kitchen-sink__flex-box">
+							Right
+						</div>
+					</LxFlex>
+				</article>
+				<article class="lx-kitchen-sink__demo-card">
+					<p class="lx-kitchen-sink__demo-title">
+						Inline Flex
+					</p>
+					<div>
+						Before
+						<LxFlex inline gap="0.35rem" class="lx-kitchen-sink__inline-example">
+							<span class="lx-kitchen-sink__inline-pill">
+								One
+							</span>
+							<span class="lx-kitchen-sink__inline-pill">
+								Two
+							</span>
+						</LxFlex>
+						After
+					</div>
+				</article>
 			</div>
 		</section>
 
@@ -93,6 +241,9 @@
 		</section>
 
 		<section class="lx-kitchen-sink__section">
+			<h3>
+				Cards
+			</h3>
 			<LxCard title="Card Example">
 				<p>
 					Cards support header/body/footer slots and work well for grouped content.
@@ -114,12 +265,25 @@
 					Hover state and border motion can be used for selectable panels.
 				</p>
 			</LxCard>
+
+			<LxCard title="Selected Card" :selected="true" padding="var(--lx-size-space-md)">
+				<p>
+					Selected style and configurable inner spacing for stateful panels.
+				</p>
+			</LxCard>
+
+			<LxCard title="No Padding Card" padding="0">
+				<div class="lx-kitchen-sink__swatch-sample" />
+			</LxCard>
 		</section>
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
-				Form Controls
+				Inputs
 			</h3>
+			<h4 class="lx-kitchen-sink__subheading">
+				Base Inputs
+			</h4>
 			<div class="lx-kitchen-sink__form-grid">
 				<LxLabel text="Input">
 					<template #default="{ controlId, controlName }">
@@ -132,7 +296,7 @@
 						/>
 					</template>
 				</LxLabel>
-				<LxLabel text="Search" display="inline">
+				<LxLabel text="Search (Disabled)">
 					<template #default="{ controlId, controlName }">
 						<LxInput
 							:id="controlId"
@@ -141,10 +305,11 @@
 							variant="primary"
 							placeholder="Search term"
 							type="search"
+							:disabled="true"
 						/>
 					</template>
 				</LxLabel>
-				<LxLabel text="Error State" :reverse="true">
+				<LxLabel text="Error State">
 					<template #default="{ controlId, controlName }">
 						<LxInput
 							:id="controlId"
@@ -165,6 +330,23 @@
 						/>
 					</template>
 				</LxLabel>
+				<LxLabel text="Select (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxSelect
+							:id="controlId"
+							v-model="selectedStatus"
+							:name="controlName"
+							:options="statusOptions"
+							:disabled="true"
+						/>
+					</template>
+				</LxLabel>
+			</div>
+
+			<h4 class="lx-kitchen-sink__subheading">
+				Choice Inputs
+			</h4>
+			<div class="lx-kitchen-sink__form-grid">
 				<LxLabel text="Combobox (Tags, Stacked Search)">
 					<template #default="{ controlId, controlName }">
 						<LxCombobox
@@ -190,7 +372,7 @@
 						/>
 					</template>
 				</LxLabel>
-				<LxLabel text="Combobox (Checkbox List Mode)">
+				<LxLabel text="Combobox (Checkbox List)">
 					<template #default="{ controlId, controlName }">
 						<LxCombobox
 							:id="controlId"
@@ -202,15 +384,15 @@
 						/>
 					</template>
 				</LxLabel>
-				<LxLabel text="Combobox (Tags, Inline Search)">
+				<LxLabel text="Combobox (Disabled)">
 					<template #default="{ controlId, controlName }">
 						<LxCombobox
 							:id="controlId"
 							v-model="selectedCountriesInline"
 							:name="controlName"
 							:options="countryOptions"
-							placeholder="Compact inline search"
-							:search-on-new-line="false"
+							placeholder="Disabled state"
+							:disabled="true"
 						/>
 					</template>
 				</LxLabel>
@@ -220,12 +402,104 @@
 							<LxSwitch :id="controlId" v-model="emailEnabled" :name="controlName" />
 						</template>
 					</LxLabel>
-					<LxLabel text="Push alerts" display="inline">
+					<LxLabel text="Push alerts (Disabled)" display="inline">
 						<template #default="{ controlId, controlName }">
-							<LxSwitch :id="controlId" v-model="pushEnabled" :name="controlName" />
+							<LxSwitch :id="controlId" v-model="pushEnabled" :name="controlName" :disabled="true" />
 						</template>
 					</LxLabel>
 				</div>
+			</div>
+
+			<h4 class="lx-kitchen-sink__subheading">
+				Extended Inputs
+			</h4>
+			<div class="lx-kitchen-sink__form-grid">
+				<LxLabel text="Slider">
+					<template #default="{ controlId, controlName }">
+						<LxSlider :id="controlId" v-model="sliderValue" :name="controlName" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Slider (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxSlider :id="controlId" :model-value="25" :name="controlName" :disabled="true" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Number Input">
+					<template #default="{ controlId, controlName }">
+						<LxNumberInput
+							:id="controlId"
+							v-model="numberValue"
+							:name="controlName"
+							:min="0"
+							:max="20"
+							:step="2"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Number Input (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxNumberInput :id="controlId" :model-value="12" :name="controlName" :disabled="true" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Radio Group">
+					<template #default>
+						<LxRadios v-model="radioValue" :options="radioOptions" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Date">
+					<template #default="{ controlId, controlName }">
+						<LxDatePicker :id="controlId" v-model="dateValue" :name="controlName" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Date (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxDatePicker :id="controlId" model-value="2026-02-13" :name="controlName" :disabled="true" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Date Range">
+					<template #default>
+						<LxDateRangePicker v-model="dateRangeValue" />
+					</template>
+				</LxLabel>
+				<LxLabel text="Colour (Alpha)">
+					<template #default="{ controlId, controlName }">
+						<LxColourPicker
+							:id="controlId"
+							v-model="colourValue"
+							:name="controlName"
+							:formats="['hex', 'rgb', 'rgba', 'hsl', 'hsla']"
+							default-format="rgba"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Colour (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxColourPicker
+							:id="controlId"
+							:model-value="colourValue"
+							:name="controlName"
+							:formats="['hex', 'hsl']"
+							default-format="hex"
+							:disabled="true"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Textarea">
+					<template #default="{ controlId, controlName }">
+						<LxTextarea
+							:id="controlId"
+							v-model="textareaValue"
+							:name="controlName"
+							:max-length="140"
+							:show-counter="true"
+						/>
+					</template>
+				</LxLabel>
+				<LxLabel text="Textarea (Disabled)">
+					<template #default="{ controlId, controlName }">
+						<LxTextarea :id="controlId" model-value="Disabled example" :name="controlName" :disabled="true" />
+					</template>
+				</LxLabel>
 			</div>
 		</section>
 
@@ -233,10 +507,10 @@
 			<h3>
 				Dropdown
 			</h3>
-			<div class="lx-kitchen-sink__button-row">
+			<LxFlex gap="var(--lx-size-space-md)">
 				<LxDropdown label="Actions" :options="dropdownOptions" @select="onDropdownSelect" />
 				<span class="lx-kitchen-sink__muted">Selected: {{ selectedAction }}</span>
-			</div>
+			</LxFlex>
 		</section>
 
 		<section class="lx-kitchen-sink__section">
@@ -274,6 +548,10 @@
 				<LxIcon name="sparkles" icon-style="sharp-solid" />
 				<LxIcon name="spinner" spin size="xl" />
 			</div>
+			<p class="lx-kitchen-sink__muted">
+				Selected icon: {{ selectedIconChoice?.name || 'none' }} ({{ selectedIconChoice?.style || 'n/a' }})
+			</p>
+			<LxIconPicker v-model="selectedIconChoice" />
 		</section>
 
 		<section class="lx-kitchen-sink__section">
@@ -301,9 +579,33 @@
 				Carousel
 			</h3>
 			<div class="lx-kitchen-sink__carousel-grid">
-				<LxCarousel v-model="carouselIndex" :slides="carouselSlides" animation="fade" />
-				<LxCarousel :slides="carouselSlides" animation="slide" />
-				<LxCarousel :slides="carouselSlides" animation="none" />
+				<article class="lx-kitchen-sink__carousel-item">
+					<h4 class="lx-kitchen-sink__subheading">
+						Fade Animation
+					</h4>
+					<p class="lx-kitchen-sink__carousel-copy">
+						Slides cross-fade for a softer transition.
+					</p>
+					<LxCarousel v-model="carouselIndex" :slides="carouselSlides" animation="fade" />
+				</article>
+				<article class="lx-kitchen-sink__carousel-item">
+					<h4 class="lx-kitchen-sink__subheading">
+						Slide Animation
+					</h4>
+					<p class="lx-kitchen-sink__carousel-copy">
+						Slides move horizontally like a classic carousel.
+					</p>
+					<LxCarousel :slides="carouselSlides" animation="slide" />
+				</article>
+				<article class="lx-kitchen-sink__carousel-item">
+					<h4 class="lx-kitchen-sink__subheading">
+						No Animation
+					</h4>
+					<p class="lx-kitchen-sink__carousel-copy">
+						Content swaps instantly with no transition effect.
+					</p>
+					<LxCarousel :slides="carouselSlides" animation="none" />
+				</article>
 			</div>
 		</section>
 
@@ -330,9 +632,20 @@
 				Progress
 			</h3>
 			<div class="lx-kitchen-sink__button-row">
-				<LxProgress :value="68" show-label />
-				<LxProgress :value="42" orientation="vertical" />
-				<LxProgress :value="82" orientation="ring" show-label />
+				<LxProgress :value="68" size="sm" show-label />
+				<LxProgress :value="68" size="md" show-label />
+				<LxProgress :value="68" size="lg" show-label />
+				<LxProgress :value="68" size="xl" show-label />
+			</div>
+			<div class="lx-kitchen-sink__button-row">
+				<LxProgress :value="42" orientation="vertical" size="sm" />
+				<LxProgress :value="42" orientation="vertical" size="md" />
+				<LxProgress :value="42" orientation="vertical" size="lg" />
+				<LxProgress :value="42" orientation="vertical" size="xl" />
+				<LxProgress :value="82" orientation="ring" size="sm" show-label />
+				<LxProgress :value="82" orientation="ring" size="md" show-label />
+				<LxProgress :value="82" orientation="ring" size="lg" show-label />
+				<LxProgress :value="82" orientation="ring" size="xl" show-label />
 			</div>
 		</section>
 
@@ -358,82 +671,6 @@
 			<LxSkeleton variant="circle" />
 		</section>
 
-		<section class="lx-kitchen-sink__section">
-			<h3>
-				Extended Inputs
-			</h3>
-			<div class="lx-kitchen-sink__form-grid">
-				<LxLabel text="Slider">
-					<template #default="{ controlId, controlName }">
-						<LxSlider :id="controlId" v-model="sliderValue" :name="controlName" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Number Input">
-					<template #default="{ controlId, controlName }">
-						<LxNumberInput
-							:id="controlId"
-							v-model="numberValue"
-							:name="controlName"
-							:min="0"
-							:max="20"
-							:step="2"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Radio Group">
-					<template #default>
-						<LxRadios v-model="radioValue" :options="radioOptions" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Date">
-					<template #default="{ controlId, controlName }">
-						<LxDatePicker :id="controlId" v-model="dateValue" :name="controlName" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Date Range">
-					<template #default>
-						<LxDateRangePicker v-model="dateRangeValue" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Colour (Alpha)">
-					<template #default="{ controlId, controlName }">
-						<LxColourPicker :id="controlId" v-model="colourValue" :name="controlName" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Textarea">
-					<template #default="{ controlId, controlName }">
-						<LxTextarea
-							:id="controlId"
-							v-model="textareaValue"
-							:name="controlName"
-							:max-length="140"
-							:show-counter="true"
-						/>
-					</template>
-				</LxLabel>
-			</div>
-		</section>
-
-		<section class="lx-kitchen-sink__section">
-			<h3>
-				Semantic Colours
-			</h3>
-			<div class="lx-kitchen-sink__swatches">
-				<article
-					v-for="swatch in semanticSwatches"
-					:key="swatch.key"
-					class="lx-kitchen-sink__swatch"
-				>
-					<div class="lx-kitchen-sink__swatch-sample" :style="{ background: `var(${swatch.token})` }" />
-					<p>
-						{{ swatch.label }}
-					</p>
-					<code>
-						{{ swatch.token }}
-					</code>
-				</article>
-			</div>
-		</section>
 	</section>
 </template>
 
@@ -453,7 +690,10 @@
 	import { LxDivider } from '../divider';
 	import { LxDrawer } from '../drawer';
 	import { LxDropdown } from '../dropdown';
+	import { LxFlex } from '../flex';
 	import { LxIcon } from '../icon';
+	import { LxIconPicker } from '../icon-picker';
+	import type { ILxIconPickerValue } from '../icon-picker';
 	import { LxInput } from '../input';
 	import { LxLabel } from '../label';
 	import { LxNumberInput } from '../number-input';
@@ -516,6 +756,26 @@
 		{ key: 'warning', label: 'Warning', token: '--lx-colour-warning' },
 		{ key: 'danger', label: 'Danger', token: '--lx-colour-danger' },
 	];
+	const surfaceTokens: ILxKitchenSinkToken[] = [
+		{ key: 'base', label: 'Base', token: '--lx-colour-surface-base' },
+		{ key: 'raised', label: 'Raised', token: '--lx-colour-surface-raised' },
+		{ key: 'sunken', label: 'Sunken', token: '--lx-colour-surface-sunken' },
+		{ key: 'overlay', label: 'Overlay', token: '--lx-colour-surface-overlay' },
+		{ key: 'border', label: 'Border', token: '--lx-colour-surface-border' },
+		{ key: 'text', label: 'Text', token: '--lx-colour-surface-text' },
+		{ key: 'text-muted', label: 'Text Muted', token: '--lx-colour-surface-text-muted' },
+		{ key: 'inverse', label: 'Inverse', token: '--lx-colour-surface-inverse' },
+	];
+	const spacingTokens: ILxKitchenSinkToken[] = [
+		{ key: 'space-2xs', label: '2XS', token: '--lx-size-space-2xs' },
+		{ key: 'space-xs', label: 'XS', token: '--lx-size-space-xs' },
+		{ key: 'space-sm', label: 'SM', token: '--lx-size-space-sm' },
+		{ key: 'space-md', label: 'MD', token: '--lx-size-space-md' },
+		{ key: 'space-lg', label: 'LG', token: '--lx-size-space-lg' },
+		{ key: 'space-xl', label: 'XL', token: '--lx-size-space-xl' },
+		{ key: 'space-2xl', label: '2XL', token: '--lx-size-space-2xl' },
+		{ key: 'space-3xl', label: '3XL', token: '--lx-size-space-3xl' },
+	];
 
 	const inputValue = ref('');
 	const searchValue = ref('');
@@ -529,6 +789,10 @@
 	const pushEnabled = ref(false);
 	const drawerOpen = ref(false);
 	const selectedAction = ref('none');
+	const selectedIconChoice = ref<ILxIconPickerValue | null>({
+		name: 'house',
+		style: 'solid',
+	});
 	const carouselIndex = ref(0);
 	const comparisonSplit = ref(50);
 	const ratingValue = ref(3);
@@ -557,12 +821,8 @@
 
 <style scoped lang="scss">
 	.lx-kitchen-sink {
-		background: var(--lx-colour-surface-raised);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		border-radius: var(--lx-size-radius-lg);
 		display: grid;
 		gap: var(--lx-size-space-xl);
-		padding: var(--lx-size-space-2xl);
 	}
 
 	.lx-kitchen-sink__header h2 {
@@ -589,6 +849,14 @@
 		margin: 0;
 	}
 
+	.lx-kitchen-sink__subheading {
+		border-top: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		font-size: var(--lx-font-size-sm);
+		font-weight: var(--lx-font-weight-semibold);
+		margin: var(--lx-size-space-xs) 0 0;
+		padding-top: var(--lx-size-space-sm);
+	}
+
 	.lx-kitchen-sink__section--grid-2 {
 		grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
 	}
@@ -611,10 +879,79 @@
 		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 	}
 
+	.lx-kitchen-sink__flex-grid {
+		display: grid;
+		gap: var(--lx-size-space-md);
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	}
+
+	.lx-kitchen-sink__demo-card {
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		display: grid;
+		gap: var(--lx-size-space-sm);
+		padding: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__demo-title {
+		color: var(--lx-colour-surface-text-muted);
+		font-size: var(--lx-font-size-xs);
+		font-weight: var(--lx-font-weight-semibold);
+		letter-spacing: 0.02em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.lx-kitchen-sink__flex-surface {
+		background: var(--lx-colour-surface-base);
+		border: var(--lx-size-border-width-hairline) dashed var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		min-height: 3.25rem;
+		padding: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__flex-box {
+		align-items: center;
+		background: color-mix(in srgb, var(--lx-colour-primary) 16%, var(--lx-colour-surface-base));
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-xs);
+		display: inline-flex;
+		font-size: var(--lx-font-size-xs);
+		font-weight: var(--lx-font-weight-semibold);
+		justify-content: center;
+		min-height: 2rem;
+		min-width: 2rem;
+		padding: 0 var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__inline-example {
+		margin: 0 var(--lx-size-space-xs);
+	}
+
+	.lx-kitchen-sink__inline-pill {
+		background: var(--lx-colour-secondary);
+		border-radius: var(--lx-size-radius-pill);
+		color: var(--lx-colour-on-secondary);
+		font-size: var(--lx-font-size-xs);
+		padding: 0.12rem 0.45rem;
+	}
+
 	.lx-kitchen-sink__carousel-grid {
 		display: grid;
 		gap: var(--lx-size-space-md);
 		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	}
+
+	.lx-kitchen-sink__carousel-item {
+		display: grid;
+		gap: var(--lx-size-space-xs);
+	}
+
+	.lx-kitchen-sink__carousel-copy {
+		color: var(--lx-colour-surface-text-muted);
+		font-size: var(--lx-font-size-sm);
+		margin: 0;
 	}
 
 	.lx-kitchen-sink__divider-demo {
@@ -629,6 +966,64 @@
 		display: grid;
 		gap: var(--lx-size-space-md);
 		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+	}
+
+	.lx-kitchen-sink__token-layout {
+		display: grid;
+		gap: var(--lx-size-space-md);
+		grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+	}
+
+	.lx-kitchen-sink__token-block {
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-md);
+		display: grid;
+		gap: var(--lx-size-space-sm);
+		padding: var(--lx-size-space-md);
+	}
+
+	.lx-kitchen-sink__token-block h4 {
+		font-size: var(--lx-font-size-sm);
+		margin: 0;
+	}
+
+	.lx-kitchen-sink__surface-grid,
+	.lx-kitchen-sink__spacing-grid {
+		display: grid;
+		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__surface-item,
+	.lx-kitchen-sink__spacing-item {
+		display: grid;
+		gap: var(--lx-size-space-xs);
+	}
+
+	.lx-kitchen-sink__surface-item code,
+	.lx-kitchen-sink__spacing-item code {
+		color: var(--lx-colour-surface-text-muted);
+		font-size: var(--lx-font-size-xs);
+	}
+
+	.lx-kitchen-sink__surface-swatch {
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		height: 2.4rem;
+	}
+
+	.lx-kitchen-sink__spacing-bar {
+		background: var(--lx-colour-surface-sunken);
+		border-radius: var(--lx-size-radius-pill);
+		height: 0.6rem;
+		overflow: hidden;
+	}
+
+	.lx-kitchen-sink__spacing-bar > div {
+		background: var(--lx-colour-primary);
+		border-radius: inherit;
+		height: 100%;
+		min-width: 0.3rem;
 	}
 
 	.lx-kitchen-sink__swatch {

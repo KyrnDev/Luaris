@@ -82,15 +82,17 @@
 		border: none;
 		color: var(--lx-colour-surface-text);
 		font: inherit;
+		line-height: 1.45;
 		outline: none;
-		padding: 0 var(--lx-size-space-sm) 0 0;
+		padding: var(--lx-size-space-xs) var(--lx-size-space-lg) var(--lx-size-space-xs) 0;
 		width: 100%;
 	}
 
 	.lx-select select option {
 		background: var(--lx-colour-surface-raised);
 		color: var(--lx-colour-surface-text);
-		padding: var(--lx-size-space-sm);
+		line-height: 1.45;
+		padding: var(--lx-size-space-sm) var(--lx-size-space-md);
 	}
 
 	.lx-select__caret {

@@ -27,9 +27,7 @@
 		</div>
 
 		<div class="lx-carousel__controls">
-			<button type="button" aria-label="Previous slide" @click="previous">
-				‹
-			</button>
+			<LxButton variant="ghost" size="xs" aria-label="Previous slide" icon="chevron-left" @click="previous" />
 			<div class="lx-carousel__dots">
 				<button
 					v-for="(slide, index) in props.slides"
@@ -40,9 +38,7 @@
 					@click="setIndex(index)"
 				/>
 			</div>
-			<button type="button" aria-label="Next slide" @click="next">
-				›
-			</button>
+			<LxButton variant="ghost" size="xs" aria-label="Next slide" icon="chevron-right" @click="next" />
 		</div>
 	</section>
 </template>
@@ -50,6 +46,7 @@
 <script setup lang='ts'>
 	import type { ILxCarouselProps } from './types';
 	import { computed, onMounted, onUnmounted, watch } from 'vue';
+	import { LxButton } from '../button';
 
 	const props = withDefaults(defineProps<ILxCarouselProps>(), {
 		slides: () => [],
@@ -201,30 +198,38 @@
 		justify-content: space-between;
 	}
 
-	.lx-carousel__controls button {
-		appearance: none;
-		background: var(--lx-colour-surface-base);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
-		border-radius: var(--lx-size-radius-sm);
-		color: var(--lx-colour-surface-text);
-		cursor: pointer;
-		padding: 0.35rem 0.6rem;
-	}
-
 	.lx-carousel__dots {
 		display: flex;
 		gap: var(--lx-size-space-xs);
 	}
 
 	.lx-carousel__dots button {
+		appearance: none;
 		background: var(--lx-colour-surface-border);
+		border: none;
 		border-radius: var(--lx-size-radius-pill);
+		cursor: pointer;
 		height: 0.55rem;
+		opacity: 0.7;
 		padding: 0;
+		transition:
+			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
+			opacity var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
+			transform var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);
 		width: 0.55rem;
 	}
 
 	.lx-carousel__dots button.is-active {
 		background: var(--lx-colour-primary);
+		opacity: 1;
+	}
+
+	.lx-carousel__dots button:hover {
+		opacity: 1;
+	}
+
+	.lx-carousel__dots button:focus-visible {
+		outline: var(--lx-size-border-width-standard) solid var(--lx-colour-focus-ring);
+		outline-offset: 2px;
 	}
 </style>

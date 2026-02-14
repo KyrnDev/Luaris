@@ -5,4 +5,5 @@ export interface ILxRadioProps {
 	value: TFormValue,
 	disabled?: boolean,
 	name?: string,
+	id?: string,
 }

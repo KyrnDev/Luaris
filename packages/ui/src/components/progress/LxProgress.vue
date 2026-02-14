@@ -1,7 +1,11 @@
 <template>
 	<div
 		class="lx-progress"
-		:class="[`lx-progress--${props.orientation}`, `lx-progress--${props.variant}`]"
+		:class="[
+			`lx-progress--${props.orientation}`,
+			`lx-progress--${props.variant}`,
+			`lx-progress--${resolvedSizeClass}`,
+		]"
 		role="progressbar"
 		:aria-valuemin="0"
 		:aria-valuemax="props.max"
@@ -28,11 +32,25 @@
 		orientation: 'horizontal',
 		showLabel: false,
 		indeterminate: false,
-		size: 64,
+		size: 'md',
 	});
 
 	const clampedValue = computed(() => Math.min(Math.max(props.value, 0), props.max));
 	const percentage = computed(() => Math.round((clampedValue.value / props.max) * 100));
+	const resolvedSizeClass = computed(() => typeof props.size === 'number' ? 'md' : props.size);
+	const ringSizeMap: Record<'sm' | 'md' | 'lg' | 'xl', number> = {
+		sm: 44,
+		md: 64,
+		lg: 84,
+		xl: 108,
+	};
+	const resolvedRingSize = computed(() => {
+		if (typeof props.size === 'number') {
+			return props.size;
+		}
+
+		return ringSizeMap[props.size];
+	});
 
 	const fillStyle = computed(() => {
 		if (props.indeterminate) {
@@ -54,7 +72,7 @@
 	});
 
 	const ringStyle = computed(() => ({
-		'--lx-progress-size': `${props.size}px`,
+		'--lx-progress-size': `${resolvedRingSize.value}px`,
 		'--lx-progress-percent': `${percentage.value}%`,
 	}));
 </script>
@@ -83,11 +101,38 @@
 		height: 0.7rem;
 	}
 
+	.lx-progress--horizontal.lx-progress--sm .lx-progress__track {
+		height: 0.45rem;
+	}
+
+	.lx-progress--horizontal.lx-progress--lg .lx-progress__track {
+		height: 0.9rem;
+	}
+
+	.lx-progress--horizontal.lx-progress--xl .lx-progress__track {
+		height: 1.15rem;
+	}
+
 	.lx-progress--vertical .lx-progress__track {
 		display: flex;
 		height: 6rem;
 		justify-content: flex-end;
 		width: 0.7rem;
+	}
+
+	.lx-progress--vertical.lx-progress--sm .lx-progress__track {
+		height: 4.25rem;
+		width: 0.45rem;
+	}
+
+	.lx-progress--vertical.lx-progress--lg .lx-progress__track {
+		height: 7.4rem;
+		width: 0.95rem;
+	}
+
+	.lx-progress--vertical.lx-progress--xl .lx-progress__track {
+		height: 9rem;
+		width: 1.2rem;
 	}
 
 	.lx-progress--vertical .lx-progress__fill {

@@ -55,4 +55,21 @@ describe('LxDropdown', () => {
 		await wrapper.find('.lx-dropdown__menu').trigger('keydown', { key: 'Escape' });
 		expect(wrapper.find('summary').attributes('aria-expanded')).toBe('false');
 	});
+
+	it('closes when clicking outside', async () => {
+		const wrapper = mount(LxDropdown, {
+			attachTo: document.body,
+			props: {
+				options: [{ label: 'One', value: 'one' }],
+			},
+		});
+
+		const details = wrapper.find('details').element as HTMLDetailsElement;
+		details.open = true;
+		await wrapper.find('details').trigger('toggle');
+		document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+		await wrapper.vm.$nextTick();
+		expect(wrapper.find('summary').attributes('aria-expanded')).toBe('false');
+		wrapper.unmount();
+	});
 });
