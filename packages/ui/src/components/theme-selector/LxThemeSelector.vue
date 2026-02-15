@@ -27,7 +27,8 @@
 
 <script setup lang="ts">
 	import type { ILxThemeSelectorProps, TLxTheme } from './types';
-	import { onMounted, ref } from 'vue';
+	import { onMounted } from 'vue';
+	import { useTheme } from '../../composables/useTheme';
 	import { LxButton } from '../button';
 
 	const props = withDefaults(defineProps<ILxThemeSelectorProps>(), {
@@ -52,31 +53,16 @@
 		(event: 'change', theme: TLxTheme): void,
 	}>();
 
-	const selectedTheme = ref<TLxTheme>('light');
+	const {
+		theme: selectedTheme,
+		resolveInitialTheme,
+		setTheme: setThemeState,
+	} = useTheme();
 
-	const resolveInitialTheme = (): TLxTheme => {
-		const themeFromAttribute = document.documentElement.dataset.theme as TLxTheme | undefined;
-
-		if (themeFromAttribute) {
-			return themeFromAttribute;
-		}
-
-		if (window.matchMedia('(prefers-contrast: more)').matches) {
-			return 'high-contrast';
-		}
-
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			return 'dark';
-		}
-
-		return 'light';
-	};
-
-	const setTheme = (theme: TLxTheme): void => {
-		document.documentElement.dataset.theme = theme;
-		selectedTheme.value = theme;
-		emit('update:theme', theme);
-		emit('change', theme);
+	const setTheme = (nextTheme: TLxTheme): void => {
+		setThemeState(nextTheme);
+		emit('update:theme', nextTheme);
+		emit('change', nextTheme);
 	};
 
 	onMounted(() => {

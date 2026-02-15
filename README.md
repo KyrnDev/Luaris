@@ -1,88 +1,52 @@
 # 🌙 Luaris Framework
 
-*Luar* means **moonlight** in Portuguese — a quiet, steady light that brings clarity.
-Luaris is built with that same idea in mind: clarity in how we design, build, and scale applications.
+Luaris is a Vue-first UI ecosystem that can scale into a full application platform.
 
-## What is Luaris?
+The core idea is simple: keep UI building blocks well-designed and strongly typed, then add protocol and runtime layers when you need declarative interfaces or deeper integration.
 
-Luaris is a **Vue-first UI ecosystem** that can grow into a full-stack application platform.
+You can adopt one package at a time, or use the whole stack.
 
-At its core, it provides a clean, strongly typed component library.
-Around that, it adds a protocol and runtime layer that allow you to describe interfaces declaratively and run them consistently across environments.
+## ✨ Why Luaris
 
-You can use one part.
-Or you can use the whole system.
+- Build with a clean Vue component library
+- Keep contracts typed and predictable
+- Describe UI declaratively when needed
+- Integrate frontend and backend concerns without extra ceremony
+- Maintain a consistent developer experience across packages
 
-## The Aim
+## 📦 Package Overview
 
-Luaris exists to make building structured, scalable interfaces simple.
+| Package | Purpose |
+| --- | --- |
+| `@luaris/ui` | Vue 3 component library built with TypeScript and SCSS |
+| `@luaris/protocol` | Typed schema for UI structure, events, and actions |
+| `@luaris/runtime-vue` | Vue runtime that renders protocol definitions with `@luaris/ui` |
+| `@luaris/protocol-jsx` | JSX authoring layer that compiles to the protocol schema |
+| `@luaris/server` | Backend layer for actions, routing, and structured app logic |
 
-The goals are:
+## 🧩 `@luaris/ui` Example
 
-- Provide a well-designed Vue component system
-- Keep contracts strongly typed and predictable
-- Allow UI to be described declaratively when needed
-- Support full-stack integration without unnecessary complexity
-- Deliver a clean developer experience from start to finish
-
-Everything should feel consistent. Nothing should feel bolted on.
-
-## The Layers
-
-Luaris is designed in layers. Each one works on its own.
-
-### `@luaris/ui`
-
-A Vue 3 component library built with TypeScript and SCSS.
-
-All components use the `Lx` prefix:
+All UI components use the `Lx` prefix:
 
 ```vue
-<LxClusterLayout>
-  <LxInput placeholder="Email" />
-  <LxButton label="Submit" />
-</LxClusterLayout>
+<LxFlex gap="md">
+	<LxInput placeholder="Email address" />
+	<LxButton>Submit</LxButton>
+</LxFlex>
 ```
 
-You can use `@luaris/ui` in any Vue project without touching the rest of the ecosystem.
+`@luaris/ui` works as a standalone component library, so you do not need the other packages unless you want them.
 
-### `@luaris/protocol`
+## 🧭 Design Principles
 
-A strictly typed schema that describes UI structure, events, and actions.
+- Modular by default: each package is useful on its own
+- Strong core contracts: stable, versionable, typed
+- Extensible architecture: easy to grow without rewrites
+- Vue-first focus: depth over broad but shallow support
+- Consistent APIs and naming across the ecosystem
 
-It allows interfaces to be defined as structured data instead of Vue templates.
-The protocol is framework-agnostic and designed to stay stable over time.
+## 🚀 Direction
 
-### `@luaris/runtime-vue`
+Luaris starts with UI components, then expands into protocol-driven frontend and backend tooling.
 
-The official Vue runtime.
-
-It interprets protocol definitions and renders them using `@luaris/ui`.
-It handles layout structure, slot mapping, and action dispatching.
-
-Vue is the primary focus, but the naming leaves room for future runtimes if the ecosystem grows.
-
-### `@luaris/protocol-jsx`
-
-A JSX-based authoring layer for the protocol.
-
-Instead of writing raw JSON, you can define protocol structures using typed JSX that compiles to the same schema.
-
-### `@luaris/server`
-
-A backend framework designed to work naturally with the protocol and runtime.
-
-It can handle actions, routing, and structured application logic — but it can also be used independently.
-
-## Design Principles
-
-- **Layered and modular** — each package works on its own.
-- **Strict core contracts** — predictable and versionable.
-- **Extensible edges** — applications can expand safely.
-- **Vue-first** — deep focus over shallow multi-framework support.
-- **Consistent developer experience** across the stack.
-
-Luaris starts as a component library.
-It can grow into a complete application platform.
-
-How far you take it is up to you. 🌙
+Use as much or as little of the framework as your project needs.

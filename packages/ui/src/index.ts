@@ -35,4 +35,5 @@ export * from './components/tag';
 export * from './components/textarea';
 export * from './components/theme-selector';
 export * from './components/tooltip';
+export * from './composables';
 export * from './directives';

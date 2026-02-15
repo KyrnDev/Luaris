@@ -157,6 +157,14 @@
 			"types": "./dist/components/tooltip/index.d.ts",
 			"import": "./dist/components/tooltip/index.js"
 		},
+		"./composables": {
+			"types": "./dist/composables/index.d.ts",
+			"import": "./dist/composables/index.js"
+		},
+		"./directives": {
+			"types": "./dist/directives/index.d.ts",
+			"import": "./dist/directives/index.js"
+		},
 		"./styles": "./dist/styles.css",
 		"./styles.css": "./dist/styles.css",
 		"./package.json": "./package.json"

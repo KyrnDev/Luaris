@@ -1,4 +1,6 @@
-export type TLxTheme = 'light' | 'dark' | 'high-contrast';
+import type { TLxTheme } from '../../types/theme';
+
+export type { TLxTheme } from '../../types/theme';
 
 export interface ILxThemeOption {
 	value: TLxTheme,

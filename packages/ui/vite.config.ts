@@ -43,6 +43,8 @@ export default defineConfig({
 				'components/textarea': resolve(__dirname, 'src/components/textarea/index.ts'),
 				'components/theme-selector': resolve(__dirname, 'src/components/theme-selector/index.ts'),
 				'components/tooltip': resolve(__dirname, 'src/components/tooltip/index.ts'),
+				'composables': resolve(__dirname, 'src/composables/index.ts'),
+				'directives': resolve(__dirname, 'src/directives/index.ts'),
 			},
 			formats: ['es'],
 			cssFileName: 'styles',
