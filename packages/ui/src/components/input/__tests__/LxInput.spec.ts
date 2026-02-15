@@ -68,4 +68,9 @@ describe('LxInput', () => {
 		expect(input.attributes('id')).toBeTruthy();
 		expect(input.attributes('name')).toBe(input.attributes('id'));
 	});
+
+	it('uses an empty string by default when model is omitted', () => {
+		const wrapper = mount(LxInput);
+		expect((wrapper.find('input').element as HTMLInputElement).value).toBe('');
+	});
 });

@@ -13,6 +13,8 @@ export default defineConfig({
 			exclude: [
 				'**/*.d.ts',
 				'**/dist/**',
+				'**/src/**/index.ts',
+				'**/src/data/**',
 				'**/src/main.ts',
 				'**/src/App.vue',
 				'**/src/styles/**',

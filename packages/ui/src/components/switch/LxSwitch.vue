@@ -6,12 +6,14 @@
 			:name="inputName"
 			type="checkbox"
 			role="switch"
-			:checked="modelValue"
+			:checked="model"
 			:disabled="disabled"
 			:aria-label="switchAriaLabel"
 			@change="onChange"
 		>
-		<span class="lx-switch__track" aria-hidden="true"><span class="lx-switch__thumb" /></span>
+		<label class="lx-switch__track" :for="inputId" @click.prevent="onTrackClick">
+			<span class="lx-switch__thumb" />
+		</label>
 	</div>
 </template>
 
@@ -24,14 +26,14 @@
 	});
 
 	const props = withDefaults(defineProps<ILxSwitchProps>(), {
-		modelValue: false,
 		disabled: false,
 	});
-
 	const emit = defineEmits<{
-		(event: 'update:modelValue', value: boolean): void,
 		(event: 'change', value: boolean): void,
 	}>();
+	const model = defineModel<boolean>({
+		default: false,
+	});
 	const attrs = useAttrs();
 	const generatedId = `lx-switch-${useId().replace(/:/g, '')}`;
 	const inputId = computed(() => {
@@ -49,11 +51,19 @@
 
 	const onChange = (event: Event): void => {
 		const target = event.target as HTMLInputElement;
-		emit('update:modelValue', target.checked);
+		model.value = target.checked;
 		emit('change', target.checked);
 	};
+	const onTrackClick = (): void => {
+		if (disabled) {
+			return;
+		}
 
-	const { disabled, modelValue } = props;
+		model.value = !model.value;
+		emit('change', model.value);
+	};
+
+	const { disabled } = props;
 </script>
 
 <style scoped lang="scss">
@@ -74,6 +84,7 @@
 		align-items: center;
 		background: var(--lx-colour-surface-border);
 		border-radius: var(--lx-size-radius-pill);
+		cursor: pointer;
 		display: inline-flex;
 		height: 1.5rem;
 		padding: 0.15rem;
@@ -106,5 +117,9 @@
 	.lx-switch.is-disabled {
 		cursor: not-allowed;
 		opacity: 0.6;
+	}
+
+	.lx-switch.is-disabled .lx-switch__track {
+		cursor: not-allowed;
 	}
 </style>

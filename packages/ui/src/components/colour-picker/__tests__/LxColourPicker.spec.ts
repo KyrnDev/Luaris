@@ -26,4 +26,53 @@ describe('LxColourPicker', () => {
 		await wrapper.find('.lx-colour-picker__output').trigger('click');
 		expect(clipboardWrite).toHaveBeenCalled();
 	});
+
+	it('supports popup mode and opens modal panel', async () => {
+		const wrapper = mount(LxColourPicker, {
+			props: {
+				popup: true,
+				modelValue: { hex: '#123456', alpha: 0.5 },
+			},
+		});
+
+		expect(document.body.querySelector('.lx-modal')).toBeNull();
+		await wrapper.find('.lx-colour-picker__trigger').trigger('click');
+		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
+	});
+
+	it('falls back to first format when default is unavailable', async () => {
+		const wrapper = mount(LxColourPicker, {
+			props: {
+				modelValue: { hex: '#ff0000', alpha: 1 },
+				formats: ['hex'],
+				defaultFormat: 'rgba',
+				showAlpha: false,
+			},
+		});
+
+		expect(wrapper.find('.lx-colour-picker__alpha').exists()).toBe(false);
+		expect(wrapper.find('.lx-colour-picker__output').text()).toContain('#FF0000');
+	});
+
+	it('uses copy fallback when clipboard api is unavailable', async () => {
+		Object.defineProperty(navigator, 'clipboard', {
+			value: undefined,
+			configurable: true,
+		});
+		Object.defineProperty(document, 'execCommand', {
+			value: vi.fn(() => true),
+			configurable: true,
+		});
+
+		const wrapper = mount(LxColourPicker, {
+			props: {
+				modelValue: { hex: '#abcdef', alpha: 1 },
+				formats: ['rgb'],
+				defaultFormat: 'rgb',
+			},
+		});
+
+		await wrapper.find('.lx-colour-picker__output').trigger('click');
+		expect(document.execCommand).toHaveBeenCalledWith('copy');
+	});
 });

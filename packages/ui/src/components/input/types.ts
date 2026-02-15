@@ -4,7 +4,6 @@ export type TLxInputVariant = 'default' | 'primary' | 'secondary';
 export type TLxInputSize = 'sm' | 'md' | 'lg';
 
 export interface ILxInputProps {
-	modelValue?: string,
 	hint?: string,
 	error?: string,
 	placeholder?: string,

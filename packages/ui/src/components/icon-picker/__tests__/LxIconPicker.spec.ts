@@ -101,4 +101,47 @@ describe('LxIconPicker', () => {
 		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
 		expect(document.body.querySelector('.lx-icon-picker__panel--modal')).not.toBeNull();
 	});
+
+	it('keeps popup open when closeOnSelect is false', async () => {
+		const wrapper = mount(LxIconPicker, {
+			props: {
+				popup: true,
+				closeOnSelect: false,
+				registry: buildRegistry(2),
+			},
+		});
+
+		await wrapper.find('.lx-icon-picker__trigger').trigger('click');
+		const firstTile = document.body.querySelector('.lx-icon-picker__tile') as HTMLButtonElement;
+		firstTile.click();
+		await wrapper.vm.$nextTick();
+
+		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
+	});
+
+	it('filters out icons with no eligible styles and clears invalid selected model', async () => {
+		const wrapper = mount(LxIconPicker, {
+			props: {
+				registry: [
+					{
+						name: 'blocked',
+						keywords: ['blocked'],
+						styles: ['solid'],
+						families: ['classic'],
+						licences: ['free'],
+						styleSources: {
+							solid: ['free'],
+						},
+					},
+				],
+				modelValue: {
+					name: 'blocked',
+					style: 'regular',
+				},
+			},
+		});
+
+		await wrapper.findAll('.lx-icon-picker__filter-group input')[0]?.setValue(false);
+		expect(wrapper.emitted('update:modelValue')?.some(payload => payload?.[0] === null)).toBe(true);
+	});
 });

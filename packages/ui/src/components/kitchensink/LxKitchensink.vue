@@ -281,121 +281,125 @@
 			<h3>
 				Inputs
 			</h3>
-			<h4 class="lx-kitchen-sink__subheading">
-				Base Inputs
-			</h4>
-			<div class="lx-kitchen-sink__form-grid">
-				<LxLabel text="Input">
-					<template #default="{ controlId, controlName }">
-						<LxInput
-							:id="controlId"
-							v-model="inputValue"
-							:name="controlName"
-							hint="Primary text input"
-							placeholder="Type here"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Search (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxInput
-							:id="controlId"
-							v-model="searchValue"
-							:name="controlName"
-							variant="primary"
-							placeholder="Search term"
-							type="search"
-							:disabled="true"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Error State">
-					<template #default="{ controlId, controlName }">
-						<LxInput
-							:id="controlId"
-							v-model="errorValue"
-							:name="controlName"
-							error="This field is required"
-							placeholder="Invalid value"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Select">
-					<template #default="{ controlId, controlName }">
-						<LxSelect
-							:id="controlId"
-							v-model="selectedStatus"
-							:name="controlName"
-							:options="statusOptions"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Select (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxSelect
-							:id="controlId"
-							v-model="selectedStatus"
-							:name="controlName"
-							:options="statusOptions"
-							:disabled="true"
-						/>
-					</template>
-				</LxLabel>
-			</div>
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Text & Select
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Input">
+						<template #default="{ controlId, controlName }">
+							<LxInput
+								:id="controlId"
+								v-model="inputValue"
+								:name="controlName"
+								hint="Primary text input"
+								placeholder="Type here"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Search (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxInput
+								:id="controlId"
+								v-model="searchValue"
+								:name="controlName"
+								variant="primary"
+								placeholder="Search term"
+								type="search"
+								:disabled="true"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Error State">
+						<template #default="{ controlId, controlName }">
+							<LxInput
+								:id="controlId"
+								v-model="errorValue"
+								:name="controlName"
+								error="This field is required"
+								placeholder="Invalid value"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Select">
+						<template #default="{ controlId, controlName }">
+							<LxSelect
+								:id="controlId"
+								v-model="selectedStatus"
+								:name="controlName"
+								:options="statusOptions"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Select (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxSelect
+								:id="controlId"
+								v-model="selectedStatus"
+								:name="controlName"
+								:options="statusOptions"
+								:disabled="true"
+							/>
+						</template>
+					</LxLabel>
+				</div>
+			</article>
 
-			<h4 class="lx-kitchen-sink__subheading">
-				Choice Inputs
-			</h4>
-			<div class="lx-kitchen-sink__form-grid">
-				<LxLabel text="Combobox (Tags, Stacked Search)">
-					<template #default="{ controlId, controlName }">
-						<LxCombobox
-							:id="controlId"
-							v-model="selectedCountries"
-							:name="controlName"
-							:options="countryOptions"
-							placeholder="Search and select countries"
-							:open-by-default="true"
-							:always-visible="true"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Combobox (Single)">
-					<template #default="{ controlId, controlName }">
-						<LxCombobox
-							:id="controlId"
-							v-model="selectedCountrySingle"
-							:name="controlName"
-							:options="countryOptions"
-							placeholder="Select one country"
-							:multiple="false"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Combobox (Checkbox List)">
-					<template #default="{ controlId, controlName }">
-						<LxCombobox
-							:id="controlId"
-							v-model="selectedCountriesCompact"
-							:name="controlName"
-							:options="countryOptions"
-							placeholder="Search and toggle options"
-							:tags="false"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Combobox (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxCombobox
-							:id="controlId"
-							v-model="selectedCountriesInline"
-							:name="controlName"
-							:options="countryOptions"
-							placeholder="Disabled state"
-							:disabled="true"
-						/>
-					</template>
-				</LxLabel>
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Choice & Toggles
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Combobox (Tags, Stacked Search)">
+						<template #default="{ controlId, controlName }">
+							<LxCombobox
+								:id="controlId"
+								v-model="selectedCountries"
+								:name="controlName"
+								:options="countryOptions"
+								placeholder="Search and select countries"
+								:open-by-default="true"
+								:always-visible="true"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Combobox (Single)">
+						<template #default="{ controlId, controlName }">
+							<LxCombobox
+								:id="controlId"
+								v-model="selectedCountrySingle"
+								:name="controlName"
+								:options="countryOptions"
+								placeholder="Select one country"
+								:multiple="false"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Combobox (Checkbox List)">
+						<template #default="{ controlId, controlName }">
+							<LxCombobox
+								:id="controlId"
+								v-model="selectedCountriesCompact"
+								:name="controlName"
+								:options="countryOptions"
+								placeholder="Search and toggle options"
+								:tags="false"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Combobox (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxCombobox
+								:id="controlId"
+								v-model="selectedCountriesInline"
+								:name="controlName"
+								:options="countryOptions"
+								placeholder="Disabled state"
+								:disabled="true"
+							/>
+						</template>
+					</LxLabel>
+				</div>
 				<div class="lx-kitchen-sink__switch-row">
 					<LxLabel text="Email alerts" display="inline">
 						<template #default="{ controlId, controlName }">
@@ -408,110 +412,154 @@
 						</template>
 					</LxLabel>
 				</div>
-			</div>
+			</article>
 
-			<h4 class="lx-kitchen-sink__subheading">
-				Extended Inputs
-			</h4>
-			<div class="lx-kitchen-sink__form-grid">
-				<LxLabel text="Slider">
-					<template #default="{ controlId, controlName }">
-						<LxSlider :id="controlId" v-model="sliderValue" :name="controlName" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Slider (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxSlider :id="controlId" :model-value="25" :name="controlName" :disabled="true" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Number Input">
-					<template #default="{ controlId, controlName }">
-						<LxNumberInput
-							:id="controlId"
-							v-model="numberValue"
-							:name="controlName"
-							:min="0"
-							:max="20"
-							:step="2"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Number Input (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxNumberInput :id="controlId" :model-value="12" :name="controlName" :disabled="true" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Radio Group">
-					<template #default>
-						<LxRadios v-model="radioValue" :options="radioOptions" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Date">
-					<template #default="{ controlId, controlName }">
-						<LxDatePicker :id="controlId" v-model="dateValue" :name="controlName" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Date (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxDatePicker :id="controlId" model-value="2026-02-13" :name="controlName" :disabled="true" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Date Range">
-					<template #default>
-						<LxDateRangePicker v-model="dateRangeValue" />
-					</template>
-				</LxLabel>
-				<LxLabel text="Colour (Alpha)">
-					<template #default="{ controlId, controlName }">
-						<LxColourPicker
-							:id="controlId"
-							v-model="colourValue"
-							:name="controlName"
-							:formats="['hex', 'rgb', 'rgba', 'hsl', 'hsla']"
-							default-format="rgba"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Colour (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxColourPicker
-							:id="controlId"
-							:model-value="colourValue"
-							:name="controlName"
-							:formats="['hex', 'hsl']"
-							default-format="hex"
-							:disabled="true"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Colour (Popup)">
-					<template #default="{ controlId, controlName }">
-						<LxColourPicker
-							:id="controlId"
-							v-model="colourValue"
-							:name="controlName"
-							:popup="true"
-							popup-title="Pick Accent Colour"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Textarea">
-					<template #default="{ controlId, controlName }">
-						<LxTextarea
-							:id="controlId"
-							v-model="textareaValue"
-							:name="controlName"
-							:max-length="140"
-							:show-counter="true"
-						/>
-					</template>
-				</LxLabel>
-				<LxLabel text="Textarea (Disabled)">
-					<template #default="{ controlId, controlName }">
-						<LxTextarea :id="controlId" model-value="Disabled example" :name="controlName" :disabled="true" />
-					</template>
-				</LxLabel>
-			</div>
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Radio Groups
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Radio Group (Stacked)">
+						<template #default>
+							<LxRadios v-model="radioValue" :options="radioOptions" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Radio Group (Inline)">
+						<template #default>
+							<LxRadios v-model="radioValueInline" :options="radioOptions" layout="inline" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Radio Cards (Vertical Slot)">
+						<template #default>
+							<LxRadios v-model="radioValueCardVertical" :options="radioOptions" card>
+								<template #option="{ option, checked }">
+									<LxFlex column align="start" gap="var(--lx-size-space-xs)" class="lx-radios__card-content">
+										<strong>{{ option.label }}</strong>
+										<small class="lx-kitchen-sink__muted">{{ checked ? 'Selected option' : 'Choose this option' }}</small>
+									</LxFlex>
+								</template>
+							</LxRadios>
+						</template>
+					</LxLabel>
+					<LxLabel text="Radio Cards (Inline Slot)">
+						<template #default>
+							<LxRadios
+								v-model="radioValueCardInline"
+								:options="radioOptions"
+								layout="inline"
+								card
+							>
+								<template #option="{ option, checked }">
+									<LxFlex column align="start" gap="var(--lx-size-space-xs)" class="lx-radios__card-content">
+										<strong>{{ option.label }}</strong>
+										<small class="lx-kitchen-sink__muted">{{ checked ? 'Selected option' : 'Choose this option' }}</small>
+									</LxFlex>
+								</template>
+							</LxRadios>
+						</template>
+					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Extended Inputs
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Slider">
+						<template #default="{ controlId, controlName }">
+							<LxSlider :id="controlId" v-model="sliderValue" :name="controlName" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Slider (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxSlider :id="controlId" :model-value="25" :name="controlName" :disabled="true" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Number Input">
+						<template #default="{ controlId, controlName }">
+							<LxNumberInput
+								:id="controlId"
+								v-model="numberValue"
+								:name="controlName"
+								:min="0"
+								:max="20"
+								:step="2"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Number Input (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxNumberInput :id="controlId" :model-value="12" :name="controlName" :disabled="true" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Date">
+						<template #default="{ controlId, controlName }">
+							<LxDatePicker :id="controlId" v-model="dateValue" :name="controlName" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Date (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxDatePicker :id="controlId" model-value="2026-02-13" :name="controlName" :disabled="true" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Date Range">
+						<template #default>
+							<LxDateRangePicker v-model="dateRangeValue" />
+						</template>
+					</LxLabel>
+					<LxLabel text="Colour (Alpha)">
+						<template #default="{ controlId, controlName }">
+							<LxColourPicker
+								:id="controlId"
+								v-model="colourValue"
+								:name="controlName"
+								:formats="['hex', 'rgb', 'rgba', 'hsl', 'hsla']"
+								default-format="rgba"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Colour (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxColourPicker
+								:id="controlId"
+								:model-value="colourValue"
+								:name="controlName"
+								:formats="['hex', 'hsl']"
+								default-format="hex"
+								:disabled="true"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Colour (Popup)">
+						<template #default="{ controlId, controlName }">
+							<LxColourPicker
+								:id="controlId"
+								v-model="colourValue"
+								:name="controlName"
+								:popup="true"
+								popup-title="Pick Accent Colour"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Textarea">
+						<template #default="{ controlId, controlName }">
+							<LxTextarea
+								:id="controlId"
+								v-model="textareaValue"
+								:name="controlName"
+								:max-length="140"
+								:show-counter="true"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Textarea (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxTextarea :id="controlId" model-value="Disabled example" :name="controlName" :disabled="true" />
+						</template>
+					</LxLabel>
+				</div>
+			</article>
 		</section>
 
 		<section class="lx-kitchen-sink__section">
@@ -960,6 +1008,9 @@
 	const sliderValue = ref(50);
 	const numberValue = ref(6);
 	const radioValue = ref('b');
+	const radioValueInline = ref('a');
+	const radioValueCardVertical = ref('c');
+	const radioValueCardInline = ref('b');
 	const dateValue = ref('2026-02-13');
 	const dateRangeValue = ref({
 		start: '2026-02-10',
@@ -1022,6 +1073,21 @@
 		font-weight: var(--lx-font-weight-semibold);
 		margin: var(--lx-size-space-xs) 0 0;
 		padding-top: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__input-group {
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-md);
+		display: grid;
+		gap: var(--lx-size-space-md);
+		padding: var(--lx-size-space-md);
+	}
+
+	.lx-kitchen-sink__input-group > .lx-kitchen-sink__subheading {
+		border-top: none;
+		margin: 0;
+		padding-top: 0;
 	}
 
 	.lx-kitchen-sink__section--grid-2 {

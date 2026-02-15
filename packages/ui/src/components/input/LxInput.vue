@@ -6,7 +6,7 @@
 				v-bind="attrs"
 				:id="inputId"
 				:name="inputName"
-				:value="modelValue"
+				:value="model"
 				:type="type"
 				:placeholder="placeholder"
 				:disabled="disabled"
@@ -27,7 +27,6 @@
 	import { computed, useAttrs, useId } from 'vue';
 
 	const props = withDefaults(defineProps<ILxInputProps>(), {
-		modelValue: '',
 		hint: '',
 		error: '',
 		placeholder: '',
@@ -37,11 +36,12 @@
 		disabled: false,
 		readonly: false,
 	});
-
 	const emit = defineEmits<{
-		(event: 'update:modelValue', value: string): void,
 		(event: 'change', value: string): void,
 	}>();
+	const model = defineModel<string>({
+		default: '',
+	});
 
 	const attrs = useAttrs();
 	const generatedId = `lx-input-${useId().replace(/:/g, '')}`;
@@ -57,7 +57,7 @@
 
 	const onInput = (event: Event): void => {
 		const target = event.target as HTMLInputElement;
-		emit('update:modelValue', target.value);
+		model.value = target.value;
 		emit('change', target.value);
 	};
 
@@ -65,7 +65,6 @@
 		disabled,
 		error,
 		hint,
-		modelValue,
 		placeholder,
 		readonly,
 		size,
