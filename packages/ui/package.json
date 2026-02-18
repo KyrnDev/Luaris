@@ -57,6 +57,10 @@
 			"types": "./dist/components/comparison/index.d.ts",
 			"import": "./dist/components/comparison/index.js"
 		},
+		"./components/data-table": {
+			"types": "./dist/components/data-table/index.d.ts",
+			"import": "./dist/components/data-table/index.js"
+		},
 		"./components/colour-picker": {
 			"types": "./dist/components/colour-picker/index.d.ts",
 			"import": "./dist/components/colour-picker/index.js"

@@ -1,5 +1,9 @@
 <template>
-	<div v-click-outside="onClickOutside" class="lx-combobox" :class="{ 'is-open': isMenuVisible }">
+	<div
+		v-click-outside="onClickOutside"
+		class="lx-combobox"
+		:class="{ 'is-open': isMenuVisible, 'is-static-menu': props.alwaysVisible }"
+	>
 		<div class="lx-combobox__control" @click="open">
 			<div v-if="showTags && selectedValues.length > 0" class="lx-combobox__tags">
 				<button
@@ -424,6 +428,7 @@
 		background: var(--lx-colour-surface-raised);
 		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
 		border-radius: var(--lx-size-radius-md);
+		box-shadow: 0 10px 24px rgb(0 0 0 / 0.12);
 		display: grid;
 		gap: var(--lx-size-space-2xs);
 		list-style: none;
@@ -431,7 +436,16 @@
 		max-height: 14rem;
 		overflow: auto;
 		padding: var(--lx-size-space-xs);
+		position: absolute;
+		top: 100%;
 		width: 100%;
+		z-index: 30;
+	}
+
+	.lx-combobox.is-static-menu .lx-combobox__menu {
+		box-shadow: none;
+		position: static;
+		z-index: auto;
 	}
 
 	.lx-combobox__option-control {

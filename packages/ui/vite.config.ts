@@ -16,6 +16,7 @@ export default defineConfig({
 				'components/card': resolve(__dirname, 'src/components/card/index.ts'),
 				'components/carousel': resolve(__dirname, 'src/components/carousel/index.ts'),
 				'components/comparison': resolve(__dirname, 'src/components/comparison/index.ts'),
+				'components/data-table': resolve(__dirname, 'src/components/data-table/index.ts'),
 				'components/colour-picker': resolve(__dirname, 'src/components/colour-picker/index.ts'),
 				'components/combobox': resolve(__dirname, 'src/components/combobox/index.ts'),
 				'components/date-picker': resolve(__dirname, 'src/components/date-picker/index.ts'),

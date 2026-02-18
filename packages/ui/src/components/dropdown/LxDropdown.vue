@@ -1,7 +1,8 @@
 <template>
 	<details v-click-outside="onClickOutside" class="lx-dropdown" :open="open" @toggle="onToggle">
 		<summary class="lx-dropdown__trigger" role="button" aria-haspopup="menu" :aria-expanded="open">
-			{{ props.label }}
+			<span class="lx-dropdown__trigger-label">{{ props.label }}</span>
+			<span class="lx-dropdown__trigger-caret" aria-hidden="true">▾</span>
 		</summary>
 		<ul class="lx-dropdown__menu" role="menu" :aria-label="props.label" @keydown.esc="open = false">
 			<li v-for="option in props.options" :key="String(option.value)">
@@ -60,17 +61,32 @@
 	}
 
 	.lx-dropdown__trigger {
+		align-items: center;
 		background: var(--lx-colour-surface-raised);
 		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
 		border-radius: var(--lx-size-radius-md);
 		color: var(--lx-colour-surface-text);
 		cursor: pointer;
+		display: inline-flex;
+		gap: var(--lx-size-space-xs);
+		justify-content: space-between;
 		list-style: none;
+		line-height: 1.2;
 		padding: var(--lx-size-space-sm) var(--lx-size-space-md);
+		width: 100%;
 	}
 
 	.lx-dropdown__trigger::-webkit-details-marker {
 		display: none;
+	}
+
+	.lx-dropdown__trigger-label {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.lx-dropdown__trigger-caret {
+		color: var(--lx-colour-surface-text-muted);
 	}
 
 	.lx-dropdown__menu {

@@ -5,6 +5,7 @@
 	"private": true,
 	"scripts": {
 		"lint": "eslint",
+		"test": "bun run --filter \"@luaris/ui\" test:run",
 		"ui:dev": "bun run --filter \"@luaris/ui\" dev"
 	},
 	"workspaces": [

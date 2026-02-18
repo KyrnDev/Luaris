@@ -1,0 +1,8 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='620' viewBox='0 0 1000 620' role='img' aria-labelledby='title desc'>
+	<title id='title'>LxPage content-only layout</title>
+	<desc id='desc'>Only the content area rendered without other optional slot regions.</desc>
+	<rect width='1000' height='620' fill='#f2f4f7'/>
+	<rect x='24' y='24' width='952' height='572' rx='14' fill='#e0f2fe' stroke='#94a3b8'/>
+	<text x='500' y='320' text-anchor='middle' font-family='Nunito, Arial, sans-serif' font-size='34' fill='#1e293b'>content</text>
+	<text x='500' y='360' text-anchor='middle' font-family='Nunito, Arial, sans-serif' font-size='18' fill='#334155'>Rendered when only #content or default slot is provided</text>
+</svg>

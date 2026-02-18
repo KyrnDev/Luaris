@@ -13,6 +13,7 @@ export default config({
 	},
 	ignores: [
 		'*.d.ts',
+		'**/*.md',
 		'eslint.config.js',
 		'.vscode/',
 		'node_modules/',
@@ -239,4 +240,3 @@ export default config({
 	},
 },
 );
-

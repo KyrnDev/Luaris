@@ -564,6 +564,65 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Data Table
+			</h3>
+			<p class="lx-kitchen-sink__muted">
+				Built-in filtering, sorting, pagination, and per-column slot overrides.
+			</p>
+			<div class="lx-kitchen-sink__table-stack">
+				<LxDataTable
+					:rows="tableRows"
+					:columns="tableColumnsBuiltIn"
+					variant="striped"
+					density="md"
+				/>
+
+				<LxDataTable
+					:rows="tableRows"
+					:columns="tableColumnsCustom"
+					variant="minimal"
+					density="sm"
+					:items-per-page="5"
+				>
+					<template #filter-revenue="{ filterModel }">
+						<select v-model="filterModel.value" class="lx-kitchen-sink__table-filter-select">
+							<option value="">
+								All
+							</option>
+							<option value="high">
+								£15k+
+							</option>
+							<option value="medium">
+								£10k - £14,999
+							</option>
+							<option value="low">
+								Under £10k
+							</option>
+						</select>
+					</template>
+					<template #col-name="{ value, row }">
+						<div class="lx-kitchen-sink__table-name">
+							<LxAvatar :name="String(value)" size="xs" variant="secondary" />
+							<div>
+								<strong>{{ value }}</strong>
+								<p class="lx-kitchen-sink__muted">
+									{{ row.region }}
+								</p>
+							</div>
+						</div>
+					</template>
+					<template #col-status="{ value }">
+						<LxBadge :text="String(value)" :variant="value === 'active' ? 'success' : (value === 'paused' ? 'warning' : 'secondary')" />
+					</template>
+					<template #col-revenue="{ value }">
+						<strong>£{{ Number(value).toLocaleString('en-GB') }}</strong>
+					</template>
+				</LxDataTable>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Dropdown
 			</h3>
 			<LxFlex gap="var(--lx-size-space-md)">
@@ -862,6 +921,8 @@
 	import { LxCard } from '../card';
 	import { LxCombobox } from '../combobox';
 	import { LxComparison } from '../comparison';
+	import { LxDataTable } from '../data-table';
+	import type { ILxDataTableColumn } from '../data-table';
 	import { LxColourPicker } from '../colour-picker';
 	import { LxDatePicker } from '../date-picker';
 	import { LxDateRangePicker } from '../date-range-picker';
@@ -975,6 +1036,140 @@
 		{ key: 'space-xl', label: 'XL', token: '--lx-size-space-xl' },
 		{ key: 'space-2xl', label: '2XL', token: '--lx-size-space-2xl' },
 		{ key: 'space-3xl', label: '3XL', token: '--lx-size-space-3xl' },
+	];
+
+	interface IKitchenSinkTableRow {
+		id: number,
+		name: string,
+		role: string,
+		status: 'active' | 'paused' | 'invited',
+		billable: boolean,
+		region: string,
+		revenue: number,
+		lastLogin: string,
+	}
+
+	const tableColumnsBuiltIn: ILxDataTableColumn<IKitchenSinkTableRow>[] = [
+		{ key: 'name', heading: 'Name', sortable: true, filterable: true, width: '15rem' },
+		{
+			key: 'role',
+			heading: 'Role (Combobox)',
+			sortable: true,
+			filterable: true,
+			filterType: 'combobox',
+			filterPlaceholder: 'Select role...',
+			filterOptions: [
+				{ label: 'Engineer', value: 'Engineer' },
+				{ label: 'Product Manager', value: 'Product Manager' },
+				{ label: 'Designer', value: 'Designer' },
+			],
+		},
+		{
+			key: 'status',
+			heading: 'Status (Select)',
+			sortable: true,
+			filterable: true,
+			width: '11rem',
+			filterType: 'select',
+			filterPlaceholder: 'Select status...',
+			filterOptions: [
+				{ label: 'Active', value: 'active' },
+				{ label: 'Paused', value: 'paused' },
+				{ label: 'Invited', value: 'invited' },
+			],
+		},
+		{
+			key: 'billable',
+			heading: 'Billable (Switch)',
+			sortable: true,
+			filterable: true,
+			width: '11rem',
+			filterType: 'switch',
+			format: value => value ? 'Yes' : 'No',
+		},
+		{
+			key: 'region',
+			heading: 'Region (Select)',
+			sortable: true,
+			filterable: true,
+			width: '12rem',
+			filterType: 'select',
+		},
+		{
+			key: 'revenue',
+			heading: 'Revenue',
+			sortable: true,
+			filterable: true,
+			align: 'right',
+			width: '8rem',
+			filterType: 'number',
+			format: value => `£${Number(value).toLocaleString('en-GB')}`,
+		},
+		{
+			key: 'lastLogin',
+			heading: 'Last Login (Date)',
+			sortable: true,
+			filterable: true,
+			width: '10rem',
+			filterType: 'date',
+			sortValue: row => new Date(row.lastLogin),
+		},
+	];
+
+	const tableColumnsCustom: ILxDataTableColumn<IKitchenSinkTableRow>[] = [
+		{ key: 'name', heading: 'Name', sortable: true, filterable: true, width: '15rem' },
+		{ key: 'status', heading: 'Status', sortable: true, filterable: true, width: '9rem', filterType: 'select' },
+		{
+			key: 'revenue',
+			heading: 'Revenue (Custom Filter Slot)',
+			sortable: true,
+			filterable: true,
+			width: '14rem',
+			align: 'right',
+			filterPredicate: (row, filterValue) => {
+				const selectedBand = String(filterValue ?? '');
+				if (selectedBand.length === 0) {
+					return true;
+				}
+
+				if (selectedBand === 'high') {
+					return row.revenue >= 15000;
+				}
+
+				if (selectedBand === 'medium') {
+					return row.revenue >= 10000 && row.revenue < 15000;
+				}
+
+				if (selectedBand === 'low') {
+					return row.revenue < 10000;
+				}
+
+				return true;
+			},
+			format: value => `£${Number(value).toLocaleString('en-GB')}`,
+		},
+		{
+			key: 'lastLogin',
+			heading: 'Last Login (Date Range)',
+			sortable: true,
+			filterable: true,
+			width: '14rem',
+			filterType: 'date-range',
+			sortValue: row => new Date(row.lastLogin),
+		},
+	];
+
+	const tableRows: IKitchenSinkTableRow[] = [
+		{ id: 1, name: 'Maya Evans', role: 'Product Manager', status: 'active', billable: true, region: 'United Kingdom', revenue: 18240, lastLogin: '2026-02-11' },
+		{ id: 2, name: 'Luca Bianchi', role: 'Engineer', status: 'active', billable: true, region: 'Italy', revenue: 14920, lastLogin: '2026-02-12' },
+		{ id: 3, name: 'Sofia Lind', role: 'Designer', status: 'paused', billable: false, region: 'Sweden', revenue: 9410, lastLogin: '2026-02-02' },
+		{ id: 4, name: 'Emil Novak', role: 'Engineer', status: 'active', billable: true, region: 'Czechia', revenue: 12775, lastLogin: '2026-02-08' },
+		{ id: 5, name: 'Clara Moreau', role: 'Support Lead', status: 'invited', billable: false, region: 'France', revenue: 7130, lastLogin: '2026-01-28' },
+		{ id: 6, name: 'Jonas Keller', role: 'Engineer', status: 'active', billable: true, region: 'Germany', revenue: 16090, lastLogin: '2026-02-13' },
+		{ id: 7, name: 'Nora Jansen', role: 'Data Analyst', status: 'paused', billable: true, region: 'Netherlands', revenue: 11004, lastLogin: '2026-02-01' },
+		{ id: 8, name: 'Iris Costa', role: 'Customer Success', status: 'active', billable: false, region: 'Portugal', revenue: 10820, lastLogin: '2026-02-06' },
+		{ id: 9, name: 'Marek Zielinski', role: 'Ops Engineer', status: 'invited', billable: false, region: 'Poland', revenue: 8955, lastLogin: '2026-01-20' },
+		{ id: 10, name: 'Elena Popov', role: 'Finance Partner', status: 'active', billable: true, region: 'Romania', revenue: 20110, lastLogin: '2026-02-10' },
 	];
 
 	const inputValue = ref('');
@@ -1231,6 +1426,33 @@
 		display: grid;
 		gap: var(--lx-size-space-md);
 		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+	}
+
+	.lx-kitchen-sink__table-stack {
+		display: grid;
+		gap: var(--lx-size-space-lg);
+	}
+
+	.lx-kitchen-sink__table-name {
+		align-items: center;
+		display: inline-flex;
+		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__table-name p {
+		margin: 0;
+	}
+
+	.lx-kitchen-sink__table-filter-select {
+		background: var(--lx-colour-surface-base);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-xs);
+		color: var(--lx-colour-surface-text);
+		font: inherit;
+		font-size: var(--lx-font-size-xs);
+		height: var(--lx-size-control-height-sm);
+		padding: 0 var(--lx-size-space-xs);
+		width: 100%;
 	}
 
 	.lx-kitchen-sink__surface-item,
