@@ -4,6 +4,7 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
+		"hooks:setup": "git config core.hooksPath .githooks",
 		"lint": "eslint",
 		"test": "bun run --filter \"@luaris/ui\" test:run",
 		"ui:dev": "bun run --filter \"@luaris/ui\" dev"
