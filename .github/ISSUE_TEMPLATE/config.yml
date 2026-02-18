@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability report
+    url: mailto:danny@kyrn.dev
+    about: Please report vulnerabilities directly by email (see SECURITY.md).
