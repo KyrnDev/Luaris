@@ -1,10 +1,10 @@
 # 🌙 Luaris Framework
 
-Luaris is a Vue-first UI ecosystem that can scale into a full application platform.
+Luaris is a Vue-first ecosystem that scales from a component library to a full application framework.
 
-The core idea is simple: keep UI building blocks well-designed and strongly typed, then add protocol and runtime layers when you need declarative interfaces or deeper integration.
+The core idea is simple: keep UI building blocks strongly typed, define shared contracts in a DSL, compose pages declaratively, then render them through runtime packages.
 
-You can adopt one package at a time, or use the whole stack.
+You can adopt one package at a time, or use the full stack.
 
 ## ✨ Why Luaris
 
@@ -19,10 +19,11 @@ You can adopt one package at a time, or use the whole stack.
 | Package | Purpose |
 | --- | --- |
 | `@luaris/ui` | Vue 3 component library built with TypeScript and SCSS |
-| `@luaris/protocol` | Typed schema for UI structure, events, and actions |
-| `@luaris/runtime-vue` | Vue runtime that renders protocol definitions with `@luaris/ui` |
-| `@luaris/protocol-jsx` | JSX authoring layer that compiles to the protocol schema |
-| `@luaris/server` | Backend layer for actions, routing, and structured app logic |
+| `@luaris/dsl` | Canonical schema/types/contracts shared between composition and runtime packages |
+| `@luaris/compose` | Class-based page composition engine that outputs DSL-compatible JSON |
+| `@luaris/compose-jsx` | JSX/TSX composition layer that compiles to DSL-compatible JSON |
+| `@luaris/runtime-vue` | Vue runtime that renders DSL-compatible JSON with `@luaris/ui` |
+| `@luaris/app` | Opinionated MVC-style app framework with HTTP/WebSocket server support |
 
 ## 🧩 `@luaris/ui` Example
 
@@ -47,6 +48,6 @@ All UI components use the `Lx` prefix:
 
 ## 🚀 Direction
 
-Luaris starts with UI components, then expands into protocol-driven frontend and backend tooling.
+Luaris starts with UI components, then expands into a DSL-driven composition and runtime model, with an application framework on top.
 
 Use as much or as little of the framework as your project needs.
