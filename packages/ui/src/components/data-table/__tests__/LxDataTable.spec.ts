@@ -126,6 +126,7 @@ describe('LxDataTable', () => {
 				rows,
 			},
 			slots: {
+				// eslint-disable-next-line ts/naming-convention
 				'col-name': ({ value }) => h('strong', { class: 'name-cell' }, String(value).toUpperCase()),
 			},
 		});
@@ -238,6 +239,7 @@ describe('LxDataTable', () => {
 				rows,
 			},
 			slots: {
+				// eslint-disable-next-line ts/naming-convention
 				'filter-status': ({ filterModel }) => h('button', {
 					class: 'custom-filter',
 					onClick: () => {
@@ -277,6 +279,7 @@ describe('LxDataTable', () => {
 	});
 
 	it('handles pagination and row keys without id', async () => {
+		// eslint-disable-next-line ts/no-unused-vars
 		const noIdRows: IRow[] = rows.map(({ id, ...row }) => row);
 		const wrapper = mount(LxDataTable<IRow>, {
 			props: {
