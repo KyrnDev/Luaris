@@ -463,7 +463,7 @@
 
 			<article class="lx-kitchen-sink__input-group">
 				<h4 class="lx-kitchen-sink__subheading">
-					Extended Inputs
+					Sliders
 				</h4>
 				<div class="lx-kitchen-sink__form-grid">
 					<LxLabel text="Slider">
@@ -476,6 +476,14 @@
 							<LxSlider :id="controlId" :model-value="25" :name="controlName" :disabled="true" />
 						</template>
 					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Number Inputs
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
 					<LxLabel text="Number Input">
 						<template #default="{ controlId, controlName }">
 							<LxNumberInput
@@ -493,6 +501,14 @@
 							<LxNumberInput :id="controlId" :model-value="12" :name="controlName" :disabled="true" />
 						</template>
 					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Date Inputs
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
 					<LxLabel text="Date">
 						<template #default="{ controlId, controlName }">
 							<LxDatePicker :id="controlId" v-model="dateValue" :name="controlName" />
@@ -500,7 +516,7 @@
 					</LxLabel>
 					<LxLabel text="Date (Disabled)">
 						<template #default="{ controlId, controlName }">
-							<LxDatePicker :id="controlId" model-value="2026-02-13" :name="controlName" :disabled="true" />
+							<LxDatePicker :id="controlId" :model-value="new Date(2026, 1, 13)" :name="controlName" :disabled="true" />
 						</template>
 					</LxLabel>
 					<LxLabel text="Date Range">
@@ -508,6 +524,86 @@
 							<LxDateRangePicker v-model="dateRangeValue" />
 						</template>
 					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Date + Time Inputs
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Date + Time">
+						<template #default>
+							<LxDateTimePicker
+								v-model="dateTimeValue"
+								date-min="2026-01-01"
+								date-max="2026-12-31"
+								time-min="08:00"
+								time-max="20:00"
+								:time-step="300"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Date + Time Range">
+						<template #default>
+							<LxDateTimeRangePicker
+								v-model="dateTimeRangeValue"
+								date-min="2026-01-01"
+								date-max="2026-12-31"
+								time-min="08:00"
+								time-max="20:00"
+								:time-step="300"
+							/>
+						</template>
+					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Time Inputs
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
+					<LxLabel text="Time">
+						<template #default="{ controlId, controlName }">
+							<LxTimePicker
+								:id="controlId"
+								v-model="timeValue"
+								:name="controlName"
+								min="08:00"
+								max="20:00"
+								:step="300"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Time (Disabled)">
+						<template #default="{ controlId, controlName }">
+							<LxTimePicker
+								:id="controlId"
+								model-value="09:30"
+								:name="controlName"
+								:disabled="true"
+							/>
+						</template>
+					</LxLabel>
+					<LxLabel text="Time Range">
+						<template #default>
+							<LxTimeRangePicker
+								v-model="timeRangeValue"
+								min="08:00"
+								max="20:00"
+								:step="300"
+							/>
+						</template>
+					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Colour Pickers
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
 					<LxLabel text="Colour (Alpha)">
 						<template #default="{ controlId, controlName }">
 							<LxColourPicker
@@ -542,6 +638,14 @@
 							/>
 						</template>
 					</LxLabel>
+				</div>
+			</article>
+
+			<article class="lx-kitchen-sink__input-group">
+				<h4 class="lx-kitchen-sink__subheading">
+					Textareas
+				</h4>
+				<div class="lx-kitchen-sink__form-grid">
 					<LxLabel text="Textarea">
 						<template #default="{ controlId, controlName }">
 							<LxTextarea
@@ -866,6 +970,151 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Tabs
+			</h3>
+			<LxTabs v-model="activeTab" variant="line">
+				<LxTab value="overview" label="Overview">
+					<p>
+						Overview content can be rendered directly from each tab.
+					</p>
+				</LxTab>
+				<LxTab value="details" label="Details">
+					<template #tab>
+						<span>Details + Slot</span>
+					</template>
+					<p>
+						Custom tab trigger slot for richer labels.
+					</p>
+				</LxTab>
+				<LxTab value="disabled" label="Disabled" :disabled="true">
+					<p>
+						Disabled tab content.
+					</p>
+				</LxTab>
+			</LxTabs>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Accordion
+			</h3>
+			<LxAccordion v-model="openAccordionItems" :items="accordionItems" :multiple="true" :default-open="['architecture']">
+				<template #item-architecture>
+					<p>
+						Open multiple sections at once and control defaults through props.
+					</p>
+				</template>
+				<template #item>
+					<p class="lx-kitchen-sink__muted">
+						Default accordion item slot content.
+					</p>
+				</template>
+			</LxAccordion>
+			<LxAccordion :items="accordionItems" linked default-open="architecture">
+				<template #item>
+					<p class="lx-kitchen-sink__muted">
+						Linked mode keeps one section open and visually connects items.
+					</p>
+				</template>
+			</LxAccordion>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Popover
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxPopover placement="bottom" trigger="click" padding="md">
+					<template #trigger>
+						<LxButton variant="secondary" size="sm">
+							Click Popover
+						</LxButton>
+					</template>
+					<p class="lx-kitchen-sink__muted">
+						Popover content can contain any custom UI.
+					</p>
+				</LxPopover>
+
+				<LxPopover placement="right" trigger="hover" padding="sm">
+					<template #trigger>
+						<LxButton variant="ghost" size="sm">
+							Hover Popover
+						</LxButton>
+					</template>
+					<p>
+						Hover-triggered contextual information.
+					</p>
+				</LxPopover>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Toasts
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxButton variant="info" size="sm" @click="pushToast('info')">
+					Info Toast
+				</LxButton>
+				<LxButton variant="success" size="sm" @click="pushToast('success')">
+					Success Toast
+				</LxButton>
+				<LxButton variant="warning" size="sm" @click="pushToast('warning')">
+					Warning Toast
+				</LxButton>
+				<LxButton variant="danger" size="sm" @click="pushToast('danger')">
+					Danger Toast
+				</LxButton>
+			</div>
+			<LxToasts v-model="toastItems" position="top-right" />
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Stepper
+			</h3>
+			<LxStepper v-model="activeStep" :items="stepperItems" :linear="true">
+				<template #step-build="{ item }">
+					<div>
+						<strong>{{ item?.label }}</strong>
+					</div>
+				</template>
+				<template #content="{ step }">
+					<p>
+						Active step: {{ step }}
+					</p>
+					<p class="lx-kitchen-sink__muted">
+						Demo state: steps 1-2 complete, step 3 active, steps 4-5 upcoming.
+					</p>
+				</template>
+			</LxStepper>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Timeline
+			</h3>
+			<LxTimeline type="date">
+				<LxTimelineItem marker="2026-02-11" marker-note="Week 1" title="Planning" subtitle="Initial scope">
+					<p class="lx-kitchen-sink__muted">
+						Defined delivery scope and milestones.
+					</p>
+				</LxTimelineItem>
+				<LxTimelineItem marker="2026-02-13" marker-note="Week 1" title="Build" subtitle="Component implementation">
+					<p class="lx-kitchen-sink__muted">
+						Implemented components with token-based styling.
+					</p>
+				</LxTimelineItem>
+				<LxTimelineItem marker="2026-02-18" marker-note="Week 2" title="Review" subtitle="Validation and tests">
+					<p class="lx-kitchen-sink__muted">
+						Verified behaviour and prepared final docs.
+					</p>
+				</LxTimelineItem>
+			</LxTimeline>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Progress
 			</h3>
 			<div class="lx-kitchen-sink__button-row">
@@ -914,6 +1163,7 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
 	import { LxAvatar } from '../avatar';
+	import { LxAccordion } from '../accordion';
 	import { LxBadge } from '../badge';
 	import { LxBreadcrumbs } from '../breadcrumbs';
 	import { LxButton } from '../button';
@@ -925,6 +1175,8 @@
 	import type { ILxDataTableColumn } from '../data-table';
 	import { LxColourPicker } from '../colour-picker';
 	import { LxDatePicker } from '../date-picker';
+	import { LxDateTimePicker } from '../date-time-picker';
+	import { LxDateTimeRangePicker } from '../date-time-range-picker';
 	import { LxDateRangePicker } from '../date-range-picker';
 	import { LxDivider } from '../divider';
 	import { LxDrawer } from '../drawer';
@@ -939,13 +1191,24 @@
 	import { LxModal } from '../modal';
 	import type { TLxModalAnimation, TLxModalPosition } from '../modal';
 	import { LxNumberInput } from '../number-input';
+	import { LxPopover } from '../popover';
 	import { LxSelect } from '../select';
 	import { LxSkeleton } from '../skeleton';
 	import { LxSlider } from '../slider';
 	import { LxSpinner } from '../spinner';
 	import { LxSwitch } from '../switch';
+	import { LxStepper } from '../stepper';
+	import { LxTab } from '../tab';
 	import { LxTag } from '../tag';
+	import { LxTabs } from '../tabs';
 	import { LxTextarea } from '../textarea';
+	import { LxTimeline } from '../timeline';
+	import { LxTimelineItem } from '../timeline-item';
+	import { LxTimePicker } from '../time-picker';
+	import { LxTimeRangePicker } from '../time-range-picker';
+	import type { TLxToastVariant } from '../toast';
+	import type { ILxToastsItem } from '../toasts';
+	import { LxToasts } from '../toasts';
 	import type { ILxKitchenSinkToken } from './types';
 	import { LxCarousel } from '../carousel';
 	import { LxProgress } from '../progress';
@@ -1000,6 +1263,18 @@
 		{ label: 'Option A', value: 'a' },
 		{ label: 'Option B', value: 'b' },
 		{ label: 'Option C', value: 'c' },
+	];
+	const accordionItems = [
+		{ id: 'architecture', title: 'Architecture', description: 'Core framework structure' },
+		{ id: 'routing', title: 'Routing', description: 'Opinionated routing defaults' },
+		{ id: 'delivery', title: 'Delivery', description: 'Runtime rendering and deployment' },
+	];
+	const stepperItems = [
+		{ id: 'discover', label: 'Discover', description: 'Gather requirements' },
+		{ id: 'design', label: 'Design', description: 'Create the solution plan' },
+		{ id: 'build', label: 'Build', description: 'Implement components' },
+		{ id: 'test', label: 'Test', description: 'Validate behaviour and quality' },
+		{ id: 'ship', label: 'Ship', description: 'Release to production' },
 	];
 
 	const carouselSlides = [
@@ -1206,11 +1481,22 @@
 	const radioValueInline = ref('a');
 	const radioValueCardVertical = ref('c');
 	const radioValueCardInline = ref('b');
-	const dateValue = ref('2026-02-13');
-	const dateRangeValue = ref({
-		start: '2026-02-10',
-		end: '2026-02-14',
-	});
+	const dateValue = ref(new Date(2026, 1, 13));
+	const dateRangeValue = ref<Date[]>([
+		new Date(2026, 1, 10),
+		new Date(2026, 1, 14),
+	]);
+	const dateTimeValue = ref<Date | null>(new Date(2026, 1, 13, 9, 30));
+	const dateTimeRangeValue = ref<Date[]>([
+		new Date(2026, 1, 10, 9, 0),
+		new Date(2026, 1, 14, 17, 0),
+	]);
+	const timeValue = ref('09:30');
+	const timeRangeValue = ref<string[]>(['09:00', '17:00']);
+	const activeTab = ref('overview');
+	const openAccordionItems = ref<string[]>(['architecture']);
+	const activeStep = ref('build');
+	const toastItems = ref<ILxToastsItem[]>([]);
 	const colourValue = ref({
 		hex: '#2563eb',
 		alpha: 0.85,
@@ -1229,6 +1515,20 @@
 		drawerSide.value = side;
 		drawerAnimation.value = animation;
 		drawerOpen.value = true;
+	};
+
+	const pushToast = (variant: TLxToastVariant): void => {
+		const id = `${variant}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+		toastItems.value = [
+			{
+				id,
+				title: `${variant[0]?.toUpperCase()}${variant.slice(1)}`,
+				text: 'Example toast notification from the kitchen sink.',
+				variant,
+				timeout: 5000,
+			},
+			...toastItems.value,
+		];
 	};
 </script>
 

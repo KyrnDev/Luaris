@@ -316,12 +316,12 @@
 			return;
 		}
 
-		const minTileSize = 56;
+		const minTileSize = props.popup ? 56 : 48;
 		const styles = window.getComputedStyle(gridElement);
 		const gap = Number.parseFloat(styles.columnGap || styles.gap || '8') || 8;
 		const availableWidth = gridElement.clientWidth;
 		const calculatedColumns = Math.max(1, Math.floor((availableWidth + gap) / (minTileSize + gap)));
-		const maxColumns = props.popup ? 5 : 8;
+		const maxColumns = props.popup ? 5 : 16;
 		gridColumns.value = Math.min(calculatedColumns, maxColumns);
 	};
 
@@ -635,11 +635,15 @@
 		aspect-ratio: 1 / 1;
 		font-size: var(--lx-font-size-lg);
 		height: auto;
-		justify-self: center;
+		justify-self: stretch;
 		padding: var(--lx-size-space-xs);
+		width: 100%;
+	}
+
+	.lx-icon-picker--popup .lx-icon-picker__tile {
+		justify-self: center;
 		max-height: var(--lx-icon-picker-tile-size);
 		max-width: var(--lx-icon-picker-tile-size);
-		width: 100%;
 	}
 
 	.lx-icon-picker__tile.is-selected,

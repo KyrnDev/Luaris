@@ -21,6 +21,10 @@
 			"types": "./dist/components/avatar/index.d.ts",
 			"import": "./dist/components/avatar/index.js"
 		},
+		"./components/accordion": {
+			"types": "./dist/components/accordion/index.d.ts",
+			"import": "./dist/components/accordion/index.js"
+		},
 		"./components/badge": {
 			"types": "./dist/components/badge/index.d.ts",
 			"import": "./dist/components/badge/index.js"
@@ -73,6 +77,14 @@
 			"types": "./dist/components/date-picker/index.d.ts",
 			"import": "./dist/components/date-picker/index.js"
 		},
+		"./components/date-time-picker": {
+			"types": "./dist/components/date-time-picker/index.d.ts",
+			"import": "./dist/components/date-time-picker/index.js"
+		},
+		"./components/date-time-range-picker": {
+			"types": "./dist/components/date-time-range-picker/index.d.ts",
+			"import": "./dist/components/date-time-range-picker/index.js"
+		},
 		"./components/date-range-picker": {
 			"types": "./dist/components/date-range-picker/index.d.ts",
 			"import": "./dist/components/date-range-picker/index.js"
@@ -104,6 +116,10 @@
 		"./components/page": {
 			"types": "./dist/components/page/index.d.ts",
 			"import": "./dist/components/page/index.js"
+		},
+		"./components/popover": {
+			"types": "./dist/components/popover/index.d.ts",
+			"import": "./dist/components/popover/index.js"
 		},
 		"./components/number-input": {
 			"types": "./dist/components/number-input/index.d.ts",
@@ -141,9 +157,17 @@
 			"types": "./dist/components/spinner/index.d.ts",
 			"import": "./dist/components/spinner/index.js"
 		},
+		"./components/stepper": {
+			"types": "./dist/components/stepper/index.d.ts",
+			"import": "./dist/components/stepper/index.js"
+		},
 		"./components/switch": {
 			"types": "./dist/components/switch/index.d.ts",
 			"import": "./dist/components/switch/index.js"
+		},
+		"./components/tab": {
+			"types": "./dist/components/tab/index.d.ts",
+			"import": "./dist/components/tab/index.js"
 		},
 		"./components/tag": {
 			"types": "./dist/components/tag/index.d.ts",
@@ -153,9 +177,37 @@
 			"types": "./dist/components/textarea/index.d.ts",
 			"import": "./dist/components/textarea/index.js"
 		},
+		"./components/tabs": {
+			"types": "./dist/components/tabs/index.d.ts",
+			"import": "./dist/components/tabs/index.js"
+		},
 		"./components/theme-selector": {
 			"types": "./dist/components/theme-selector/index.d.ts",
 			"import": "./dist/components/theme-selector/index.js"
+		},
+		"./components/time-picker": {
+			"types": "./dist/components/time-picker/index.d.ts",
+			"import": "./dist/components/time-picker/index.js"
+		},
+		"./components/time-range-picker": {
+			"types": "./dist/components/time-range-picker/index.d.ts",
+			"import": "./dist/components/time-range-picker/index.js"
+		},
+		"./components/timeline": {
+			"types": "./dist/components/timeline/index.d.ts",
+			"import": "./dist/components/timeline/index.js"
+		},
+		"./components/timeline-item": {
+			"types": "./dist/components/timeline-item/index.d.ts",
+			"import": "./dist/components/timeline-item/index.js"
+		},
+		"./components/toast": {
+			"types": "./dist/components/toast/index.d.ts",
+			"import": "./dist/components/toast/index.js"
+		},
+		"./components/toasts": {
+			"types": "./dist/components/toasts/index.d.ts",
+			"import": "./dist/components/toasts/index.js"
 		},
 		"./components/tooltip": {
 			"types": "./dist/components/tooltip/index.d.ts",

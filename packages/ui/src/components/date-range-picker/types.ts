@@ -1,7 +1,4 @@
-export interface ILxDateRangeValue {
-	start: string,
-	end: string,
-}
+export type ILxDateRangeValue = Date[];
 
 export interface ILxDateRangePickerProps {
 	min?: string,

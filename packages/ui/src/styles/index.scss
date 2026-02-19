@@ -8,25 +8,30 @@
 :root,
 html,
 html[data-theme='light'] {
+	color-scheme: light;
 	@include helpers.lx-emit-variables(light.$theme-light);
 }
 
 html[data-theme='dark'] {
+	color-scheme: dark;
 	@include helpers.lx-emit-variables(dark.$theme-dark);
 }
 
 html[data-theme='high-contrast'] {
+	color-scheme: dark;
 	@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
 }
 
 @media (prefers-color-scheme: dark) {
 	html:not([data-theme]) {
+		color-scheme: dark;
 		@include helpers.lx-emit-variables(dark.$theme-dark);
 	}
 }
 
 @media (prefers-contrast: more) {
 	html:not([data-theme]) {
+		color-scheme: dark;
 		@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
 	}
 }
@@ -37,6 +42,11 @@ body {
 	color: var(--lx-colour-surface-text);
 	font-size: var(--lx-font-size-md);
 	line-height: var(--lx-font-line-height-normal);
+	margin: 0;
+	padding: 0;
+}
+
+p {
 	margin: 0;
 	padding: 0;
 }

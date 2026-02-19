@@ -1,13 +1,24 @@
 <template>
 	<fieldset class="lx-date-range-picker" :disabled="props.disabled">
-		<div class="lx-date-range-picker__grid">
-			<label>
-				<span>Start</span>
-				<input v-model="startDate" type="date" :min="props.min" :max="value.end || props.max">
+		<div class="lx-date-range-picker__row">
+			<label class="lx-date-range-picker__field">
+				<input
+					v-model="startDate"
+					type="date"
+					:min="props.min"
+					:max="endDate || props.max"
+					aria-label="Start date"
+				>
 			</label>
-			<label>
-				<span>End</span>
-				<input v-model="endDate" type="date" :min="value.start || props.min" :max="props.max">
+			<span class="lx-date-range-picker__separator" aria-hidden="true">to</span>
+			<label class="lx-date-range-picker__field">
+				<input
+					v-model="endDate"
+					type="date"
+					:min="startDate || props.min"
+					:max="props.max"
+					aria-label="End date"
+				>
 			</label>
 		</div>
 	</fieldset>
@@ -28,25 +39,64 @@
 	}>();
 
 	const value = defineModel<ILxDateRangeValue>({
-		default: {
-			start: '',
-			end: '',
-		},
+		default: () => [],
 	});
 
 	const startDate = computed({
-		get: () => value.value.start,
+		get: () => formatDateForInput(value.value[0]),
 		set: start => {
-			value.value = { ...value.value, start };
+			const nextValue = [...value.value];
+			const parsedStart = parseDateFromInput(start);
+			if (parsedStart) {
+				nextValue[0] = parsedStart;
+			} else {
+				nextValue.splice(0, 1);
+			}
+			value.value = nextValue;
 		},
 	});
 
 	const endDate = computed({
-		get: () => value.value.end,
+		get: () => formatDateForInput(value.value[1]),
 		set: end => {
-			value.value = { ...value.value, end };
+			const nextValue = [...value.value];
+			const parsedEnd = parseDateFromInput(end);
+			if (parsedEnd) {
+				nextValue[1] = parsedEnd;
+			} else {
+				nextValue.splice(1, 1);
+			}
+			value.value = nextValue;
 		},
 	});
+
+	function formatDateForInput(dateValue?: Date): string {
+		if (!(dateValue instanceof Date) || Number.isNaN(dateValue.getTime())) {
+			return '';
+		}
+
+		const year = dateValue.getFullYear();
+		const month = String(dateValue.getMonth() + 1).padStart(2, '0');
+		const day = String(dateValue.getDate()).padStart(2, '0');
+		return `${year}-${month}-${day}`;
+	}
+
+	function parseDateFromInput(dateText: string): Date | undefined {
+		if (!dateText) {
+			return undefined;
+		}
+
+		const [yearText, monthText, dayText] = dateText.split('-');
+		const year = Number(yearText);
+		const month = Number(monthText);
+		const day = Number(dayText);
+		if (!year || !month || !day) {
+			return undefined;
+		}
+
+		const parsedDate = new Date(year, month - 1, day);
+		return Number.isNaN(parsedDate.getTime()) ? undefined : parsedDate;
+	}
 
 	watch(value, next => {
 		emit('change', next);
@@ -56,21 +106,31 @@
 <style scoped lang='scss'>
 	.lx-date-range-picker {
 		border: none;
-		display: grid;
-		gap: var(--lx-size-space-sm);
 		margin: 0;
 		padding: 0;
 	}
 
-	.lx-date-range-picker__grid {
+	.lx-date-range-picker__row {
+		align-items: center;
 		display: grid;
 		gap: var(--lx-size-space-sm);
-		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
 	}
 
-	.lx-date-range-picker label {
+	.lx-date-range-picker__field {
 		display: grid;
 		gap: var(--lx-size-space-2xs);
+	}
+
+	.lx-date-range-picker__label {
+		color: var(--lx-colour-surface-text-muted);
+		font-size: var(--lx-font-size-xs);
+	}
+
+	.lx-date-range-picker__separator {
+		color: var(--lx-colour-surface-text-muted);
+		font-size: var(--lx-font-size-sm);
+		white-space: nowrap;
 	}
 
 	.lx-date-range-picker input {
@@ -80,5 +140,16 @@
 		color: var(--lx-colour-surface-text);
 		font: inherit;
 		padding: var(--lx-size-space-sm);
+		width: 100%;
+	}
+
+	@media (max-width: 640px) {
+		.lx-date-range-picker__row {
+			grid-template-columns: 1fr;
+		}
+
+		.lx-date-range-picker__separator {
+			justify-self: center;
+		}
 	}
 </style>

@@ -92,7 +92,7 @@
 									/>
 									<LxDatePicker
 										v-else-if="getColumnFilterType(column) === 'date'"
-										v-model="getTextFilterModel(column).value"
+										v-model="getDateFilterModel(column).value"
 										:aria-label="`Filter ${column.heading}`"
 									/>
 									<LxInput
@@ -208,6 +208,7 @@
 		getColumnFilterModel,
 		getColumnFilterPlaceholder,
 		getColumnFilterType,
+		getDateFilterModel,
 		getDateRangePickerModel,
 		getDropdownFilterOptions,
 		getDropdownLabel,
@@ -358,13 +359,9 @@
 		padding: 0 var(--lx-size-space-xs);
 	}
 
-	.lx-data-table__filters-row :deep(.lx-date-range-picker__grid) {
+	.lx-data-table__filters-row :deep(.lx-date-range-picker__row) {
 		gap: var(--lx-size-space-2xs);
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.lx-data-table__filters-row :deep(.lx-date-range-picker label > span) {
-		font-size: var(--lx-font-size-xs);
 	}
 
 	.lx-data-table td {

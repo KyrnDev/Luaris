@@ -60,9 +60,13 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 	const getDefaultFilterValue = (filterType: TLxDataTableFilterType): unknown => {
 		if (filterType === 'date-range') {
 			return {
-				from: '',
-				to: '',
+				from: null,
+				to: null,
 			} satisfies ILxDataTableDateRangeFilter;
+		}
+
+		if (filterType === 'date') {
+			return null;
 		}
 
 		if (filterType === 'switch') {
@@ -146,6 +150,10 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 			return !rangeValue?.from && !rangeValue?.to;
 		}
 
+		if (filterType === 'date') {
+			return !(value instanceof Date) || Number.isNaN(value.getTime());
+		}
+
 		if (filterType === 'switch') {
 			return value !== true;
 		}
@@ -165,6 +173,22 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 	const getTextFilterModel = (column: ILxDataTableColumn<TRow>): WritableComputedRef<string> => {
 		return computed({
 			get: () => String(getColumnFilterValue(column) ?? ''),
+			set: value => {
+				setColumnFilterValue(column, value);
+			},
+		});
+	};
+
+	const getDateFilterModel = (column: ILxDataTableColumn<TRow>): WritableComputedRef<Date | null> => {
+		return computed({
+			get: () => {
+				const value = getColumnFilterValue(column);
+				if (value instanceof Date && !Number.isNaN(value.getTime())) {
+					return value;
+				}
+
+				return null;
+			},
 			set: value => {
 				setColumnFilterValue(column, value);
 			},
@@ -237,8 +261,8 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 				}
 
 				return {
-					from: '',
-					to: '',
+					from: null,
+					to: null,
 				};
 			},
 			set: value => {
@@ -251,15 +275,19 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 		return computed({
 			get: () => {
 				const range = getDateRangeFilterModel(column).value;
-				return {
-					start: range.from,
-					end: range.to,
-				};
+				const nextRange: Date[] = [];
+				if (range.from instanceof Date && !Number.isNaN(range.from.getTime())) {
+					nextRange[0] = range.from;
+				}
+				if (range.to instanceof Date && !Number.isNaN(range.to.getTime())) {
+					nextRange[1] = range.to;
+				}
+				return nextRange;
 			},
 			set: value => {
 				setColumnFilterValue(column, {
-					from: value.start,
-					to: value.end,
+					from: value[0] ?? null,
+					to: value[1] ?? null,
 				} satisfies ILxDataTableDateRangeFilter);
 			},
 		});
@@ -370,16 +398,32 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 						return false;
 					}
 
-					if (dateRangeFilter.from) {
-						const fromDate = new Date(`${dateRangeFilter.from}T00:00:00`);
-						if (dateValue < fromDate) {
+					if (dateRangeFilter.from instanceof Date && !Number.isNaN(dateRangeFilter.from.getTime())) {
+						const fromDate = new Date(
+							dateRangeFilter.from.getFullYear(),
+							dateRangeFilter.from.getMonth(),
+							dateRangeFilter.from.getDate(),
+							0,
+							0,
+							0,
+							0,
+						);
+						if (dateValue.getTime() < fromDate.getTime()) {
 							return false;
 						}
 					}
 
-					if (dateRangeFilter.to) {
-						const toDate = new Date(`${dateRangeFilter.to}T23:59:59`);
-						if (dateValue > toDate) {
+					if (dateRangeFilter.to instanceof Date && !Number.isNaN(dateRangeFilter.to.getTime())) {
+						const toDate = new Date(
+							dateRangeFilter.to.getFullYear(),
+							dateRangeFilter.to.getMonth(),
+							dateRangeFilter.to.getDate(),
+							23,
+							59,
+							59,
+							999,
+						);
+						if (dateValue.getTime() > toDate.getTime()) {
 							return false;
 						}
 					}
@@ -387,15 +431,24 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 				}
 
 				if (filterType === 'date') {
-					const dateFilter = String(filterValue);
-					if (dateFilter.length === 0) {
+					const dateFilter = filterValue instanceof Date ? filterValue : null;
+					if (!dateFilter || Number.isNaN(dateFilter.getTime())) {
 						continue;
 					}
 
-					const rowDateText = rowValue instanceof Date
-						? rowValue.toISOString().slice(0, 10)
-						: String(rowValue ?? '').slice(0, 10);
-					if (rowDateText !== dateFilter) {
+					const rowDate = rowValue instanceof Date
+						? rowValue
+						: new Date(String(rowValue ?? ''));
+					if (Number.isNaN(rowDate.getTime())) {
+						return false;
+					}
+
+					const sameDay = (
+						rowDate.getFullYear() === dateFilter.getFullYear()
+						&& rowDate.getMonth() === dateFilter.getMonth()
+						&& rowDate.getDate() === dateFilter.getDate()
+					);
+					if (!sameDay) {
 						return false;
 					}
 					continue;
@@ -436,6 +489,7 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 		getColumnFilterModel,
 		getColumnFilterPlaceholder,
 		getColumnFilterType,
+		getDateFilterModel,
 		getDateRangePickerModel,
 		getDropdownFilterOptions,
 		getDropdownLabel,

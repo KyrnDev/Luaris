@@ -20,8 +20,8 @@ export type TLxDataTableFilterType = (
 );
 
 export interface ILxDataTableDateRangeFilter {
-	from: string,
-	to: string,
+	from: Date | null,
+	to: Date | null,
 }
 
 export interface ILxDataTableFilterOption {
@@ -87,6 +87,7 @@ export interface ILxDataTableFiltersComposable<TRow extends object> {
 	getColumnFilterPlaceholder: (column: ILxDataTableColumn<TRow>) => string,
 	getColumnFilterType: (column: ILxDataTableColumn<TRow>) => TLxDataTableFilterType,
 	getDateRangePickerModel: (column: ILxDataTableColumn<TRow>) => WritableComputedRef<ILxDateRangeValue>,
+	getDateFilterModel: (column: ILxDataTableColumn<TRow>) => WritableComputedRef<Date | null>,
 	getDropdownFilterOptions: (column: ILxDataTableColumn<TRow>) => ILxDataTableFilterOption[],
 	getDropdownLabel: (column: ILxDataTableColumn<TRow>) => string,
 	getFilterOptionsWithAll: (column: ILxDataTableColumn<TRow>) => ILxDataTableFilterOption[],
