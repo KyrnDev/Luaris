@@ -244,6 +244,7 @@
 		ILxIconPickerProps,
 		ILxIconPickerValue,
 		ILxIconRegistryEntry,
+		ILxIconRegistryItemNormalised,
 		TLxIconPickerFamily,
 		TLxIconPickerLicence,
 	} from './types';
@@ -296,7 +297,41 @@
 	const familyOptions: TLxIconPickerFamily[] = ['classic', 'sharp', 'brands'];
 	const styleOptions = SUPPORTED_STYLES;
 
-	const registry = computed(() => props.registry || []);
+	const normaliseEntry = (entry: ILxIconRegistryEntry): ILxIconRegistryItemNormalised | null => {
+		const name = String(entry.name || entry.icon || '').trim();
+		if (!name) {
+			return null;
+		}
+
+		const styles = (entry.styles || []).filter(style => styleOptions.includes(style));
+		if (styles.length === 0) {
+			return null;
+		}
+
+		const families = entry.families?.length
+			? entry.families
+			: (styles.includes('brands') ? ['brands'] : ['classic']);
+		const licences = entry.licences?.length ? entry.licences : ['free', 'pro'];
+		const styleSources = entry.styleSources || Object.fromEntries(
+			styles.map(style => [style, [...licences]]),
+		) as Partial<Record<TLxIconStyle, TLxIconPickerLicence[]>>;
+
+		return {
+			name,
+			label: String(entry.label || name),
+			keywords: entry.keywords || entry.terms || [],
+			styles,
+			families,
+			licences,
+			styleSources,
+		};
+	};
+
+	const registry = computed<ILxIconRegistryItemNormalised[]>(() => {
+		return (props.registry || [])
+			.map(normaliseEntry)
+			.filter((entry): entry is ILxIconRegistryItemNormalised => entry !== null);
+	});
 	const selectedName = computed(() => model.value?.name || '');
 	const modelStyle = computed(() => model.value?.style || 'solid');
 	const minimumRows = computed(() => props.popup ? 5 : 3);
@@ -349,7 +384,7 @@
 		window.addEventListener('resize', updateGridColumns);
 	};
 
-	const iconStylesFor = (icon: ILxIconRegistryEntry): TLxIconStyle[] => {
+	const iconStylesFor = (icon: ILxIconRegistryItemNormalised): TLxIconStyle[] => {
 		return icon.styles.filter(style => {
 			if (!selectedStyles.value.includes(style)) {
 				return false;
@@ -396,7 +431,7 @@
 		return filteredIcons.value.slice(start, start + resolvedPageSize.value);
 	});
 
-	const selectedIcon = computed(() => {
+	const selectedIcon = computed<ILxIconRegistryItemNormalised | null>(() => {
 		if (!selectedName.value) {
 			return null;
 		}
@@ -412,7 +447,7 @@
 		return iconStylesFor(selectedIcon.value);
 	});
 
-	const activeStyleFor = (icon: ILxIconRegistryEntry): TLxIconStyle => {
+	const activeStyleFor = (icon: ILxIconRegistryItemNormalised): TLxIconStyle => {
 		const availableStyles = iconStylesFor(icon);
 		if (icon.name === selectedName.value && availableStyles.includes(modelStyle.value)) {
 			return modelStyle.value;
@@ -437,7 +472,7 @@
 		popupOpen.value = !popupOpen.value;
 	};
 
-	const selectIcon = (icon: ILxIconRegistryEntry): void => {
+	const selectIcon = (icon: ILxIconRegistryItemNormalised): void => {
 		const availableStyles = iconStylesFor(icon);
 		const firstStyle = availableStyles[0];
 		if (!firstStyle) {

@@ -10,7 +10,20 @@ export interface ILxIconPickerValue {
 }
 
 export interface ILxIconRegistryEntry {
+	name?: string,
+	icon?: string,
+	label?: string,
+	keywords?: string[],
+	terms?: string[],
+	styles: TLxIconStyle[],
+	families?: TLxIconPickerFamily[],
+	licences?: TLxIconPickerLicence[],
+	styleSources?: Partial<Record<TLxIconStyle, TLxIconPickerLicence[]>>,
+}
+
+export interface ILxIconRegistryItemNormalised {
 	name: string,
+	label: string,
 	keywords: string[],
 	styles: TLxIconStyle[],
 	families: TLxIconPickerFamily[],
