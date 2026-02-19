@@ -13,6 +13,7 @@ export default config({
 	},
 	ignores: [
 		'*.d.ts',
+		'**/*.json',
 		'**/*.md',
 		'eslint.config.js',
 		'.vscode/',
