@@ -298,7 +298,7 @@ describe('LxDataTable', () => {
 
 	it('uses column.format when provided and falls back to string conversion for non-primitives', () => {
 		interface IFormattedRow extends IRow {
-			meta: { label: string, },
+			meta: { label: string },
 			note?: string,
 		}
 		const formattedRows: IFormattedRow[] = [

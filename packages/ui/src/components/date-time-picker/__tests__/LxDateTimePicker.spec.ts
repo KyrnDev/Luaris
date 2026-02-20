@@ -1,8 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import LxDateTimePicker from '../LxDateTimePicker.vue';
-import { LxDatePicker } from '../../date-picker';
-import { LxTimePicker } from '../../time-picker';
 
 describe('LxDateTimePicker', () => {
 	it('updates date/time model from composed inputs', async () => {

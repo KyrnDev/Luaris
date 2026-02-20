@@ -49,8 +49,8 @@ describe('LxTimePicker', () => {
 	it('prefers provided id/name/aria-label attrs and supports disabled input', () => {
 		const wrapper = mount(LxTimePicker, {
 			attrs: {
-				id: 'meeting-time',
-				name: 'meetingTime',
+				'id': 'meeting-time',
+				'name': 'meetingTime',
 				'aria-label': 'Meeting time',
 			},
 			props: {

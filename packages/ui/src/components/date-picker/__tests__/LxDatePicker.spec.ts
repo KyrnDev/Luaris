@@ -20,8 +20,8 @@ describe('LxDatePicker', () => {
 	it('uses explicit id, name and aria-label attrs when provided', () => {
 		const wrapper = mount(LxDatePicker, {
 			attrs: {
-				id: 'birth-date',
-				name: 'birthDate',
+				'id': 'birth-date',
+				'name': 'birthDate',
 				'aria-label': 'Birth date',
 			},
 		});

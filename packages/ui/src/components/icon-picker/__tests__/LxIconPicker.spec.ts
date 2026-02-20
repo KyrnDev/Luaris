@@ -288,14 +288,14 @@ describe('LxIconPicker', () => {
 		const disconnectSpy = vi.fn();
 
 		class TResizeObserver {
-			callback: ResizeObserverCallback;
+			public callback: ResizeObserverCallback;
 
-			constructor(callback: ResizeObserverCallback) {
+			public constructor(callback: ResizeObserverCallback) {
 				this.callback = callback;
 			}
 
-			observe = observeSpy;
-			disconnect = disconnectSpy;
+			public observe = observeSpy;
+			public disconnect = disconnectSpy;
 		}
 
 		Object.defineProperty(globalThis, 'ResizeObserver', {
@@ -475,12 +475,12 @@ describe('LxIconPicker', () => {
 		const disconnectSpy = vi.fn();
 
 		class TResizeObserver {
-			constructor(callback: () => void) {
+			public constructor(callback: () => void) {
 				resizeCallback = callback;
 			}
 
-			observe = observeSpy;
-			disconnect = disconnectSpy;
+			public observe = observeSpy;
+			public disconnect = disconnectSpy;
 		}
 
 		Object.defineProperty(globalThis, 'ResizeObserver', {
@@ -517,7 +517,7 @@ describe('LxIconPicker', () => {
 					startGridObserver: () => Promise<void>,
 					togglePopup: () => void,
 					selectStyle: (style: string) => void,
-					selectIcon: (icon: { name: string, styles: string[], families: string[], licences: string[], styleSources: Record<string, string[]>, keywords: string[], label: string, }) => void,
+					selectIcon: (icon: { name: string, styles: string[], families: string[], licences: string[], styleSources: Record<string, string[]>, keywords: string[], label: string }) => void,
 				},
 			},
 		}).$.setupState;

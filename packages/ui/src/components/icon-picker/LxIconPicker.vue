@@ -121,16 +121,16 @@
 
 		<LxModal
 			v-if="props.popup"
-				v-model="popupOpen"
-				:title="props.popupTitle"
-				:position="props.popupPosition"
-				:animation="props.popupAnimation"
-				:width="props.popupWidth"
-				:max-width="props.popupMaxWidth"
-				:max-height="props.popupMaxHeight"
-				:show-close="true"
+			v-model="popupOpen"
+			:title="props.popupTitle"
+			:position="props.popupPosition"
+			:animation="props.popupAnimation"
+			:width="props.popupWidth"
+			:max-width="props.popupMaxWidth"
+			:max-height="props.popupMaxHeight"
+			:show-close="true"
 		>
-				<div class="lx-icon-picker__panel lx-icon-picker__panel--modal">
+			<div class="lx-icon-picker__panel lx-icon-picker__panel--modal">
 				<div class="lx-icon-picker__search-row">
 					<input
 						v-model.trim="query"
@@ -234,8 +234,8 @@
 					</div>
 				</section>
 				<template v-else />
-				</div>
-			</LxModal>
+			</div>
+		</LxModal>
 		<template v-else />
 	</section>
 </template>

@@ -50,8 +50,8 @@ describe('LxTextarea', () => {
 	it('prefers id/name/aria-label attrs and applies disabled/readonly/rows/maxlength', () => {
 		const wrapper = mount(LxTextarea, {
 			attrs: {
-				id: 'notes',
-				name: 'notesName',
+				'id': 'notes',
+				'name': 'notesName',
 				'aria-label': 'Notes',
 			},
 			props: {

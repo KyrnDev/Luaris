@@ -113,7 +113,7 @@ describe('useColourScheme', () => {
 	});
 
 	it('falls back safely when matchMedia is unavailable', async () => {
-		// eslint-disable-next-line ts/no-explicit-any
+
 		window.matchMedia = undefined as any;
 
 		const wrapper = mountHarness();

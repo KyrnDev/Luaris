@@ -57,8 +57,8 @@ describe('LxSwitch', () => {
 	it('prefers provided id/name/aria-label attrs', () => {
 		const wrapper = mount(LxSwitch, {
 			attrs: {
-				id: 'email-alerts',
-				name: 'emailAlerts',
+				'id': 'email-alerts',
+				'name': 'emailAlerts',
 				'aria-label': 'Email alerts',
 			},
 		});

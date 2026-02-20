@@ -4,8 +4,8 @@
 		class="lx-combobox"
 		:class="{ 'is-open': isMenuVisible, 'is-static-menu': props.alwaysVisible }"
 	>
-			<div class="lx-combobox__control" @click="open">
-				<div v-if="showTags && selectedValues.length > 0" class="lx-combobox__tags">
+		<div class="lx-combobox__control" @click="open">
+			<div v-if="showTags && selectedValues.length > 0" class="lx-combobox__tags">
 				<button
 					v-for="value in selectedValues"
 					:key="value"
@@ -15,9 +15,9 @@
 					@click.stop="removeValue(value)"
 				>
 					{{ getOptionLabel(value) }} ×
-					</button>
-				</div>
-				<template v-else />
+				</button>
+			</div>
+			<template v-else />
 
 			<div class="lx-combobox__selected" :class="{ 'is-inline': useInlineSearch }">
 				<div class="lx-combobox__search" :class="{ 'is-inline': useInlineSearch }">

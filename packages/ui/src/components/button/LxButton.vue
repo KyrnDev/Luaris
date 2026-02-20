@@ -9,31 +9,31 @@
 	>
 		<span v-if="props.loading" class="lx-button__spinner" aria-hidden="true" />
 
-			<span v-if="props.icon && props.iconOrder === 'left'" class="lx-button__icon" aria-hidden="true">
-				<LxIcon :name="props.icon" />
-			</span>
-			<template v-else />
+		<span v-if="props.icon && props.iconOrder === 'left'" class="lx-button__icon" aria-hidden="true">
+			<LxIcon :name="props.icon" />
+		</span>
+		<template v-else />
 
 		<span v-if="$slots.leading" class="lx-button__leading">
 			<slot name="leading" />
 		</span>
 
-			<span v-if="hasLabel" class="lx-button__label">
-				<slot>
-					{{ props.label }}
-				</slot>
-			</span>
-			<template v-else />
+		<span v-if="hasLabel" class="lx-button__label">
+			<slot>
+				{{ props.label }}
+			</slot>
+		</span>
+		<template v-else />
 
 		<span v-if="$slots.trailing" class="lx-button__trailing">
 			<slot name="trailing" />
 		</span>
 
-			<span v-if="props.icon && props.iconOrder === 'right'" class="lx-button__icon" aria-hidden="true">
-				<LxIcon :name="props.icon" />
-			</span>
-			<template v-else />
-		</button>
+		<span v-if="props.icon && props.iconOrder === 'right'" class="lx-button__icon" aria-hidden="true">
+			<LxIcon :name="props.icon" />
+		</span>
+		<template v-else />
+	</button>
 </template>
 
 <script setup lang="ts">

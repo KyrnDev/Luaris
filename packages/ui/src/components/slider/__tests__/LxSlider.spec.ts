@@ -33,8 +33,8 @@ describe('LxSlider', () => {
 	it('prefers attr id/name/aria-label and hides value when showValue is false', () => {
 		const wrapper = mount(LxSlider, {
 			attrs: {
-				id: 'volume',
-				name: 'volumeName',
+				'id': 'volume',
+				'name': 'volumeName',
 				'aria-label': 'Volume',
 			},
 			props: {

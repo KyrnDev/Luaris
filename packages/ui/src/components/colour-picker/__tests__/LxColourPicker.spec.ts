@@ -31,8 +31,8 @@ describe('LxColourPicker', () => {
 		const wrapper = mount(LxColourPicker, {
 			attachTo: document.body,
 			attrs: {
-				id: 'popup-colour-id',
-				name: 'popup-colour-name',
+				'id': 'popup-colour-id',
+				'name': 'popup-colour-name',
 				'aria-label': 'Popup colour',
 			},
 			props: {
@@ -42,36 +42,36 @@ describe('LxColourPicker', () => {
 		});
 
 		const modal = document.body.querySelector('.lx-modal') as HTMLElement;
-			expect(modal).not.toBeNull();
-			expect(modal.style.display).toBe('none');
-			await wrapper.find('.lx-colour-picker__trigger').trigger('click');
-			await wrapper.vm.$nextTick();
-			expect(modal.style.display).not.toBe('none');
+		expect(modal).not.toBeNull();
+		expect(modal.style.display).toBe('none');
+		await wrapper.find('.lx-colour-picker__trigger').trigger('click');
+		await wrapper.vm.$nextTick();
+		expect(modal.style.display).not.toBe('none');
 
-			const popupColourInput = document.body.querySelector<HTMLInputElement>('.lx-modal input[type="color"]');
-			expect(popupColourInput).not.toBeNull();
-			expect(popupColourInput?.id).toBe('popup-colour-id');
-			expect(popupColourInput?.name).toBe('popup-colour-name');
-			expect(popupColourInput?.getAttribute('aria-label')).toBe('Popup colour');
-			popupColourInput!.value = '#654321';
-			popupColourInput!.dispatchEvent(new Event('input', { bubbles: true }));
+		const popupColourInput = document.body.querySelector<HTMLInputElement>('.lx-modal input[type="color"]');
+		expect(popupColourInput).not.toBeNull();
+		expect(popupColourInput?.id).toBe('popup-colour-id');
+		expect(popupColourInput?.name).toBe('popup-colour-name');
+		expect(popupColourInput?.getAttribute('aria-label')).toBe('Popup colour');
+		popupColourInput!.value = '#654321';
+		popupColourInput!.dispatchEvent(new Event('input', { bubbles: true }));
 
-			const popupAlpha = document.body.querySelector<HTMLInputElement>('.lx-modal input[aria-label="Alpha"]');
-			expect(popupAlpha).not.toBeNull();
-			popupAlpha!.value = '0.25';
-			popupAlpha!.dispatchEvent(new Event('input', { bubbles: true }));
+		const popupAlpha = document.body.querySelector<HTMLInputElement>('.lx-modal input[aria-label="Alpha"]');
+		expect(popupAlpha).not.toBeNull();
+		popupAlpha!.value = '0.25';
+		popupAlpha!.dispatchEvent(new Event('input', { bubbles: true }));
 
-			const popupFormats = document.body.querySelectorAll<HTMLButtonElement>('.lx-modal .lx-colour-picker__format');
-			popupFormats[0]?.click();
-			await wrapper.vm.$nextTick();
-			expect(document.body.textContent).toContain('HEX');
+		const popupFormats = document.body.querySelectorAll<HTMLButtonElement>('.lx-modal .lx-colour-picker__format');
+		popupFormats[0]?.click();
+		await wrapper.vm.$nextTick();
+		expect(document.body.textContent).toContain('HEX');
 
-			const modalComponent = wrapper.findComponent({ name: 'LxModal' });
-			modalComponent.vm.$emit('update:modelValue', false);
-			await wrapper.vm.$nextTick();
-			expect(modal.style.display).toBe('none');
-			wrapper.unmount();
-		});
+		const modalComponent = wrapper.findComponent({ name: 'LxModal' });
+		modalComponent.vm.$emit('update:modelValue', false);
+		await wrapper.vm.$nextTick();
+		expect(modal.style.display).toBe('none');
+		wrapper.unmount();
+	});
 
 	it('falls back to first format when default is unavailable', async () => {
 		const wrapper = mount(LxColourPicker, {
@@ -131,10 +131,10 @@ describe('LxColourPicker', () => {
 		const updated = wrapper.emitted('update:modelValue')?.some(payload => payload[0]?.alpha === 1);
 		expect(updated).toBe(true);
 
-			await wrapper.find('.lx-colour-picker__output').trigger('click');
-			expect(wrapper.find('.lx-colour-picker__output').text()).toContain('hsl(');
-			expect(wrapper.find('.lx-tooltip__content').text()).toContain('Click to copy');
-		});
+		await wrapper.find('.lx-colour-picker__output').trigger('click');
+		expect(wrapper.find('.lx-colour-picker__output').text()).toContain('hsl(');
+		expect(wrapper.find('.lx-tooltip__content').text()).toContain('Click to copy');
+	});
 
 	it('supports hsl output, copied timeout reset, and alpha clamping from prop updates', async () => {
 		vi.useFakeTimers();
