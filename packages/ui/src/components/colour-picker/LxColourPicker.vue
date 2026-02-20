@@ -10,6 +10,7 @@
 			<span class="lx-colour-picker__trigger-swatch" :style="{ background: previewBackground }" />
 			<span class="lx-colour-picker__trigger-text">{{ colourText }}</span>
 		</button>
+		<template v-else />
 
 		<div v-if="!props.popup" class="lx-colour-picker__panel">
 			<div class="lx-colour-picker__top">
@@ -40,6 +41,7 @@
 				>
 				<span>{{ Math.round(alphaValue * 100) }}%</span>
 			</label>
+			<template v-else />
 
 			<div class="lx-colour-picker__formats">
 				<button
@@ -67,6 +69,7 @@
 				</LxTooltip>
 			</button>
 		</div>
+		<template v-else />
 
 		<LxModal
 			v-if="props.popup"
@@ -108,6 +111,7 @@
 					>
 					<span>{{ Math.round(alphaValue * 100) }}%</span>
 				</label>
+				<template v-else />
 
 				<div class="lx-colour-picker__formats">
 					<button
@@ -136,6 +140,7 @@
 				</button>
 			</div>
 		</LxModal>
+		<template v-else />
 	</div>
 </template>
 

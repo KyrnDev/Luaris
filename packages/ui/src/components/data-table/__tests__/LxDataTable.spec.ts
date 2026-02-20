@@ -295,4 +295,109 @@ describe('LxDataTable', () => {
 		await wrapper.findAll('button').find(button => button.text() === 'Previous')?.trigger('click');
 		expect(wrapper.find('.lx-data-table__meta').text()).toContain('Page 1 / 3');
 	});
+
+	it('uses column.format when provided and falls back to string conversion for non-primitives', () => {
+		interface IFormattedRow extends IRow {
+			meta: { label: string, },
+			note?: string,
+		}
+		const formattedRows: IFormattedRow[] = [
+			{
+				...rows[0]!,
+				meta: { label: 'x' },
+				note: undefined,
+			},
+		];
+		const wrapper = mount(LxDataTable<IFormattedRow>, {
+			props: {
+				columns: [
+					{
+						key: 'name',
+						heading: 'Name',
+						format: value => `@${String(value)}`,
+					},
+					{
+						key: 'role',
+						heading: 'Role',
+					},
+					{
+						key: 'meta',
+						heading: 'Meta',
+					},
+					{
+						key: 'note',
+						heading: 'Note',
+					},
+				],
+				rows: formattedRows,
+			},
+		});
+
+		const cells = wrapper.findAll('tbody tr td').map(cell => cell.text());
+		expect(cells[0]).toBe('@Alice');
+		expect(cells[1]).toBe('Engineer');
+		expect(cells[2]).toBe('[object Object]');
+		expect(cells[3]).toBe('');
+	});
+
+	it('clamps current page when total pages shrink', async () => {
+		const wrapper = mount(LxDataTable<IRow>, {
+			props: {
+				columns: [{ key: 'name', heading: 'Name' }],
+				rows,
+				itemsPerPage: 1,
+			},
+		});
+
+		await wrapper.findAll('button').find(button => button.text() === 'Next')?.trigger('click');
+		expect(wrapper.find('.lx-data-table__meta').text()).toContain('Page 2 / 3');
+
+		await wrapper.setProps({
+			rows: [rows[0]!],
+		});
+		await wrapper.vm.$nextTick();
+		expect(wrapper.find('.lx-data-table__meta').text()).toContain('Page 1 / 1');
+	});
+
+	it('covers sortable/filterable false branches and slot clear callback', async () => {
+		const clearSpy = vi.fn();
+		const wrapper = mount(LxDataTable<IRow>, {
+			props: {
+				sortable: false,
+				filterable: false,
+				columns: [
+					{ key: 'name', heading: 'Name', sortable: false, filterable: false },
+				],
+				rows,
+			},
+		});
+
+		expect(wrapper.find('.lx-data-table__sort-button').exists()).toBe(false);
+		expect(wrapper.find('.lx-data-table__filters-row').exists()).toBe(false);
+
+		const slotted = mount(LxDataTable<IRow>, {
+			props: {
+				filterable: true,
+				columns: [
+					{ key: 'status', heading: 'Status', filterable: true, filterType: 'select' },
+					{ key: 'name', heading: 'Name', filterable: false },
+				],
+				rows,
+			},
+			slots: {
+				// eslint-disable-next-line ts/naming-convention
+				'filter-status': ({ clear }) => h('button', {
+					class: 'trigger-clear',
+					onClick: () => {
+						clear();
+						clearSpy();
+					},
+				}, 'clear'),
+			},
+		});
+
+		expect(slotted.find('.lx-data-table__filters-row').exists()).toBe(true);
+		await slotted.find('.trigger-clear').trigger('click');
+		expect(clearSpy).toHaveBeenCalledTimes(1);
+	});
 });

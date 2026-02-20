@@ -32,6 +32,7 @@ describe('LxInput', () => {
 		const wrapper = mount(LxInput, {
 			attrs: {
 				id: 'email-field',
+				name: 'email-name',
 			},
 			props: {
 				modelValue: '',
@@ -41,6 +42,7 @@ describe('LxInput', () => {
 
 		expect(wrapper.find('.lx-input__message').text()).toContain('Optional field');
 		expect(wrapper.find('input').attributes('id')).toBe('email-field');
+		expect(wrapper.find('input').attributes('name')).toBe('email-name');
 	});
 
 	it('renders leading and trailing addon slots', () => {

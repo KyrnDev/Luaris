@@ -56,4 +56,28 @@ describe('LxFlex', () => {
 		expect(wrapper.element.tagName).toBe('SECTION');
 		expect(wrapper.attributes('style')).toContain('flex-direction: row-reverse;');
 	});
+
+	it('supports column direction without reverse when no explicit direction is provided', () => {
+		const wrapper = mount(LxFlex, {
+			props: {
+				column: true,
+				reverse: false,
+			},
+		});
+
+		expect(wrapper.attributes('style')).toContain('flex-direction: column;');
+	});
+
+	it('supports reversed row direction and gap fallback when gap is empty', () => {
+		const wrapper = mount(LxFlex, {
+			props: {
+				reverse: true,
+				gap: '',
+			},
+		});
+
+		expect(wrapper.attributes('style')).toContain('flex-direction: row-reverse;');
+		expect(wrapper.attributes('style')).toContain('row-gap: 0px;');
+		expect(wrapper.attributes('style')).toContain('column-gap: 0px;');
+	});
 });

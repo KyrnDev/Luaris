@@ -26,6 +26,7 @@
 				@click="close"
 			/>
 		</header>
+		<template v-else />
 		<div class="lx-drawer__body">
 			<slot />
 		</div>

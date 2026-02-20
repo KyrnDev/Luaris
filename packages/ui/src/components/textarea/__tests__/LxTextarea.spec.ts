@@ -27,4 +27,50 @@ describe('LxTextarea', () => {
 
 		expect(wrapper.find('.lx-textarea__counter').exists()).toBe(false);
 	});
+
+	it('uses generated id/name and default aria-label when attrs are not provided', () => {
+		const wrapper = mount(LxTextarea, {
+			props: {
+				modelValue: 'Hello',
+				maxRows: 8,
+				resizable: false,
+			},
+		});
+
+		const textarea = wrapper.find('textarea');
+		const generatedId = textarea.attributes('id');
+		expect(generatedId).toMatch(/^lx-textarea-/);
+		expect(textarea.attributes('name')).toBe(generatedId);
+		expect(textarea.attributes('aria-label')).toBe('Textarea');
+		expect(textarea.attributes('maxlength')).toBeUndefined();
+		expect(textarea.attributes('style')).toContain('max-height: 12em;');
+		expect(textarea.attributes('style')).toContain('resize: none;');
+	});
+
+	it('prefers id/name/aria-label attrs and applies disabled/readonly/rows/maxlength', () => {
+		const wrapper = mount(LxTextarea, {
+			attrs: {
+				id: 'notes',
+				name: 'notesName',
+				'aria-label': 'Notes',
+			},
+			props: {
+				modelValue: 'A',
+				disabled: true,
+				readonly: true,
+				minRows: 5,
+				maxLength: 20,
+			},
+		});
+
+		const textarea = wrapper.find('textarea');
+		expect(textarea.attributes('id')).toBe('notes');
+		expect(textarea.attributes('name')).toBe('notesName');
+		expect(textarea.attributes('aria-label')).toBe('Notes');
+		expect(textarea.attributes('disabled')).toBeDefined();
+		expect(textarea.attributes('readonly')).toBeDefined();
+		expect(textarea.attributes('rows')).toBe('5');
+		expect(textarea.attributes('maxlength')).toBe('20');
+		expect(textarea.attributes('style')).toContain('resize: vertical;');
+	});
 });

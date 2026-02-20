@@ -1,7 +1,7 @@
 <template>
 	<Teleport to="body">
 		<div
-			v-if="props.modelValue"
+			v-show="props.modelValue"
 			class="lx-modal"
 			:class="[`lx-modal--${props.position}`, `lx-modal--${props.animation}`]"
 		>
@@ -23,7 +23,7 @@
 					:aria-labelledby="hasHeader ? headerId : undefined"
 					tabindex="-1"
 				>
-					<header v-if="hasHeader" :id="headerId" class="lx-modal__header">
+					<header v-show="hasHeader" :id="headerId" class="lx-modal__header">
 						<slot name="header">
 							{{ props.title }}
 						</slot>

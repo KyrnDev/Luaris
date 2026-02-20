@@ -50,4 +50,15 @@ describe('LxCard', () => {
 		expect(wrapper.classes()).toContain('lx-card--selected');
 		expect(wrapper.attributes('style')).toContain('--lx-card-padding: 0;');
 	});
+
+	it('does not render header when neither title nor header slot is provided', () => {
+		const wrapper = mount(LxCard, {
+			slots: {
+				default: '<p>Only body</p>',
+			},
+		});
+
+		expect(wrapper.find('.lx-card__header').exists()).toBe(false);
+		expect(wrapper.find('.lx-card__body').text()).toContain('Only body');
+	});
 });

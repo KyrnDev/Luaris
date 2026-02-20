@@ -105,8 +105,10 @@
 									/>
 								</slot>
 							</template>
+							<template v-else />
 						</th>
 					</tr>
+					<template v-else />
 				</thead>
 				<tbody v-if="paginatedRows.length > 0">
 					<tr v-for="(row, rowIndex) in paginatedRows" :key="getRowKey(row, rowIndex)">
@@ -129,6 +131,7 @@
 						</td>
 					</tr>
 				</tbody>
+				<template v-else />
 			</table>
 
 			<div v-if="paginatedRows.length === 0" class="lx-data-table__empty">
@@ -136,6 +139,7 @@
 					{{ props.emptyText }}
 				</slot>
 			</div>
+			<template v-else />
 		</div>
 
 		<footer class="lx-data-table__pagination">

@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import LxDateTimePicker from '../LxDateTimePicker.vue';
+import { LxDatePicker } from '../../date-picker';
+import { LxTimePicker } from '../../time-picker';
 
 describe('LxDateTimePicker', () => {
 	it('updates date/time model from composed inputs', async () => {
@@ -43,5 +45,25 @@ describe('LxDateTimePicker', () => {
 		expect(inputs[1]?.attributes('min')).toBe('08:00');
 		expect(inputs[1]?.attributes('max')).toBe('20:00');
 		expect(inputs[1]?.attributes('step')).toBe('300');
+	});
+
+	it('returns null when merge inputs are invalid', async () => {
+		const wrapper = mount(LxDateTimePicker, {
+			props: {
+				modelValue: null,
+			},
+		});
+
+		const api = (wrapper.vm as {
+			$: {
+				setupState: {
+					mergeDateAndTime: (dateValue: Date | null, timeText: string) => Date | null,
+				},
+			},
+		}).$.setupState;
+
+		expect(api.mergeDateAndTime(null, '12:30')).toBeNull();
+		expect(api.mergeDateAndTime(new Date(2026, 7, 20), '')).toBeNull();
+		expect(api.mergeDateAndTime(new Date(2026, 7, 20), 'aa:bb')).toBeNull();
 	});
 });

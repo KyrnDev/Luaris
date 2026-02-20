@@ -10,6 +10,7 @@
 		>
 			<LxIcon :name="selectedName || 'circle-question'" :icon-style="modelStyle" />
 		</LxButton>
+		<template v-else />
 
 		<div v-if="!props.popup" class="lx-icon-picker__panel">
 			<div class="lx-icon-picker__search-row">
@@ -65,6 +66,7 @@
 					</fieldset>
 				</div>
 			</details>
+			<template v-else />
 
 			<div
 				ref="gridRef"
@@ -88,11 +90,11 @@
 			</div>
 
 			<div class="lx-icon-picker__pagination">
-				<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="currentPage -= 1">
+				<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="goToPreviousPage">
 					Previous
 				</LxButton>
 				<span>Page {{ currentPage }} / {{ totalPages }}</span>
-				<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="currentPage += 1">
+				<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="goToNextPage">
 					Next
 				</LxButton>
 			</div>
@@ -113,20 +115,22 @@
 					</button>
 				</div>
 			</section>
+			<template v-else />
 		</div>
+		<template v-else />
 
 		<LxModal
 			v-if="props.popup"
-			v-model="popupOpen"
-			:title="props.popupTitle"
-			:position="props.popupPosition"
-			:animation="props.popupAnimation"
-			:width="props.popupWidth"
-			:max-width="props.popupMaxWidth"
-			:max-height="props.popupMaxHeight"
-			:show-close="true"
+				v-model="popupOpen"
+				:title="props.popupTitle"
+				:position="props.popupPosition"
+				:animation="props.popupAnimation"
+				:width="props.popupWidth"
+				:max-width="props.popupMaxWidth"
+				:max-height="props.popupMaxHeight"
+				:show-close="true"
 		>
-			<div class="lx-icon-picker__panel lx-icon-picker__panel--modal">
+				<div class="lx-icon-picker__panel lx-icon-picker__panel--modal">
 				<div class="lx-icon-picker__search-row">
 					<input
 						v-model.trim="query"
@@ -180,6 +184,7 @@
 						</fieldset>
 					</div>
 				</details>
+				<template v-else />
 
 				<div
 					ref="gridRef"
@@ -203,11 +208,11 @@
 				</div>
 
 				<div class="lx-icon-picker__pagination">
-					<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="currentPage -= 1">
+					<LxButton variant="plain" size="xs" :disabled="currentPage <= 1" @click="goToPreviousPage">
 						Previous
 					</LxButton>
 					<span>Page {{ currentPage }} / {{ totalPages }}</span>
-					<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="currentPage += 1">
+					<LxButton variant="plain" size="xs" :disabled="currentPage >= totalPages" @click="goToNextPage">
 						Next
 					</LxButton>
 				</div>
@@ -228,8 +233,10 @@
 						</button>
 					</div>
 				</section>
-			</div>
-		</LxModal>
+				<template v-else />
+				</div>
+			</LxModal>
+		<template v-else />
 	</section>
 </template>
 
@@ -353,7 +360,8 @@
 
 		const minTileSize = props.popup ? 56 : 48;
 		const styles = window.getComputedStyle(gridElement);
-		const gap = Number.parseFloat(styles.columnGap || styles.gap || '8') || 8;
+		const parsedGap = Number.parseFloat(styles.columnGap);
+		const gap = Number.isNaN(parsedGap) ? 8 : parsedGap;
 		const availableWidth = gridElement.clientWidth;
 		const calculatedColumns = Math.max(1, Math.floor((availableWidth + gap) / (minTileSize + gap)));
 		const maxColumns = props.popup ? 5 : 16;
@@ -390,7 +398,7 @@
 				return false;
 			}
 
-			const sources = icon.styleSources?.[style] || [];
+			const sources = icon.styleSources[style] || [];
 			return sources.some(source => selectedLicences.value.includes(source));
 		});
 	};
@@ -431,6 +439,14 @@
 		return filteredIcons.value.slice(start, start + resolvedPageSize.value);
 	});
 
+	const goToPreviousPage = (): void => {
+		currentPage.value = Math.max(1, currentPage.value - 1);
+	};
+
+	const goToNextPage = (): void => {
+		currentPage.value = Math.min(totalPages.value, currentPage.value + 1);
+	};
+
 	const selectedIcon = computed<ILxIconRegistryItemNormalised | null>(() => {
 		if (!selectedName.value) {
 			return null;
@@ -453,7 +469,7 @@
 			return modelStyle.value;
 		}
 
-		return availableStyles[0] ?? 'solid';
+		return availableStyles[0] as TLxIconStyle;
 	};
 
 	const toTitle = (value: string): string => {

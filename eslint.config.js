@@ -25,6 +25,8 @@ export default config({
 	],
 }, {
 	rules: {
+		'no-console': 0,
+		'style/arrow-parens': 0,
 		'antfu/if-newline': 0,
 		'antfu/consistent-chaining': 0,
 		'antfu/top-level-function': 0,

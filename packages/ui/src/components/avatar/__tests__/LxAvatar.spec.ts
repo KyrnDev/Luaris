@@ -83,4 +83,16 @@ describe('LxAvatar', () => {
 		await wrapper.trigger('keydown', { key: ' ' });
 		expect(wrapper.emitted('activate')).toHaveLength(1);
 	});
+
+	it('ignores non-activation keys when clickable', async () => {
+		const wrapper = mount(LxAvatar, {
+			props: {
+				clickable: true,
+				name: 'Jane Doe',
+			},
+		});
+
+		await wrapper.trigger('keydown', { key: 'Tab' });
+		expect(wrapper.emitted('activate')).toBeUndefined();
+	});
 });

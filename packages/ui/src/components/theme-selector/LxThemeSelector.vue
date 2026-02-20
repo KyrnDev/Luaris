@@ -81,10 +81,14 @@
 	}
 
 	.lx-theme-selector__label {
+		align-items: center;
 		color: var(--lx-colour-surface-text-muted);
+		display: inline-flex;
 		font-size: var(--lx-font-size-sm);
 		font-weight: var(--lx-font-weight-medium);
 		letter-spacing: 0.02em;
+		line-height: var(--lx-font-line-height-tight);
+		padding-block: var(--lx-size-space-2xs);
 	}
 
 	.lx-theme-selector__options {
@@ -103,8 +107,9 @@
 		color: var(--lx-colour-surface-text-muted);
 		font-size: var(--lx-font-size-sm);
 		font-weight: var(--lx-font-weight-semibold);
-		height: auto;
-		padding: 0.35rem 0.85rem;
+		height: var(--lx-size-control-height-sm);
+		line-height: 1;
+		padding: 0 var(--lx-size-space-md);
 		transition:
 			color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
 			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);

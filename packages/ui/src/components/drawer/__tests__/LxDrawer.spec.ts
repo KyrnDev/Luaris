@@ -61,7 +61,9 @@ describe('LxDrawer', () => {
 			},
 		});
 
-		expect(document.body.querySelector('.lx-modal')).toBeNull();
+		const modal = document.body.querySelector('.lx-modal') as HTMLElement;
+		expect(modal).not.toBeNull();
+		expect(modal.style.display).toBe('none');
 		wrapper.unmount();
 	});
 
@@ -73,9 +75,11 @@ describe('LxDrawer', () => {
 			},
 		});
 
-		expect(document.body.querySelector('.lx-modal')).toBeNull();
+		const modal = document.body.querySelector('.lx-modal') as HTMLElement;
+		expect(modal).not.toBeNull();
+		expect(modal.style.display).toBe('none');
 		await wrapper.setProps({ modelValue: true });
-		expect(document.body.querySelector('.lx-modal')).not.toBeNull();
+		expect(modal.style.display).not.toBe('none');
 		wrapper.unmount();
 	});
 

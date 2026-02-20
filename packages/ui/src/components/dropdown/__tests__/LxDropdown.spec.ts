@@ -72,4 +72,24 @@ describe('LxDropdown', () => {
 		expect(wrapper.find('summary').attributes('aria-expanded')).toBe('false');
 		wrapper.unmount();
 	});
+
+	it('handles toggle event safely when currentTarget is null', () => {
+		const wrapper = mount(LxDropdown, {
+			props: {
+				options: [{ label: 'One', value: 'one' }],
+			},
+		});
+
+		const api = (wrapper.vm as {
+			$: {
+				setupState: {
+					onToggle: (event: Event) => void,
+					open: boolean,
+				},
+			},
+		}).$.setupState;
+
+		api.onToggle({ currentTarget: null } as unknown as Event);
+		expect(api.open).toBe(false);
+	});
 });

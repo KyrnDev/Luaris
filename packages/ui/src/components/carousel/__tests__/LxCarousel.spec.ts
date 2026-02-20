@@ -66,4 +66,86 @@ describe('LxCarousel', () => {
 		await wrapper.vm.$nextTick();
 		expect(wrapper.emitted('change')?.length).toBeGreaterThan(0);
 	});
+
+	it('supports dot navigation click', async () => {
+		const wrapper = mount(LxCarousel, {
+			props: {
+				slides: [{ title: 'One' }, { title: 'Two' }, { title: 'Three' }],
+			},
+		});
+
+		await wrapper.find('button[aria-label="Go to slide 3"]').trigger('click');
+		expect(wrapper.emitted('change')?.[0]?.[0]).toBe(2);
+	});
+
+	it('re-validates index and restarts timer when slide length changes', async () => {
+		vi.useFakeTimers();
+		const wrapper = mount(LxCarousel, {
+			props: {
+				modelValue: 1,
+				slides: [{ title: 'One' }, { title: 'Two' }],
+				autoplay: true,
+				interval: 30,
+			},
+		});
+
+		await wrapper.setProps({
+			slides: [{ title: 'Only one slide' }],
+		});
+
+		const changeEvents = wrapper.emitted('change') ?? [];
+		expect(changeEvents.some(payload => payload[0] === 0)).toBe(true);
+	});
+
+	it('clears autoplay timer on unmount', () => {
+		vi.useFakeTimers();
+		const clearIntervalSpy = vi.spyOn(window, 'clearInterval');
+		const wrapper = mount(LxCarousel, {
+			props: {
+				slides: [{ title: 'One' }, { title: 'Two' }],
+				autoplay: true,
+				interval: 20,
+			},
+		});
+
+		wrapper.unmount();
+		expect(clearIntervalSpy).toHaveBeenCalled();
+		clearIntervalSpy.mockRestore();
+	});
+
+	it('renders fallback slide content branches for image, title and description', () => {
+		const wrapper = mount(LxCarousel, {
+			props: {
+				slides: [
+					{
+						id: 'full',
+						image: 'https://example.com/slide.jpg',
+						title: 'Complete slide',
+						description: 'Description content',
+					},
+					{
+						id: 'empty',
+					},
+				],
+			},
+		});
+
+		expect(wrapper.find('.lx-carousel__image').exists()).toBe(true);
+		expect(wrapper.text()).toContain('Complete slide');
+		expect(wrapper.text()).toContain('Description content');
+	});
+
+	it('uses fallback alt text when image slide has no title', () => {
+		const wrapper = mount(LxCarousel, {
+			props: {
+				slides: [
+					{
+						image: 'https://example.com/no-title.jpg',
+					},
+				],
+			},
+		});
+
+		expect(wrapper.find('.lx-carousel__image').attributes('alt')).toBe('Slide 1');
+	});
 });

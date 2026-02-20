@@ -1,10 +1,12 @@
 <template>
 	<div class="lx-label" :class="[`lx-label--${props.display}`, { 'lx-label--reverse': props.reverse }]">
 		<label v-if="hasLabel" class="lx-label__text" :for="resolvedControlId">
-			<slot name="label">
+			<slot v-if="hasLabelSlot" name="label" />
+			<template v-else>
 				{{ props.text }}
-			</slot>
+			</template>
 		</label>
+		<template v-else />
 		<div class="lx-label__control">
 			<slot :control-id="resolvedControlId" :control-name="resolvedControlName" />
 		</div>
@@ -25,6 +27,9 @@
 
 	const slots = useSlots();
 	const generatedId = `lx-field-${useId().replace(/:/g, '')}`;
+	const hasLabelSlot = computed(() => {
+		return Boolean(slots.label);
+	});
 
 	const resolvedControlId = computed(() => {
 		return props.controlId.trim().length > 0 ? props.controlId : generatedId;
@@ -35,7 +40,7 @@
 	});
 
 	const hasLabel = computed(() => {
-		return props.text.trim().length > 0 || Boolean(slots.label);
+		return props.text.trim().length > 0 || hasLabelSlot.value;
 	});
 </script>
 

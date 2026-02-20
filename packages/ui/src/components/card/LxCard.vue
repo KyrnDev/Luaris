@@ -5,12 +5,14 @@
 				{{ title }}
 			</slot>
 		</header>
+		<template v-else />
 		<div class="lx-card__body">
 			<slot />
 		</div>
 		<footer v-if="$slots.footer" class="lx-card__footer">
 			<slot name="footer" />
 		</footer>
+		<template v-else />
 	</article>
 </template>
 

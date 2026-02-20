@@ -1,7 +1,6 @@
 <template>
 	<div class="lx-radio" :class="{ 'is-disabled': props.disabled }">
 		<input
-			v-bind="attrs"
 			:id="inputId"
 			v-model="model"
 			type="radio"
@@ -17,7 +16,7 @@
 </template>
 
 <script setup lang='ts'>
-	import { computed, useAttrs, useId } from 'vue';
+	import { computed, useId } from 'vue';
 	import type { TFormValue } from '../../types/form';
 	import type { ILxRadioProps } from './types';
 
@@ -31,22 +30,11 @@
 		name: '',
 		id: '',
 	});
-	const attrs = useAttrs();
 	const generatedId = `lx-radio-${useId().replace(/:/g, '')}`;
 	const inputId = computed(() => {
-		const attrId = attrs.id;
-		if (typeof attrId === 'string' && attrId.length > 0) {
-			return attrId;
-		}
-
 		return props.id || generatedId;
 	});
 	const inputName = computed(() => {
-		const attrName = attrs.name;
-		if (typeof attrName === 'string' && attrName.length > 0) {
-			return attrName;
-		}
-
 		return props.name || inputId.value;
 	});
 

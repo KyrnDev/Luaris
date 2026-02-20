@@ -48,4 +48,39 @@ describe('LxLabel', () => {
 		expect(wrapper.find('input').attributes('id')).toBe('status-id');
 		expect(wrapper.find('input').attributes('name')).toBe('status-name');
 	});
+
+	it('does not render label element when text is empty and no label slot is provided', () => {
+		const wrapper = mount(LxLabel, {
+			props: {
+				text: '',
+			},
+			slots: {
+				default: ({ controlId, controlName }: { controlId: string, controlName: string }) => h('input', {
+					id: controlId,
+					name: controlName,
+				}),
+			},
+		});
+
+		expect(wrapper.find('label').exists()).toBe(false);
+		expect(wrapper.find('input').exists()).toBe(true);
+	});
+
+	it('renders label when only the label slot is provided', () => {
+		const wrapper = mount(LxLabel, {
+			props: {
+				text: '',
+			},
+			slots: {
+				label: () => h('span', { class: 'custom-label' }, 'Custom Label'),
+				default: ({ controlId, controlName }: { controlId: string, controlName: string }) => h('input', {
+					id: controlId,
+					name: controlName,
+				}),
+			},
+		});
+
+		expect(wrapper.find('label').exists()).toBe(true);
+		expect(wrapper.find('.custom-label').text()).toBe('Custom Label');
+	});
 });

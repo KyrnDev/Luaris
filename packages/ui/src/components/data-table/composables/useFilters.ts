@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue';
-import type { Ref, WritableComputedRef } from 'vue';
+import type { ComputedRef, Ref, WritableComputedRef } from 'vue';
 import type { ILxDateRangeValue } from '../../date-range-picker/types';
 import type {
 	ILxDataTableColumn,
@@ -195,24 +195,19 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 		});
 	};
 
-	const getNumberFilterModel = (column: ILxDataTableColumn<TRow>): WritableComputedRef<number | ''> => {
-		return computed({
-			get: () => {
-				const value = getColumnFilterValue(column);
-				if (typeof value === 'number') {
-					return value;
-				}
+	const getNumberFilterModel = (column: ILxDataTableColumn<TRow>): ComputedRef<number | ''> => {
+		return computed(() => {
+			const value = getColumnFilterValue(column);
+			if (typeof value === 'number') {
+				return value;
+			}
 
-				if (typeof value === 'string' && value.trim().length > 0) {
-					const parsed = Number(value);
-					return Number.isNaN(parsed) ? '' : parsed;
-				}
+			if (typeof value === 'string' && value.trim().length > 0) {
+				const parsed = Number(value);
+				return Number.isNaN(parsed) ? '' : parsed;
+			}
 
-				return '';
-			},
-			set: value => {
-				setColumnFilterValue(column, value);
-			},
+			return '';
 		});
 	};
 
@@ -252,22 +247,17 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 		});
 	};
 
-	const getDateRangeFilterModel = (column: ILxDataTableColumn<TRow>): WritableComputedRef<ILxDataTableDateRangeFilter> => {
-		return computed({
-			get: () => {
-				const value = getColumnFilterValue(column);
-				if (typeof value === 'object' && value !== null && 'from' in value && 'to' in value) {
-					return value as ILxDataTableDateRangeFilter;
-				}
+	const getDateRangeFilterModel = (column: ILxDataTableColumn<TRow>): ComputedRef<ILxDataTableDateRangeFilter> => {
+		return computed(() => {
+			const value = getColumnFilterValue(column);
+			if (typeof value === 'object' && value !== null && 'from' in value && 'to' in value) {
+				return value as ILxDataTableDateRangeFilter;
+			}
 
-				return {
-					from: null,
-					to: null,
-				};
-			},
-			set: value => {
-				setColumnFilterValue(column, value);
-			},
+			return {
+				from: null,
+				to: null,
+			};
 		});
 	};
 
@@ -431,10 +421,7 @@ export const useFilters = <TRow extends object>(props: ILxDataTableProps<TRow>):
 				}
 
 				if (filterType === 'date') {
-					const dateFilter = filterValue instanceof Date ? filterValue : null;
-					if (!dateFilter || Number.isNaN(dateFilter.getTime())) {
-						continue;
-					}
+					const dateFilter = filterValue as Date;
 
 					const rowDate = rowValue instanceof Date
 						? rowValue

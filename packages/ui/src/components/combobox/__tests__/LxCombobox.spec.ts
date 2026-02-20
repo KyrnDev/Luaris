@@ -194,4 +194,145 @@ describe('LxCombobox', () => {
 		await withList.find('.lx-combobox__selected-list input').setValue(false);
 		expect(withList.emitted('change')?.[0]?.[0]).toEqual([]);
 	});
+
+	it('uses provided id prop and name attr identifiers', () => {
+		const wrapper = mount(LxCombobox, {
+			attrs: {
+				name: 'country-name',
+			},
+			props: {
+				options,
+				id: 'country-filter',
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		expect(input.attributes('id')).toBe('country-filter');
+		expect(input.attributes('name')).toBe('country-name');
+		expect(input.attributes('aria-controls')).toBeUndefined();
+	});
+
+	it('supports removing already-selected values and disabled fallback selection logic', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: true,
+				options: [
+					{ label: 'United Kingdom', value: 'United Kingdom' },
+					{ label: 'Germany', value: 'Germany', disabled: true },
+				],
+				modelValue: ['United Kingdom'],
+				openByDefault: true,
+			},
+		});
+
+		await wrapper.findAll('.lx-combobox__option-control')[0]?.trigger('click');
+		expect(wrapper.emitted('change')?.[0]?.[0]).toEqual([]);
+
+		const input = wrapper.find('input[role="combobox"]');
+		await input.trigger('keydown', { key: 'ArrowDown' });
+		await input.trigger('keydown', { key: 'ArrowDown' });
+		await input.trigger('keydown', { key: 'Enter' });
+
+		const emitted = wrapper.emitted('change') ?? [];
+		expect(emitted[1]?.[0]).toEqual(['United Kingdom']);
+	});
+
+	it('wraps highlight navigation when first key is arrow up', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				options: [
+					{ label: 'United Kingdom', value: 'United Kingdom', disabled: true },
+					{ label: 'Germany', value: 'Germany' },
+					{ label: 'Sweden', value: 'Sweden' },
+				],
+				openByDefault: true,
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		await input.trigger('keydown', { key: 'ArrowUp' });
+		const activeDescendant = input.attributes('aria-activedescendant');
+		expect(activeDescendant?.endsWith('-option-2')).toBe(true);
+	});
+
+	it('normalises array model in single mode with empty first value', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: false,
+				options,
+				modelValue: [''],
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		expect((input.element as HTMLInputElement).value).toBe('');
+
+		await wrapper.setProps({
+			modelValue: ['Germany', 'Sweden'],
+			openByDefault: true,
+		});
+		await wrapper.vm.$nextTick();
+
+		expect((input.element as HTMLInputElement).value).toContain('Germany');
+		expect(wrapper.find('.lx-combobox__menu').exists()).toBe(true);
+	});
+
+	it('falls back to raw selected value when option is missing', () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: true,
+				options: ['Germany'],
+				modelValue: ['Unknown country'],
+			},
+		});
+
+		expect(wrapper.find('.lx-combobox__chip').text()).toContain('Unknown country');
+	});
+
+	it('handles backspace with empty-string value without removal call', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: true,
+				options: [''],
+				modelValue: [''],
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		await input.trigger('keydown', { key: 'Backspace' });
+		expect(wrapper.emitted('change')).toBeUndefined();
+	});
+
+	it('does not remove selected value on backspace when query has content', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: true,
+				options,
+				modelValue: ['Germany'],
+				openByDefault: true,
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		await input.setValue('g');
+		await input.trigger('keydown', { key: 'Backspace' });
+		expect(wrapper.emitted('change')).toBeUndefined();
+	});
+
+	it('selects first enabled option on enter when no option is highlighted', async () => {
+		const wrapper = mount(LxCombobox, {
+			props: {
+				multiple: false,
+				options: [
+					{ label: 'Disabled', value: 'disabled', disabled: true },
+					{ label: 'Germany', value: 'Germany' },
+				],
+				openByDefault: true,
+			},
+		});
+
+		const input = wrapper.find('input[role="combobox"]');
+		await input.trigger('keydown', { key: 'Enter' });
+		expect(wrapper.emitted('change')?.[0]?.[0]).toBe('Germany');
+	});
 });

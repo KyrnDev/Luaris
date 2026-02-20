@@ -43,4 +43,42 @@ describe('LxSwitch', () => {
 		expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toBe(true);
 		expect(wrapper.emitted('change')?.[0]?.[0]).toBe(true);
 	});
+
+	it('uses generated id/name and default aria-label when attrs are not provided', () => {
+		const wrapper = mount(LxSwitch);
+		const input = wrapper.find('input');
+		const generatedId = input.attributes('id');
+
+		expect(generatedId).toMatch(/^lx-switch-/);
+		expect(input.attributes('name')).toBe(generatedId);
+		expect(input.attributes('aria-label')).toBe('Switch');
+	});
+
+	it('prefers provided id/name/aria-label attrs', () => {
+		const wrapper = mount(LxSwitch, {
+			attrs: {
+				id: 'email-alerts',
+				name: 'emailAlerts',
+				'aria-label': 'Email alerts',
+			},
+		});
+
+		const input = wrapper.find('input');
+		expect(input.attributes('id')).toBe('email-alerts');
+		expect(input.attributes('name')).toBe('emailAlerts');
+		expect(input.attributes('aria-label')).toBe('Email alerts');
+	});
+
+	it('does not toggle when clicking track while disabled', async () => {
+		const wrapper = mount(LxSwitch, {
+			props: {
+				modelValue: true,
+				disabled: true,
+			},
+		});
+
+		await wrapper.find('.lx-switch__track').trigger('click');
+		expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+		expect(wrapper.emitted('change')).toBeUndefined();
+	});
 });

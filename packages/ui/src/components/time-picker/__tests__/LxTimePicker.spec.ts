@@ -30,4 +30,39 @@ describe('LxTimePicker', () => {
 		expect(input.attributes('max')).toBe('18:00');
 		expect(input.attributes('step')).toBe('300');
 	});
+
+	it('uses generated id/name and default aria label when attrs are not provided', () => {
+		const wrapper = mount(LxTimePicker, {
+			props: {
+				modelValue: '',
+			},
+		});
+
+		const input = wrapper.find('input');
+		const generatedId = input.attributes('id');
+		expect(generatedId).toMatch(/^lx-time-picker-/);
+		expect(input.attributes('name')).toBe(generatedId);
+		expect(input.attributes('aria-label')).toBe('Time');
+		expect(input.attributes('step')).toBe('60');
+	});
+
+	it('prefers provided id/name/aria-label attrs and supports disabled input', () => {
+		const wrapper = mount(LxTimePicker, {
+			attrs: {
+				id: 'meeting-time',
+				name: 'meetingTime',
+				'aria-label': 'Meeting time',
+			},
+			props: {
+				modelValue: '12:00',
+				disabled: true,
+			},
+		});
+
+		const input = wrapper.find('input');
+		expect(input.attributes('id')).toBe('meeting-time');
+		expect(input.attributes('name')).toBe('meetingTime');
+		expect(input.attributes('aria-label')).toBe('Meeting time');
+		expect(input.attributes('disabled')).toBeDefined();
+	});
 });

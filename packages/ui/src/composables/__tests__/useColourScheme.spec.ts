@@ -87,4 +87,41 @@ describe('useColourScheme', () => {
 		expect(darkQuery.removeEventListener).toHaveBeenCalledWith('change', expect.any(Function));
 		expect(contrastQuery.removeEventListener).toHaveBeenCalledWith('change', expect.any(Function));
 	});
+
+	it('updates state when registered media change listeners fire', async () => {
+		const darkQuery = createMediaQueryMock('(prefers-color-scheme: dark)', false);
+		const contrastQuery = createMediaQueryMock('(prefers-contrast: more)', false);
+
+		window.matchMedia = vi.fn().mockImplementation((query: string) => (
+			query.includes('prefers-color-scheme: dark') ? darkQuery : contrastQuery
+		));
+
+		const wrapper = mountHarness();
+		await nextTick();
+
+		const darkListener = darkQuery.addEventListener.mock.calls[0]?.[1] as (() => void) | undefined;
+		const contrastListener = contrastQuery.addEventListener.mock.calls[0]?.[1] as (() => void) | undefined;
+
+		darkQuery.matches = true;
+		contrastQuery.matches = true;
+		darkListener?.();
+		contrastListener?.();
+		await nextTick();
+
+		expect(wrapper.vm.colourScheme).toBe('dark');
+		expect(wrapper.vm.contrastPreference).toBe('more');
+	});
+
+	it('falls back safely when matchMedia is unavailable', async () => {
+		// eslint-disable-next-line ts/no-explicit-any
+		window.matchMedia = undefined as any;
+
+		const wrapper = mountHarness();
+		await nextTick();
+
+		expect(wrapper.vm.prefersDark).toBe(false);
+		expect(wrapper.vm.prefersHighContrast).toBe(false);
+		expect(wrapper.vm.colourScheme).toBe('light');
+		expect(wrapper.vm.contrastPreference).toBe('no-preference');
+	});
 });

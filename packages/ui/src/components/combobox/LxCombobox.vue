@@ -4,8 +4,8 @@
 		class="lx-combobox"
 		:class="{ 'is-open': isMenuVisible, 'is-static-menu': props.alwaysVisible }"
 	>
-		<div class="lx-combobox__control" @click="open">
-			<div v-if="showTags && selectedValues.length > 0" class="lx-combobox__tags">
+			<div class="lx-combobox__control" @click="open">
+				<div v-if="showTags && selectedValues.length > 0" class="lx-combobox__tags">
 				<button
 					v-for="value in selectedValues"
 					:key="value"
@@ -15,8 +15,9 @@
 					@click.stop="removeValue(value)"
 				>
 					{{ getOptionLabel(value) }} ×
-				</button>
-			</div>
+					</button>
+				</div>
+				<template v-else />
 
 			<div class="lx-combobox__selected" :class="{ 'is-inline': useInlineSearch }">
 				<div class="lx-combobox__search" :class="{ 'is-inline': useInlineSearch }">
@@ -51,6 +52,7 @@
 					</label>
 				</li>
 			</ul>
+			<template v-else />
 		</div>
 
 		<ul
@@ -98,6 +100,7 @@
 				No results
 			</li>
 		</ul>
+		<template v-else />
 	</div>
 </template>
 
@@ -139,14 +142,7 @@
 	const highlightedIndex = ref(-1);
 	const generatedId = `lx-combobox-${Math.random().toString(36).slice(2, 9)}`;
 
-	const inputId = computed(() => {
-		const attrId = attrs.id;
-		if (typeof attrId === 'string' && attrId.length > 0) {
-			return attrId;
-		}
-
-		return props.id || generatedId;
-	});
+	const inputId = computed(() => props.id || generatedId);
 	const inputName = computed(() => {
 		const attrName = attrs.name;
 		return typeof attrName === 'string' && attrName.length > 0 ? attrName : inputId.value;
@@ -215,7 +211,8 @@
 	const getOptionId = (index: number): string => `${listboxId.value}-option-${index}`;
 
 	const updateValues = (values: string[]): void => {
-		const nextValue: TLxComboboxModelValue = props.multiple ? values : (values[0] ?? '');
+		const [firstValue = ''] = values;
+		const nextValue: TLxComboboxModelValue = props.multiple ? values : firstValue;
 		model.value = nextValue;
 		emit('change', nextValue);
 	};
@@ -268,7 +265,7 @@
 		const next = current === -1
 			? (direction === 1 ? 0 : enabled.length - 1)
 			: (current + direction + enabled.length) % enabled.length;
-		highlightedIndex.value = enabled[next]?.index ?? -1;
+		highlightedIndex.value = enabled[next]!.index;
 	};
 
 	const selectHighlighted = (): void => {

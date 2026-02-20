@@ -48,4 +48,43 @@ describe('LxSelect', () => {
 
 		expect(wrapper.find('select').attributes('aria-label')).toBe('Status');
 	});
+
+	it('uses generated id/name and default aria-label fallback', () => {
+		const wrapper = mount(LxSelect, {
+			props: {
+				options: [
+					{ label: 'One', value: '1', disabled: true },
+					{ label: 'Two', value: '2' },
+				],
+				size: 'sm',
+			},
+		});
+
+		const select = wrapper.find('select');
+		const generatedId = select.attributes('id');
+		expect(generatedId).toMatch(/^lx-select-/);
+		expect(select.attributes('name')).toBe(generatedId);
+		expect(select.attributes('aria-label')).toBe('Select option');
+		expect(wrapper.classes()).toContain('lx-select--sm');
+		expect(select.findAll('option')[0]?.attributes('disabled')).toBeDefined();
+	});
+
+	it('prefers explicit name attr and supports lg size class', () => {
+		const wrapper = mount(LxSelect, {
+			attrs: {
+				name: 'statusName',
+			},
+			props: {
+				modelValue: 'draft',
+				size: 'lg',
+				options: [
+					{ label: 'Draft', value: 'draft' },
+					{ label: 'Published', value: 'published' },
+				],
+			},
+		});
+
+		expect(wrapper.find('select').attributes('name')).toBe('statusName');
+		expect(wrapper.classes()).toContain('lx-select--lg');
+	});
 });

@@ -24,4 +24,46 @@ describe('LxDateRangePicker', () => {
 		expect(updatedValue?.[0]).toBeInstanceOf(Date);
 		expect(updatedValue?.[1]).toBeInstanceOf(Date);
 	});
+
+	it('clears start and end values when inputs are emptied', async () => {
+		const wrapper = mount(LxDateRangePicker, {
+			props: {
+				modelValue: [
+					new Date(2026, 1, 1),
+					new Date(2026, 1, 10),
+				],
+			},
+		});
+
+		const api = (wrapper.vm as {
+			$: {
+				setupState: {
+					startDate: string,
+					endDate: string,
+				},
+			},
+		}).$.setupState;
+
+		api.endDate = '';
+		api.startDate = '';
+		await wrapper.vm.$nextTick();
+
+		const updatedValue = wrapper.emitted('update:modelValue')?.at(-1)?.[0] as Date[] | undefined;
+		expect(updatedValue).toEqual([]);
+	});
+
+	it('parses invalid date inputs safely', () => {
+		const wrapper = mount(LxDateRangePicker);
+		const api = (wrapper.vm as {
+			$: {
+				setupState: {
+					parseDateFromInput: (value: string) => Date | undefined,
+				},
+			},
+		}).$.setupState;
+
+		expect(api.parseDateFromInput('2026-00-12')).toBeUndefined();
+		expect(api.parseDateFromInput('Infinity-01-01')).toBeUndefined();
+		expect(api.parseDateFromInput('2026-12-31')).toBeInstanceOf(Date);
+	});
 });
