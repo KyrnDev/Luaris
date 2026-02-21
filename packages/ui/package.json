@@ -21,6 +21,10 @@
 			"types": "./dist/components/avatar/index.d.ts",
 			"import": "./dist/components/avatar/index.js"
 		},
+		"./components/alert": {
+			"types": "./dist/components/alert/index.d.ts",
+			"import": "./dist/components/alert/index.js"
+		},
 		"./components/accordion": {
 			"types": "./dist/components/accordion/index.d.ts",
 			"import": "./dist/components/accordion/index.js"
@@ -60,6 +64,14 @@
 		"./components/comparison": {
 			"types": "./dist/components/comparison/index.d.ts",
 			"import": "./dist/components/comparison/index.js"
+		},
+		"./components/confirm-modal": {
+			"types": "./dist/components/confirm-modal/index.d.ts",
+			"import": "./dist/components/confirm-modal/index.js"
+		},
+		"./components/context-menu": {
+			"types": "./dist/components/context-menu/index.d.ts",
+			"import": "./dist/components/context-menu/index.js"
 		},
 		"./components/data-table": {
 			"types": "./dist/components/data-table/index.d.ts",
@@ -101,9 +113,21 @@
 			"types": "./dist/components/dropdown/index.d.ts",
 			"import": "./dist/components/dropdown/index.js"
 		},
+		"./components/empty-state": {
+			"types": "./dist/components/empty-state/index.d.ts",
+			"import": "./dist/components/empty-state/index.js"
+		},
+		"./components/file-upload": {
+			"types": "./dist/components/file-upload/index.d.ts",
+			"import": "./dist/components/file-upload/index.js"
+		},
 		"./components/flex": {
 			"types": "./dist/components/flex/index.d.ts",
 			"import": "./dist/components/flex/index.js"
+		},
+		"./components/form-field": {
+			"types": "./dist/components/form-field/index.d.ts",
+			"import": "./dist/components/form-field/index.js"
 		},
 		"./components/icon": {
 			"types": "./dist/components/icon/index.d.ts",
@@ -124,6 +148,18 @@
 		"./components/number-input": {
 			"types": "./dist/components/number-input/index.d.ts",
 			"import": "./dist/components/number-input/index.js"
+		},
+		"./components/list": {
+			"types": "./dist/components/list/index.d.ts",
+			"import": "./dist/components/list/index.js"
+		},
+		"./components/list-item": {
+			"types": "./dist/components/list-item/index.d.ts",
+			"import": "./dist/components/list-item/index.js"
+		},
+		"./components/pagination": {
+			"types": "./dist/components/pagination/index.d.ts",
+			"import": "./dist/components/pagination/index.js"
 		},
 		"./components/progress": {
 			"types": "./dist/components/progress/index.d.ts",
@@ -156,6 +192,10 @@
 		"./components/spinner": {
 			"types": "./dist/components/spinner/index.d.ts",
 			"import": "./dist/components/spinner/index.js"
+		},
+		"./components/stat": {
+			"types": "./dist/components/stat/index.d.ts",
+			"import": "./dist/components/stat/index.js"
 		},
 		"./components/stepper": {
 			"types": "./dist/components/stepper/index.d.ts",
@@ -201,6 +241,10 @@
 			"types": "./dist/components/timeline-item/index.d.ts",
 			"import": "./dist/components/timeline-item/index.js"
 		},
+		"./components/table": {
+			"types": "./dist/components/table/index.d.ts",
+			"import": "./dist/components/table/index.js"
+		},
 		"./components/toast": {
 			"types": "./dist/components/toast/index.d.ts",
 			"import": "./dist/components/toast/index.js"
@@ -212,6 +256,14 @@
 		"./components/tooltip": {
 			"types": "./dist/components/tooltip/index.d.ts",
 			"import": "./dist/components/tooltip/index.js"
+		},
+		"./components/tree": {
+			"types": "./dist/components/tree/index.d.ts",
+			"import": "./dist/components/tree/index.js"
+		},
+		"./components/tree-item": {
+			"types": "./dist/components/tree-item/index.d.ts",
+			"import": "./dist/components/tree-item/index.js"
 		},
 		"./composables": {
 			"types": "./dist/composables/index.d.ts",

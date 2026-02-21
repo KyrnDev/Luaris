@@ -727,6 +727,215 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Table
+			</h3>
+			<LxTable
+				caption="Simple project overview table"
+				:columns="simpleTableColumns"
+				:rows="simpleTableRows"
+				striped
+				hoverable
+				@row-click="onTableRowClick"
+			>
+				<template #cell-status="{ value }">
+					<LxBadge
+						:text="String(value)"
+						:variant="value === 'Live' ? 'success' : (value === 'Review' ? 'warning' : 'secondary')"
+					/>
+				</template>
+			</LxTable>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Tree
+			</h3>
+			<div class="lx-kitchen-sink__tree-stack">
+				<LxTree v-model="selectedTreeNodes" :items="treeItems" multiple>
+					<template #item="{ node }">
+						<span>{{ node.label }}</span>
+					</template>
+				</LxTree>
+				<p class="lx-kitchen-sink__muted">
+					Selected nodes: {{ selectedTreeNodes.join(', ') || 'none' }}
+				</p>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Context Menu
+			</h3>
+			<LxContextMenu :items="contextMenuItems" @select="onContextMenuSelect">
+				<div class="lx-kitchen-sink__context-target">
+					Right click this panel to open actions.
+				</div>
+			</LxContextMenu>
+			<p class="lx-kitchen-sink__muted">
+				Last action: {{ selectedContextAction || 'none' }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Empty State
+			</h3>
+			<div class="lx-kitchen-sink__empty-grid">
+				<LxEmptyState
+					title="No deployments yet"
+					description="Create your first deployment target to begin releasing updates."
+					icon="rocket-launch"
+					variant="info"
+				>
+					<template #actions>
+						<LxButton size="sm" variant="primary">
+							Create deployment
+						</LxButton>
+					</template>
+				</LxEmptyState>
+				<LxEmptyState
+					title="No alerts"
+					description="Everything is quiet for now."
+					icon="circle-check"
+					variant="success"
+				/>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Stat
+			</h3>
+			<div class="lx-kitchen-sink__stat-grid">
+				<LxStat label="Monthly Revenue" value="£84,320" delta="+12.4%" trend="up" help-text="Compared with last month" />
+				<LxStat label="Incidents" value="3" delta="-2 from last week" trend="down" />
+				<LxStat label="Avg. Response Time" value="124ms" help-text="Across EU regions" />
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Alert
+			</h3>
+			<div class="lx-kitchen-sink__alert-stack">
+				<LxAlert
+					title="Informational update"
+					text="A scheduled deployment is queued for later today."
+					variant="info"
+				>
+					<template #actions>
+						<LxButton variant="ghost" size="xs">
+							View
+						</LxButton>
+					</template>
+				</LxAlert>
+				<LxAlert
+					title="Warning"
+					text="One environment is running an outdated schema."
+					variant="warning"
+					dismissible
+				/>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Pagination
+			</h3>
+			<LxPagination
+				v-model="paginationPage"
+				:total="tableRows.length"
+				:page-size="paginationPageSize"
+				:max-buttons="7"
+				:show-page-size="true"
+				:page-size-options="[5, 10, 25]"
+				@update:page-size="onPageSizeChange"
+			/>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				File Upload
+			</h3>
+			<LxFileUpload
+				v-model="uploadedFiles"
+				:multiple="true"
+				:max-files="4"
+				:max-size="1048576"
+				@error="onUploadError"
+			>
+				Drop files here or choose files
+			</LxFileUpload>
+			<p class="lx-kitchen-sink__muted">
+				Files selected: {{ uploadedFiles.length }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Confirm Modal
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxButton variant="danger" size="sm" @click="confirmModalOpen = true">
+					Open Confirm Modal
+				</LxButton>
+			</div>
+			<LxConfirmModal
+				v-model="confirmModalOpen"
+				title="Delete release"
+				message="This action cannot be undone. Are you sure you want to continue?"
+				confirm-label="Delete"
+				cancel-label="Keep release"
+				confirm-variant="danger"
+				@confirm="onConfirmModal"
+				@cancel="onCancelModal"
+			/>
+			<p class="lx-kitchen-sink__muted">
+				Last confirm action: {{ confirmModalResult }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				List
+			</h3>
+			<LxList divided>
+				<LxListItem
+					v-for="item in listItems"
+					:key="item.value"
+					:value="item.value"
+					clickable
+					:selected="selectedListItem === item.value"
+					@select="selectedListItem = $event"
+				>
+					{{ item.label }}
+				</LxListItem>
+			</LxList>
+			<p class="lx-kitchen-sink__muted">
+				Selected item: {{ selectedListItem || 'none' }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Form Field
+			</h3>
+			<div class="lx-kitchen-sink__form-field-grid">
+				<LxFormField label="Project name" help-text="Used across deployments." required>
+					<template #default="{ fieldId }">
+						<LxInput :id="fieldId" v-model="formFieldProjectName" placeholder="Luaris Platform" />
+					</template>
+				</LxFormField>
+				<LxFormField label="Environment" display="inline" error="Environment is required.">
+					<template #default="{ fieldId }">
+						<LxSelect :id="fieldId" v-model="formFieldEnvironment" :options="environmentOptions" />
+					</template>
+				</LxFormField>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Dropdown
 			</h3>
 			<LxFlex gap="var(--lx-size-space-md)">
@@ -1163,6 +1372,7 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
 	import { LxAvatar } from '../avatar';
+	import { LxAlert } from '../alert';
 	import { LxAccordion } from '../accordion';
 	import { LxBadge } from '../badge';
 	import { LxBreadcrumbs } from '../breadcrumbs';
@@ -1170,7 +1380,10 @@
 	import type { TLxButtonSize, TLxButtonVariant } from '../button';
 	import { LxCard } from '../card';
 	import { LxCombobox } from '../combobox';
+	import { LxConfirmModal } from '../confirm-modal';
 	import { LxComparison } from '../comparison';
+	import { LxContextMenu } from '../context-menu';
+	import type { ILxContextMenuItem } from '../context-menu';
 	import { LxDataTable } from '../data-table';
 	import type { ILxDataTableColumn } from '../data-table';
 	import { LxColourPicker } from '../colour-picker';
@@ -1182,24 +1395,33 @@
 	import { LxDrawer } from '../drawer';
 	import type { TLxDrawerAnimation, TLxDrawerSide } from '../drawer';
 	import { LxDropdown } from '../dropdown';
+	import { LxEmptyState } from '../empty-state';
+	import { LxFileUpload } from '../file-upload';
 	import { LxFlex } from '../flex';
+	import { LxFormField } from '../form-field';
 	import { LxIcon } from '../icon';
 	import { LxIconPicker } from '../icon-picker';
 	import type { ILxIconPickerValue } from '../icon-picker';
 	import { LxInput } from '../input';
 	import { LxLabel } from '../label';
+	import { LxList } from '../list';
+	import { LxListItem } from '../list-item';
 	import { LxModal } from '../modal';
 	import type { TLxModalAnimation, TLxModalPosition } from '../modal';
 	import { LxNumberInput } from '../number-input';
+	import { LxPagination } from '../pagination';
 	import { LxPopover } from '../popover';
 	import { LxSelect } from '../select';
 	import { LxSkeleton } from '../skeleton';
 	import { LxSlider } from '../slider';
 	import { LxSpinner } from '../spinner';
+	import { LxStat } from '../stat';
 	import { LxSwitch } from '../switch';
 	import { LxStepper } from '../stepper';
 	import { LxTab } from '../tab';
 	import { LxTag } from '../tag';
+	import { LxTable } from '../table';
+	import type { ILxTableColumn } from '../table';
 	import { LxTabs } from '../tabs';
 	import { LxTextarea } from '../textarea';
 	import { LxTimeline } from '../timeline';
@@ -1209,6 +1431,8 @@
 	import type { TLxToastVariant } from '../toast';
 	import type { ILxToastsItem } from '../toasts';
 	import { LxToasts } from '../toasts';
+	import { LxTree } from '../tree';
+	import type { ILxTreeNode } from '../tree';
 	import type { ILxKitchenSinkToken } from './types';
 	import { LxCarousel } from '../carousel';
 	import { LxProgress } from '../progress';
@@ -1322,6 +1546,13 @@
 		region: string,
 		revenue: number,
 		lastLogin: string,
+	}
+
+	interface IKitchenSinkSimpleRow {
+		id: number,
+		project: string,
+		owner: string,
+		status: 'Live' | 'Review' | 'Draft',
 	}
 
 	const tableColumnsBuiltIn: ILxDataTableColumn<IKitchenSinkTableRow>[] = [
@@ -1447,6 +1678,60 @@
 		{ id: 10, name: 'Elena Popov', role: 'Finance Partner', status: 'active', billable: true, region: 'Romania', revenue: 20110, lastLogin: '2026-02-10' },
 	];
 
+	const simpleTableColumns: ILxTableColumn[] = [
+		{ key: 'project', label: 'Project', align: 'left', width: '35%' },
+		{ key: 'owner', label: 'Owner', align: 'left', width: '35%' },
+		{ key: 'status', label: 'Status', align: 'center', width: '30%' },
+	];
+
+	const simpleTableRows: IKitchenSinkSimpleRow[] = [
+		{ id: 1, project: 'Luaris Dashboard', owner: 'Maya Evans', status: 'Live' },
+		{ id: 2, project: 'Runtime API', owner: 'Luca Bianchi', status: 'Review' },
+		{ id: 3, project: 'Design Tokens', owner: 'Sofia Lind', status: 'Draft' },
+	];
+
+	const treeItems: ILxTreeNode[] = [
+		{
+			id: 'platform',
+			label: 'Platform',
+			icon: 'layer-group',
+			expanded: true,
+			children: [
+				{ id: 'platform-ui', label: 'UI Library', icon: 'palette' },
+				{ id: 'platform-runtime', label: 'Runtime', icon: 'bolt' },
+			],
+		},
+		{
+			id: 'apps',
+			label: 'Applications',
+			icon: 'window-maximize',
+			children: [
+				{ id: 'apps-web', label: 'Web App', icon: 'globe' },
+				{ id: 'apps-admin', label: 'Admin Console', icon: 'sliders' },
+			],
+		},
+	];
+
+	const contextMenuItems: ILxContextMenuItem[] = [
+		{ label: 'Rename', value: 'rename', icon: 'pen' },
+		{ label: 'Duplicate', value: 'duplicate', icon: 'copy' },
+		{ label: 'Archive', value: 'archive', icon: 'box-archive' },
+		{ label: 'Delete', value: 'delete', icon: 'trash', danger: true },
+	];
+
+	const listItems = [
+		{ label: 'Release notes', value: 'release-notes' },
+		{ label: 'Audit logs', value: 'audit-logs' },
+		{ label: 'Usage analytics', value: 'usage-analytics' },
+		{ label: 'Environment variables', value: 'environment-variables' },
+	];
+
+	const environmentOptions = [
+		{ label: 'Development', value: 'development' },
+		{ label: 'Staging', value: 'staging' },
+		{ label: 'Production', value: 'production' },
+	];
+
 	const inputValue = ref('');
 	const searchValue = ref('');
 	const errorValue = ref('');
@@ -1502,6 +1787,16 @@
 		alpha: 0.85,
 	});
 	const textareaValue = ref('This is a sample textarea value.');
+	const selectedTreeNodes = ref<string[]>(['platform-ui']);
+	const selectedContextAction = ref('');
+	const paginationPage = ref(1);
+	const paginationPageSize = ref(25);
+	const uploadedFiles = ref<File[]>([]);
+	const confirmModalOpen = ref(false);
+	const confirmModalResult = ref('none');
+	const selectedListItem = ref('release-notes');
+	const formFieldProjectName = ref('Luaris Platform');
+	const formFieldEnvironment = ref('development');
 
 	const onDropdownSelect = (value: string | number): void => {
 		selectedAction.value = String(value);
@@ -1509,6 +1804,30 @@
 
 	const onTagRemove = (): void => {
 		selectedAction.value = 'tag removed';
+	};
+
+	const onTableRowClick = (row: { project?: unknown }): void => {
+		selectedAction.value = `table:${String(row.project ?? 'unknown')}`;
+	};
+
+	const onContextMenuSelect = (item: ILxContextMenuItem): void => {
+		selectedContextAction.value = item.label;
+	};
+
+	const onPageSizeChange = (pageSize: number): void => {
+		paginationPageSize.value = pageSize;
+	};
+
+	const onUploadError = (message: string): void => {
+		selectedAction.value = `upload-error:${message}`;
+	};
+
+	const onConfirmModal = (): void => {
+		confirmModalResult.value = 'confirmed';
+	};
+
+	const onCancelModal = (): void => {
+		confirmModalResult.value = 'cancelled';
 	};
 
 	const openDrawerPreset = (side: TLxDrawerSide, animation: TLxDrawerAnimation): void => {
@@ -1731,6 +2050,28 @@
 	.lx-kitchen-sink__table-stack {
 		display: grid;
 		gap: var(--lx-size-space-lg);
+	}
+
+	.lx-kitchen-sink__tree-stack,
+	.lx-kitchen-sink__alert-stack {
+		display: grid;
+		gap: var(--lx-size-space-md);
+	}
+
+	.lx-kitchen-sink__empty-grid,
+	.lx-kitchen-sink__stat-grid,
+	.lx-kitchen-sink__form-field-grid {
+		display: grid;
+		gap: var(--lx-size-space-md);
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	}
+
+	.lx-kitchen-sink__context-target {
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) dashed var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		color: var(--lx-colour-surface-text-muted);
+		padding: var(--lx-size-space-lg);
 	}
 
 	.lx-kitchen-sink__table-name {

@@ -315,10 +315,10 @@
 			return null;
 		}
 
-		const families = entry.families?.length
+		const families = (entry.families?.length
 			? entry.families
-			: (styles.includes('brands') ? ['brands'] : ['classic']);
-		const licences = entry.licences?.length ? entry.licences : ['free', 'pro'];
+			: (styles.includes('brands') ? ['brands'] : ['classic'])) as TLxIconPickerFamily[];
+		const licences = (entry.licences?.length ? entry.licences : ['free', 'pro']) as TLxIconPickerLicence[];
 		const styleSources = entry.styleSources || Object.fromEntries(
 			styles.map(style => [style, [...licences]]),
 		) as Partial<Record<TLxIconStyle, TLxIconPickerLicence[]>>;

@@ -26,7 +26,7 @@
 
 <script setup lang='ts'>
 	import { computed, nextTick, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
-	import type { VNode } from 'vue';
+	import type { ComponentPublicInstance, VNode } from 'vue';
 	import { LxCard } from '../card';
 	import { LxTag } from '../tag';
 	import { LxTimelineItem } from '../timeline-item';
@@ -101,7 +101,7 @@
 		rootElement.style.setProperty('--lx-timeline-overview-width', `${maxWidth}px`);
 	};
 
-	const setOverviewRef = (element: Element | null, index: number): void => {
+	const setOverviewRef = (element: Element | ComponentPublicInstance | null, index: number): void => {
 		overviewRefs.value[index] = element instanceof HTMLElement ? element : null;
 	};
 
