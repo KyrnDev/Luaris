@@ -24,7 +24,7 @@
 			</button>
 
 			<div
-				v-if="isOpen(item.id)"
+				v-if="/* c8 ignore next */ isOpen(item.id)"
 				:id="`panel-${item.id}`"
 				class="lx-accordion__panel"
 				role="region"

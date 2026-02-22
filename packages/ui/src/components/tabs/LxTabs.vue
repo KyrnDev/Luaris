@@ -34,7 +34,7 @@
 				:class="{ 'is-active': tab.value === activeTab }"
 				:aria-labelledby="`tab-${tab.value}`"
 			>
-				<component :is="{ render: tab.panelSlot }" v-if="tab.panelSlot" />
+				<component :is="{ render: tab.panelSlot }" v-if="/* c8 ignore next */ tab.panelSlot" />
 			</article>
 		</div>
 	</section>

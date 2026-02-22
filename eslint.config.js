@@ -240,6 +240,7 @@ export default config({
 	],
 	rules: {
 		'test/prefer-lowercase-title': 0,
+		'ts/naming-convention': 0,
 	},
 },
 );

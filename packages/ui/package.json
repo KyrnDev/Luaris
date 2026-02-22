@@ -25,6 +25,10 @@
 			"types": "./dist/components/alert/index.d.ts",
 			"import": "./dist/components/alert/index.js"
 		},
+		"./components/auto-complete": {
+			"types": "./dist/components/auto-complete/index.d.ts",
+			"import": "./dist/components/auto-complete/index.js"
+		},
 		"./components/accordion": {
 			"types": "./dist/components/accordion/index.d.ts",
 			"import": "./dist/components/accordion/index.js"
@@ -57,9 +61,17 @@
 			"types": "./dist/components/card/index.d.ts",
 			"import": "./dist/components/card/index.js"
 		},
+		"./components/calendar": {
+			"types": "./dist/components/calendar/index.d.ts",
+			"import": "./dist/components/calendar/index.js"
+		},
 		"./components/carousel": {
 			"types": "./dist/components/carousel/index.d.ts",
 			"import": "./dist/components/carousel/index.js"
+		},
+		"./components/command-palette": {
+			"types": "./dist/components/command-palette/index.d.ts",
+			"import": "./dist/components/command-palette/index.js"
 		},
 		"./components/comparison": {
 			"types": "./dist/components/comparison/index.d.ts",
@@ -157,9 +169,37 @@
 			"types": "./dist/components/list-item/index.d.ts",
 			"import": "./dist/components/list-item/index.js"
 		},
+		"./components/markdown-editor": {
+			"types": "./dist/components/markdown-editor/index.d.ts",
+			"import": "./dist/components/markdown-editor/index.js"
+		},
+		"./components/markdown-preview": {
+			"types": "./dist/components/markdown-preview/index.d.ts",
+			"import": "./dist/components/markdown-preview/index.js"
+		},
+		"./components/menu-bar": {
+			"types": "./dist/components/menu-bar/index.d.ts",
+			"import": "./dist/components/menu-bar/index.js"
+		},
+		"./components/menu-item": {
+			"types": "./dist/components/menu-item/index.d.ts",
+			"import": "./dist/components/menu-item/index.js"
+		},
+		"./components/mentions-input": {
+			"types": "./dist/components/mentions-input/index.d.ts",
+			"import": "./dist/components/mentions-input/index.js"
+		},
 		"./components/pagination": {
 			"types": "./dist/components/pagination/index.d.ts",
 			"import": "./dist/components/pagination/index.js"
+		},
+		"./components/otp-input": {
+			"types": "./dist/components/otp-input/index.d.ts",
+			"import": "./dist/components/otp-input/index.js"
+		},
+		"./components/pin-input": {
+			"types": "./dist/components/pin-input/index.d.ts",
+			"import": "./dist/components/pin-input/index.js"
 		},
 		"./components/progress": {
 			"types": "./dist/components/progress/index.d.ts",
@@ -177,6 +217,10 @@
 			"types": "./dist/components/rating/index.d.ts",
 			"import": "./dist/components/rating/index.js"
 		},
+		"./components/resizable": {
+			"types": "./dist/components/resizable/index.d.ts",
+			"import": "./dist/components/resizable/index.js"
+		},
 		"./components/select": {
 			"types": "./dist/components/select/index.d.ts",
 			"import": "./dist/components/select/index.js"
@@ -188,6 +232,14 @@
 		"./components/slider": {
 			"types": "./dist/components/slider/index.d.ts",
 			"import": "./dist/components/slider/index.js"
+		},
+		"./components/sortable": {
+			"types": "./dist/components/sortable/index.d.ts",
+			"import": "./dist/components/sortable/index.js"
+		},
+		"./components/split-pane": {
+			"types": "./dist/components/split-pane/index.d.ts",
+			"import": "./dist/components/split-pane/index.js"
 		},
 		"./components/spinner": {
 			"types": "./dist/components/spinner/index.d.ts",
@@ -264,6 +316,18 @@
 		"./components/tree-item": {
 			"types": "./dist/components/tree-item/index.d.ts",
 			"import": "./dist/components/tree-item/index.js"
+		},
+		"./components/virtual-list": {
+			"types": "./dist/components/virtual-list/index.d.ts",
+			"import": "./dist/components/virtual-list/index.js"
+		},
+		"./components/virtual-table": {
+			"types": "./dist/components/virtual-table/index.d.ts",
+			"import": "./dist/components/virtual-table/index.js"
+		},
+		"./components/hover-card": {
+			"types": "./dist/components/hover-card/index.d.ts",
+			"import": "./dist/components/hover-card/index.js"
 		},
 		"./composables": {
 			"types": "./dist/composables/index.d.ts",

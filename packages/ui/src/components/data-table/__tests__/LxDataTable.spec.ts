@@ -126,7 +126,7 @@ describe('LxDataTable', () => {
 				rows,
 			},
 			slots: {
-				// eslint-disable-next-line ts/naming-convention
+
 				'col-name': ({ value }) => h('strong', { class: 'name-cell' }, String(value).toUpperCase()),
 			},
 		});
@@ -239,7 +239,7 @@ describe('LxDataTable', () => {
 				rows,
 			},
 			slots: {
-				// eslint-disable-next-line ts/naming-convention
+
 				'filter-status': ({ filterModel }) => h('button', {
 					class: 'custom-filter',
 					onClick: () => {
@@ -385,7 +385,7 @@ describe('LxDataTable', () => {
 				rows,
 			},
 			slots: {
-				// eslint-disable-next-line ts/naming-convention
+
 				'filter-status': ({ clear }) => h('button', {
 					class: 'trigger-clear',
 					onClick: () => {

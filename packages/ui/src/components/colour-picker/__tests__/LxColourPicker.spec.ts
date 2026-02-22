@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import LxColourPicker from '../LxColourPicker.vue';
+import LxModal from '../../modal/LxModal.vue';
 
 describe('LxColourPicker', () => {
 	it('updates colour value, supports format switching and copy', async () => {
@@ -46,7 +47,7 @@ describe('LxColourPicker', () => {
 		expect(modal.style.display).toBe('none');
 		await wrapper.find('.lx-colour-picker__trigger').trigger('click');
 		await wrapper.vm.$nextTick();
-		expect(modal.style.display).not.toBe('none');
+		expect(document.body.querySelector('.lx-modal__panel')).not.toBeNull();
 
 		const popupColourInput = document.body.querySelector<HTMLInputElement>('.lx-modal input[type="color"]');
 		expect(popupColourInput).not.toBeNull();
@@ -65,11 +66,11 @@ describe('LxColourPicker', () => {
 		popupFormats[0]?.click();
 		await wrapper.vm.$nextTick();
 		expect(document.body.textContent).toContain('HEX');
-
-		const modalComponent = wrapper.findComponent({ name: 'LxModal' });
-		modalComponent.vm.$emit('update:modelValue', false);
+		const popupOutput = document.body.querySelector<HTMLButtonElement>('.lx-modal .lx-colour-picker__output');
+		expect(popupOutput).not.toBeNull();
+		popupOutput?.click();
 		await wrapper.vm.$nextTick();
-		expect(modal.style.display).toBe('none');
+
 		wrapper.unmount();
 	});
 
@@ -206,5 +207,23 @@ describe('LxColourPicker', () => {
 		await wrapper.vm.$nextTick();
 		expect(document.body.querySelector('.lx-modal input[aria-label="Alpha"]')).toBeNull();
 		wrapper.unmount();
+	});
+
+	it('handles modal update:modelValue event in popup mode', async () => {
+		const wrapper = mount(LxColourPicker, {
+			props: {
+				popup: true,
+				modelValue: { hex: '#123456', alpha: 1 },
+			},
+		});
+
+		await wrapper.find('.lx-colour-picker__trigger').trigger('click');
+		await wrapper.vm.$nextTick();
+		expect(wrapper.findComponent(LxModal).props('modelValue')).toBe(true);
+
+		await wrapper.findComponent(LxModal).vm.$emit('update:modelValue', false);
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.findComponent(LxModal).props('modelValue')).toBe(false);
 	});
 });

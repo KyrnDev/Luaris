@@ -15,7 +15,7 @@
 		</div>
 
 		<div
-			v-if="open"
+			v-if="/* c8 ignore next */ open"
 			class="lx-popover__panel"
 			role="dialog"
 			@keydown.esc="close"

@@ -926,11 +926,223 @@
 						<LxInput :id="fieldId" v-model="formFieldProjectName" placeholder="Luaris Platform" />
 					</template>
 				</LxFormField>
-				<LxFormField label="Environment" display="inline" error="Environment is required.">
+				<LxFormField
+					label="Environment"
+					display="inline"
+					required
+					:error="formFieldEnvironment ? '' : 'Environment is required.'"
+				>
 					<template #default="{ fieldId }">
 						<LxSelect :id="fieldId" v-model="formFieldEnvironment" :options="environmentOptions" />
 					</template>
 				</LxFormField>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Menu Bar / Menu Item
+			</h3>
+			<LxMenuBar v-model="activeMenuItem" :items="menuBarItems" />
+			<div class="lx-kitchen-sink__button-row">
+				<LxMenuItem label="Standalone Item" value="standalone" @select="activeMenuItem = $event" />
+				<LxMenuItem label="Disabled Item" value="disabled" :disabled="true" />
+			</div>
+			<p class="lx-kitchen-sink__muted">
+				Active menu item: {{ activeMenuItem }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Command Palette
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxButton variant="primary" size="sm" @click="commandPaletteOpen = true">
+					Open Command Palette
+				</LxButton>
+			</div>
+			<p class="lx-kitchen-sink__muted">
+				Last selected command: {{ selectedCommand || 'none' }}
+			</p>
+			<LxCommandPalette
+				v-model="commandPaletteOpen"
+				:items="commandPaletteItems"
+				@select="onCommandSelect"
+			/>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Auto Complete
+			</h3>
+			<div class="lx-kitchen-sink__form-grid">
+				<LxAutoComplete
+					v-model="autoCompleteValue"
+					:options="autoCompleteOptions"
+					placeholder="Search country..."
+					@select="onAutoCompleteSelect"
+				/>
+				<LxAutoComplete
+					v-model="autoCompleteStrictValue"
+					:options="autoCompleteOptions"
+					:min-chars="2"
+					placeholder="Type at least 2 characters"
+				/>
+			</div>
+			<p class="lx-kitchen-sink__muted">
+				Selected option: {{ selectedAutoCompleteOption || 'none' }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Virtual List
+			</h3>
+			<LxVirtualList :items="virtualListItems" :height="220" :item-height="36">
+				<template #item="{ item, index }">
+					<div class="lx-kitchen-sink__virtual-item">
+						<span>#{{ index + 1 }}</span>
+						<strong>{{ item }}</strong>
+					</div>
+				</template>
+			</LxVirtualList>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Virtual Table
+			</h3>
+			<LxVirtualTable
+				:columns="virtualTableColumns"
+				:rows="virtualTableRows"
+				:height="260"
+				:row-height="40"
+			>
+				<template #cell-status="{ value }">
+					<LxBadge :text="String(value)" :variant="value === 'active' ? 'success' : 'warning'" />
+				</template>
+			</LxVirtualTable>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Markdown
+			</h3>
+			<LxMarkdownEditor v-model="markdownValue" />
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Calendar
+			</h3>
+			<div class="lx-kitchen-sink__calendar-wrap">
+				<LxCalendar v-model="calendarValue" />
+			</div>
+			<p class="lx-kitchen-sink__muted">
+				Selected date: {{ calendarValue ? calendarValue.toLocaleDateString('en-GB') : 'none' }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Mentions Input
+			</h3>
+			<LxMentionsInput
+				v-model="mentionsValue"
+				:sources="mentionsSources"
+				:min-chars="1"
+				@mention="onMentionSelect"
+			/>
+			<p class="lx-kitchen-sink__muted">
+				Last mention: {{ selectedMention || 'none' }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Split Pane
+			</h3>
+			<LxSplitPane v-model="splitRatio" :min="20" :max="80">
+				<template #first>
+					<div class="lx-kitchen-sink__pane">
+						Left pane content
+					</div>
+				</template>
+				<template #second>
+					<div class="lx-kitchen-sink__pane">
+						Right pane content
+					</div>
+				</template>
+			</LxSplitPane>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				PIN / OTP Input
+			</h3>
+			<div class="lx-kitchen-sink__form-grid">
+				<div class="lx-kitchen-sink__stacked-control">
+					<LxPinInput v-model="pinValue" :length="4" />
+					<p class="lx-kitchen-sink__muted">
+						PIN: {{ pinValue || 'empty' }}
+					</p>
+				</div>
+				<div class="lx-kitchen-sink__stacked-control">
+					<LxOTPInput v-model="otpValue" :length="6" />
+					<p class="lx-kitchen-sink__muted">
+						OTP: {{ otpValue || 'empty' }}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Resizable
+			</h3>
+			<LxResizable v-model="resizableSize" :min-width="260" :min-height="150" :max-width="680" :max-height="360">
+				<div class="lx-kitchen-sink__pane">
+					Resize this panel using the corner handle.
+				</div>
+			</LxResizable>
+			<p class="lx-kitchen-sink__muted">
+				Size: {{ resizableSize.width }} x {{ resizableSize.height }}
+			</p>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Sortable
+			</h3>
+			<LxSortable v-model="sortableItems" item-key="id" children-key="children">
+				<template #item="{ item, level }">
+					<div class="lx-kitchen-sink__sortable-item">
+						<LxIcon name="grip-vertical" />
+						<span>{{ level === 1 ? 'Child:' : 'Parent:' }} {{ item.label }}</span>
+					</div>
+				</template>
+			</LxSortable>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
+				Hover Card
+			</h3>
+			<div class="lx-kitchen-sink__button-row">
+				<LxHoverCard placement="bottom">
+					<LxButton variant="secondary" size="sm">
+						Hover me
+					</LxButton>
+					<template #content>
+						<div class="lx-kitchen-sink__hover-content">
+							<strong>Environment status</strong>
+							<p class="lx-kitchen-sink__muted">
+								All systems operational, last deploy 09:30.
+							</p>
+						</div>
+					</template>
+				</LxHoverCard>
 			</div>
 		</section>
 
@@ -1374,12 +1586,17 @@
 	import { LxAvatar } from '../avatar';
 	import { LxAlert } from '../alert';
 	import { LxAccordion } from '../accordion';
+	import { LxAutoComplete } from '../auto-complete';
+	import type { ILxAutoCompleteOption } from '../auto-complete';
 	import { LxBadge } from '../badge';
 	import { LxBreadcrumbs } from '../breadcrumbs';
 	import { LxButton } from '../button';
 	import type { TLxButtonSize, TLxButtonVariant } from '../button';
+	import { LxCalendar } from '../calendar';
 	import { LxCard } from '../card';
 	import { LxCombobox } from '../combobox';
+	import { LxCommandPalette } from '../command-palette';
+	import type { ILxCommandPaletteItem } from '../command-palette';
 	import { LxConfirmModal } from '../confirm-modal';
 	import { LxComparison } from '../comparison';
 	import { LxContextMenu } from '../context-menu';
@@ -1406,14 +1623,27 @@
 	import { LxLabel } from '../label';
 	import { LxList } from '../list';
 	import { LxListItem } from '../list-item';
+	import { LxHoverCard } from '../hover-card';
+	import { LxMarkdownEditor } from '../markdown-editor';
+	import { LxMenuBar } from '../menu-bar';
+	import type { ILxMenuBarItem } from '../menu-bar';
+	import { LxMenuItem } from '../menu-item';
+	import { LxMentionsInput } from '../mentions-input';
+	import type { ILxMentionsSource } from '../mentions-input';
 	import { LxModal } from '../modal';
 	import type { TLxModalAnimation, TLxModalPosition } from '../modal';
 	import { LxNumberInput } from '../number-input';
+	import { LxOTPInput } from '../otp-input';
 	import { LxPagination } from '../pagination';
+	import { LxPinInput } from '../pin-input';
 	import { LxPopover } from '../popover';
+	import { LxResizable } from '../resizable';
+	import type { ILxResizableSize } from '../resizable';
 	import { LxSelect } from '../select';
 	import { LxSkeleton } from '../skeleton';
 	import { LxSlider } from '../slider';
+	import { LxSortable } from '../sortable';
+	import { LxSplitPane } from '../split-pane';
 	import { LxSpinner } from '../spinner';
 	import { LxStat } from '../stat';
 	import { LxSwitch } from '../switch';
@@ -1421,7 +1651,7 @@
 	import { LxTab } from '../tab';
 	import { LxTag } from '../tag';
 	import { LxTable } from '../table';
-	import type { ILxTableColumn } from '../table';
+	import type { ILxTableColumn, ILxTableRow } from '../table';
 	import { LxTabs } from '../tabs';
 	import { LxTextarea } from '../textarea';
 	import { LxTimeline } from '../timeline';
@@ -1433,6 +1663,9 @@
 	import { LxToasts } from '../toasts';
 	import { LxTree } from '../tree';
 	import type { ILxTreeNode } from '../tree';
+	import { LxVirtualList } from '../virtual-list';
+	import { LxVirtualTable } from '../virtual-table';
+	import type { ILxVirtualTableColumn } from '../virtual-table';
 	import type { ILxKitchenSinkToken } from './types';
 	import { LxCarousel } from '../carousel';
 	import { LxProgress } from '../progress';
@@ -1548,11 +1781,24 @@
 		lastLogin: string,
 	}
 
-	interface IKitchenSinkSimpleRow {
+	interface IKitchenSinkSimpleRow extends ILxTableRow {
 		id: number,
 		project: string,
 		owner: string,
 		status: 'Live' | 'Review' | 'Draft',
+	}
+
+	interface IKitchenSinkVirtualTableRow extends Record<string, unknown> {
+		id: number,
+		name: string,
+		team: string,
+		status: 'active' | 'review',
+	}
+
+	interface IKitchenSinkSortableItem {
+		id: number,
+		label: string,
+		children?: IKitchenSinkSortableItem[],
 	}
 
 	const tableColumnsBuiltIn: ILxDataTableColumn<IKitchenSinkTableRow>[] = [
@@ -1694,20 +1940,95 @@
 		{
 			id: 'platform',
 			label: 'Platform',
-			icon: 'layer-group',
+			icon: 'folder-open',
 			expanded: true,
 			children: [
-				{ id: 'platform-ui', label: 'UI Library', icon: 'palette' },
-				{ id: 'platform-runtime', label: 'Runtime', icon: 'bolt' },
+				{
+					id: 'platform-ui',
+					label: 'UI Library',
+					icon: 'folder',
+					expanded: true,
+					children: [
+						{
+							id: 'platform-ui-components',
+							label: 'Components',
+							icon: 'folder',
+							expanded: true,
+							children: [
+								{ id: 'platform-ui-components-inputs', label: 'Inputs', icon: 'file' },
+								{ id: 'platform-ui-components-feedback', label: 'Feedback', icon: 'file' },
+								{
+									id: 'platform-ui-components-data',
+									label: 'Data Display',
+									icon: 'folder',
+									children: [
+										{ id: 'platform-ui-components-data-table', label: 'LxDataTable', icon: 'table' },
+										{ id: 'platform-ui-components-data-tree', label: 'LxTree', icon: 'sitemap' },
+									],
+								},
+							],
+						},
+						{
+							id: 'platform-ui-tokens',
+							label: 'Theme Tokens',
+							icon: 'folder',
+							children: [
+								{ id: 'platform-ui-tokens-colour', label: 'Colour', icon: 'file' },
+								{ id: 'platform-ui-tokens-space', label: 'Spacing', icon: 'file' },
+							],
+						},
+					],
+				},
+				{
+					id: 'platform-runtime',
+					label: 'Runtime',
+					icon: 'folder',
+					children: [
+						{
+							id: 'platform-runtime-renderers',
+							label: 'Renderers',
+							icon: 'folder',
+							children: [
+								{ id: 'platform-runtime-renderers-vue', label: 'Vue Renderer', icon: 'file' },
+								{ id: 'platform-runtime-renderers-fallback', label: 'Fallback Renderer', icon: 'file' },
+							],
+						},
+					],
+				},
 			],
 		},
 		{
 			id: 'apps',
 			label: 'Applications',
-			icon: 'window-maximize',
+			icon: 'folder-open',
+			expanded: true,
 			children: [
-				{ id: 'apps-web', label: 'Web App', icon: 'globe' },
-				{ id: 'apps-admin', label: 'Admin Console', icon: 'sliders' },
+				{
+					id: 'apps-web',
+					label: 'Web App',
+					icon: 'folder',
+					children: [
+						{ id: 'apps-web-dashboard', label: 'Dashboard', icon: 'file' },
+						{ id: 'apps-web-docs', label: 'Docs', icon: 'file' },
+					],
+				},
+				{
+					id: 'apps-admin',
+					label: 'Admin Console',
+					icon: 'folder',
+					children: [
+						{ id: 'apps-admin-users', label: 'Users', icon: 'file' },
+						{
+							id: 'apps-admin-permissions',
+							label: 'Permissions',
+							icon: 'folder',
+							children: [
+								{ id: 'apps-admin-permissions-roles', label: 'Roles', icon: 'file' },
+								{ id: 'apps-admin-permissions-policies', label: 'Policies', icon: 'file' },
+							],
+						},
+					],
+				},
 			],
 		},
 	];
@@ -1730,6 +2051,70 @@
 		{ label: 'Development', value: 'development' },
 		{ label: 'Staging', value: 'staging' },
 		{ label: 'Production', value: 'production' },
+	];
+
+	const menuBarItems: ILxMenuBarItem[] = [
+		{ label: 'Overview', value: 'overview' },
+		{ label: 'Team', value: 'team' },
+		{ label: 'Deployments', value: 'deployments' },
+		{ label: 'Settings', value: 'settings' },
+	];
+
+	const commandPaletteItems: ILxCommandPaletteItem[] = [
+		{ label: 'Create Deployment', value: 'create-deployment', shortcut: '⌘⇧D', keywords: ['deploy', 'release'] },
+		{ label: 'Open Audit Logs', value: 'open-audit', shortcut: '⌘L', keywords: ['logs', 'audit'] },
+		{ label: 'Manage Team', value: 'manage-team', shortcut: '⌘T', keywords: ['users', 'members'] },
+		{ label: 'Open Settings', value: 'open-settings', shortcut: '⌘,', keywords: ['preferences'] },
+	];
+
+	const autoCompleteOptions: ILxAutoCompleteOption[] = [
+		{ label: 'Austria', value: 'at' },
+		{ label: 'Belgium', value: 'be' },
+		{ label: 'Denmark', value: 'dk' },
+		{ label: 'Finland', value: 'fi' },
+		{ label: 'Ireland', value: 'ie' },
+		{ label: 'Norway', value: 'no' },
+		{ label: 'Switzerland', value: 'ch' },
+	];
+
+	const virtualListItems = Array.from({ length: 240 }, (unused, index) => {
+		void unused;
+		return `Virtual list item ${index + 1}`;
+	});
+
+	const virtualTableColumns: ILxVirtualTableColumn[] = [
+		{ key: 'name', label: 'Name', width: '12rem' },
+		{ key: 'team', label: 'Team', width: '10rem' },
+		{ key: 'status', label: 'Status', width: '8rem', align: 'center' },
+	];
+
+	const virtualTableRows: IKitchenSinkVirtualTableRow[] = Array.from({ length: 160 }, (unused, index) => {
+		void unused;
+		return {
+			id: index + 1,
+			name: `User ${index + 1}`,
+			team: index % 2 === 0 ? 'Platform' : 'Runtime',
+			status: index % 3 === 0 ? 'review' : 'active',
+		};
+	});
+
+	const mentionsSources: ILxMentionsSource[] = [
+		{
+			trigger: '@',
+			items: [
+				{ label: 'danny', value: 'danny' },
+				{ label: 'maya', value: 'maya' },
+				{ label: 'luca', value: 'luca' },
+			],
+		},
+		{
+			trigger: '#',
+			items: [
+				{ label: 'release', value: 'release' },
+				{ label: 'incident', value: 'incident' },
+				{ label: 'roadmap', value: 'roadmap' },
+			],
+		},
 	];
 
 	const inputValue = ref('');
@@ -1797,6 +2182,42 @@
 	const selectedListItem = ref('release-notes');
 	const formFieldProjectName = ref('Luaris Platform');
 	const formFieldEnvironment = ref('development');
+	const activeMenuItem = ref('overview');
+	const commandPaletteOpen = ref(false);
+	const selectedCommand = ref('');
+	const autoCompleteValue = ref('');
+	const autoCompleteStrictValue = ref('');
+	const selectedAutoCompleteOption = ref('');
+	const markdownValue = ref(`# Luaris Notes\n\n| Title1 | Title2 |\n| - | - |\n| some data | some data |\n| some data | some data |\n\n- Token based design\n- Tree-shakeable exports\n- Strong TypeScript support`);
+	const calendarValue = ref<Date | null>(new Date(2026, 1, 21));
+	const mentionsValue = ref('Hey @da');
+	const selectedMention = ref('');
+	const splitRatio = ref(45);
+	const pinValue = ref('1234');
+	const otpValue = ref('');
+	const resizableSize = ref<ILxResizableSize>({
+		width: 420,
+		height: 240,
+	});
+	const sortableItems = ref<IKitchenSinkSortableItem[]>([
+		{
+			id: 1,
+			label: 'Collect requirements',
+			children: [
+				{ id: 11, label: 'Interview stakeholders' },
+				{ id: 12, label: 'Document goals' },
+			],
+		},
+		{ id: 2, label: 'Design interfaces' },
+		{
+			id: 3,
+			label: 'Build components',
+			children: [
+				{ id: 31, label: 'Implement primitives' },
+			],
+		},
+		{ id: 4, label: 'Run tests' },
+	]);
 
 	const onDropdownSelect = (value: string | number): void => {
 		selectedAction.value = String(value);
@@ -1828,6 +2249,18 @@
 
 	const onCancelModal = (): void => {
 		confirmModalResult.value = 'cancelled';
+	};
+
+	const onCommandSelect = (value: string): void => {
+		selectedCommand.value = value;
+	};
+
+	const onAutoCompleteSelect = (option: ILxAutoCompleteOption): void => {
+		selectedAutoCompleteOption.value = option.label;
+	};
+
+	const onMentionSelect = (payload: { trigger: string, option: { label: string } }): void => {
+		selectedMention.value = `${payload.trigger}${payload.option.label}`;
 	};
 
 	const openDrawerPreset = (side: TLxDrawerSide, animation: TLxDrawerAnimation): void => {
@@ -2072,6 +2505,45 @@
 		border-radius: var(--lx-size-radius-sm);
 		color: var(--lx-colour-surface-text-muted);
 		padding: var(--lx-size-space-lg);
+	}
+
+	.lx-kitchen-sink__virtual-item {
+		align-items: center;
+		border-bottom: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		display: flex;
+		gap: var(--lx-size-space-sm);
+		justify-content: space-between;
+	}
+
+	.lx-kitchen-sink__calendar-wrap {
+		max-width: 22rem;
+	}
+
+	.lx-kitchen-sink__pane {
+		align-items: center;
+		background: var(--lx-colour-surface-raised);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		display: flex;
+		justify-content: center;
+		min-height: 8rem;
+		padding: var(--lx-size-space-md);
+	}
+
+	.lx-kitchen-sink__stacked-control {
+		display: grid;
+		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__sortable-item {
+		align-items: center;
+		display: inline-flex;
+		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-kitchen-sink__hover-content {
+		display: grid;
+		gap: var(--lx-size-space-xs);
 	}
 
 	.lx-kitchen-sink__table-name {

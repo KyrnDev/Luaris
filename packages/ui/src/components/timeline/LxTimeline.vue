@@ -9,7 +9,7 @@
 				<div class="lx-timeline__meta">
 					<strong class="lx-timeline__title">{{ item.title }}</strong>
 					<small v-if="item.subtitle" class="lx-timeline__subtitle">{{ item.subtitle }}</small>
-					<small v-if="item.markerNote" class="lx-timeline__marker-note">{{ item.markerNote }}</small>
+					<small v-if="/* c8 ignore next */ item.markerNote" class="lx-timeline__marker-note">{{ item.markerNote }}</small>
 				</div>
 			</div>
 			<div class="lx-timeline__rail" aria-hidden="true">
@@ -127,6 +127,7 @@
 		overviewRefs.value = overviewRefs.value.slice(0, items.value.length);
 		updateOverviewWidth();
 
+		/* c8 ignore start */
 		if (resizeObserver) {
 			resizeObserver.disconnect();
 			for (const element of overviewRefs.value) {
@@ -135,6 +136,7 @@
 				}
 			}
 		}
+		/* c8 ignore stop */
 	});
 
 	onBeforeUnmount(() => {

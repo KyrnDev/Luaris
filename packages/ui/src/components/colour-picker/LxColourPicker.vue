@@ -73,7 +73,7 @@
 
 		<LxModal
 			v-if="props.popup"
-			v-model="popupOpen"
+			:model-value="popupOpen"
 			:title="props.popupTitle"
 			:position="props.popupPosition"
 			:animation="props.popupAnimation"
@@ -81,6 +81,7 @@
 			:max-width="props.popupMaxWidth"
 			:max-height="props.popupMaxHeight"
 			:show-close="true"
+			@update:model-value="value => { popupOpen = value; }"
 		>
 			<div class="lx-colour-picker__panel">
 				<div class="lx-colour-picker__top">

@@ -51,6 +51,10 @@
 </script>
 
 <style scoped lang='scss'>
+	.lx-tree-item {
+		list-style: none;
+	}
+
 	.lx-tree-item__row {
 		align-items: center;
 		display: grid;
