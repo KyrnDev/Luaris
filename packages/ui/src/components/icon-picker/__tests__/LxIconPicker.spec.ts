@@ -629,8 +629,7 @@ describe('LxIconPicker', () => {
 		api.confirmPopupSelection();
 		if (Array.isArray(api.selectedStyles)) {
 			api.selectedStyles = [];
-		}
-		else {
+		} else {
 			api.selectedStyles.value = [];
 		}
 		api.selectStyle('solid');
