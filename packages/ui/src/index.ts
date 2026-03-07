@@ -52,6 +52,7 @@ export * from './components/radio';
 export * from './components/radios';
 export * from './components/rating';
 export * from './components/resizable';
+export * from './components/rte';
 export * from './components/select';
 export * from './components/skeleton';
 export * from './components/slider';

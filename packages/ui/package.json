@@ -217,6 +217,10 @@
 			"types": "./dist/components/rating/index.d.ts",
 			"import": "./dist/components/rating/index.js"
 		},
+		"./components/rte": {
+			"types": "./dist/components/rte/index.d.ts",
+			"import": "./dist/components/rte/index.js"
+		},
 		"./components/resizable": {
 			"types": "./dist/components/resizable/index.d.ts",
 			"import": "./dist/components/resizable/index.js"

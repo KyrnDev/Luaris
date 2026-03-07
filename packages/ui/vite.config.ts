@@ -39,6 +39,7 @@ export default defineConfig({
 				'components/radio': resolve(__dirname, 'src/components/radio/index.ts'),
 				'components/radios': resolve(__dirname, 'src/components/radios/index.ts'),
 				'components/rating': resolve(__dirname, 'src/components/rating/index.ts'),
+				'components/rte': resolve(__dirname, 'src/components/rte/index.ts'),
 				'components/select': resolve(__dirname, 'src/components/select/index.ts'),
 				'components/skeleton': resolve(__dirname, 'src/components/skeleton/index.ts'),
 				'components/slider': resolve(__dirname, 'src/components/slider/index.ts'),

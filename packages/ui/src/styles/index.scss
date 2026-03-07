@@ -2,6 +2,7 @@
 @use './themes/light';
 @use './themes/dark';
 @use './themes/high-contrast';
+@use './utils/helpers' as utils;
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;500;700&family=Nunito:wght@400;500;600;700&display=swap');
 
@@ -67,4 +68,5 @@ samp {
 
 @layer lx-token-classes {
 	@include helpers.lx-emit-token-classes(light.$theme-light);
+	@include utils.lx-emit-utility-helpers();
 }

@@ -1,0 +1,172 @@
+@use 'sass:list';
+
+$lx-space-scales: (
+	'2xs',
+	'xs',
+	'sm',
+	'md',
+	'lg',
+	'xl',
+	'2xl',
+	'3xl',
+);
+
+$lx-size-scales: (
+	'2xs',
+	'xs',
+	'sm',
+	'md',
+	'lg',
+	'xl',
+	'2xl',
+);
+
+@mixin lx-emit-spacing-helpers($scales: $lx-space-scales) {
+	@each $scale in $scales {
+		$space-var: var(--lx-size-space-#{$scale});
+
+		.lx-padding--#{$scale} { padding: $space-var; }
+		.lx-padding-x--#{$scale} {
+			padding-left: $space-var;
+			padding-right: $space-var;
+		}
+		.lx-padding-y--#{$scale} {
+			padding-bottom: $space-var;
+			padding-top: $space-var;
+		}
+		.lx-padding-top--#{$scale} { padding-top: $space-var; }
+		.lx-padding-right--#{$scale} { padding-right: $space-var; }
+		.lx-padding-bottom--#{$scale} { padding-bottom: $space-var; }
+		.lx-padding-left--#{$scale} { padding-left: $space-var; }
+
+		.lx-margin--#{$scale} { margin: $space-var; }
+		.lx-margin-x--#{$scale} {
+			margin-left: $space-var;
+			margin-right: $space-var;
+		}
+		.lx-margin-y--#{$scale} {
+			margin-bottom: $space-var;
+			margin-top: $space-var;
+		}
+		.lx-margin-top--#{$scale} { margin-top: $space-var; }
+		.lx-margin-right--#{$scale} { margin-right: $space-var; }
+		.lx-margin-bottom--#{$scale} { margin-bottom: $space-var; }
+		.lx-margin-left--#{$scale} { margin-left: $space-var; }
+
+		.lx-gap--#{$scale} { gap: $space-var; }
+		.lx-row-gap--#{$scale} { row-gap: $space-var; }
+		.lx-column-gap--#{$scale} { column-gap: $space-var; }
+	}
+
+	.lx-padding--none { padding: 0; }
+	.lx-padding-x--none {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.lx-padding-y--none {
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+	.lx-margin--none { margin: 0; }
+	.lx-margin-auto { margin: auto; }
+	.lx-margin-x--auto {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.lx-margin-y--auto {
+		margin-bottom: auto;
+		margin-top: auto;
+	}
+	.lx-gap--none { gap: 0; }
+	.lx-row-gap--none { row-gap: 0; }
+	.lx-column-gap--none { column-gap: 0; }
+}
+
+@mixin lx-emit-layout-helpers() {
+	.lx-block { display: block; }
+	.lx-inline-block { display: inline-block; }
+	.lx-inline { display: inline; }
+	.lx-hidden { display: none; }
+
+	.lx-flex { display: flex; }
+	.lx-inline-flex { display: inline-flex; }
+	.lx-flex-1 { flex: 1 1 0%; }
+	.lx-flex-auto { flex: 1 1 auto; }
+	.lx-flex-none { flex: none; }
+	.lx-flex-wrap { flex-wrap: wrap; }
+	.lx-flex-nowrap { flex-wrap: nowrap; }
+	.lx-flex-wrap-reverse { flex-wrap: wrap-reverse; }
+	.lx-flex-direction--row { flex-direction: row; }
+	.lx-flex-direction--column { flex-direction: column; }
+	.lx-flex-direction--row-reverse { flex-direction: row-reverse; }
+	.lx-flex-direction--column-reverse { flex-direction: column-reverse; }
+
+	.lx-justify-content--start { justify-content: flex-start; }
+	.lx-justify-content--center { justify-content: center; }
+	.lx-justify-content--end { justify-content: flex-end; }
+	.lx-justify-content--between { justify-content: space-between; }
+	.lx-justify-content--around { justify-content: space-around; }
+	.lx-justify-content--evenly { justify-content: space-evenly; }
+
+	.lx-align-items--start { align-items: flex-start; }
+	.lx-align-items--center { align-items: center; }
+	.lx-align-items--end { align-items: flex-end; }
+	.lx-align-items--stretch { align-items: stretch; }
+	.lx-align-items--baseline { align-items: baseline; }
+
+	.lx-align-content--start { align-content: flex-start; }
+	.lx-align-content--center { align-content: center; }
+	.lx-align-content--end { align-content: flex-end; }
+	.lx-align-content--between { align-content: space-between; }
+	.lx-align-content--around { align-content: space-around; }
+	.lx-align-content--stretch { align-content: stretch; }
+
+	.lx-self--start { align-self: flex-start; }
+	.lx-self--center { align-self: center; }
+	.lx-self--end { align-self: flex-end; }
+	.lx-self--stretch { align-self: stretch; }
+	.lx-self--baseline { align-self: baseline; }
+
+	.lx-grid { display: grid; }
+	.lx-inline-grid { display: inline-grid; }
+	.lx-grid-auto-flow--row { grid-auto-flow: row; }
+	.lx-grid-auto-flow--column { grid-auto-flow: column; }
+	.lx-grid-auto-flow--dense { grid-auto-flow: dense; }
+	.lx-grid-auto-flow--row-dense { grid-auto-flow: row dense; }
+	.lx-grid-auto-flow--column-dense { grid-auto-flow: column dense; }
+
+	@for $col from 1 through 12 {
+		.lx-grid-cols--#{$col} { grid-template-columns: repeat(#{$col}, minmax(0, 1fr)); }
+		.lx-grid-rows--#{$col} { grid-template-rows: repeat(#{$col}, minmax(0, 1fr)); }
+		.lx-col-span--#{$col} { grid-column: span #{$col} / span #{$col}; }
+		.lx-row-span--#{$col} { grid-row: span #{$col} / span #{$col}; }
+	}
+
+	.lx-col-span--full { grid-column: 1 / -1; }
+	.lx-row-span--full { grid-row: 1 / -1; }
+}
+
+@mixin lx-emit-size-helpers($scales: $lx-size-scales) {
+	@each $scale in $scales {
+		.lx-rounded--#{$scale} {
+			border-radius: var(--lx-size-radius-#{$scale});
+		}
+
+		.lx-height--#{$scale} {
+			height: var(--lx-size-control-height-#{$scale});
+		}
+
+		.lx-min-height--#{$scale} {
+			min-height: var(--lx-size-control-height-#{$scale});
+		}
+	}
+
+	.lx-rounded--pill { border-radius: var(--lx-size-radius-pill); }
+	.lx-rounded--none { border-radius: 0; }
+}
+
+@mixin lx-emit-utility-helpers() {
+	@include lx-emit-spacing-helpers();
+	@include lx-emit-size-helpers();
+	@include lx-emit-layout-helpers();
+}

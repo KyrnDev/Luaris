@@ -21,15 +21,15 @@
 	const props = withDefaults(defineProps<ILxFlexProps>(), {
 		as: 'div',
 		gap: 'var(--lx-size-space-md)',
-		rowGap: undefined,
-		columnGap: undefined,
+		rowGap: 'var(--lx-size-space-md)',
+		columnGap: 'var(--lx-size-space-md)',
 		wrap: false,
 		inline: false,
 		column: false,
 		reverse: false,
 		direction: undefined,
-		align: undefined,
-		justify: undefined,
+		align: 'center',
+		justify: 'start',
 		fullWidth: false,
 	});
 

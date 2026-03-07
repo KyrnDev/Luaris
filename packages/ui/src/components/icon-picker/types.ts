@@ -33,6 +33,9 @@ export interface ILxIconRegistryItemNormalised {
 
 export interface ILxIconPickerProps {
 	registry?: ILxIconRegistryEntry[],
+	availableLicences?: TLxIconPickerLicence[],
+	availableFamilies?: TLxIconPickerFamily[],
+	availableStyles?: TLxIconStyle[],
 	placeholder?: string,
 	showSettings?: boolean,
 	pageSize?: number,

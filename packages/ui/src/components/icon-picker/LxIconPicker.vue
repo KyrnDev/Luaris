@@ -26,48 +26,6 @@
 				</span>
 			</div>
 
-			<details v-if="props.showSettings" class="lx-icon-picker__settings">
-				<summary>Display Settings</summary>
-				<div class="lx-icon-picker__settings-grid">
-					<fieldset class="lx-icon-picker__filter-group">
-						<legend>Licences</legend>
-						<label v-for="licence in licenceOptions" :key="licence">
-							<input
-								v-model="selectedLicences"
-								type="checkbox"
-								:value="licence"
-							>
-							{{ licence }}
-						</label>
-					</fieldset>
-
-					<fieldset class="lx-icon-picker__filter-group">
-						<legend>Families</legend>
-						<label v-for="family in familyOptions" :key="family">
-							<input
-								v-model="selectedFamilies"
-								type="checkbox"
-								:value="family"
-							>
-							{{ family }}
-						</label>
-					</fieldset>
-
-					<fieldset class="lx-icon-picker__filter-group">
-						<legend>Styles</legend>
-						<label v-for="style in styleOptions" :key="style">
-							<input
-								v-model="selectedStyles"
-								type="checkbox"
-								:value="style"
-							>
-							{{ style }}
-						</label>
-					</fieldset>
-				</div>
-			</details>
-			<template v-else />
-
 			<div
 				ref="gridRef"
 				class="lx-icon-picker__grid"
@@ -85,7 +43,7 @@
 					:title="toTitle(icon.name)"
 					@click="selectIcon(icon)"
 				>
-					<LxIcon :name="icon.name" :icon-style="activeStyleFor(icon)" size="lg" />
+					<LxIcon :name="icon.name" :icon-style="activeStyleFor(icon)" size="sm" />
 				</button>
 			</div>
 
@@ -144,48 +102,6 @@
 					</span>
 				</div>
 
-				<details v-if="props.showSettings" class="lx-icon-picker__settings">
-					<summary>Display Settings</summary>
-					<div class="lx-icon-picker__settings-grid">
-						<fieldset class="lx-icon-picker__filter-group">
-							<legend>Licences</legend>
-							<label v-for="licence in licenceOptions" :key="licence">
-								<input
-									v-model="selectedLicences"
-									type="checkbox"
-									:value="licence"
-								>
-								{{ licence }}
-							</label>
-						</fieldset>
-
-						<fieldset class="lx-icon-picker__filter-group">
-							<legend>Families</legend>
-							<label v-for="family in familyOptions" :key="family">
-								<input
-									v-model="selectedFamilies"
-									type="checkbox"
-									:value="family"
-								>
-								{{ family }}
-							</label>
-						</fieldset>
-
-						<fieldset class="lx-icon-picker__filter-group">
-							<legend>Styles</legend>
-							<label v-for="style in styleOptions" :key="style">
-								<input
-									v-model="selectedStyles"
-									type="checkbox"
-									:value="style"
-								>
-								{{ style }}
-							</label>
-						</fieldset>
-					</div>
-				</details>
-				<template v-else />
-
 				<div
 					ref="gridRef"
 					class="lx-icon-picker__grid"
@@ -203,7 +119,7 @@
 						:title="toTitle(icon.name)"
 						@click="selectIcon(icon)"
 					>
-						<LxIcon :name="icon.name" :icon-style="activeStyleFor(icon)" size="lg" />
+						<LxIcon :name="icon.name" :icon-style="activeStyleFor(icon)" size="sm" />
 					</button>
 				</div>
 
@@ -234,6 +150,17 @@
 					</div>
 				</section>
 				<template v-else />
+
+				<div class="lx-icon-picker__confirm">
+					<LxButton
+						variant="primary"
+						size="sm"
+						:disabled="!draftSelection"
+						@click="confirmPopupSelection"
+					>
+						Select Button
+					</LxButton>
+				</div>
 			</div>
 		</LxModal>
 		<template v-else />
@@ -258,8 +185,23 @@
 
 	const props = withDefaults(defineProps<ILxIconPickerProps>(), {
 		registry: () => faRegistry as ILxIconRegistryEntry[],
+		availableLicences: () => ['free', 'pro'],
+		availableFamilies: () => ['classic', 'sharp', 'brands'],
+		availableStyles: () => [
+			'solid',
+			'regular',
+			'brands',
+			'light',
+			'duotone',
+			'thin',
+			'sharp-solid',
+			'sharp-regular',
+			'sharp-light',
+			'sharp-thin',
+			'sharp-duotone',
+		] as TLxIconStyle[],
 		placeholder: 'Search icons',
-		showSettings: true,
+		showSettings: false,
 		columns: 5,
 		rows: 5,
 		popup: false,
@@ -276,33 +218,24 @@
 		default: null,
 	});
 
-	const SUPPORTED_STYLES: TLxIconStyle[] = [
-		'solid',
-		'regular',
-		'brands',
-		'light',
-		'duotone',
-		'thin',
-		'sharp-solid',
-		'sharp-regular',
-		'sharp-light',
-		'sharp-thin',
-		'sharp-duotone',
-	];
-
 	const popupOpen = ref(false);
+	const draftSelection = ref<ILxIconPickerValue | null>(null);
 	const gridRef = ref<HTMLElement | null>(null);
 	const gridColumns = ref(Math.max(1, props.columns));
 	let resizeObserver: ResizeObserver | null = null;
 	const query = ref('');
 	const currentPage = ref(1);
-	const selectedLicences = ref<TLxIconPickerLicence[]>(['free', 'pro']);
-	const selectedFamilies = ref<TLxIconPickerFamily[]>(['classic', 'sharp', 'brands']);
-	const selectedStyles = ref<TLxIconStyle[]>([...SUPPORTED_STYLES]);
+	const selectedLicences = ref<TLxIconPickerLicence[]>([...props.availableLicences]);
+	const selectedFamilies = ref<TLxIconPickerFamily[]>([...props.availableFamilies]);
+	const selectedStyles = ref<TLxIconStyle[]>([...props.availableStyles]);
 
-	const licenceOptions: TLxIconPickerLicence[] = ['free', 'pro'];
-	const familyOptions: TLxIconPickerFamily[] = ['classic', 'sharp', 'brands'];
-	const styleOptions = SUPPORTED_STYLES;
+	const styleOptions = computed<TLxIconStyle[]>(() => [...props.availableStyles]);
+
+	const normaliseSelection = <TOption extends string>(selected: TOption[], available: TOption[]): TOption[] => {
+		const availableSet = new Set(available);
+		const next = selected.filter(value => availableSet.has(value));
+		return next.length > 0 ? next : [...available];
+	};
 
 	const normaliseEntry = (entry: ILxIconRegistryEntry): ILxIconRegistryItemNormalised | null => {
 		const name = String(entry.name || entry.icon || '').trim();
@@ -310,7 +243,7 @@
 			return null;
 		}
 
-		const styles = (entry.styles || []).filter(style => styleOptions.includes(style));
+		const styles = (entry.styles || []).filter(style => styleOptions.value.includes(style));
 		if (styles.length === 0) {
 			return null;
 		}
@@ -318,7 +251,7 @@
 		const families = (entry.families?.length
 			? entry.families
 			: (styles.includes('brands') ? ['brands'] : ['classic'])) as TLxIconPickerFamily[];
-		const licences = (entry.licences?.length ? entry.licences : ['free', 'pro']) as TLxIconPickerLicence[];
+		const licences = (entry.licences?.length ? entry.licences : [...props.availableLicences]) as TLxIconPickerLicence[];
 		const styleSources = entry.styleSources || Object.fromEntries(
 			styles.map(style => [style, [...licences]]),
 		) as Partial<Record<TLxIconStyle, TLxIconPickerLicence[]>>;
@@ -339,8 +272,9 @@
 			.map(normaliseEntry)
 			.filter((entry): entry is ILxIconRegistryItemNormalised => entry !== null);
 	});
-	const selectedName = computed(() => model.value?.name || '');
-	const modelStyle = computed(() => model.value?.style || 'solid');
+	const selectedValue = computed(() => props.popup ? draftSelection.value : model.value);
+	const selectedName = computed(() => selectedValue.value?.name || '');
+	const modelStyle = computed(() => selectedValue.value?.style || 'solid');
 	const minimumRows = computed(() => props.popup ? 5 : 3);
 	const resolvedPageSize = computed(() => {
 		const dynamicTarget = gridColumns.value * minimumRows.value;
@@ -358,15 +292,44 @@
 			return;
 		}
 
-		const minTileSize = props.popup ? 56 : 48;
+		if (props.popup) {
+			gridColumns.value = 8;
+			return;
+		}
+
+		const minTileSize = 48;
 		const styles = window.getComputedStyle(gridElement);
 		const parsedGap = Number.parseFloat(styles.columnGap);
-		const gap = Number.isNaN(parsedGap) ? 8 : parsedGap;
+		const gap = /* c8 ignore next */ Number.isNaN(parsedGap) ? 8 : parsedGap;
 		const availableWidth = gridElement.clientWidth;
 		const calculatedColumns = Math.max(1, Math.floor((availableWidth + gap) / (minTileSize + gap)));
-		const maxColumns = props.popup ? 5 : 16;
+		const maxColumns = 16;
 		gridColumns.value = Math.min(calculatedColumns, maxColumns);
 	};
+
+	watch(
+		() => props.availableLicences,
+		nextAvailable => {
+			selectedLicences.value = normaliseSelection(selectedLicences.value, nextAvailable);
+		},
+		{ immediate: true },
+	);
+
+	watch(
+		() => props.availableFamilies,
+		nextAvailable => {
+			selectedFamilies.value = normaliseSelection(selectedFamilies.value, nextAvailable);
+		},
+		{ immediate: true },
+	);
+
+	watch(
+		() => props.availableStyles,
+		nextAvailable => {
+			selectedStyles.value = normaliseSelection(selectedStyles.value, nextAvailable);
+		},
+		{ immediate: true },
+	);
 
 	const stopGridObserver = (): void => {
 		resizeObserver?.disconnect();
@@ -488,6 +451,24 @@
 		popupOpen.value = !popupOpen.value;
 	};
 
+	const updateSelection = (nextSelection: ILxIconPickerValue | null): void => {
+		if (props.popup) {
+			draftSelection.value = nextSelection;
+			return;
+		}
+
+		model.value = nextSelection;
+	};
+
+	const confirmPopupSelection = (): void => {
+		if (!props.popup || !draftSelection.value) {
+			return;
+		}
+
+		model.value = { ...draftSelection.value };
+		closePopup();
+	};
+
 	const selectIcon = (icon: ILxIconRegistryItemNormalised): void => {
 		const availableStyles = iconStylesFor(icon);
 		const firstStyle = availableStyles[0];
@@ -495,14 +476,10 @@
 			return;
 		}
 
-		model.value = {
+		updateSelection({
 			name: icon.name,
 			style: firstStyle,
-		};
-
-		if (props.popup && props.closeOnSelect) {
-			closePopup();
-		}
+		});
 	};
 
 	const selectStyle = (style: TLxIconStyle): void => {
@@ -510,10 +487,10 @@
 			return;
 		}
 
-		model.value = {
+		updateSelection({
 			name: selectedIcon.value.name,
 			style,
-		};
+		});
 	};
 
 	watch(
@@ -531,7 +508,10 @@
 
 	watch(
 		() => popupOpen.value,
-		() => {
+		isOpen => {
+			if (props.popup && isOpen) {
+				draftSelection.value = model.value ? { ...model.value } : null;
+			}
 			void startGridObserver();
 		},
 	);
@@ -545,21 +525,22 @@
 	watch(
 		selectedIconStyles,
 		nextStyles => {
-			if (!model.value) {
+			const currentValue = selectedValue.value;
+			if (!currentValue) {
 				return;
 			}
 
 			if (nextStyles.length === 0) {
-				model.value = null;
+				updateSelection(null);
 				return;
 			}
 
 			const firstStyle = nextStyles[0];
-			if (firstStyle && !nextStyles.includes(model.value.style)) {
-				model.value = {
-					...model.value,
+			if (firstStyle && !nextStyles.includes(currentValue.style)) {
+				updateSelection({
+					...currentValue,
 					style: firstStyle,
-				};
+				});
 			}
 		},
 		{ immediate: true },
@@ -579,6 +560,14 @@
 		--lx-icon-picker-tile-size: 3.75rem;
 		display: grid;
 		gap: var(--lx-size-space-sm);
+	}
+
+	.lx-icon-picker:not(.lx-icon-picker--popup) {
+		--lx-icon-picker-tile-size: 3.25rem;
+	}
+
+	.lx-icon-picker--popup {
+		--lx-icon-picker-tile-size: 2.75rem;
 	}
 
 	.lx-icon-picker__trigger {
@@ -732,6 +721,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--lx-size-space-xs);
+	}
+
+	.lx-icon-picker__confirm {
+		display: flex;
+		justify-content: flex-end;
 	}
 
 	.lx-icon-picker__style-chip {

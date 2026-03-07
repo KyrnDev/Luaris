@@ -68,7 +68,7 @@ describe('LxFlex', () => {
 		expect(wrapper.attributes('style')).toContain('flex-direction: column;');
 	});
 
-	it('supports reversed row direction and gap fallback when gap is empty', () => {
+	it('supports reversed row direction and keeps explicit row/column gap defaults when gap is empty', () => {
 		const wrapper = mount(LxFlex, {
 			props: {
 				reverse: true,
@@ -77,7 +77,7 @@ describe('LxFlex', () => {
 		});
 
 		expect(wrapper.attributes('style')).toContain('flex-direction: row-reverse;');
-		expect(wrapper.attributes('style')).toContain('row-gap: 0px;');
-		expect(wrapper.attributes('style')).toContain('column-gap: 0px;');
+		expect(wrapper.attributes('style')).toContain('row-gap: var(--lx-size-space-md);');
+		expect(wrapper.attributes('style')).toContain('column-gap: var(--lx-size-space-md);');
 	});
 });

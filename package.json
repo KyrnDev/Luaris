@@ -8,7 +8,8 @@
 		"lint": "eslint",
 		"test": "bun run --filter \"@luaris/ui\" test:run",
 		"test:coverage": "bun run --filter \"@luaris/ui\" test:coverage",
-		"ui:dev": "bun run --filter \"@luaris/ui\" dev"
+		"ui:dev": "bun run --filter \"@luaris/ui\" dev",
+		"ui:screenshot": "bun run ./scripts/capture-ui-screenshot.ts --ready-selector=.lx-app-page"
 	},
 	"workspaces": [
 		"packages/*"
@@ -16,7 +17,8 @@
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.4.3",
 		"@types/bun": "latest",
-		"eslint": "^10.0.0"
+		"eslint": "^10.0.0",
+		"playwright": "^1.58.2"
 	},
 	"peerDependencies": {
 		"typescript": "^5"

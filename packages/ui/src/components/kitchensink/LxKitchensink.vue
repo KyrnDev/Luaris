@@ -1034,6 +1034,14 @@
 
 		<section class="lx-kitchen-sink__section">
 			<h3>
+				Rich Text Editor (AST)
+			</h3>
+			<LxRte v-model="rteValue" />
+			<pre class="lx-kitchen-sink__code-block">{{ JSON.stringify(rteValue, null, 2) }}</pre>
+		</section>
+
+		<section class="lx-kitchen-sink__section">
+			<h3>
 				Calendar
 			</h3>
 			<div class="lx-kitchen-sink__calendar-wrap">
@@ -1625,6 +1633,8 @@
 	import { LxListItem } from '../list-item';
 	import { LxHoverCard } from '../hover-card';
 	import { LxMarkdownEditor } from '../markdown-editor';
+	import { LxRte } from '../rte';
+	import type { ILxRteDocument } from '../rte';
 	import { LxMenuBar } from '../menu-bar';
 	import type { ILxMenuBarItem } from '../menu-bar';
 	import { LxMenuItem } from '../menu-item';
@@ -2189,6 +2199,30 @@
 	const autoCompleteStrictValue = ref('');
 	const selectedAutoCompleteOption = ref('');
 	const markdownValue = ref(`# Luaris Notes\n\n| Title1 | Title2 |\n| - | - |\n| some data | some data |\n| some data | some data |\n\n- Token based design\n- Tree-shakeable exports\n- Strong TypeScript support`);
+	const rteValue = ref<ILxRteDocument>({
+		type: 'doc',
+		children: [
+			{
+				type: 'heading-2',
+				children: [{ type: 'text', value: 'Luaris RTE' }],
+			},
+			{
+				type: 'paragraph',
+				children: [
+					{ type: 'text', value: 'This editor stores content as a ' },
+					{ type: 'text', value: 'typed AST', marks: ['bold'] },
+					{ type: 'text', value: ' rather than HTML.' },
+				],
+			},
+			{
+				type: 'unordered-list',
+				items: [
+					{ children: [{ type: 'text', value: 'Vue render-function based output' }] },
+					{ children: [{ type: 'text', value: 'JSON model via v-model' }] },
+				],
+			},
+		],
+	});
 	const calendarValue = ref<Date | null>(new Date(2026, 1, 21));
 	const mentionsValue = ref('Hey @da');
 	const selectedMention = ref('');
@@ -2566,6 +2600,18 @@
 		height: var(--lx-size-control-height-sm);
 		padding: 0 var(--lx-size-space-xs);
 		width: 100%;
+	}
+
+	.lx-kitchen-sink__code-block {
+		background: var(--lx-colour-surface-sunken);
+		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		border-radius: var(--lx-size-radius-sm);
+		font-family: var(--lx-font-family-mono);
+		font-size: var(--lx-font-size-xs);
+		margin: 0;
+		max-height: 18rem;
+		overflow: auto;
+		padding: var(--lx-size-space-sm);
 	}
 
 	.lx-kitchen-sink__surface-item,

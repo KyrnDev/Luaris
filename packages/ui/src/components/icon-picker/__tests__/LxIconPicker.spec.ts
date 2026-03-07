@@ -105,11 +105,10 @@ describe('LxIconPicker', () => {
 		expect(document.body.querySelector('.lx-icon-picker__panel--modal')).not.toBeNull();
 	});
 
-	it('keeps popup open when closeOnSelect is false', async () => {
+	it('keeps popup open after icon selection in popup mode', async () => {
 		const wrapper = mount(LxIconPicker, {
 			props: {
 				popup: true,
-				closeOnSelect: false,
 				registry: buildRegistry(2),
 			},
 		});
@@ -145,7 +144,10 @@ describe('LxIconPicker', () => {
 			},
 		});
 
-		await wrapper.findAll('.lx-icon-picker__filter-group input')[0]?.setValue(false);
+		await wrapper.setProps({
+			availableLicences: ['pro'],
+		});
+		await wrapper.vm.$nextTick();
 		expect(wrapper.emitted('update:modelValue')?.some(payload => payload?.[0] === null)).toBe(true);
 	});
 
@@ -243,7 +245,7 @@ describe('LxIconPicker', () => {
 		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(0);
 	});
 
-	it('supports filtering by family and style settings', async () => {
+	it('supports filtering by available family and style options', async () => {
 		const wrapper = mount(LxIconPicker, {
 			props: {
 				registry: [
@@ -266,20 +268,80 @@ describe('LxIconPicker', () => {
 		});
 
 		expect(wrapper.text()).toContain('2 results');
-
-		const familyFieldset = wrapper.findAll('.lx-icon-picker__filter-group')
-			.find(group => group.find('legend').text() === 'Families');
-		const brandFamilyCheckbox = familyFieldset?.findAll('input[type="checkbox"]')
-			.find(box => (box.element as HTMLInputElement).value === 'brands');
-		await brandFamilyCheckbox?.setValue(false);
+		await wrapper.setProps({
+			availableFamilies: ['classic'],
+		});
+		await wrapper.vm.$nextTick();
 		expect(wrapper.text()).toContain('1 results');
-
-		const styleFieldset = wrapper.findAll('.lx-icon-picker__filter-group')
-			.find(group => group.find('legend').text() === 'Styles');
-		const solidStyleCheckbox = styleFieldset?.findAll('input[type="checkbox"]')
-			.find(box => (box.element as HTMLInputElement).value === 'solid');
-		await solidStyleCheckbox?.setValue(false);
+		await wrapper.setProps({
+			availableStyles: ['regular'],
+		});
+		await wrapper.vm.$nextTick();
 		expect(wrapper.text()).toContain('0 results');
+	});
+
+	it('filters out icon styles not present in availableStyles', () => {
+		const wrapper = mount(LxIconPicker, {
+			props: {
+				registry: [
+					{
+						name: 'mixed-style-icon',
+						styles: ['solid', 'regular'],
+						families: ['classic'],
+						licences: ['free', 'pro'],
+						styleSources: {
+							solid: ['free'],
+							regular: ['pro'],
+						},
+					},
+				],
+				availableStyles: ['regular'],
+				availableLicences: ['pro'],
+				availableFamilies: ['classic'],
+			},
+		});
+
+		expect(wrapper.text()).toContain('1 results');
+		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(1);
+	});
+
+	it('supports consumer-defined availability options', async () => {
+		const wrapper = mount(LxIconPicker, {
+			props: {
+				registry: [
+					{
+						name: 'brand-icon',
+						styles: ['brands'],
+						families: ['brands'],
+						licences: ['free'],
+						keywords: ['brand'],
+					},
+					{
+						name: 'classic-pro',
+						styles: ['regular'],
+						families: ['classic'],
+						licences: ['pro'],
+						keywords: ['classic'],
+					},
+				],
+				availableFamilies: ['classic'],
+				availableLicences: ['pro'],
+				availableStyles: ['regular'],
+			},
+		});
+
+		expect(wrapper.text()).toContain('1 results');
+		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(1);
+
+		await wrapper.setProps({
+			availableFamilies: ['brands'],
+			availableLicences: ['free'],
+			availableStyles: ['brands'],
+		});
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.text()).toContain('1 results');
+		expect(wrapper.findAll('.lx-icon-picker__tile')).toHaveLength(1);
 	});
 
 	it('uses computed style gap fallback and resize observer path in popup mode', async () => {
@@ -320,7 +382,7 @@ describe('LxIconPicker', () => {
 		await wrapper.vm.$nextTick();
 
 		expect(observeSpy).toHaveBeenCalled();
-		expect(getComputedStyleSpy).toHaveBeenCalled();
+		expect(getComputedStyleSpy).not.toHaveBeenCalled();
 
 		wrapper.unmount();
 		expect(disconnectSpy).toHaveBeenCalled();
@@ -330,6 +392,36 @@ describe('LxIconPicker', () => {
 			value: originalResizeObserver,
 			configurable: true,
 		});
+	});
+
+	it('uses non-popup gap fallback when computed columnGap is invalid', async () => {
+		const getComputedStyleSpy = vi.spyOn(window, 'getComputedStyle').mockReturnValue({
+			columnGap: 'not-a-number',
+			gap: '',
+		} as CSSStyleDeclaration);
+
+		const wrapper = mount(LxIconPicker, {
+			props: {
+				popup: false,
+				registry: buildRegistry(6),
+			},
+		});
+
+		const api = (wrapper.vm as {
+			$: {
+				setupState: {
+					gridRef: HTMLElement | null,
+					updateGridColumns: () => void,
+				},
+			},
+		}).$.setupState;
+		api.gridRef = wrapper.find('.lx-icon-picker__grid').element as HTMLElement;
+		api.updateGridColumns();
+		await wrapper.vm.$nextTick();
+		expect(getComputedStyleSpy).toHaveBeenCalled();
+		expect(wrapper.findAll('.lx-icon-picker__tile').length).toBeGreaterThan(0);
+
+		getComputedStyleSpy.mockRestore();
 	});
 
 	it('keeps style label empty-state safe when selected icon disappears', async () => {
@@ -353,18 +445,19 @@ describe('LxIconPicker', () => {
 			},
 		});
 
-		const licenceCheckboxes = wrapper.findAll('input[type="checkbox"]');
-		await licenceCheckboxes[0]?.setValue(false);
+		await wrapper.setProps({
+			availableLicences: ['pro'],
+		});
+		await wrapper.vm.$nextTick();
 
 		expect(wrapper.emitted('update:modelValue')?.some(event => event?.[0] === null)).toBe(true);
 		expect(wrapper.find('.lx-icon-picker__style-section').exists()).toBe(false);
 	});
 
-	it('closes popup after selection when closeOnSelect is true', async () => {
+	it('confirms popup selection only when Select Button is clicked', async () => {
 		const wrapper = mount(LxIconPicker, {
 			props: {
 				popup: true,
-				closeOnSelect: true,
 				registry: buildRegistry(6),
 			},
 			attachTo: document.body,
@@ -376,7 +469,16 @@ describe('LxIconPicker', () => {
 		firstTile.click();
 		await wrapper.vm.$nextTick();
 
+		expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+
 		const modal = document.body.querySelector('.lx-modal') as HTMLElement;
+		expect(modal.style.display).not.toBe('none');
+
+		const confirmButton = document.body.querySelector('.lx-icon-picker__confirm button') as HTMLButtonElement;
+		confirmButton.click();
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.emitted('update:modelValue')?.length).toBeGreaterThan(0);
 		expect(modal.style.display).toBe('none');
 	});
 
@@ -438,15 +540,6 @@ describe('LxIconPicker', () => {
 		styleChip?.click();
 		await wrapper.vm.$nextTick();
 
-		const modalGroups = Array.from(document.body.querySelectorAll('.lx-icon-picker__panel--modal .lx-icon-picker__filter-group'));
-		const licenceGroup = modalGroups.find(group => group.querySelector('legend')?.textContent === 'Licences');
-		const familyGroup = modalGroups.find(group => group.querySelector('legend')?.textContent === 'Families');
-		const styleGroup = modalGroups.find(group => group.querySelector('legend')?.textContent === 'Styles');
-		(licenceGroup?.querySelector('input[type="checkbox"]') as HTMLInputElement | null)?.click();
-		(familyGroup?.querySelector('input[type="checkbox"]') as HTMLInputElement | null)?.click();
-		(styleGroup?.querySelector('input[type="checkbox"]') as HTMLInputElement | null)?.click();
-		await wrapper.vm.$nextTick();
-
 		const modalPagerButtons = wrapper.findAllComponents(LxButton)
 			.filter(button => button.element.closest('.lx-icon-picker__panel--modal'));
 		const modalNextButton = modalPagerButtons.find(button => button.text().trim() === 'Next');
@@ -459,6 +552,10 @@ describe('LxIconPicker', () => {
 		const modalSearch = document.body.querySelector('.lx-icon-picker__panel--modal .lx-icon-picker__search') as HTMLInputElement;
 		modalSearch.value = 'icon-1';
 		modalSearch.dispatchEvent(new Event('input'));
+		await wrapper.vm.$nextTick();
+
+		const confirmButton = document.body.querySelector('.lx-icon-picker__confirm button') as HTMLButtonElement;
+		confirmButton.click();
 		await wrapper.vm.$nextTick();
 
 		wrapper.findComponent(LxModal).vm.$emit('update:modelValue', false);
@@ -513,9 +610,11 @@ describe('LxIconPicker', () => {
 					gridRef: HTMLElement | null,
 					currentPage: number,
 					query: string,
+					selectedStyles: string[] | { value: string[] },
 					updateGridColumns: () => void,
 					startGridObserver: () => Promise<void>,
 					togglePopup: () => void,
+					confirmPopupSelection: () => void,
 					selectStyle: (style: string) => void,
 					selectIcon: (icon: { name: string, styles: string[], families: string[], licences: string[], styleSources: Record<string, string[]>, keywords: string[], label: string }) => void,
 				},
@@ -527,10 +626,28 @@ describe('LxIconPicker', () => {
 		await api.startGridObserver();
 
 		api.togglePopup();
+		api.confirmPopupSelection();
+		if (Array.isArray(api.selectedStyles)) {
+			api.selectedStyles = [];
+		}
+		else {
+			api.selectedStyles.value = [];
+		}
 		api.selectStyle('solid');
 		api.selectIcon({
 			name: 'broken',
 			label: 'Broken',
+			keywords: [],
+			styles: ['solid'],
+			families: ['classic'],
+			licences: ['free'],
+			styleSources: {
+				solid: ['free'],
+			},
+		});
+		api.selectIcon({
+			name: 'no-style',
+			label: 'No Style',
 			keywords: [],
 			styles: [],
 			families: ['classic'],
@@ -553,11 +670,10 @@ describe('LxIconPicker', () => {
 		});
 	});
 
-	it('hides popup settings when showSettings is disabled', async () => {
+	it('does not render display settings controls in popup mode', async () => {
 		const wrapper = mount(LxIconPicker, {
 			props: {
 				popup: true,
-				showSettings: false,
 				registry: buildRegistry(4),
 			},
 			attachTo: document.body,
@@ -567,5 +683,6 @@ describe('LxIconPicker', () => {
 		await wrapper.vm.$nextTick();
 
 		expect(document.body.querySelector('.lx-icon-picker__panel--modal .lx-icon-picker__settings')).toBeNull();
+		expect(document.body.textContent).not.toContain('Display Settings');
 	});
 });
