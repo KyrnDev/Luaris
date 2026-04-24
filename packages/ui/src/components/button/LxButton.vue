@@ -9,10 +9,12 @@
 	>
 		<span v-if="props.loading" class="lx-button__spinner" aria-hidden="true" />
 
-		<span v-if="props.icon && props.iconOrder === 'left'" class="lx-button__icon" aria-hidden="true">
-			<LxIcon :name="props.icon" />
+		<span v-if="(props.icon || $slots.icon) && props.iconOrder === 'left'" class="lx-button__icon" aria-hidden="true">
+			<template v-if="$slots.icon">
+				<slot name="icon" />
+			</template>
+			<LxIcon v-else :name="props.icon" />
 		</span>
-		<template v-else />
 
 		<span v-if="$slots.leading" class="lx-button__leading">
 			<slot name="leading" />
@@ -23,21 +25,22 @@
 				{{ props.label }}
 			</slot>
 		</span>
-		<template v-else />
 
 		<span v-if="$slots.trailing" class="lx-button__trailing">
 			<slot name="trailing" />
 		</span>
 
-		<span v-if="props.icon && props.iconOrder === 'right'" class="lx-button__icon" aria-hidden="true">
-			<LxIcon :name="props.icon" />
+		<span v-if="(props.icon || $slots.icon) && props.iconOrder === 'right'" class="lx-button__icon" aria-hidden="true">
+			<template v-if="$slots.icon">
+				<slot name="icon" />
+			</template>
+			<LxIcon v-else :name="props.icon" />
 		</span>
-		<template v-else />
 	</button>
 </template>
 
 <script setup lang="ts">
-	import type { ILxButtonProps } from './types';
+	import type { TLxButtonProps } from './types';
 	import { LxIcon } from '../icon';
 	import { computed, useAttrs, useSlots } from 'vue';
 
@@ -45,7 +48,7 @@
 		inheritAttrs: false,
 	});
 
-	const props = withDefaults(defineProps<ILxButtonProps>(), {
+	const props = withDefaults(defineProps<TLxButtonProps>(), {
 		variant: 'primary',
 		size: 'md',
 		type: 'button',

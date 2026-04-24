@@ -1,12 +1,19 @@
 <template>
-	<i :class="iconClasses" :aria-hidden="decorative ? 'true' : undefined" :aria-label="decorative ? undefined : label" />
+	<i
+		:class="iconClasses"
+		:style="{
+			fontSize: getSize,
+		}"
+		:aria-hidden="decorative ? 'true' : undefined"
+		:aria-label="decorative ? undefined : label"
+	/>
 </template>
 
 <script setup lang="ts">
-	import type { ILxIconProps, TLxIconSize, TLxIconStyle } from './types';
+	import type { TLxIconProps, TLxIconStyle } from './types';
 	import { computed } from 'vue';
 
-	const props = withDefaults(defineProps<ILxIconProps>(), {
+	const props = withDefaults(defineProps<TLxIconProps>(), {
 		iconStyle: 'solid',
 		size: 'md',
 		spin: false,
@@ -30,16 +37,9 @@
 		'sharp-duotone': ['fa-sharp-duotone'],
 	};
 
-	const getSizeClass = (size: TLxIconSize): string => {
-		switch (size) {
-		case 'xs': return 'fa-xs';
-		case 'sm': return 'fa-sm';
-		case 'lg': return 'fa-lg';
-		case 'xl': return 'fa-xl';
-		case '2xl': return 'fa-2xl';
-		default: return '';
-		}
-	};
+	const getSize = computed(() => {
+		return `var(--lx-font-size-${props.size})`;
+	});
 
 	const iconClasses = computed(() => {
 		const classes = [
@@ -47,8 +47,6 @@
 			`fa-${props.name}`,
 		];
 
-		const sizeClass = getSizeClass(props.size);
-		if (sizeClass) classes.push(sizeClass);
 		if (props.spin) classes.push('fa-spin');
 		if (props.pulse) classes.push('fa-pulse');
 		if (props.fixedWidth) classes.push('fa-fw');

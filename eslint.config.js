@@ -229,6 +229,7 @@ export default config({
 		}],
 		'vue/script-indent': ['error', 'tab', {
 			baseIndent: 1,
+			switchCase: 1,
 		}],
 	},
 },

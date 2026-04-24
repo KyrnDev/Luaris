@@ -10,6 +10,8 @@ export type TLayoutsZero = 0 | '0';
 export type TLayoutsGlobal = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
 export type TLayoutsBase = TLayoutsCalc | TLayoutsVar | TLayoutsGlobal;
 export type TLayoutsNumeric = TLayoutsBase | TLayoutsZero;
+export type TFontSizes = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+export type TColours = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'white' | 'black';
 
 export type TLayoutsUnits = (
 	'cap' | 'ch' | 'em' | 'ex' | 'ic' | 'lh'
@@ -20,7 +22,7 @@ export type TLayoutsUnits = (
 );
 
 export type TLayoutsColour = TLayoutsVar | TLayoutsGlobal | string;
-export type TLayoutsLength = TLayoutsNumeric | `${number}${TLayoutsUnits}`;
+export type TLayoutsLength = TLayoutsNumeric | `${number}${TLayoutsUnits}` | 'auto';
 export type TLayoutsLengthPercentage = TLayoutsNumeric | `${number}${TLayoutsUnits}` | `${number}%`;
 export type TLayoutsNumber = TLayoutsNumeric | number | `${number}`;
 export type TLayoutsPercentage = TLayoutsNumeric | `${number}%`;

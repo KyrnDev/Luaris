@@ -8,21 +8,32 @@
 
 :root,
 html,
+html[data-theme='light'],
+html[data-theme='dark'],
+html[data-theme='high-contrast'] {
+	@include utils.lx-emit-utility-helpers();
+}
+
+:root,
+html,
 html[data-theme='light'] {
 	color-scheme: light;
 	@include helpers.lx-emit-variables(light.$theme-light);
+	@include helpers.lx-emit-token-classes(light.$theme-light);
 	@include utils.lx-emit-colour-helpers(light.$theme-light);
 }
 
 html[data-theme='dark'] {
 	color-scheme: dark;
 	@include helpers.lx-emit-variables(dark.$theme-dark);
+	@include helpers.lx-emit-token-classes(dark.$theme-dark);
 	@include utils.lx-emit-colour-helpers(dark.$theme-dark);
 }
 
 html[data-theme='high-contrast'] {
 	color-scheme: dark;
 	@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
+	@include helpers.lx-emit-token-classes(high-contrast.$theme-high-contrast);
 	@include utils.lx-emit-colour-helpers(high-contrast.$theme-high-contrast);
 }
 
@@ -30,6 +41,7 @@ html[data-theme='high-contrast'] {
 	html:not([data-theme]) {
 		color-scheme: dark;
 		@include helpers.lx-emit-variables(dark.$theme-dark);
+		@include helpers.lx-emit-token-classes(dark.$theme-dark);
 		@include utils.lx-emit-colour-helpers(dark.$theme-dark);
 	}
 }
@@ -38,40 +50,7 @@ html[data-theme='high-contrast'] {
 	html:not([data-theme]) {
 		color-scheme: dark;
 		@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
+		@include helpers.lx-emit-token-classes(high-contrast.$theme-high-contrast);
 		@include utils.lx-emit-colour-helpers(high-contrast.$theme-high-contrast);
 	}
-}
-
-html,
-body {
-	background-color: var(--lx-colour-surface-base);
-	color: var(--lx-colour-surface-text);
-	font-size: var(--lx-font-size-md);
-	line-height: var(--lx-font-line-height-normal);
-	margin: 0;
-	padding: 0;
-}
-
-p {
-	margin: 0;
-	padding: 0;
-}
-
-*:not(i),
-*:not(i)::before,
-*:not(i)::after {
-	box-sizing: border-box;
-	font-family: var(--lx-font-family-primary);
-}
-
-code,
-pre,
-kbd,
-samp {
-	font-family: var(--lx-font-family-mono);
-}
-
-@layer lx-token-classes {
-	@include helpers.lx-emit-token-classes(light.$theme-light);
-	@include utils.lx-emit-utility-helpers();
 }

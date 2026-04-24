@@ -7,6 +7,8 @@ $colour-info: #0284c7;
 $colour-success: #15803d;
 $colour-warning: #ca8a04;
 $colour-danger: #b91c1c;
+$colour-white: #ffffff;
+$colour-black: #000000;
 
 $colour-surface-base: #f2f5fb;
 $colour-surface-raised: #fbfcff;
@@ -26,8 +28,10 @@ $theme-light: (
 		'success': $colour-success,
 		'warning': $colour-warning,
 		'danger': $colour-danger,
+		'white': $colour-white,
+		'black': $colour-black,
 		'focus-ring': #1d4ed8,
-		'on': (
+		'hover': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
 			'secondary': contrast.lx-contrast-colour($colour-secondary),
 			'accent': contrast.lx-contrast-colour($colour-accent),
@@ -35,6 +39,8 @@ $theme-light: (
 			'success': contrast.lx-contrast-colour($colour-success),
 			'warning': contrast.lx-contrast-colour($colour-warning),
 			'danger': contrast.lx-contrast-colour($colour-danger),
+			'white': $colour-white,
+			'black': $colour-black,
 		),
 		'surface': (
 			'base': $colour-surface-base,
@@ -89,11 +95,14 @@ $theme-light: (
 			'mono': ('JetBrains Mono', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace),
 		),
 		'size': (
+			'2xs': 0.625rem,
 			'xs': 0.75rem,
 			'sm': 0.875rem,
 			'md': 1rem,
-			'lg': 1.125rem,
-			'xl': 1.25rem,
+			'lg': 1.25rem,
+			'xl': 1.5rem,
+			'2xl': 2rem,
+			'3xl': 3rem,
 		),
 		'line-height': (
 			'tight': 1.2,

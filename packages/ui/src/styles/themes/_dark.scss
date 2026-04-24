@@ -9,6 +9,8 @@ $colour-info: #0ea5e9;
 $colour-success: #16a34a;
 $colour-warning: #f59e0b;
 $colour-danger: #dc2626;
+$colour-white: #ffffff;
+$colour-black: #000000;
 
 $theme-dark: map.deep-merge(light.$theme-light, (
 	'colour': (
@@ -19,8 +21,10 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 		'success': $colour-success,
 		'warning': $colour-warning,
 		'danger': $colour-danger,
+		'white': $colour-white,
+		'black': $colour-black,
 		'focus-ring': #fbbf24,
-		'on': (
+		'hover': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
 			'secondary': contrast.lx-contrast-colour($colour-secondary),
 			'accent': contrast.lx-contrast-colour($colour-accent),
@@ -28,6 +32,8 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 			'success': contrast.lx-contrast-colour($colour-success),
 			'warning': contrast.lx-contrast-colour($colour-warning),
 			'danger': contrast.lx-contrast-colour($colour-danger),
+			'white': $colour-white,
+			'black': $colour-black,
 		),
 		'surface': (
 			'base': #121314,

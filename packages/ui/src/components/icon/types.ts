@@ -1,3 +1,5 @@
+import type { TFontSizes } from '../../types/units';
+
 export type TLxIconStyle = (
 	'solid'
 	| 'regular'
@@ -11,15 +13,14 @@ export type TLxIconStyle = (
 	| 'sharp-thin'
 	| 'sharp-duotone'
 );
-export type TLxIconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export interface ILxIconProps {
+export type TLxIconProps = {
 	name: string,
 	iconStyle?: TLxIconStyle,
-	size?: TLxIconSize,
+	size?: TFontSizes,
 	spin?: boolean,
 	pulse?: boolean,
 	fixedWidth?: boolean,
 	label?: string,
 	decorative?: boolean,
-}
+};

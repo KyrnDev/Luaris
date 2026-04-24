@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'sass:meta';
 
 $lx-space-scales: (
 	'2xs',
@@ -24,6 +25,9 @@ $lx-size-scales: (
 @mixin lx-emit-spacing-helpers($scales: $lx-space-scales) {
 	@each $scale in $scales {
 		$space-var: var(--lx-size-space-#{$scale});
+
+		.lx-font-size--#{$scale} { font-size: $space-var; }
+		.lx-line-height--#{$scale} { line-height: $space-var; }
 
 		.lx-padding--#{$scale} { padding: $space-var; }
 		.lx-padding-x--#{$scale} {
@@ -69,6 +73,8 @@ $lx-size-scales: (
 	}
 	.lx-margin--none { margin: 0; }
 	.lx-margin-auto { margin: auto; }
+	.lx-margin-left--auto { margin-left: auto; }
+	.lx-margin-right--auto { margin-right: auto; }
 	.lx-margin-x--auto {
 		margin-left: auto;
 		margin-right: auto;
@@ -163,6 +169,38 @@ $lx-size-scales: (
 
 	.lx-rounded--pill { border-radius: var(--lx-size-radius-pill); }
 	.lx-rounded--none { border-radius: 0; }
+}
+
+@mixin lx-emit-colour-helpers($theme) {
+	.lx-bg--transparent { background-color: transparent; }
+	.lx-border--transparent { border-color: transparent; }
+	.lx-hover-bg--transparent:hover { background-color: transparent; }
+
+	@each $group, $items in $theme {
+		@if ($group == 'colour') {
+			@each $name, $value in $items {
+				@if meta.type-of($value) == 'map' {
+					@if ($name == 'hover') {
+						@each $subname, $subvalue in $value {
+							.lx-#{$name}-bg--#{$subname}:hover { background-color: var(--lx-#{$group}-#{$subname}); }
+							.lx-#{$name}-text--#{$subname}:hover { color: var(--lx-#{$group}-#{$subname}); }
+							.lx-#{$name}-border--#{$subname}:hover { border-color: var(--lx-#{$group}-#{$subname}); }
+						}
+					} @else {
+						@each $subname, $subvalue in $value {
+							.lx-bg--#{$name}-#{$subname} { background-color: var(--lx-#{$group}-#{$name}-#{$subname}); }
+							.lx-text--#{$name}-#{$subname} { color: var(--lx-#{$group}-#{$name}-#{$subname}); }
+							.lx-border--#{$name}-#{$subname} { border-color: var(--lx-#{$group}-#{$name}-#{$subname}); }
+						}
+					}
+				} @else {
+					.lx-bg--#{$name} { background-color: var(--lx-#{$group}-#{$name}); }
+					.lx-text--#{$name} { color: var(--lx-#{$group}-#{$name}); }
+					.lx-border--#{$name} { border-color: var(--lx-#{$group}-#{$name}); }
+				}
+			}
+		}
+	}
 }
 
 @mixin lx-emit-utility-helpers() {
