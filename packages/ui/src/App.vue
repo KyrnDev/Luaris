@@ -8,6 +8,12 @@
 					<LxIcon name="save" size="xl" />
 				</template>
 			</LxButton>
+
+			<LxFlex class="lx-padding-y--3xl" gap="0px">
+				<LxButton label="Left" variant="primary" size="md" group="left" />
+				<LxButton label="Middle" variant="primary" size="md" group="middle" />
+				<LxButton label="Right" variant="primary" size="md" group="right" />
+			</LxFlex>
 		</template>
 
 		<template #default>
@@ -24,4 +30,5 @@
 	import LxPage from './components/page/LxPage.vue';
 	import LxIcon from './components/icon/LxIcon.vue';
 	import LxButton from './components/button/LxButton.vue';
+	import LxFlex from './components/flex/LxFlex.vue';
 </script>

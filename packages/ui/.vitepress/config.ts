@@ -10,7 +10,7 @@ export default defineConfig({
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
 			{ text: 'Home', link: '/' },
-			{ text: 'Examples', link: '/markdown-examples' },
+			{ text: 'Components', link: '/components/' },
 		],
 
 		sidebar: [
@@ -19,6 +19,7 @@ export default defineConfig({
 				link: '/components/',
 				items: [
 					{ text: 'Button', link: '/components/button' },
+					{ text: 'Flex', link: '/components/flex' },
 					{ text: 'Icon', link: '/components/icon' },
 					{ text: 'Page', link: '/components/page' },
 				],
@@ -26,7 +27,7 @@ export default defineConfig({
 		],
 
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+			{ icon: 'github', link: 'https://github.com/KyrnDev/Luaris/' },
 		],
 	},
 
