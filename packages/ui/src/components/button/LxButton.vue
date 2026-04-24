@@ -1,6 +1,7 @@
 <template>
 	<button
 		v-bind="attrs"
+		class="lx-button"
 		:class="buttonClasses"
 		:type="props.type"
 		:disabled="isDisabled"
@@ -66,20 +67,22 @@
 	const isDisabled = computed(() => props.disabled || props.loading);
 	const hasLabel = computed(() => Boolean(props.label) || Boolean(slots.default));
 
-	const buttonClasses = computed(() => ({
-		'lx-button': true,
-		[`lx-button--${props.variant}`]: true,
-		[`lx-button--${props.size}`]: true,
-		'lx-button--loading': props.loading,
-		'lx-button--full-width': props.fullWidth,
-	}));
+	const buttonClasses = computed(() => ([
+		`lx-button--${props.variant}`,
+		`lx-button--${props.size}`,
+		`lx-button--group-${props.group ?? 'none'}`,
+		{
+			'lx-button--loading': props.loading,
+			'lx-button--full-width': props.fullWidth,
+		},
+	]));
 </script>
 
 <style scoped lang="scss">
 	.lx-button {
 		--lx-button-background: var(--lx-colour-primary);
 		--lx-button-border: var(--lx-colour-primary);
-		--lx-button-text: var(--lx-colour-on-primary);
+		--lx-button-text: var(--lx-colour-hover-primary);
 		align-items: center;
 		background-color: var(--lx-button-background);
 		border: var(--lx-size-border-width-hairline) solid var(--lx-button-border);
@@ -104,8 +107,7 @@
 	}
 
 	.lx-button:hover:not(:disabled) {
-		filter: brightness(1.08);
-		transform: translateY(-1px);
+		filter: brightness(1.25);
 	}
 
 	.lx-button:active:not(:disabled) {
@@ -253,6 +255,23 @@
 		border-top-color: currentColor;
 		height: 1em;
 		width: 1em;
+	}
+
+	.lx-button--group-left {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.lx-button--group-middle {
+		border-radius: 0;
+		border-left-width: 0;
+		border-right-width: 0;
+	}
+
+	.lx-button--group-right {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		border-left-width: 0;
 	}
 
 	@keyframes lx-spin {

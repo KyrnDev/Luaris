@@ -64,6 +64,7 @@ The below configurator allows you to select which zones of the page you want to 
 
 The Page component uses slots to position content with the page layout, you can use the above configurator to see the different layouts.
 
+> [!NOTE]
 > The next section will not show any examples due to the full-page nature of this, you can of course use the `no-fill` prop to prevent full height, but it's not great for showcasing the slots.
 
 ## Slot: Banner
@@ -83,14 +84,3 @@ The banner slot is typically used for a large, attention-grabbing section at the
 </LxPage>
 ```
 </details>
-
-banner
-header
-sub-header
-navigation-header
-navigation
-navigation-footer
-main-header
-main-footer
-aside
-footer

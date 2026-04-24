@@ -1,4 +1,5 @@
 <script setup>
+	import LxFlex from '../flex/LxFlex.vue';
 	import LxButton from './LxButton.vue';
 </script>
 
@@ -7,6 +8,8 @@
 The button component is a versatile and customizable UI element that can be used for various actions in your application. It supports multiple variants, sizes, and states to fit different use cases.
 
 ## Settings
+
+The Button component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -23,7 +26,9 @@ The button component is a versatile and customizable UI element that can be used
 
 ## Styles
 
-<div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
+The button component supports various styles through its `variant` prop. Each variant applies different colors and visual treatments to the button, allowing you to choose the one that best fits your design needs.
+
+<LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
 	<LxButton class="lx-margin-right--sm" label="Secondary" variant="secondary" />
 	<LxButton class="lx-margin-right--sm" label="Accent" variant="accent" />
@@ -31,25 +36,29 @@ The button component is a versatile and customizable UI element that can be used
 	<LxButton class="lx-margin-right--sm" label="Success" variant="success" />
 	<LxButton class="lx-margin-right--sm" label="Warning" variant="warning" />
 	<LxButton class="lx-margin-right--sm" label="Danger" variant="danger" />
-</div>
+</LxFlex>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
-<LxButton class="lx-margin-right--sm" label="Secondary" variant="secondary" />
-<LxButton class="lx-margin-right--sm" label="Accent" variant="accent" />
-<LxButton class="lx-margin-right--sm" label="Info" variant="info" />
-<LxButton class="lx-margin-right--sm" label="Success" variant="success" />
-<LxButton class="lx-margin-right--sm" label="Warning" variant="warning" />
-<LxButton class="lx-margin-right--sm" label="Danger" variant="danger" />
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
+	<LxButton class="lx-margin-right--sm" label="Secondary" variant="secondary" />
+	<LxButton class="lx-margin-right--sm" label="Accent" variant="accent" />
+	<LxButton class="lx-margin-right--sm" label="Info" variant="info" />
+	<LxButton class="lx-margin-right--sm" label="Success" variant="success" />
+	<LxButton class="lx-margin-right--sm" label="Warning" variant="warning" />
+	<LxButton class="lx-margin-right--sm" label="Danger" variant="danger" />
+</LxFlex>
 ```
 </details>
 
 ## Sizes
 
-<div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
+The button component supports multiple sizes through its `size` prop, allowing you to choose the appropriate size for different contexts in your application.
+
+<LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="2xs" variant="primary" size="2xs" />
 	<LxButton class="lx-margin-right--sm" label="xs" variant="primary" size="xs" />
 	<LxButton class="lx-margin-right--sm" label="sm" variant="primary" size="sm" />
@@ -57,56 +66,118 @@ The button component is a versatile and customizable UI element that can be used
 	<LxButton class="lx-margin-right--sm" label="lg" variant="primary" size="lg" />
 	<LxButton class="lx-margin-right--sm" label="xl" variant="primary" size="xl" />
 	<LxButton class="lx-margin-right--sm" label="2xl" variant="primary" size="2xl" />
-</div>
+</LxFlex>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxButton class="lx-margin-right--sm" label="2xs" variant="primary" size="2xs" />
-<LxButton class="lx-margin-right--sm" label="xs" variant="primary" size="xs" />
-<LxButton class="lx-margin-right--sm" label="sm" variant="primary" size="sm" />
-<LxButton class="lx-margin-right--sm" label="md" variant="primary" size="md" />
-<LxButton class="lx-margin-right--sm" label="lg" variant="primary" size="lg" />
-<LxButton class="lx-margin-right--sm" label="xl" variant="primary" size="xl" />
-<LxButton class="lx-margin-right--sm" label="2xl" variant="primary" size="2xl" />
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm" label="2xs" variant="primary" size="2xs" />
+	<LxButton class="lx-margin-right--sm" label="xs" variant="primary" size="xs" />
+	<LxButton class="lx-margin-right--sm" label="sm" variant="primary" size="sm" />
+	<LxButton class="lx-margin-right--sm" label="md" variant="primary" size="md" />
+	<LxButton class="lx-margin-right--sm" label="lg" variant="primary" size="lg" />
+	<LxButton class="lx-margin-right--sm" label="xl" variant="primary" size="xl" />
+	<LxButton class="lx-margin-right--sm" label="2xl" variant="primary" size="2xl" />
+</LxFlex>
 ```
 </details>
 
 ## States
 
-<div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
+The button component supports different states such as loading and disabled, which can be used to indicate that an action is in progress or that the button is not currently interactive.
+
+<LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="Loading" variant="primary" loading />
 	<LxButton class="lx-margin-right--sm" label="Disabled" variant="primary" disabled />
-</div>
+</LxFlex>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxButton class="lx-margin-right--sm" label="Loading" variant="primary" loading />
-<LxButton class="lx-margin-right--sm" label="Disabled" variant="primary" disabled />
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm" label="Loading" variant="primary" loading />
+	<LxButton class="lx-margin-right--sm" label="Disabled" variant="primary" disabled />
+</LxFlex>
 ```
 </details>
 
 ## Layout
 
-<LxButton class="lx-margin-right--sm lx-margin-top--sm" label="Full Width" variant="primary" fullWidth />
+The button component can also be configured to take up the full width of its container, which can be useful for creating more prominent call-to-action buttons.
+
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm lx-margin-top--sm" label="Full Width" variant="primary" fullWidth />
+</LxFlex>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxButton class="lx-margin-right--sm lx-margin-top--sm" label="Full Width" variant="primary" fullWidth />
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm lx-margin-top--sm" label="Full Width" variant="primary" fullWidth />
+</LxFlex>
 ```
 </details>
 
 ## Icon
 
-<div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
+The button component supports adding an icon to the left or right of the label using the `icon` and `iconOrder` props. This can be used to enhance the visual appeal of the button or to provide additional context about the action it performs.
+
+<LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="Icon Left" variant="primary" icon="poo" />
 	<LxButton class="lx-margin-right--sm" label="Icon Right" variant="primary" icon="poo" iconOrder="right" />
-</div>
+</LxFlex>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm" label="Icon Left" variant="primary" icon="poo" />
+	<LxButton class="lx-margin-right--sm" label="Icon Right" variant="primary" icon="poo" iconOrder="right" />
+</LxFlex>
+```
+</details>
+
+## Grouping
+
+The button component supports grouping through the `group` prop, which can be set to 'left', 'middle', or 'right'. This allows you to visually connect buttons that are part of the same action group, such as a set of related options or a multi-step process.
+
+> [!INFO]
+> I decided on this design rather than using a wrapper component for button groups, as it allows for more flexibility in how the buttons are grouped and styled, without the need for an additional component.
+
+<LxFlex gap="0rem" class="lx-padding-bottom--md" wrap>
+	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Middle" variant="primary" size="md" group="middle" />
+	<LxButton label="Right" variant="primary" size="md" group="right" />
+</LxFlex>
+
+<LxFlex gap="0.2rem" wrap>
+	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Middle" variant="primary" size="md" group="middle" />
+	<LxButton label="Right" variant="primary" size="md" group="right" />
+</LxFlex>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxFlex gap="0rem" wrap>
+	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Middle" variant="primary" size="md" group="middle" />
+	<LxButton label="Right" variant="primary" size="md" group="right" />
+</LxFlex>
+
+<LxFlex gap="0.2rem" wrap>
+	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Middle" variant="primary" size="md" group="middle" />
+	<LxButton label="Right" variant="primary" size="md" group="right" />
+</LxFlex>
+```
+</details>
 
 ## Slots
 
@@ -114,7 +185,7 @@ The button component also supports slots for more custom content.
 
 ### Slot: Icon
 
-Can allow you to add a custom icon to the button, such as an SVG or a font icon with custom styling.
+Can allow you to add a custom icon to the button, such as an SVG or a font icon with custom styling, note you can also use the `iconOrder` prop to position the icon on the left or right of the label, it will use the same slot.
 
 <LxButton class="lx-margin-right--sm" variant="primary">
 	Car
@@ -138,7 +209,7 @@ Can allow you to add a custom icon to the button, such as an SVG or a font icon 
 
 ### Slot: Leading
 
-The leading slot allows you to add content before the button label, such as contextual information.
+The leading slot allows you to add content before the button label, such as contextual information, this is additional to the icon slot, which is more for decorative icons, but offering both allows for more flexibility in how you can use icons and other content in the button.
 
 <LxButton class="lx-margin-right--sm" variant="primary">
 	<template #leading>
@@ -162,7 +233,7 @@ The leading slot allows you to add content before the button label, such as cont
 
 ### Slot: Trailing
 
-The trailing slot allows you to add content after the button label, such as a badge or an additional icon.
+The trailing slot allows you to add content after the button label, such as a badge or an additional icon, this is additional to the icon slot, which is more for decorative icons, but offering both allows for more flexibility in how you can use icons and other content in the button.
 
 <LxButton class="lx-margin-right--sm" variant="primary">
 	Button

@@ -2,6 +2,7 @@ export type TLxButtonVariant = 'primary' | 'secondary' | 'ghost' | 'plain' | 'ac
 export type TLxButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type TLxButtonType = 'button' | 'submit' | 'reset';
 export type TLxButtonIconOrder = 'left' | 'right';
+export type TLxButtonGroup = 'left' | 'middle' | 'right';
 
 export type TLxButtonProps = {
 	variant?: TLxButtonVariant,
@@ -14,4 +15,5 @@ export type TLxButtonProps = {
 	ariaLabel?: string,
 	icon?: string,
 	iconOrder?: TLxButtonIconOrder,
+	group?: TLxButtonGroup,
 };
