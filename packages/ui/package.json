@@ -21,18 +21,18 @@
       "types": "./dist/components/button/index.d.ts",
       "import": "./dist/components/button/index.js"
     },
-	"./components/flex": {
-	  "types": "./dist/components/flex/index.d.ts",
-	  "import": "./dist/components/flex/index.js"
-	},
-	"./components/icon": {
-	  "types": "./dist/components/icon/index.d.ts",
-	  "import": "./dist/components/icon/index.js"
-	},
-	"./components/page": {
-	  "types": "./dist/components/page/index.d.ts",
-	  "import": "./dist/components/page/index.js"
-	},
+    "./components/flex": {
+      "types": "./dist/components/flex/index.d.ts",
+      "import": "./dist/components/flex/index.js"
+    },
+    "./components/icon": {
+      "types": "./dist/components/icon/index.d.ts",
+      "import": "./dist/components/icon/index.js"
+    },
+    "./components/page": {
+      "types": "./dist/components/page/index.d.ts",
+      "import": "./dist/components/page/index.js"
+    },
     "./composables": {
       "types": "./dist/composables/index.d.ts",
       "import": "./dist/composables/index.js"
@@ -52,10 +52,7 @@
     "fa:registry": "bun run scripts/generate-fa-registry.ts",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "test:coverage": "vitest run --coverage"
   },
   "peerDependencies": {
     "vue": "^3.5.25"
@@ -70,7 +67,6 @@
     "sass-embedded": "^1.97.3",
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
-    "vitepress": "^2.0.0-alpha.17",
     "vitest": "^4.0.18",
     "vue": "^3.5.28",
     "vue-tsc": "^3.2.4"
