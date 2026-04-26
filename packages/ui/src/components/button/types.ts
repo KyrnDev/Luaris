@@ -16,4 +16,5 @@ export type TLxButtonProps = {
 	icon?: string,
 	iconOrder?: TLxButtonIconOrder,
 	group?: TLxButtonGroup,
+	active?: boolean,
 };

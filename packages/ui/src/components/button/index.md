@@ -23,6 +23,7 @@ The Button component accepts the following props:
 | `ariaLabel` | `string` | `''` | The aria-label attribute for accessibility. |
 | `icon` | `string` | `''` | The name of the icon to display in the button. |
 | `iconOrder` | `icon-left \| icon-right` | `icon-left` | The position of the icon in relation to the label. |
+| `active` | `boolean` | `false` | Whether the button is in an active state. |
 
 ## Styles
 
@@ -91,6 +92,7 @@ The button component supports different states such as loading and disabled, whi
 <LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="Loading" variant="primary" loading />
 	<LxButton class="lx-margin-right--sm" label="Disabled" variant="primary" disabled />
+	<LxButton class="lx-margin-right--sm" label="Active" variant="primary" active />
 </LxFlex>
 
 <details>
@@ -100,6 +102,7 @@ The button component supports different states such as loading and disabled, whi
 <LxFlex gap="0.1rem" wrap>
 	<LxButton class="lx-margin-right--sm" label="Loading" variant="primary" loading />
 	<LxButton class="lx-margin-right--sm" label="Disabled" variant="primary" disabled />
+	<LxButton class="lx-margin-right--sm" label="Active" variant="primary" active />
 </LxFlex>
 ```
 </details>

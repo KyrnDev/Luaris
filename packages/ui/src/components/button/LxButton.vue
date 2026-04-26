@@ -53,6 +53,7 @@
 		variant: 'primary',
 		size: 'md',
 		type: 'button',
+		active: false,
 		disabled: false,
 		loading: false,
 		fullWidth: false,
@@ -74,6 +75,7 @@
 		{
 			'lx-button--loading': props.loading,
 			'lx-button--full-width': props.fullWidth,
+			'lx-button--active': props.active,
 		},
 	]));
 </script>
@@ -106,8 +108,12 @@
 		user-select: none;
 	}
 
+	.lx-button--active {
+		filter: brightness(1.3);
+	}
+
 	.lx-button:hover:not(:disabled) {
-		filter: brightness(1.25);
+		filter: brightness(1.5);
 	}
 
 	.lx-button:active:not(:disabled) {

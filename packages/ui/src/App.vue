@@ -9,6 +9,10 @@
 				</template>
 			</LxButton>
 
+			<LxFlex class="lx-padding-top--3xl lx-padding-x--3xl">
+				<LxThemeSwitcher />
+			</LxFlex>
+
 			<LxFlex class="lx-padding-y--3xl" gap="0px">
 				<LxButton label="Left" variant="primary" size="md" group="left" />
 				<LxButton label="Middle" variant="primary" size="md" group="middle" />
@@ -31,4 +35,5 @@
 	import LxIcon from './components/icon/LxIcon.vue';
 	import LxButton from './components/button/LxButton.vue';
 	import LxFlex from './components/flex/LxFlex.vue';
+	import LxThemeSwitcher from './components/theme-switcher/LxThemeSwitcher.vue';
 </script>
