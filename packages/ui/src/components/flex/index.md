@@ -9,6 +9,8 @@ The Flex component is a powerful layout tool that allows you to create flexible 
 > [!NOTE]
 > This component is designed to be a more convenient way of using CSS Flex, the aim for the Luaris project is to avoid the need for custom CSS as much as possible. This component will also be the core of a lot of the layout components.
 
+[[toc]]
+
 ## Settings
 
 The Flex component accepts the following props:

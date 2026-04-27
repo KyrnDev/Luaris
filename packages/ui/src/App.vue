@@ -1,27 +1,34 @@
 <template>
 	<LxPage>
 		<template #header>
-			<p>Header</p>
-			<LxIcon name="coffee" size="md" />
-			<LxButton label="Save" variant="success" size="md">
-				<template #icon>
-					<LxIcon name="save" size="xl" />
-				</template>
-			</LxButton>
-
-			<LxFlex class="lx-padding-top--3xl lx-padding-x--3xl">
-				<LxThemeSwitcher />
-			</LxFlex>
-
-			<LxFlex class="lx-padding-y--3xl" gap="0px">
-				<LxButton label="Left" variant="primary" size="md" group="left" />
-				<LxButton label="Middle" variant="primary" size="md" group="middle" />
-				<LxButton label="Right" variant="primary" size="md" group="right" />
-			</LxFlex>
+			<h1>Luaris Components</h1>
 		</template>
 
 		<template #default>
-			<p>Main content</p>
+			<section class="components">
+				<article class="component">
+					<header>
+						<h2>Buttons</h2>
+					</header>
+
+					<LxIcon name="coffee" size="md" />
+					<LxButton label="Save" variant="success" size="md">
+						<template #icon>
+							<LxIcon name="save" size="xl" />
+						</template>
+					</LxButton>
+
+					<LxFlex class="lx-padding-top--3xl lx-padding-x--3xl">
+						<LxThemeSwitcher />
+					</LxFlex>
+
+					<LxFlex class="lx-padding-y--3xl" gap="0px">
+						<LxButton label="Left" variant="primary" size="md" group="left" />
+						<LxButton label="Middle" variant="primary" size="md" group="middle" />
+						<LxButton label="Right" variant="primary" size="md" group="right" />
+					</LxFlex>
+				</article>
+			</section>
 		</template>
 
 		<template #footer>

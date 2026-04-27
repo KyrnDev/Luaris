@@ -7,6 +7,8 @@
 
 The button component is a versatile and customizable UI element that can be used for various actions in your application. It supports multiple variants, sizes, and states to fit different use cases.
 
+[[toc]]
+
 ## Settings
 
 The Button component accepts the following props:

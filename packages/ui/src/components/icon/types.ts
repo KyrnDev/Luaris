@@ -1,4 +1,4 @@
-import type { TFontSizes } from '../../types/units';
+import type { TSizes } from '../../types/units';
 
 export type TLxIconStyle = (
 	'solid'
@@ -17,7 +17,7 @@ export type TLxIconStyle = (
 export type TLxIconProps = {
 	name: string,
 	iconStyle?: TLxIconStyle,
-	size?: TFontSizes,
+	size?: TSizes,
 	spin?: boolean,
 	pulse?: boolean,
 	fixedWidth?: boolean,

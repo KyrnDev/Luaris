@@ -1,6 +1,77 @@
 # TODO
 
-# Chores
+# Components
 
-- [ ] Create a script to automatically pull the latest icons from the FontAwesome Pro NPM package each week, and update the registry file. This will ensure we always have the latest icons available in our icon picker, then publish a new version.
-- [ ] Do a pass over the new components: LxAlert, LxConfirmModal, LxContextMenu, LxEmptyState, LxFileUpload, LxFormField, LxListItem, LxList, LxPagination, LxStat, LxTable, LxTreeItem, LxTree.
+- accordion
+- alert
+- auto-complete
+- avatar
+- badge
+- breadcrumbs
+- calendar
+- card
+- carousel
+- colour-picker / color-picker
+- combobox
+- command-palette
+- comparison
+- modal
+- context-menu
+- data-table
+- date-picker
+- date-picker (w/ Time)
+- date-range-picker (w/ Time)
+- time-picker
+- time-range-picker
+- divider
+- drawer
+- dropdown
+- empty-state
+- file-upload
+- form
+- form-field
+- hover-card
+- icon-picker
+- input
+- label
+- list-item
+- list
+- markdown-editor
+- markdown-preview
+- mentions-input
+- menu-bar
+- menu-item
+- number-input
+- otp-input
+- pagination
+- pin-input
+- popover
+- progress
+- radio
+- radios
+- rating
+- resizeable
+- rte
+- select
+- skeleton
+- slider
+- sortable
+- split-pane
+- stat
+- stepper
+- switch
+- tab
+- table
+- tabs
+- tag
+- textarea
+- theme-selector
+- timeline
+- timeline-item
+- toast
+- toasts
+- tooltip
+- tree-item
+- tree
+- virtual-list
+- virtual-table

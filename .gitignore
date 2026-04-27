@@ -36,3 +36,7 @@ bunfig.toml
 
 # Temporary files
 tmp
+
+# Vitepress
+.vitepress/dist
+.vitepress/cache

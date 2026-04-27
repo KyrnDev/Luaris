@@ -10,7 +10,7 @@ export type TLayoutsZero = 0 | '0';
 export type TLayoutsGlobal = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
 export type TLayoutsBase = TLayoutsCalc | TLayoutsVar | TLayoutsGlobal;
 export type TLayoutsNumeric = TLayoutsBase | TLayoutsZero;
-export type TFontSizes = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+export type TSizes = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 export type TColours = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'white' | 'black';
 
 export type TLayoutsUnits = (

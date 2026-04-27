@@ -35,6 +35,8 @@
 
 The Page component is a layout component that provides a consistent structure for your application's pages. It includes a header, main content area, and footer, and can be used to create a cohesive look and feel across your application.
 
+[[toc]]
+
 ## Settings
 
 The Page component accepts the following props:

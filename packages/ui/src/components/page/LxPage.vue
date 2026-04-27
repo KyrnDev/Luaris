@@ -60,6 +60,7 @@
 	const heightValue = computed(() => props.noFill ? 'auto' : '100vh');
 	const getGap = computed(() => props.gap);
 	const getAsideWidth = computed(() => props.asideWidth || '250px');
+	const getDefaultPadding = computed(() => props.padding || props.gap || '1rem');
 </script>
 
 <style lang="scss" scoped>
@@ -68,6 +69,7 @@
 		height: v-bind(heightValue);
 		width: 100%;
 		gap: v-bind(getGap);
+		padding: v-bind(getDefaultPadding);
 		grid-template-areas: "banner" "header" "sub-header" "content";
 		grid-template-columns: 1fr;
 		grid-template-rows: auto auto auto 1fr;

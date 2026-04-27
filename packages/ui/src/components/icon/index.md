@@ -6,6 +6,8 @@
 
 The Icon component is a simple wrapper around the Font Awesome icon library, with support for both the free and pro icon sets. It allows you to easily add icons to your application with a consistent API.
 
+[[toc]]
+
 ## Settings
 
 The Icon component accepts the following props:
