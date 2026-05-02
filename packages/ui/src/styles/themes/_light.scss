@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../helpers/contrast' as contrast;
 
 $colour-primary: #2c415a;
@@ -15,8 +16,6 @@ $colour-surface-raised: #fbfcff;
 $colour-surface-sunken: #e6ecf6;
 $colour-surface-overlay: rgb(15 23 42 / 0.58);
 $colour-surface-border: #c8d3e5;
-$colour-surface-text: #121a2b;
-$colour-surface-text-muted: #4a5977;
 $colour-surface-inverse: #ffffff;
 
 $theme-light: (
@@ -30,8 +29,8 @@ $theme-light: (
 		'danger': $colour-danger,
 		'white': $colour-white,
 		'black': $colour-black,
-		'focus-ring': #1d4ed8,
-		'hover': (
+		'transparent': transparent,
+		'on': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
 			'secondary': contrast.lx-contrast-colour($colour-secondary),
 			'accent': contrast.lx-contrast-colour($colour-accent),
@@ -39,8 +38,33 @@ $theme-light: (
 			'success': contrast.lx-contrast-colour($colour-success),
 			'warning': contrast.lx-contrast-colour($colour-warning),
 			'danger': contrast.lx-contrast-colour($colour-danger),
-			'white': $colour-white,
-			'black': $colour-black,
+			'white': contrast.lx-contrast-colour($colour-white),
+			'black': contrast.lx-contrast-colour($colour-black),
+			'transparent': contrast.lx-contrast-colour(transparent),
+		),
+		'disabled': (
+			'primary': color.scale($colour-primary, $lightness: -50%),
+			'secondary': color.scale($colour-secondary, $lightness: -50%),
+			'accent': color.scale($colour-accent, $lightness: -50%),
+			'info': color.scale($colour-info, $lightness: -50%),
+			'success': color.scale($colour-success, $lightness: -50%),
+			'warning': color.scale($colour-warning, $lightness: -50%),
+			'danger': color.scale($colour-danger, $lightness: -50%),
+			'white': color.scale($colour-white, $lightness: -50%),
+			'black': color.scale($colour-black, $lightness: -50%),
+			'transparent': color.scale(transparent, $lightness: -50%),
+		),
+		'hover': (
+			'primary': color.scale($colour-primary, $lightness: -20%),
+			'secondary': color.scale($colour-secondary, $lightness: -20%),
+			'accent': color.scale($colour-accent, $lightness: -20%),
+			'info': color.scale($colour-info, $lightness: -20%),
+			'success': color.scale($colour-success, $lightness: -20%),
+			'warning': color.scale($colour-warning, $lightness: -20%),
+			'danger': color.scale($colour-danger, $lightness: -20%),
+			'white': color.scale($colour-white, $lightness: -20%),
+			'black': color.scale($colour-black, $lightness: -20%),
+			'transparent': color.scale(transparent, $lightness: -20%),
 		),
 		'surface': (
 			'base': $colour-surface-base,
@@ -48,8 +72,6 @@ $theme-light: (
 			'sunken': $colour-surface-sunken,
 			'overlay': $colour-surface-overlay,
 			'border': $colour-surface-border,
-			'text': $colour-surface-text,
-			'text-muted': $colour-surface-text-muted,
 			'inverse': $colour-surface-inverse,
 		),
 	),
@@ -65,27 +87,17 @@ $theme-light: (
 			'3xl': 3rem,
 		),
 		'radius': (
+			'none': 0px,
 			'sm': 0.25rem,
 			'md': 0.5rem,
 			'lg': 0.75rem,
 			'pill': 9999px,
+			'full': 100%,
 		),
 		'border-width': (
-			'hairline': 1px,
-			'standard': 2px,
-		),
-		'control': (
-			'height-2xs': 1.5rem,
-			'height-xs': 1.75rem,
-			'height-sm': 2rem,
-			'height-md': 2.5rem,
-			'height-lg': 3rem,
-			'height-xl': 3.5rem,
-			'height-2xl': 4rem,
-		),
-		'layout': (
-			'content-max': 72rem,
-			'sidebar-width': 18rem,
+			'none': 0px,
+			'thin': 1px,
+			'thick': 2px,
 		),
 	),
 	'font': (
@@ -110,6 +122,7 @@ $theme-light: (
 			'relaxed': 1.7,
 		),
 		'weight': (
+			'light': 300,
 			'regular': 400,
 			'medium': 500,
 			'semibold': 600,

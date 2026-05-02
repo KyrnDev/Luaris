@@ -1,3 +1,6 @@
+import type { TSizes } from '../../types/units';
+
 export type TLxCardProps = {
-	test?: string,
+	padding?: TSizes,
+	borderRadius?: TSizes,
 };

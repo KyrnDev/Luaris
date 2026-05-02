@@ -94,8 +94,8 @@
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
     120deg,
-    #bd34fe 30%,
-    #41d1ff
+    #00aeff 30%,
+    #FFA500
   );
 
   --vp-home-hero-image-background-image: linear-gradient(
@@ -137,3 +137,14 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+body {
+	background-color: var(--lx-colour-surface-base);
+
+	header {
+		background-color: var(--lx-colour-surface-raised);
+	}
+
+	aside {
+		background-color: var(--lx-colour-surface-raised);
+	}
+}

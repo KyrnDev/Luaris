@@ -16,3 +16,7 @@ export default {
 	// 	// ...
 	// }
 } satisfies Theme;
+
+document.addEventListener('DOMContentLoaded', () => {
+	console.log(document.querySelector('.VPSwitchAppearance'));
+});

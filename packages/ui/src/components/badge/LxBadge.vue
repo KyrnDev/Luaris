@@ -15,9 +15,14 @@
 	import type { TLxBadgeProps } from './types';
 	import { computed } from 'vue';
 
-	const props = defineProps<TLxBadgeProps>();
-	const getVariant = computed(() => `var(--lx-colour-${props.variant ?? 'primary'})`);
-	const getSize = computed(() => `var(--lx-font-size-${props.size ?? 'md'})`);
+	const props = withDefaults(defineProps<TLxBadgeProps>(), {
+		variant: 'primary',
+		size: 'md',
+	});
+
+	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
+	const getVariant = computed(() => `var(--lx-colour-${props.variant})`);
+	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +38,7 @@
 		line-height: 1.2;
 		padding: var(--lx-size-space-xs) var(--lx-size-space-md);
 		background-color: v-bind(getVariant);
+		color: v-bind(getTextColour);
 		font-size: v-bind(getSize);
 	}
 </style>

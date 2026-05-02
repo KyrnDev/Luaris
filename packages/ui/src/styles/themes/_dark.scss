@@ -1,9 +1,10 @@
 @use 'sass:map';
+@use 'sass:color';
 @use '../helpers/contrast' as contrast;
 @use './light';
 
 $colour-primary: #42556f;
-$colour-secondary: #8ea3c5;
+$colour-secondary: #202020;
 $colour-accent: #f59e0b;
 $colour-info: #0ea5e9;
 $colour-success: #16a34a;
@@ -23,8 +24,8 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 		'danger': $colour-danger,
 		'white': $colour-white,
 		'black': $colour-black,
-		'focus-ring': #fbbf24,
-		'hover': (
+		'transparent': transparent,
+		'on': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
 			'secondary': contrast.lx-contrast-colour($colour-secondary),
 			'accent': contrast.lx-contrast-colour($colour-accent),
@@ -32,18 +33,41 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 			'success': contrast.lx-contrast-colour($colour-success),
 			'warning': contrast.lx-contrast-colour($colour-warning),
 			'danger': contrast.lx-contrast-colour($colour-danger),
-			'white': $colour-white,
-			'black': $colour-black,
+			'white': contrast.lx-contrast-colour($colour-white),
+			'black': contrast.lx-contrast-colour($colour-black),
+			'transparent': contrast.lx-contrast-colour(transparent),
+		),
+		'disabled': (
+			'primary': rgba(color.scale($colour-primary, $lightness: -70%), 0.8),
+			'secondary': rgba(color.scale($colour-secondary, $lightness: -70%), 0.8),
+			'accent': rgba(color.scale($colour-accent, $lightness: -70%), 0.8),
+			'info': rgba(color.scale($colour-info, $lightness: -70%), 0.8),
+			'success': rgba(color.scale($colour-success, $lightness: -70%), 0.8),
+			'warning': rgba(color.scale($colour-warning, $lightness: -70%), 0.8),
+			'danger': rgba(color.scale($colour-danger, $lightness: -70%), 0.8),
+			'white': rgba(color.scale($colour-white, $lightness: -70%), 0.8),
+			'black': rgba(color.scale($colour-black, $lightness: -70%), 0.8),
+			'transparent': color.scale(transparent, $lightness: -70%),
+		),
+		'hover': (
+			'primary': color.scale($colour-primary, $lightness: 30%),
+			'secondary': color.scale($colour-secondary, $lightness: 30%),
+			'accent': color.scale($colour-accent, $lightness: 30%),
+			'info': color.scale($colour-info, $lightness: 30%),
+			'success': color.scale($colour-success, $lightness: 30%),
+			'warning': color.scale($colour-warning, $lightness: 30%),
+			'danger': color.scale($colour-danger, $lightness: 30%),
+			'white': color.scale($colour-white, $lightness: -30%),
+			'black': color.scale($colour-black, $lightness: 30%),
+			'transparent': color.scale(transparent, $lightness: 30%),
 		),
 		'surface': (
-			'base': #121314,
-			'raised': #1a1c1f,
-			'sunken': #0f1113,
-			'overlay': rgb(3 7 18 / 0.82),
-			'border': #2d3138,
-			'text': #eef2f7,
-			'text-muted': #a8b0bf,
-			'inverse': #0b0c0e,
+			'base': #181818,
+			'raised': #1b1b1f,
+			'sunken': #11181c,
+			'overlay': rgba(30, 41, 59, 0.8),
+			'border': #475569,
+			'inverse': #f1f5f9,
 		),
 	),
 ));

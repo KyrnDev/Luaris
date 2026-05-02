@@ -2,6 +2,7 @@
 	<span class="lx-tag" :class="[`lx-tag--${variant}`, `lx-tag--${size}`]">
 		<span v-if="$slots.leading" class="lx-tag__leading"><slot name="leading" /></span>
 		<slot>{{ label }}</slot>
+
 		<LxButton
 			v-if="removable"
 			class="lx-tag__remove"
@@ -31,16 +32,17 @@
 	}>();
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size ?? 'md'})`);
+	const getColour = computed(() => `var(--lx-colour-${props.variant ?? 'primary'})`);
+	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant ?? 'primary'})`);
 </script>
 
 <style scoped lang="scss">
 	.lx-tag {
-		--lx-tag-colour: var(--lx-colour-secondary);
 		align-items: center;
-		background: color-mix(in srgb, var(--lx-tag-colour) 14%, transparent);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-tag-colour);
+		border: var(--lx-size-border-width-thin) solid v-bind(getColour);
 		border-radius: var(--lx-size-radius-md);
-		color: var(--lx-tag-colour);
+		background: color-mix(in srgb, v-bind(getColour) 30%, transparent);
+		color: v-bind(getTextColour);
 		display: inline-flex;
 		font-weight: var(--lx-font-weight-medium);
 		font-size: v-bind(getSize);
@@ -56,12 +58,4 @@
 		padding: 0;
 		min-width: auto;
 	}
-
-	.lx-tag--primary { --lx-tag-colour: var(--lx-colour-primary); }
-	.lx-tag--secondary { --lx-tag-colour: var(--lx-colour-secondary); }
-	.lx-tag--accent { --lx-tag-colour: var(--lx-colour-accent); }
-	.lx-tag--info { --lx-tag-colour: var(--lx-colour-info); }
-	.lx-tag--success { --lx-tag-colour: var(--lx-colour-success); }
-	.lx-tag--warning { --lx-tag-colour: var(--lx-colour-warning); }
-	.lx-tag--danger { --lx-tag-colour: var(--lx-colour-danger); }
 </style>

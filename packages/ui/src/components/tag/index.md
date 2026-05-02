@@ -10,15 +10,38 @@ The Tag component is a versatile UI element used to display small pieces of info
 
 [[toc]]
 
+## Settings
+
+The Tag component accepts several props to customize its appearance and behavior:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | TVariant | `primary` | The visual style of the tag. |
+| `size` | TSizes | `md` | The size of the tag. |
+| `label` | `string?` | `undefined` | The text label of the tag, optional, can use default slot instead. |
+| `removable` | `boolean` | `false` | Whether the tag can be removed by the user, emits a `remove` event when the remove action is triggered. |
+
+## Events
+
+The Tag component can emit the following events:
+
+| Event | Description |
+| --- | --- |
+| `remove` | Emitted when the user triggers the remove action on a removable tag. |
+
 ## Variants
 
 <LxFlex wrap>
 	<LxTag variant="primary">Primary</LxTag>
 	<LxTag variant="secondary">Secondary</LxTag>
-	<LxTag variant="success">Success</LxTag>
-	<LxTag variant="danger">Danger</LxTag>
-	<LxTag variant="warning">Warning</LxTag>
+	<LxTag variant="accent">Accent</LxTag>
 	<LxTag variant="info">Info</LxTag>
+	<LxTag variant="success">Success</LxTag>
+	<LxTag variant="warning">Warning</LxTag>
+	<LxTag variant="danger">Danger</LxTag>
+	<LxTag variant="white">White</LxTag>
+	<LxTag variant="black">Black</LxTag>
+	<LxTag variant="transparent">Transparent</LxTag>
 </LxFlex>
 
 <details>
@@ -28,10 +51,14 @@ The Tag component is a versatile UI element used to display small pieces of info
 <LxFlex wrap>
 	<LxTag variant="primary">Primary</LxTag>
 	<LxTag variant="secondary">Secondary</LxTag>
-	<LxTag variant="success">Success</LxTag>
-	<LxTag variant="danger">Danger</LxTag>
-	<LxTag variant="warning">Warning</LxTag>
+	<LxTag variant="accent">Accent</LxTag>
 	<LxTag variant="info">Info</LxTag>
+	<LxTag variant="success">Success</LxTag>
+	<LxTag variant="warning">Warning</LxTag>
+	<LxTag variant="danger">Danger</LxTag>
+	<LxTag variant="white">White</LxTag>
+	<LxTag variant="black">Black</LxTag>
+	<LxTag variant="transparent">Transparent</LxTag>
 </LxFlex>
 ```
 </details>
@@ -84,7 +111,7 @@ The Tag component is a versatile UI element used to display small pieces of info
 
 ## Slots
 
-The Badge component does offer a default slot for custom content, allowing you to include icons, text, or any other elements within the badge.
+The Tag component does offer a default slot for custom content, allowing you to include icons, text, or any other elements within the tag.
 
 <LxFlex>
 	<LxTag variant="primary">

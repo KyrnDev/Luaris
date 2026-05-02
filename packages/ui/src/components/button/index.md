@@ -26,6 +26,10 @@ The Button component accepts the following props:
 | `icon` | `string` | `''` | The name of the icon to display in the button. |
 | `iconOrder` | `icon-left \| icon-right` | `icon-left` | The position of the icon in relation to the label. |
 | `active` | `boolean` | `false` | Whether the button is in an active state. |
+| `borderRadius` | `none \| sm \| md \| lg \| pill \| full \| pill` | The border radius of the button. |
+| `borderWidth` | `none \| thin \| thick` | The border width of the button, used for the invert hover mode. |
+| `hoverMode` | `default \| invert` | `default` | The hover mode of the button, which changes the hover effect. |
+| `group` | `start \| middle \| end` | `undefined` | The group position of the button, used for visually connecting buttons that are part of the same action group. |
 
 ## Styles
 
@@ -109,6 +113,15 @@ The button component supports different states such as loading and disabled, whi
 ```
 </details>
 
+## Hover Modes
+
+The button component supports two different hover modes, default and invert, which can be set using the `hoverMode` prop. The default hover mode changes the background color of the button on hover using the `hover` colour state. The `invert` mode instead applies a border that on hover will set the text colour and border colour to the variant colour and the background to transparent.
+
+<LxFlex gap="0.1rem" wrap>
+	<LxButton class="lx-margin-right--sm" label="Hover Default" variant="primary" />
+	<LxButton class="lx-margin-right--sm" label="Hover Invert" variant="primary" hoverMode="invert" />
+</LxFlex>
+
 ## Layout
 
 The button component can also be configured to take up the full width of its container, which can be useful for creating more prominent call-to-action buttons.
@@ -149,21 +162,21 @@ The button component supports adding an icon to the left or right of the label u
 
 ## Grouping
 
-The button component supports grouping through the `group` prop, which can be set to 'left', 'middle', or 'right'. This allows you to visually connect buttons that are part of the same action group, such as a set of related options or a multi-step process.
+The button component supports grouping through the `group` prop, which can be set to 'start', 'middle', or 'end'. This allows you to visually connect buttons that are part of the same action group, such as a set of related options or a multi-step process.
 
 > [!INFO]
 > I decided on this design rather than using a wrapper component for button groups, as it allows for more flexibility in how the buttons are grouped and styled, without the need for an additional component.
 
 <LxFlex gap="0rem" class="lx-padding-bottom--md" wrap>
-	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Start" variant="primary" size="md" group="start" />
 	<LxButton label="Middle" variant="primary" size="md" group="middle" />
-	<LxButton label="Right" variant="primary" size="md" group="right" />
+	<LxButton label="End" variant="primary" size="md" group="end" />
 </LxFlex>
 
-<LxFlex gap="0.2rem" wrap>
-	<LxButton label="Left" variant="primary" size="md" group="left" />
+<LxFlex gap="0.3rem" wrap>
+	<LxButton label="Start" variant="primary" size="md" group="start" />
 	<LxButton label="Middle" variant="primary" size="md" group="middle" />
-	<LxButton label="Right" variant="primary" size="md" group="right" />
+	<LxButton label="End" variant="primary" size="md" group="end" />
 </LxFlex>
 
 <details>
@@ -171,15 +184,15 @@ The button component supports grouping through the `group` prop, which can be se
 
 ```html
 <LxFlex gap="0rem" wrap>
-	<LxButton label="Left" variant="primary" size="md" group="left" />
+	<LxButton label="Start" variant="primary" size="md" group="start" />
 	<LxButton label="Middle" variant="primary" size="md" group="middle" />
-	<LxButton label="Right" variant="primary" size="md" group="right" />
+	<LxButton label="End" variant="primary" size="md" group="end" />
 </LxFlex>
 
-<LxFlex gap="0.2rem" wrap>
-	<LxButton label="Left" variant="primary" size="md" group="left" />
+<LxFlex gap="0.3rem" wrap>
+	<LxButton label="Start" variant="primary" size="md" group="start" />
 	<LxButton label="Middle" variant="primary" size="md" group="middle" />
-	<LxButton label="Right" variant="primary" size="md" group="right" />
+	<LxButton label="End" variant="primary" size="md" group="end" />
 </LxFlex>
 ```
 </details>
@@ -187,6 +200,14 @@ The button component supports grouping through the `group` prop, which can be se
 ## Slots
 
 The button component also supports slots for more custom content.
+
+### Slot: Default
+
+You can use the button's default slot like a normal slot.
+
+<LxButton class="lx-margin-right--sm" variant="primary">
+	Custom Label
+</LxButton>
 
 ### Slot: Icon
 
@@ -207,55 +228,6 @@ Can allow you to add a custom icon to the button, such as an SVG or a font icon 
 	Car
 	<template #icon>
 		<i class="fa-duotone fa-car lx-font-size--xl" />
-	</template>
-</LxButton>
-```
-</details>
-
-### Slot: Leading
-
-The leading slot allows you to add content before the button label, such as contextual information, this is additional to the icon slot, which is more for decorative icons, but offering both allows for more flexibility in how you can use icons and other content in the button.
-
-<LxButton class="lx-margin-right--sm" variant="primary">
-	<template #leading>
-		<p>$</p>
-	</template>
-	Button
-</LxButton>
-
-<details>
-<summary>Show code</summary>
-
-```html
-<LxButton class="lx-margin-right--sm" variant="primary">
-	<template #leading>
-		<p>£</p>
-	</template>
-	Button
-</LxButton>
-```
-</details>
-
-### Slot: Trailing
-
-The trailing slot allows you to add content after the button label, such as a badge or an additional icon, this is additional to the icon slot, which is more for decorative icons, but offering both allows for more flexibility in how you can use icons and other content in the button.
-
-<LxButton class="lx-margin-right--sm" variant="primary">
-	Button
-	<template #trailing>
-		<p>!</p>
-	</template>
-</LxButton>
-
-
-<details>
-<summary>Show code</summary>
-
-```html
-<LxButton class="lx-margin-right--sm" variant="primary">
-	Button
-	<template #trailing>
-		<p>!</p>
 	</template>
 </LxButton>
 ```

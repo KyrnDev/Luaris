@@ -1,12 +1,13 @@
-export type TLxButtonVariant = 'primary' | 'secondary' | 'ghost' | 'plain' | 'accent' | 'info' | 'success' | 'warning' | 'danger';
-export type TLxButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+import type { TRadiusSize, TColours, TSizes, TBorderWidths } from '../../types/units';
+
 export type TLxButtonType = 'button' | 'submit' | 'reset';
 export type TLxButtonIconOrder = 'left' | 'right';
-export type TLxButtonGroup = 'left' | 'middle' | 'right';
+export type TLxButtonGroup = 'start' | 'middle' | 'end';
+export type THoverModes = 'default' | 'invert';
 
 export type TLxButtonProps = {
-	variant?: TLxButtonVariant,
-	size?: TLxButtonSize,
+	variant?: TColours,
+	size?: TSizes,
 	type?: TLxButtonType,
 	disabled?: boolean,
 	loading?: boolean,
@@ -15,6 +16,9 @@ export type TLxButtonProps = {
 	ariaLabel?: string,
 	icon?: string,
 	iconOrder?: TLxButtonIconOrder,
+	borderRadius?: TRadiusSize,
+	borderWidth?: TBorderWidths,
 	group?: TLxButtonGroup,
 	active?: boolean,
+	hoverMode?: THoverModes,
 };

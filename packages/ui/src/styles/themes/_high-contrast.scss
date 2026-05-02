@@ -1,16 +1,25 @@
 @use 'sass:map';
+@use 'sass:color';
 @use '../helpers/contrast' as contrast;
 @use './dark';
 
-$colour-primary: #9bc0ff;
-$colour-secondary: #d1d5db;
-$colour-accent: #ffb300;
-$colour-info: #00d4ff;
-$colour-success: #00e05a;
-$colour-warning: #ffd800;
-$colour-danger: #ff1f1f;
+// Pick colours for dark mode, avoid #000000 and #ffffff to ensure sufficient contrast with text and borders
+$colour-primary: #0000ff;
+$colour-secondary: #00ff00;
+$colour-accent: #ff00ff;
+$colour-info: #00ffff;
+$colour-success: #00ff00;
+$colour-warning: #ffff00;
+$colour-danger: #ff0000;
 $colour-white: #ffffff;
 $colour-black: #000000;
+
+$colour-surface-base: #000000;
+$colour-surface-raised: #000000;
+$colour-surface-sunken: #000000;
+$colour-surface-overlay: rgb(255 255 255 / 0.58);
+$colour-surface-border: #ffffff;
+$colour-surface-inverse: #000000;
 
 $theme-high-contrast: map.deep-merge(dark.$theme-dark, (
 	'colour': (
@@ -23,8 +32,7 @@ $theme-high-contrast: map.deep-merge(dark.$theme-dark, (
 		'danger': $colour-danger,
 		'white': $colour-white,
 		'black': $colour-black,
-		'focus-ring': #ffffff,
-		'hover': (
+		'on': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
 			'secondary': contrast.lx-contrast-colour($colour-secondary),
 			'accent': contrast.lx-contrast-colour($colour-accent),
@@ -32,18 +40,30 @@ $theme-high-contrast: map.deep-merge(dark.$theme-dark, (
 			'success': contrast.lx-contrast-colour($colour-success),
 			'warning': contrast.lx-contrast-colour($colour-warning),
 			'danger': contrast.lx-contrast-colour($colour-danger),
-			'white': $colour-white,
-			'black': $colour-black,
+			'white': contrast.lx-contrast-colour($colour-white),
+			'black': contrast.lx-contrast-colour($colour-black),
 		),
-		'surface': (
-			'base': #000000,
-			'raised': #000000,
-			'sunken': #000000,
-			'overlay': rgb(0 0 0 / 0.9),
-			'border': #ffffff,
-			'text': #ffffff,
-			'text-muted': #f8fafc,
-			'inverse': #000000,
+		'hover': (
+			'primary': color.scale($colour-primary, $lightness: -20%),
+			'secondary': color.scale($colour-secondary, $lightness: -20%),
+			'accent': color.scale($colour-accent, $lightness: -20%),
+			'info': color.scale($colour-info, $lightness: -20%),
+			'success': color.scale($colour-success, $lightness: -20%),
+			'warning': color.scale($colour-warning, $lightness: -20%),
+			'danger': color.scale($colour-danger, $lightness: -20%),
+			'white': color.scale($colour-white, $lightness: -20%),
+			'black': color.scale($colour-black, $lightness: -20%),
+		),
+		'disabled': (
+			'primary': color.scale($colour-primary, $lightness: 40%),
+			'secondary': color.scale($colour-secondary, $lightness: 40%),
+			'accent': color.scale($colour-accent, $lightness: 40%),
+			'info': color.scale($colour-info, $lightness: 40%),
+			'success': color.scale($colour-success, $lightness: 40%),
+			'warning': color.scale($colour-warning, $lightness: 40%),
+			'danger': color.scale($colour-danger, $lightness: 40%),
+			'white': color.scale($colour-white, $lightness: 40%),
+			'black': color.scale($colour-black, $lightness: 40%),
 		),
 	),
 	'size': (

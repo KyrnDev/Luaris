@@ -10,15 +10,29 @@ The Badge component is a versatile UI element used to display small pieces of in
 
 [[toc]]
 
+## Settings
+
+The Badge component accepts several props to customize its appearance and behavior:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | TVariant | `primary` | The visual style of the badge. |
+| `size` | TSizes | `md` | The size of the badge. |
+| `label` | `string?` | `undefined` | The text label of the badge, optional, can use default slot instead. |
+
 ## Variants
 
 <LxFlex wrap>
 	<LxBadge variant="primary">Primary</LxBadge>
 	<LxBadge variant="secondary">Secondary</LxBadge>
-	<LxBadge variant="success">Success</LxBadge>
-	<LxBadge variant="danger">Danger</LxBadge>
-	<LxBadge variant="warning">Warning</LxBadge>
+	<LxBadge variant="accent">Accent</LxBadge>
 	<LxBadge variant="info">Info</LxBadge>
+	<LxBadge variant="success">Success</LxBadge>
+	<LxBadge variant="warning">Warning</LxBadge>
+	<LxBadge variant="danger">Danger</LxBadge>
+	<LxBadge variant="white">White</LxBadge>
+	<LxBadge variant="black">Black</LxBadge>
+	<LxBadge variant="transparent">Transparent</LxBadge>
 </LxFlex>
 
 <details>
@@ -28,10 +42,14 @@ The Badge component is a versatile UI element used to display small pieces of in
 <LxFlex wrap>
 	<LxBadge variant="primary">Primary</LxBadge>
 	<LxBadge variant="secondary">Secondary</LxBadge>
-	<LxBadge variant="success">Success</LxBadge>
-	<LxBadge variant="danger">Danger</LxBadge>
-	<LxBadge variant="warning">Warning</LxBadge>
+	<LxBadge variant="accent">Accent</LxBadge>
 	<LxBadge variant="info">Info</LxBadge>
+	<LxBadge variant="success">Success</LxBadge>
+	<LxBadge variant="warning">Warning</LxBadge>
+	<LxBadge variant="danger">Danger</LxBadge>
+	<LxBadge variant="white">White</LxBadge>
+	<LxBadge variant="black">Black</LxBadge>
+	<LxBadge variant="transparent">Transparent</LxBadge>
 </LxFlex>
 ```
 </details>

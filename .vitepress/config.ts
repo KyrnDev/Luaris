@@ -7,17 +7,33 @@ export default defineConfig({
 	rewrites: {
 		'packages/ui/src/components/:component/index.md': 'components/:component/index.md',
 		'packages/ui/src/components/index.md': 'components/index.md',
+		'packages/docs/design/index.md': 'design/index.md',
+		'packages/docs/design/:page': 'design/:page',
 	},
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
 			{ text: 'Home', link: '/' },
-			{ text: 'Components', link: '/components/' },
+			{ text: 'Design', link: '/design/index.md' },
+			{ text: 'Components', link: '/components/index.md' },
+			{ text: 'Compose', link: '#' },
+			{ text: 'Server', link: '#' },
 		],
 
 		sidebar: [
 			{
+				text: 'Design System',
+				link: '/design/index.md',
+				items: [
+					{ text: 'Colours', link: '/design/colours.md' },
+					{ text: 'Sizing', link: '/design/sizing.md' },
+					{ text: 'Typography', link: '/design/typography.md' },
+					{ text: 'Motion', link: '/design/motion.md' },
+				],
+			},
+			{
 				text: 'Components',
+				link: '/components/index.md',
 				items: [
 					{ text: 'Badge', link: '/components/badge/' },
 					{ text: 'Button', link: '/components/button/' },
