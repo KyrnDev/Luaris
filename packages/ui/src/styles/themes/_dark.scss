@@ -49,6 +49,18 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 			'black': rgba(color.scale($colour-black, $lightness: -70%), 0.8),
 			'transparent': color.scale(transparent, $lightness: -70%),
 		),
+		'active': (
+			'primary': color.scale($colour-primary, $lightness: 30%),
+			'secondary': color.scale($colour-secondary, $lightness: 30%),
+			'accent': color.scale($colour-accent, $lightness: 30%),
+			'info': color.scale($colour-info, $lightness: 30%),
+			'success': color.scale($colour-success, $lightness: 30%),
+			'warning': color.scale($colour-warning, $lightness: 30%),
+			'danger': color.scale($colour-danger, $lightness: 30%),
+			'white': color.scale($colour-white, $lightness: -30%),
+			'black': color.scale($colour-black, $lightness: 30%),
+			'transparent': color.scale(transparent, $lightness: 30%),
+		),
 		'hover': (
 			'primary': color.scale($colour-primary, $lightness: 30%),
 			'secondary': color.scale($colour-secondary, $lightness: 30%),

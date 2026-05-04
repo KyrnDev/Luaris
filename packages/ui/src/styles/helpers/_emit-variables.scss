@@ -1,5 +1,6 @@
 @use 'sass:meta';
 @use 'sass:string';
+@use 'sass:color';
 
 @mixin lx-emit-variables($tokens, $prefix: null) {
 	@each $token, $value in $tokens {
@@ -14,7 +15,23 @@
 		@if meta.type-of($value) == 'map' {
 			@include lx-emit-variables($value, $token-name);
 		} @else {
-			--lx-#{$token-name}: #{$value};
+			@if
+				string.index($token-name, 'colour-') == 1
+				and string.index($token-name, '-transparent') == null
+				and string.index($token-name, '-on') == null
+				and string.index($token-name, '-hover') == null
+				and string.index($token-name, '-disabled') == null
+				and string.index($token-name, '-active') == null
+				and string.index($token-name, '-surface') == null
+			{
+				--lx-#{$token-name}--lighter: #{color.scale($value, $lightness: 40%)};
+				--lx-#{$token-name}--light: #{color.scale($value, $lightness: 20%)};
+				--lx-#{$token-name}: #{$value};
+				--lx-#{$token-name}--dark: #{color.scale($value, $lightness: -20%)};
+				--lx-#{$token-name}--darker: #{color.scale($value, $lightness: -40%)};
+			} @else {
+				--lx-#{$token-name}: #{$value};
+			}
 		}
 	}
 }

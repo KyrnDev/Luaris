@@ -1,7 +1,6 @@
 @use './helpers/emit-variables' as helpers;
 @use './themes/light';
 @use './themes/dark';
-@use './themes/high-contrast';
 @use './utils/helpers' as utils;
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;500;700&family=Nunito:wght@400;500;600;700&display=swap');
@@ -30,27 +29,11 @@ html[data-theme='dark'] {
 	@include utils.lx-emit-colour-helpers(dark.$theme-dark);
 }
 
-html[data-theme='high-contrast'] {
-	color-scheme: dark;
-	@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
-	@include helpers.lx-emit-token-classes(high-contrast.$theme-high-contrast);
-	@include utils.lx-emit-colour-helpers(high-contrast.$theme-high-contrast);
-}
-
 @media (prefers-color-scheme: dark) {
 	html:not([data-theme]) {
 		color-scheme: dark;
 		@include helpers.lx-emit-variables(dark.$theme-dark);
 		@include helpers.lx-emit-token-classes(dark.$theme-dark);
 		@include utils.lx-emit-colour-helpers(dark.$theme-dark);
-	}
-}
-
-@media (prefers-contrast: more) {
-	html:not([data-theme]) {
-		color-scheme: dark;
-		@include helpers.lx-emit-variables(high-contrast.$theme-high-contrast);
-		@include helpers.lx-emit-token-classes(high-contrast.$theme-high-contrast);
-		@include utils.lx-emit-colour-helpers(high-contrast.$theme-high-contrast);
 	}
 }

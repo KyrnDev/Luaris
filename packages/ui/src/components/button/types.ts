@@ -3,7 +3,7 @@ import type { TRadiusSize, TColours, TSizes, TBorderWidths } from '../../types/u
 export type TLxButtonType = 'button' | 'submit' | 'reset';
 export type TLxButtonIconOrder = 'left' | 'right';
 export type TLxButtonGroup = 'start' | 'middle' | 'end';
-export type THoverModes = 'default' | 'invert';
+export type TLxButtonHoverModes = 'default' | 'invert';
 
 export type TLxButtonProps = {
 	variant?: TColours,
@@ -20,5 +20,5 @@ export type TLxButtonProps = {
 	borderWidth?: TBorderWidths,
 	group?: TLxButtonGroup,
 	active?: boolean,
-	hoverMode?: THoverModes,
+	hoverMode?: TLxButtonHoverModes,
 };

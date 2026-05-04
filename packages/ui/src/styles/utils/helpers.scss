@@ -141,6 +141,15 @@ $lx-size-scales: (
 	.lx-grid-auto-flow--row-dense { grid-auto-flow: row dense; }
 	.lx-grid-auto-flow--column-dense { grid-auto-flow: column dense; }
 
+	.lx-width--half { width: 50%; }
+	.lx-width--full { width: 100%; }
+	.lx-height--half { height: 50%; }
+	.lx-height--full { height: 100%; }
+	.lx-max-width--half { max-width: 50%; }
+	.lx-max-width--full { max-width: 100%; }
+	.lx-max-height--half { max-height: 50%; }
+	.lx-max-height--full { max-height: 100%; }
+
 	@for $col from 1 through 12 {
 		.lx-grid-cols--#{$col} { grid-template-columns: repeat(#{$col}, minmax(0, 1fr)); }
 		.lx-grid-rows--#{$col} { grid-template-rows: repeat(#{$col}, minmax(0, 1fr)); }

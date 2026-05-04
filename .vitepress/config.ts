@@ -41,6 +41,7 @@ export default defineConfig({
 					{ text: 'Flex', link: '/components/flex/' },
 					{ text: 'Icon', link: '/components/icon/' },
 					{ text: 'Page', link: '/components/page/' },
+					{ text: 'Switch', link: '/components/switch/' },
 					{ text: 'Tag', link: '/components/tag/' },
 				],
 			},
