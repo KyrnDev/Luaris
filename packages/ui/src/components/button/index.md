@@ -209,6 +209,16 @@ You can use the button's default slot like a normal slot.
 	Custom Label
 </LxButton>
 
+<details>
+<summary>Show code</summary>
+
+```html
+<LxButton class="lx-margin-right--sm" variant="primary">
+	Custom Label
+</LxButton>
+```
+</details>
+
 ### Slot: Icon
 
 Can allow you to add a custom icon to the button, such as an SVG or a font icon with custom styling, note you can also use the `iconOrder` prop to position the icon on the left or right of the label, it will use the same slot.

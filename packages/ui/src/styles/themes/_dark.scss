@@ -3,13 +3,13 @@
 @use '../helpers/contrast' as contrast;
 @use './light';
 
-$colour-primary: #42556f;
-$colour-secondary: #202020;
-$colour-accent: #f59e0b;
-$colour-info: #0ea5e9;
-$colour-success: #16a34a;
-$colour-warning: #f59e0b;
-$colour-danger: #dc2626;
+$colour-primary: #7aa2c7;
+$colour-secondary: #8fa0b3;
+$colour-accent: #f2a65a;
+$colour-info: #56b6d7;
+$colour-success: #4eb38a;
+$colour-warning: #d9a441;
+$colour-danger: #f06a6a;
 $colour-white: #ffffff;
 $colour-black: #000000;
 
@@ -62,12 +62,12 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 			'transparent': color.scale(transparent, $lightness: 30%),
 		),
 		'surface': (
-			'base': #181818,
-			'raised': #1b1b1f,
-			'sunken': #11181c,
-			'overlay': rgba(30, 41, 59, 0.8),
-			'border': #475569,
-			'inverse': #f1f5f9,
+			'base': #18191a,
+			'raised': #222227,
+			'sunken': #0b1118,
+			'overlay': rgb(2 8 23 / 0.76),
+			'border': #2d3b4b,
+			'inverse': #f8fafc,
 		),
 	),
 ));

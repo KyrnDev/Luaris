@@ -3,23 +3,23 @@
 @use '../helpers/contrast' as contrast;
 @use './dark';
 
-// Pick colours for dark mode, avoid #000000 and #ffffff to ensure sufficient contrast with text and borders
-$colour-primary: #0000ff;
-$colour-secondary: #00ff00;
-$colour-accent: #ff00ff;
-$colour-info: #00ffff;
-$colour-success: #00ff00;
-$colour-warning: #ffff00;
-$colour-danger: #ff0000;
+// High-contrast should stay unmistakable, but still feel deliberate rather than random.
+$colour-primary: #ffffff;
+$colour-secondary: #ffd400;
+$colour-accent: #00c2ff;
+$colour-info: #00c2ff;
+$colour-success: #00d084;
+$colour-warning: #ffd400;
+$colour-danger: #ff5a5f;
 $colour-white: #ffffff;
 $colour-black: #000000;
 
 $colour-surface-base: #000000;
-$colour-surface-raised: #000000;
+$colour-surface-raised: #0a0a0a;
 $colour-surface-sunken: #000000;
-$colour-surface-overlay: rgb(255 255 255 / 0.58);
+$colour-surface-overlay: rgb(255 255 255 / 0.72);
 $colour-surface-border: #ffffff;
-$colour-surface-inverse: #000000;
+$colour-surface-inverse: #ffffff;
 
 $theme-high-contrast: map.deep-merge(dark.$theme-dark, (
 	'colour': (

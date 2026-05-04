@@ -140,11 +140,11 @@
 body {
 	background-color: var(--lx-colour-surface-base);
 
-	header {
-		background-color: var(--lx-colour-surface-raised);
+	header, header .content-body {
+		background-color: var(--lx-colour-surface-raised) !important;
 	}
 
 	aside {
-		background-color: var(--lx-colour-surface-raised);
+		background-color: var(--lx-colour-surface-sunken) !important;
 	}
 }

@@ -3,9 +3,10 @@
 		class="lx-button"
 		:class="[`lx-button-hover--${hoverMode}`]"
 		:type="props.type"
-		:disabled="disabled"
+		:disabled="isDisabled"
 		:aria-busy="props.loading || undefined"
-		:aria-label="props.ariaLabel"
+		:aria-label="accessibleLabel"
+		:aria-pressed="pressedState"
 	>
 		<span v-if="props.loading" class="lx-button__spinner" aria-hidden="true" />
 
@@ -40,7 +41,6 @@
 		variant: 'primary',
 		size: 'md',
 		type: 'button',
-		active: false,
 		disabled: false,
 		loading: false,
 		fullWidth: false,
@@ -52,6 +52,9 @@
 		borderWidth: 'none',
 	});
 
+	const isDisabled = computed(() => props.disabled || props.loading);
+	const accessibleLabel = computed(() => props.ariaLabel || props.label || undefined);
+	const pressedState = computed(() => props.active ?? undefined);
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 	const getWidth = computed(() => (props.fullWidth ? '100%' : 'auto'));
@@ -82,10 +85,21 @@
 		justify-content: center;
 		align-items: center;
 		gap: var(--lx-size-space-sm);
+		cursor: pointer;
+		min-width: 24px;
+		min-height: 24px;
+		transition:
+			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
+			box-shadow var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);
 
 		&:disabled {
 			background-color: v-bind(getDisabledBackgroundColour);
 			cursor: not-allowed;
+		}
+
+		&:focus-visible {
+			outline: none;
+			box-shadow: 0 0 0 var(--lx-size-border-width-thick) var(--lx-colour-accent);
 		}
 
 		&-hover--default:not(:disabled):hover {

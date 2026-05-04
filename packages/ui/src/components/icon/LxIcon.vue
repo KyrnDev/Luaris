@@ -4,8 +4,9 @@
 		:style="{
 			fontSize: getSize,
 		}"
+		:role="decorative ? undefined : 'img'"
 		:aria-hidden="decorative ? 'true' : undefined"
-		:aria-label="decorative ? undefined : label"
+		:aria-label="decorative ? undefined : accessibleLabel"
 	/>
 </template>
 
@@ -41,6 +42,11 @@
 		return `var(--lx-font-size-${props.size})`;
 	});
 
+	const accessibleLabel = computed(() => {
+		if (props.label) return props.label;
+		return props.name.replaceAll('-', ' ');
+	});
+
 	const iconClasses = computed(() => {
 		const classes = [
 			...stylePrefixMap[props.iconStyle],
@@ -54,7 +60,7 @@
 		return classes;
 	});
 
-	const { decorative, label } = props;
+	const { decorative } = props;
 </script>
 
 <style scoped lang="scss">

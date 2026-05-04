@@ -6,10 +6,10 @@
 		<LxButton
 			v-if="removable"
 			class="lx-tag__remove"
-			variant="plain"
+			variant="transparent"
 			size="xs"
 			icon="xmark"
-			aria-label="Remove tag"
+			:aria-label="removeButtonLabel"
 			@click="emit('remove')"
 		/>
 	</span>
@@ -34,6 +34,7 @@
 	const getSize = computed(() => `var(--lx-font-size-${props.size ?? 'md'})`);
 	const getColour = computed(() => `var(--lx-colour-${props.variant ?? 'primary'})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant ?? 'primary'})`);
+	const removeButtonLabel = computed(() => props.label ? `Remove ${props.label}` : 'Remove tag');
 </script>
 
 <style scoped lang="scss">
@@ -54,8 +55,6 @@
 	.lx-tag__remove {
 		background: transparent;
 		color: inherit;
-		height: auto;
 		padding: 0;
-		min-width: auto;
 	}
 </style>

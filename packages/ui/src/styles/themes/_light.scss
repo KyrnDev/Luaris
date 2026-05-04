@@ -1,22 +1,22 @@
 @use 'sass:color';
 @use '../helpers/contrast' as contrast;
 
-$colour-primary: #2c415a;
-$colour-secondary: #445a75;
-$colour-accent: #d97706;
-$colour-info: #0284c7;
-$colour-success: #15803d;
-$colour-warning: #ca8a04;
-$colour-danger: #b91c1c;
+$colour-primary: #1f4d78;
+$colour-secondary: #5c7288;
+$colour-accent: #c96b1f;
+$colour-info: #0f7490;
+$colour-success: #1f7a4d;
+$colour-warning: #b7791f;
+$colour-danger: #b42318;
 $colour-white: #ffffff;
 $colour-black: #000000;
 
-$colour-surface-base: #f2f5fb;
-$colour-surface-raised: #fbfcff;
-$colour-surface-sunken: #e6ecf6;
-$colour-surface-overlay: rgb(15 23 42 / 0.58);
-$colour-surface-border: #c8d3e5;
-$colour-surface-inverse: #ffffff;
+$colour-surface-base: #f4f7fb;
+$colour-surface-raised: #ffffff;
+$colour-surface-sunken: #e8eef5;
+$colour-surface-overlay: rgb(15 23 42 / 0.64);
+$colour-surface-border: #d3dce8;
+$colour-surface-inverse: #0f172a;
 
 $theme-light: (
 	'colour': (

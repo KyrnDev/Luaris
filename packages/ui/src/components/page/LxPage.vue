@@ -1,6 +1,6 @@
 <template>
 	<div class="lx-page">
-		<div v-if="$slots.banner" role="banner" class="lx-page__banner">
+		<div v-if="$slots.banner" class="lx-page__banner">
 			<slot name="banner" />
 		</div>
 
@@ -8,12 +8,12 @@
 			<slot name="header" />
 		</header>
 
-		<header v-if="$slots['sub-header']" class="lx-page__sub-header">
+		<div v-if="$slots['sub-header']" class="lx-page__sub-header">
 			<slot name="sub-header" />
-		</header>
+		</div>
 
 		<div class="lx-page__content">
-			<nav v-if="$slots['navigation-header'] || $slots.navigation || $slots['navigation-footer']" class="lx-page__content__navigation" role="navigation" aria-label="Page navigation">
+			<nav v-if="$slots['navigation-header'] || $slots.navigation || $slots['navigation-footer']" class="lx-page__content__navigation" aria-label="Page navigation">
 				<header v-if="$slots['navigation-header']" class="lx-page__content__navigation-header">
 					<slot name="navigation-header" />
 				</header>
@@ -27,7 +27,7 @@
 				</footer>
 			</nav>
 
-			<main v-if="$slots['main-header'] || $slots.default || $slots['main-footer']" class="lx-page__content__main" role="main">
+			<main v-if="$slots['main-header'] || $slots.default || $slots['main-footer']" class="lx-page__content__main">
 				<header v-if="$slots['main-header']" class="lx-page__content__main-header">
 					<slot name="main-header" />
 				</header>

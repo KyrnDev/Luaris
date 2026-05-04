@@ -1,8 +1,8 @@
 <template>
-	<LxFlex gap="0px">
-		<LxButton icon="fa-regular fa-sun" group="left" :active="theme === 'light'" @click="setTheme('light')" />
-		<LxButton icon="fa-solid fa-moon" group="middle" :active="theme === 'dark'" @click="setTheme('dark')" />
-		<LxButton icon="fa-regular fa-yin-yang" group="right" :active="theme === 'auto'" @click="setTheme('auto')" />
+	<LxFlex gap="0px" role="group" aria-label="Theme switcher">
+		<LxButton icon="sun" group="start" aria-label="Use light theme" :active="theme === 'light'" @click="setTheme('light')" />
+		<LxButton icon="moon" group="middle" aria-label="Use dark theme" :active="theme === 'dark'" @click="setTheme('dark')" />
+		<LxButton icon="circle-half-stroke" group="end" aria-label="Use automatic theme" :active="theme === 'auto'" @click="setTheme('auto')" />
 	</LxFlex>
 </template>
 
