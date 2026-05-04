@@ -16,7 +16,7 @@ The Icon component accepts the following props:
 | --- | --- | --- | --- |
 | `name` | `string` | `''` | The name of the icon to display. This should be the Font Awesome icon name, without the `fa-` prefix. For example, `home` for the `fa-home` icon. |
 | `iconStyle` | `string` | `'solid'` | The style of the icon. This should be one of the Font Awesome styles, such as `solid`, `regular`, `light`, `duotone`, or `brands`. |
-| `size` | `string` | `'md'` | The size of the icon. This can be one of the following: `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`. |
+| `size` | [TSizes](/types/theme.html#type-tsizes) | `'md'` | The size of the icon. This can be one of the following: `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`. |
 | `spin` | `boolean` | `false` | Whether the icon should spin. |
 | `pulse` | `boolean` | `false` | Whether the icon should pulse. |
 | `fixedWidth` | `boolean` | `false` | Whether the icon should have a fixed width. This can be useful for aligning icons in a list or menu. |

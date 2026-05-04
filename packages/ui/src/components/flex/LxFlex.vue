@@ -14,13 +14,16 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, useAttrs } from 'vue';
-	import type { CSSProperties } from 'vue';
 	import type { TLxFlexProps, TLxFlexAlign, TLxFlexJustify } from './types';
+	import type { TLayoutsLength } from '../../types/units';
+	import type { TSizes } from '../../types/theme';
+	import type { CSSProperties } from 'vue';
+	import { getSizeValue } from '../../helpers/theme';
+	import { computed, useAttrs } from 'vue';
 
 	const props = withDefaults(defineProps<TLxFlexProps>(), {
 		as: 'div',
-		gap: 'var(--lx-size-space-md)',
+		gap: 'md',
 		wrap: false,
 		inline: false,
 		column: false,
@@ -56,9 +59,9 @@
 		return props.reverse ? 'row-reverse' : 'row';
 	});
 
-	const resolvedGap = computed(() => props.gap || '0');
-	const resolvedRowGap = computed(() => props.rowGap || resolvedGap.value);
-	const resolvedColumnGap = computed(() => props.columnGap || resolvedGap.value);
+	const resolvedGap = computed(() => getSizeValue(props.gap || '0rem') as TSizes | TLayoutsLength);
+	const resolvedRowGap = computed(() => getSizeValue(props.rowGap || resolvedGap.value) as TSizes | TLayoutsLength);
+	const resolvedColumnGap = computed(() => getSizeValue(props.columnGap || resolvedGap.value) as TSizes | TLayoutsLength);
 
 	const flexStyle = computed<CSSProperties>(() => ({
 		flexDirection: resolvedDirection.value,

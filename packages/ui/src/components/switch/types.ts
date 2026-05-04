@@ -1,4 +1,4 @@
-import type { TColours } from '../../types/units';
+import type { TColours } from '../../types/theme';
 
 export type TLxSwitchProps = {
 	variant?: TColours,

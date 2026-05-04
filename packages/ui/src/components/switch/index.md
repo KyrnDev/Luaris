@@ -14,7 +14,7 @@ The Switch component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | `TColours` | `primary` | The visual style of the switch. |
+| `variant` | [TColours](/types/theme.html#type-tcolours) | `primary` | The visual style of the switch. |
 | `disabled` | `boolean` | `false` | Whether the switch is disabled. |
 
 ## Variants

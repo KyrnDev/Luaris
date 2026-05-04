@@ -1,4 +1,4 @@
-import type { TRadiusSize, TColours, TSizes, TBorderWidths } from '../../types/units';
+import type { TRadiusSize, TColours, TSizes, TBorderWidths } from '../../types/theme';
 
 export type TLxButtonType = 'button' | 'submit' | 'reset';
 export type TLxButtonIconOrder = 'left' | 'right';

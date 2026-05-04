@@ -22,7 +22,7 @@
 		disabled: false,
 	});
 
-	const uniqueId = `lx-switch-${Math.random().toString(36).substr(2, 9)}`;
+	const uniqueId = `lx-switch-${Math.random().toString(36).substring(2, 9)}`;
 </script>
 
 <style lang="scss" scoped>

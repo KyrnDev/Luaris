@@ -15,8 +15,8 @@ The Button component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | `primary \| secondary \| success \| warning \| danger \| ghost \| plain \| accent \| info` | `primary` | The visual style of the button. |
-| `size` | `2xs \| xs \| sm \| md \| lg \| xl \| 2xl` | `md` | The size of the button. |
+| `variant` | [TColours](/types/theme.html#type-tcolours) | `primary` | The visual style of the button. |
+| `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The size of the button. |
 | `type` | `button \| submit \| reset` | `button` | The HTML button type. |
 | `disabled` | `boolean` | `false` | Whether the button is disabled. |
 | `loading` | `boolean` | `false` | Whether the button is in a loading state. |
@@ -26,8 +26,8 @@ The Button component accepts the following props:
 | `icon` | `string` | `''` | The name of the icon to display in the button. |
 | `iconOrder` | `icon-left \| icon-right` | `icon-left` | The position of the icon in relation to the label. |
 | `active` | `boolean` | `false` | Whether the button is in an active state. |
-| `borderRadius` | `none \| sm \| md \| lg \| pill \| full \| pill` | The border radius of the button. |
-| `borderWidth` | `none \| thin \| thick` | The border width of the button, used for the invert hover mode. |
+| `borderRadius` | [TRadiusSize](/types/theme.html#type-tradiussize) | `md` | The border radius of the button. |
+| `borderWidth` | [TBorderWidths](/types/theme.html#type-tborderwidths) | `none` | The border width of the button, used for the invert hover mode. |
 | `hoverMode` | `default \| invert` | `default` | The hover mode of the button, which changes the hover effect. |
 | `group` | `start \| middle \| end` | `undefined` | The group position of the button, used for visually connecting buttons that are part of the same action group. |
 

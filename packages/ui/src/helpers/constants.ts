@@ -1,0 +1,13 @@
+export const COLOURS = ['primary', 'secondary', 'accent', 'info', 'success', 'warning', 'danger', 'white', 'black', 'transparent'] as const;
+export const COLOUR_STATES = ['base', 'on', 'hover', 'disabled', 'surface', 'active'] as const;
+export const COLOUR_SHADES = ['lighter', 'light', '', 'dark', 'darker'] as const;
+export const SURFACE_COLOURS = ['base', 'raised', 'sunken', 'overlay', 'border', 'inverse'] as const;
+export const SIZES = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const;
+export const RADIUS_SIZES = ['none', 'sm', 'md', 'lg', 'pill', 'full'] as const;
+export const BORDER_WIDTHS = ['none', 'thin', 'thick'] as const;
+export const FONT_FAMILIES = ['primary', 'secondary', 'mono'] as const;
+export const FONT_SIZES = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const;
+export const FONT_LINE_HEIGHTS = ['tight', 'normal', 'relaxed'] as const;
+export const FONT_WEIGHTS = ['light', 'regular', 'medium', 'semibold', 'bold'] as const;
+export const MOTION_DURATIONS = ['fast', 'normal', 'slow'] as const;
+export const MOTION_EASINGS = ['standard', 'emphasised'] as const;

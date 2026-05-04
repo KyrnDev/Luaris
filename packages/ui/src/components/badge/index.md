@@ -16,8 +16,8 @@ The Badge component accepts several props to customize its appearance and behavi
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | TVariant | `primary` | The visual style of the badge. |
-| `size` | TSizes | `md` | The size of the badge. |
+| `variant` | [TColours](/types/theme.html#type-tcolours) | `primary` | The visual style of the badge. |
+| `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The size of the badge. |
 | `label` | `string?` | `undefined` | The text label of the badge, optional, can use default slot instead. |
 
 ## Variants

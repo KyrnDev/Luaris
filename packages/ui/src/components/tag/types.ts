@@ -1,8 +1,7 @@
-import type { TSizes } from '../../types/units';
-import type { TVariant } from '../../types/variants';
+import type { TColours, TSizes } from '../../types/theme';
 
 export type TLxTagProps = {
-	variant?: TVariant,
+	variant?: TColours,
 	size?: TSizes,
 	label?: string,
 	removable?: boolean,

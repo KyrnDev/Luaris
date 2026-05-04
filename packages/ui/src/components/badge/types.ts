@@ -1,8 +1,7 @@
-import type { TSizes } from '../../types/units';
-import type { TVariant } from '../../types/variants';
+import type { TSizes, TColours } from '../../types/theme';
 
 export type TLxBadgeProps = {
-	variant?: TVariant,
+	variant?: TColours,
 	label?: string,
 	size?: TSizes,
 };

@@ -1,4 +1,5 @@
 import type { TLayoutsLength, TLayoutsNode } from '../../types/units';
+import type { TSizes } from '../../types/theme';
 import type { CSSProperties } from 'vue';
 
 export type TLxFlexDirection = CSSProperties['flexDirection'];
@@ -8,9 +9,9 @@ export type TLxFlexJustify = 'start' | 'center' | 'end' | 'between' | 'around' |
 
 export type TLxFlexProps = {
 	as?: TLayoutsNode,
-	gap?: TLayoutsLength,
-	rowGap?: TLayoutsLength,
-	columnGap?: TLayoutsLength,
+	gap?: TSizes | TLayoutsLength,
+	rowGap?: TSizes | TLayoutsLength,
+	columnGap?: TSizes | TLayoutsLength,
 	wrap?: boolean,
 	inline?: boolean,
 	column?: boolean,

@@ -16,8 +16,8 @@ The Tag component accepts several props to customize its appearance and behavior
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | TVariant | `primary` | The visual style of the tag. |
-| `size` | TSizes | `md` | The size of the tag. |
+| `variant` | [TColours](/types/theme.html#type-tcolours) | `primary` | The visual style of the tag. |
+| `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The size of the tag. |
 | `label` | `string?` | `undefined` | The text label of the tag, optional, can use default slot instead. |
 | `removable` | `boolean` | `false` | Whether the tag can be removed by the user, emits a `remove` event when the remove action is triggered. |
 

@@ -7,6 +7,8 @@ export default defineConfig({
 	rewrites: {
 		'packages/ui/src/components/:component/index.md': 'components/:component/index.md',
 		'packages/ui/src/components/index.md': 'components/index.md',
+		'packages/ui/src/types/:page': 'types/:page',
+		'packages/ui/src/types/index.md': 'types/index.md',
 		'packages/docs/design/index.md': 'design/index.md',
 		'packages/docs/design/:page': 'design/:page',
 	},
@@ -43,6 +45,14 @@ export default defineConfig({
 					{ text: 'Page', link: '/components/page/' },
 					{ text: 'Switch', link: '/components/switch/' },
 					{ text: 'Tag', link: '/components/tag/' },
+				],
+			},
+			{
+				text: 'TypeScript Types',
+				link: '/types/index.md',
+				items: [
+					{ text: 'Theme', link: '/types/theme.md' },
+					{ text: 'Units', link: '/types/units.md' },
 				],
 			},
 		],

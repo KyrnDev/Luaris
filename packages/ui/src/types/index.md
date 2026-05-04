@@ -1,9 +1,17 @@
-# Types
+# TypeScript Types
 
-The following page denotes various utility types that are used across the UI library.
+This section contains references to the TypeScript types used within the Luaris Framework, these types are used across the components, design system, and other parts of the framework to ensure type safety and consistency.
 
-## TSize
+Each component has it's own types file, while also importing from the global shared types, this section will focus on the globally shared types, each component's types will be documented in the respective component documentation.
 
-| Type | Options | Description |
-| --- | --- | --- |
-| `TSizes` | `2xs \| xs \| sm \| md \| lg \| xl \| 2xl \| 3xl` | A type representing predefined size values that can be used for various components to ensure consistent spacing and sizing throughout the UI. |
+## Theme
+
+The theme types include definitions for the design tokens used across the framework, such as colours, sizes, border radius, and border widths. These types ensure that the design tokens are used consistently across all components and allow for type checking when using these tokens in component props.
+
+[Read more](/types/theme.md)
+
+## Units
+
+The units types include definitions for the various units of measurement used in the framework, such as lengths, sizes, and other CSS-related values. These types help ensure that when specifying dimensions or spacing in component props, the values are valid and consistent with the design system.
+
+[Read more](/types/units.md)

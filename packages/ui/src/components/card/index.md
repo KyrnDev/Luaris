@@ -16,7 +16,7 @@ The Card component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `padding` | TSizes | `md` | The padding size for the card content, which can be set to one of the predefined size values (e.g., `xs`, `sm`, `md`, `lg`, `xl`, etc.). |
+| `padding` | [TSizes](/types/theme.html#type-tsizes) | `md` | The padding size for the card content, which can be set to one of the predefined size values (e.g., `xs`, `sm`, `md`, `lg`, `xl`, etc.). |
 
 ## Usage
 

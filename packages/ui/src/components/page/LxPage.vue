@@ -54,13 +54,14 @@
 
 <script setup lang="ts">
 	import type { TLxPageProps } from './types';
+	import { getSizeValue } from '../../helpers/theme';
 	import { computed } from 'vue';
 
 	const props = defineProps<TLxPageProps>();
 	const heightValue = computed(() => props.noFill ? 'auto' : '100vh');
-	const getGap = computed(() => props.gap);
-	const getAsideWidth = computed(() => props.asideWidth || '250px');
-	const getDefaultPadding = computed(() => props.padding || props.gap || '1rem');
+	const getGap = computed(() => getSizeValue(props.gap ?? '0'));
+	const getAsideWidth = computed(() => getSizeValue(props.asideWidth || '250px'));
+	const getDefaultPadding = computed(() => getSizeValue(props.padding || props.gap || `md`));
 </script>
 
 <style lang="scss" scoped>

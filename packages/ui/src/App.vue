@@ -22,10 +22,10 @@
 						<LxThemeSwitcher />
 					</LxFlex>
 
-					<LxFlex class="lx-padding-y--3xl" gap="0px">
-						<LxButton label="Left" variant="primary" size="md" group="left" />
+					<LxFlex class="lx-padding-y--3xl" gap="md">
+						<LxButton label="Left" variant="primary" size="md" group="start" />
 						<LxButton label="Middle" variant="primary" size="md" group="middle" />
-						<LxButton label="Right" variant="primary" size="md" group="right" />
+						<LxButton label="Right" variant="primary" size="md" group="end" />
 					</LxFlex>
 				</article>
 			</section>

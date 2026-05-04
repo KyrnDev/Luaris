@@ -1,4 +1,4 @@
-import type { TSizes } from '../../types/units';
+import type { TSizes } from '../../types/theme';
 
 export type TLxIconStyle = (
 	'solid'

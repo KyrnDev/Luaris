@@ -43,7 +43,8 @@ The Page component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `gap` | `string` | `0` | The gap between the different sections of the page. This can be used to create more space between the sections or to create a more compact layout. |
+| `gap` | [TLayoutsLength](/types/units.html#type-tlayoutslength) \| [TSizes](/types/theme.html#type-tsizes) | `0` | The gap between the different sections of the page. This can be used to create more space between the sections or to create a more compact layout. |
+| `padding` | [TLayoutsLength](/types/units.html#type-tlayoutslength) \| [TSizes](/types/theme.html#type-tsizes) | `var(--lx-spacing-md)` | The padding around the content of the page. This can be used to create more space around the content or to create a more compact layout. |
 | `asideWidth` | `string` | `250px` | The width of the aside section. This can be used to create a wider or narrower aside section depending on your design needs, this affects both navigation and aside sections. |
 | `noFill` | `boolean` | `false` | If true, the page will not take up the full height of the viewport. This can be useful for pages that are meant to be embedded within other layouts or components. |
 

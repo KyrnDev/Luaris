@@ -1,4 +1,14 @@
-export type TLxTheme = 'light' | 'dark' | 'high-contrast';
-
-export type TLxColourScheme = 'light' | 'dark';
-export type TLxContrastPreference = 'no-preference' | 'more';
+export type TThemes = 'light' | 'dark';
+export type TColourTypes = 'base' | 'on' | 'hover' | 'disabled' | 'surface' | 'active';
+export type TColours = 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'danger' | 'white' | 'black' | 'transparent';
+export type TColourShades = 'lighter' | 'light' | '' | 'dark' | 'darker';
+export type TSurfaceColours = 'base' | 'raised' | 'sunken' | 'overlay' | 'border' | 'inverse';
+export type TSizes = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+export type TRadiusSize = 'none' | 'sm' | 'md' | 'lg' | 'pill' | 'full';
+export type TBorderWidths = 'none' | 'thin' | 'thick';
+export type TFontFamily = 'primary' | 'secondary' | 'mono';
+export type TFontSizes = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+export type TFontLineHeights = 'tight' | 'normal' | 'relaxed';
+export type TFontWeights = 'light' | 'regular' | 'medium' | 'semibold' | 'bold';
+export type TMotionDurations = 'fast' | 'normal' | 'slow';
+export type TMotionEasings = 'standard' | 'emphasised';
