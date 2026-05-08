@@ -21,12 +21,15 @@
 	});
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
+	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
+	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
 	const getVariant = computed(() => `var(--lx-colour-${props.variant})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 </script>
 
 <style lang="scss" scoped>
 	.lx-badge {
+		box-sizing: border-box;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -36,7 +39,8 @@
 		white-space: nowrap;
 		vertical-align: middle;
 		line-height: 1.2;
-		padding: var(--lx-size-space-xs) var(--lx-size-space-md);
+		height: v-bind(getControlHeight);
+		padding: 0 v-bind(getControlPaddingX);
 		background-color: v-bind(getVariant);
 		color: v-bind(getTextColour);
 		font-size: v-bind(getSize);

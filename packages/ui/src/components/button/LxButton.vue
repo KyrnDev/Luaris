@@ -14,7 +14,7 @@
 			<template v-if="$slots.icon">
 				<slot name="icon" />
 			</template>
-			<LxIcon v-else :name="props.icon" />
+			<LxIcon v-else :name="props.icon" :size="props.size" />
 		</span>
 
 		<span v-if="(props.label && props.label.length > 0) || $slots.default" class="lx-button__label">
@@ -27,7 +27,7 @@
 			<template v-if="$slots.icon">
 				<slot name="icon" />
 			</template>
-			<LxIcon v-else :name="props.icon" />
+			<LxIcon v-else :name="props.icon" :size="props.size" />
 		</span>
 	</button>
 </template>
@@ -56,6 +56,9 @@
 	const accessibleLabel = computed(() => props.ariaLabel || props.label || undefined);
 	const pressedState = computed(() => props.active ?? undefined);
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
+	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
+	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
+	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 	const getWidth = computed(() => (props.fullWidth ? '100%' : 'auto'));
 	const getBackgroundColour = computed(() => `var(--lx-colour-${props.variant})`);
@@ -73,21 +76,22 @@
 
 <style scoped lang="scss">
 	.lx-button {
+		box-sizing: border-box;
 		font-size: v-bind(getSize);
 		line-height: 1.2;
 		color: v-bind(getTextColour);
 		background-color: v-bind(getBackgroundColour);
-		padding: var(--lx-size-space-md) var(--lx-size-space-md);
+		height: v-bind(getControlHeight);
+		padding: 0 v-bind(getControlPaddingX);
 		width: v-bind(getWidth);
 		border: v-bind(getBorderThickness) solid v-bind(getBackgroundColour);
 		border-radius: v-bind(getBorderRadius);
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		gap: var(--lx-size-space-sm);
+		gap: v-bind(getControlGap);
 		cursor: pointer;
 		min-width: 24px;
-		min-height: 24px;
 		transition:
 			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
 			box-shadow var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);

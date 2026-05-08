@@ -39,7 +39,7 @@
 	};
 
 	const getSize = computed(() => {
-		return `var(--lx-font-size-${props.size})`;
+		return `var(--lx-size-control-icon-${props.size})`;
 	});
 
 	const accessibleLabel = computed(() => {

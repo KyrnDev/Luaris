@@ -7,7 +7,7 @@
 			v-if="removable"
 			class="lx-tag__remove"
 			variant="transparent"
-			size="xs"
+			:size="props.size"
 			icon="xmark"
 			:aria-label="removeButtonLabel"
 			@click="emit('remove')"
@@ -32,6 +32,9 @@
 	}>();
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size ?? 'md'})`);
+	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size ?? 'md'})`);
+	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size ?? 'md'})`);
+	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size ?? 'md'})`);
 	const getColour = computed(() => `var(--lx-colour-${props.variant ?? 'primary'})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant ?? 'primary'})`);
 	const removeButtonLabel = computed(() => props.label ? `Remove ${props.label}` : 'Remove tag');
@@ -39,6 +42,7 @@
 
 <style scoped lang="scss">
 	.lx-tag {
+		box-sizing: border-box;
 		align-items: center;
 		border: var(--lx-size-border-width-thin) solid v-bind(getColour);
 		border-radius: var(--lx-size-radius-md);
@@ -47,14 +51,22 @@
 		display: inline-flex;
 		font-weight: var(--lx-font-weight-medium);
 		font-size: v-bind(getSize);
-		padding: var(--lx-size-space-xs) var(--lx-size-space-sm);
-		gap: var(--lx-size-space-xs);
+		height: v-bind(getControlHeight);
+		padding: 0 v-bind(getControlPaddingX);
+		gap: v-bind(getControlGap);
 		line-height: 1.2;
 	}
 
-	.lx-tag__remove {
+	.lx-tag :deep(.lx-button) {
 		background: transparent;
 		color: inherit;
+		min-height: auto;
 		padding: 0;
+		border: 0;
+	}
+
+	.lx-tag__remove {
+		display: inline-flex;
+		align-items: center;
 	}
 </style>

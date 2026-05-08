@@ -20,6 +20,7 @@ $lx-size-scales: (
 	'lg',
 	'xl',
 	'2xl',
+	'3xl',
 );
 
 @mixin lx-emit-spacing-helpers($scales: $lx-space-scales) {

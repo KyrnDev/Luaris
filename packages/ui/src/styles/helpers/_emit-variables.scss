@@ -65,6 +65,10 @@
 		@return height;
 	}
 
+	@if string.index($token-name, 'size-control-icon-') == 1 {
+		@return font-size;
+	}
+
 	@return null;
 }
 

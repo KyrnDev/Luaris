@@ -104,12 +104,36 @@ The Switch component supports the following variants:
 The Switch component supports the following sizes:
 
 <LxFlex wrap>
-	<LxSwitch size="2xs" />
-	<LxSwitch size="xs" />
-	<LxSwitch size="sm" />
-	<LxSwitch size="md" />
-	<LxSwitch size="lg" />
-	<LxSwitch size="xl" />
-	<LxSwitch size="2xl" />
-	<LxSwitch size="3xl" />
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="2xs" />
+		<p class="lx-margin--none">2XS</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="xs" />
+		<p class="lx-margin--none">XS</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="sm" />
+		<p class="lx-margin--none">SM</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="md" />
+		<p class="lx-margin--none">MD</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="lg" />
+		<p class="lx-margin--none">LG</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="xl" />
+		<p class="lx-margin--none">XL</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="2xl" />
+		<p class="lx-margin--none">2XL</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="3xl" />
+		<p class="lx-margin--none">3XL</p>
+	</LxFlex>
 </LxFlex>
