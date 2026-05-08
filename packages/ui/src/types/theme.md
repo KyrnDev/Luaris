@@ -28,11 +28,48 @@ The colour types include definitions for the different colour categories and the
 
 ## Size Types
 
-The size types include definitions for the various sizes used in the design system, such as spacing sizes, border radius sizes, and border width sizes. These types help ensure that when specifying sizes in component props, the values are valid and consistent with the design system.
+The size types include definitions for the various sizes used in the design system. The framework now uses two sizing layers:
+
+- primitive scales, such as spacing and font size
+- semantic control scales, such as shared control height and icon size
+
+This split lets components like buttons, tags, badges, switches, and inputs share the same overall height for a given size token, even when their internal layout differs.
 
 ### Type: `TSizes`
 
 `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+This is the shared base size scale used across the design system. Component `size` props typically use this type.
+
+### Type: `TSpaceSizes`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for primitive spacing tokens such as `--lx-size-space-*`.
+
+### Type: `TControlHeights`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for semantic control height tokens such as `--lx-size-control-height-*`. These tokens define the overall outer height for controls that should align on the same row.
+
+### Type: `TControlPaddingSizes`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for semantic horizontal control padding tokens such as `--lx-size-control-padding-x-*`.
+
+### Type: `TControlGaps`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for semantic control gap tokens such as `--lx-size-control-gap-*`.
+
+### Type: `TControlIconSizes`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for semantic control icon tokens such as `--lx-size-control-icon-*`. These are intended for icons used inside controls, and for standalone icons that should follow the same control-sizing rhythm.
 
 ### Type: `TRadiusSize`
 
@@ -45,6 +82,8 @@ The size types include definitions for the various sizes used in the design syst
 ## Font Types
 
 The font types include definitions for the various font-related design tokens used in the design system, such as font families, font sizes, line heights, and font weights. These types help ensure that when specifying typography-related props in components, the values are valid and consistent with the design system.
+
+Font size tokens are intentionally separate from control-height tokens. For example, `md` typography can remain `16px`, while `md` controls can render at `32px` tall.
 
 ### Type: `TFontFamily`
 
