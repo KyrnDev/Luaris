@@ -15,22 +15,34 @@
 </template>
 
 <script setup lang="ts">
-	import { computed } from 'vue';
+	import type { TSurfaceColours } from '../../types/theme';
 	import type { TLxCardProps } from './types';
+	import { computed } from 'vue';
+	import { SURFACE_COLOURS } from '../../helpers/constants';
 
 	const props = withDefaults(defineProps<TLxCardProps>(), {
 		padding: 'md',
 		borderRadius: 'md',
+		borderSize: 'thin',
+		borderColour: 'border',
+		contentBackgroundColour: 'raised',
+		headerBackgroundColour: 'raised',
+		footerBackgroundColour: 'raised',
 	});
 
 	const getPadding = computed(() => `var(--lx-size-space-${props.padding})`);
+	const getBorderWidth = computed(() => `var(--lx-size-border-width-${props.borderSize})`);
 	const getBorderRadius = computed(() => `var(--lx-size-radius-${props.borderRadius})`);
+	const getBorderColour = computed(() => `var(--lx-colour-${SURFACE_COLOURS.includes(props.borderColour as TSurfaceColours) ? 'surface-' : ''}${props.borderColour})`);
+	const getContentBackgroundColour = computed(() => `var(--lx-colour-${SURFACE_COLOURS.includes(props.contentBackgroundColour as TSurfaceColours) ? 'surface-' : ''}${props.contentBackgroundColour})`);
+	const getHeaderBackgroundColour = computed(() => `var(--lx-colour-${SURFACE_COLOURS.includes(props.headerBackgroundColour as TSurfaceColours) ? 'surface-' : ''}${props.headerBackgroundColour})`);
+	const getFooterBackgroundColour = computed(() => `var(--lx-colour-${SURFACE_COLOURS.includes(props.footerBackgroundColour as TSurfaceColours) ? 'surface-' : ''}${props.footerBackgroundColour})`);
 </script>
 
 <style lang="scss" scoped>
 	.lx-card {
-		background-color: var(--lx-colour-surface-raised);
-		border: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+		background-color: v-bind(getContentBackgroundColour);
+		border: v-bind(getBorderWidth) solid v-bind(getBorderColour);
 		border-radius: v-bind(getBorderRadius);
 
 		&__header,
@@ -40,11 +52,13 @@
 		}
 
 		&__header {
-			border-bottom: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+			background-color: v-bind(getHeaderBackgroundColour);
+			border-bottom: v-bind(getBorderWidth) solid v-bind(getBorderColour);
 		}
 
 		&__footer {
-			border-top: var(--lx-size-border-width-hairline) solid var(--lx-colour-surface-border);
+			background-color: v-bind(getFooterBackgroundColour);
+			border-top: v-bind(getBorderWidth) solid v-bind(getBorderColour);
 		}
 	}
 </style>

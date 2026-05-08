@@ -2,6 +2,9 @@
 	import LxSwitch from './LxSwitch.vue';
 	import LxFlex from '../flex/LxFlex.vue';
 	import { COLOURS } from '../../helpers/constants';
+	import { ref } from 'vue';
+
+	const value = ref(false);
 </script>
 
 # Switch
@@ -18,6 +21,28 @@ The Switch component accepts the following props:
 | --- | --- | --- | --- |
 | `variant` | [TColours](/types/theme.html#type-tcolours) | `primary` | The visual style of the switch. |
 | `disabled` | `boolean` | `false` | Whether the switch is disabled. |
+| `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The size of the switch. |
+| `modelValue` | `boolean` | `false` | The current state of the switch (on/off). |
+
+## Usage
+
+The Switch component can be used as follows:
+
+<LxFlex>
+	<LxSwitch v-model="value" />
+</LxFlex>
+
+Status: {{ value ? 'On' : 'Off' }}
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxFlex>
+	<LxSwitch v-model="value" />
+</LxFlex>
+```
+</details>
 
 ## Variants
 
@@ -137,3 +162,66 @@ The Switch component supports the following sizes:
 		<p class="lx-margin--none">3XL</p>
 	</LxFlex>
 </LxFlex>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxFlex wrap>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="2xs" />
+		<p class="lx-margin--none">2XS</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="xs" />
+		<p class="lx-margin--none">XS</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="sm" />
+		<p class="lx-margin--none">SM</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="md" />
+		<p class="lx-margin--none">MD</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="lg" />
+		<p class="lx-margin--none">LG</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="xl" />
+		<p class="lx-margin--none">XL</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="2xl" />
+		<p class="lx-margin--none">2XL</p>
+	</LxFlex>
+	<LxFlex direction="column" gap="0">
+		<LxSwitch size="3xl" />
+		<p class="lx-margin--none">3XL</p>
+	</LxFlex>
+</LxFlex>
+```
+</details>
+
+## States
+
+The Switch component can be in the following states:
+
+### State: Disabled
+
+To disable the Switch component, apply the `disabled` prop:
+
+<LxFlex>
+	<LxSwitch disabled />
+</LxFlex>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxFlex>
+	<LxSwitch disabled />
+</LxFlex>
+```
+</details>

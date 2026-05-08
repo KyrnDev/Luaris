@@ -2,8 +2,10 @@
 	<div class="lx-switch">
 		<input
 			:id="uniqueId"
+			v-model="value"
 			class="lx-switch__input"
 			type="checkbox"
+			:disabled="disabled"
 			v-bind="$attrs"
 		/>
 	</div>
@@ -19,6 +21,8 @@
 		size: 'md',
 		disabled: false,
 	});
+
+	const value = defineModel({ required: false, default: false });
 
 	const uniqueId = `lx-switch-${Math.random().toString(36).substring(2, 9)}`;
 	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
@@ -61,6 +65,10 @@
 				border-radius: 50%;
 				transition: transform var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);
 				box-shadow: 0 0px 5px rgb(black, 0.5);
+			}
+
+			&:disabled {
+				cursor: not-allowed;
 			}
 
 			&:checked {
