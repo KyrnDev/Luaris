@@ -50,7 +50,10 @@ The button component supports various styles through its `variant` prop. Each va
 
 ```html
 <LxFlex gap="0.1rem" wrap>
-	<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
+	<LxFlex>
+		<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
+
+	</LxFlex>
 	<LxButton class="lx-margin-right--sm" label="Secondary" variant="secondary" />
 	<LxButton class="lx-margin-right--sm" label="Accent" variant="accent" />
 	<LxButton class="lx-margin-right--sm" label="Info" variant="info" />
@@ -73,6 +76,7 @@ The button component supports multiple sizes through its `size` prop, allowing y
 	<LxButton class="lx-margin-right--sm" label="lg" variant="primary" size="lg" />
 	<LxButton class="lx-margin-right--sm" label="xl" variant="primary" size="xl" />
 	<LxButton class="lx-margin-right--sm" label="2xl" variant="primary" size="2xl" />
+	<LxButton class="lx-margin-right--sm" label="3xl" variant="primary" size="3xl" />
 </LxFlex>
 
 <details>
@@ -87,6 +91,7 @@ The button component supports multiple sizes through its `size` prop, allowing y
 	<LxButton class="lx-margin-right--sm" label="lg" variant="primary" size="lg" />
 	<LxButton class="lx-margin-right--sm" label="xl" variant="primary" size="xl" />
 	<LxButton class="lx-margin-right--sm" label="2xl" variant="primary" size="2xl" />
+	<LxButton class="lx-margin-right--sm" label="3xl" variant="primary" size="3xl" />
 </LxFlex>
 ```
 </details>

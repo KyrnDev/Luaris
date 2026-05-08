@@ -6,64 +6,64 @@
 			type="checkbox"
 			v-bind="$attrs"
 		/>
-
-		<label class="lx-switch__track" :for="uniqueId">
-			<span class="lx-switch__thumb" aria-hidden="true" />
-		</label>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import type { TLxSwitchProps } from './types';
+	import { computed } from 'vue';
 
 	defineOptions({ inheritAttrs: false });
-	withDefaults(defineProps<TLxSwitchProps>(), {
+	const props = withDefaults(defineProps<TLxSwitchProps>(), {
 		variant: 'primary',
+		size: 'md',
 		disabled: false,
 	});
 
 	const uniqueId = `lx-switch-${Math.random().toString(36).substring(2, 9)}`;
+	const getSize = computed(() => `var(--lx-size-space-${props.size})`);
+	const getColour = computed(() => `var(--lx-colour-${props.variant})`);
+	const getHoverColour = computed(() => `var(--lx-colour-hover-${props.variant})`);
+	const getDisabledColour = computed(() => `var(--lx-colour-disabled-${props.variant})`);
+	const getOnColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 </script>
 
 <style lang="scss" scoped>
 	.lx-switch {
 		&__input {
-			opacity: 0;
-			pointer-events: none;
-			position: absolute;
-		}
-
-		&__track {
+			appearance: none;
 			position: relative;
-			display: inline-flex;
-			align-items: center;
-			width: 4rem;
-			height: 2rem;
-			border-radius: 9999px;
-			background-color: var(--lx-colour-disabled-primary);
-			position: relative;
+			height: calc(v-bind(getSize) * 3.5);
+			width: calc(v-bind(getSize) * 7);
+			background-color: v-bind(getDisabledColour);
+			border-radius: var(--lx-size-radius-pill);
 			cursor: pointer;
-			transition: background-color 0.2s ease;
-			border: 1px solid #9e9e9e;
-		}
 
-		&__thumb {
-			width: calc(2rem - 6px);
-			height: calc(2rem - 6px);
-			border-radius: 50%;
-			background-color: var(--lx-colour-primary);
-			position: absolute;
-			left: 2px;
-			top: 2px;
-			transition: transform 0.2s ease;
-		}
+			&:not(:disabled):hover {
+				background-color: v-bind(getHoverColour);
+			}
 
-		&__input:checked + &__track {
-			background-color: color-mix(from srgb var(--lx-colour-primary) 80%, var(--lx-colour-disabled-primary) 20%);
-		}
+			&:after {
+				content: '';
+				pointer-events: none;
+				position: absolute;
+				top: 3px;
+				left: 3px;
+				width: calc(v-bind(getSize) * 3.5 - 6px);
+				height: calc(v-bind(getSize) * 3.5 - 6px);
+				background-color: v-bind(getOnColour);
+				border-radius: 50%;
+				transition: transform 0.2s ease;
+				box-shadow: 0 0px 5px rgb(black, 0.5);
+			}
 
-		&__input:checked + &__track .lx-switch__thumb {
-			transform: translateX(2rem);
+			&:checked {
+				background-color: v-bind(getColour);
+
+				&:after {
+					transform: translateX(calc(v-bind(getSize) * 3.5));
+				}
+			}
 		}
 	}
 </style>

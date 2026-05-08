@@ -63,5 +63,13 @@ export default defineConfig({
 	},
 	head: [
 		['link', { rel: 'stylesheet', href: 'https://kit.fontawesome.com/74330f543d.css' }],
+		['script', {}, `
+			const observer = new MutationObserver(() => {
+				const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			});
+			observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+			document.documentElement.setAttribute('data-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+		`],
 	],
 });
