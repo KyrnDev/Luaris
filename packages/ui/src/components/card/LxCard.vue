@@ -1,6 +1,6 @@
 <template>
 	<div class="lx-card">
-		<div class="lx-card__header">
+		<div v-if="$slots.header" class="lx-card__header">
 			<slot name="header" />
 		</div>
 
@@ -8,7 +8,7 @@
 			<slot />
 		</div>
 
-		<div class="lx-card__footer">
+		<div v-if="$slots.footer" class="lx-card__footer">
 			<slot name="footer" />
 		</div>
 	</div>
