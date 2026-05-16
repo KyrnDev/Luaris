@@ -4,6 +4,10 @@
 
 # 🌙 Luaris Framework
 
+<p align="center">
+  <a href="https://kyrndev.github.io/Luaris/"><strong>Read the documentation</strong></a>
+</p>
+
 Luaris is a Vue-first ecosystem that scales from a component library to a full application framework.
 
 The core idea is simple: keep UI building blocks strongly typed, define shared contracts in a DSL, compose pages declaratively, then render them through runtime packages.
