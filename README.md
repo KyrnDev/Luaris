@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="Luaris logo" width="200" />
+  <img src="/logo.png" alt="Luaris logo" width="200" />
 </p>
 
 # 🌙 Luaris Framework

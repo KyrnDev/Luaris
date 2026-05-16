@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+	base: '/Luaris/',
+	ignoreDeadLinks: true,
 	title: 'Luaris Framework',
 	lang: 'en-GB',
 	description: 'Luaris is a Vue-first UI ecosystem that can grow into a full-stack application platform with a strongly typed component library and a protocol for building headless, but declarative, interfaces via a JSON-DSL.',
