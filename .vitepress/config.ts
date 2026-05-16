@@ -18,7 +18,7 @@ export default defineConfig({
 	},
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
-		logo: './logo.png',
+		logo: '/Luaris/logo.png',
 
 		nav: [
 			{ text: 'Home', link: '/' },
@@ -126,7 +126,7 @@ export default defineConfig({
 	},
 	head: [
 		['link', { rel: 'stylesheet', href: 'https://kit.fontawesome.com/74330f543d.css' }],
-		['link', { rel: 'icon', href: './logo.png' }],
+		['link', { rel: 'icon', href: '/Luaris/logo.png' }],
 		['script', {}, `
 			const observer = new MutationObserver(() => {
 				const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
