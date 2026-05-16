@@ -6,6 +6,9 @@ hero:
   name: "Luaris Framework"
   text: "All-in-one framework."
   tagline: Luaris is a comprehensive framework for building modern web applications, offering a wide range of components and tools to streamline development and enhance user experience.
+  image:
+    src: /logo.png
+    alt: Luaris Logo
   actions:
     - theme: brand
       text: Components
@@ -13,7 +16,6 @@ hero:
     - theme: alt
       text: Design
       link: /design/index.md
-
 features:
   - title: Design System
     details: The design system is a collection of defined, and SCSS generated design tokens (CSS Variables) that are used to create a consistent look and feel across all components and applications built with the Luaris Framework.

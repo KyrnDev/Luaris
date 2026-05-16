@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/logo.png" alt="Luaris logo" width="200" />
+</p>
+
 # 🌙 Luaris Framework
 
 Luaris is a Vue-first ecosystem that scales from a component library to a full application framework.

@@ -4,12 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "hooks:setup": "git config core.hooksPath .githooks",
     "lint": "eslint",
     "test": "bun run --filter \"@luaris/ui\" test:run",
     "test:coverage": "bun run --filter \"@luaris/ui\" test:coverage",
-    "ui:dev": "bun run --filter \"@luaris/ui\" dev",
-    "ui:screenshot": "bun run ./scripts/capture-ui-screenshot.ts --ready-selector=.lx-app-page",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"

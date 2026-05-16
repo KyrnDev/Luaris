@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
 	title: 'Luaris Framework',
+	lang: 'en-GB',
 	description: 'Luaris is a Vue-first UI ecosystem that can grow into a full-stack application platform with a strongly typed component library and a protocol for building headless, but declarative, interfaces via a JSON-DSL.',
 	rewrites: {
 		'packages/ui/src/components/:component/index.md': 'components/:component/index.md',
@@ -14,6 +15,8 @@ export default defineConfig({
 	},
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
+		logo: '/logo.png',
+
 		nav: [
 			{ text: 'Home', link: '/' },
 			{ text: 'Design', link: '/design/index.md' },
@@ -120,6 +123,7 @@ export default defineConfig({
 	},
 	head: [
 		['link', { rel: 'stylesheet', href: 'https://kit.fontawesome.com/74330f543d.css' }],
+		['link', { rel: 'icon', href: '/logo.png' }],
 		['script', {}, `
 			const observer = new MutationObserver(() => {
 				const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';

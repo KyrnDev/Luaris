@@ -1,0 +1,13 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"types": [
+			"vitepress/client"
+		]
+	},
+	"include": [
+		"./config.ts",
+		"./theme/**/*.ts",
+		"./theme/**/*.d.ts"
+	]
+}
