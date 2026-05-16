@@ -1,5 +1,5 @@
 {
-  "name": "monorepo",
+  "name": "@luaris/monorepo",
   "module": "index.ts",
   "type": "module",
   "private": true,
