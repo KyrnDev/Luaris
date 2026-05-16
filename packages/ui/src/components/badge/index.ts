@@ -1,2 +1,2 @@
 export { default as LxBadge } from './LxBadge.vue';
-export type { TLxBadgeProps } from './types';
+export type * from './types';

@@ -1,2 +1,2 @@
 export { default as LxThemeSwitcher } from './LxThemeSwitcher.vue';
-export type { TLxThemeSwitcherProps } from './types';
+export type * from './types';
