@@ -52,6 +52,9 @@ The Page component accepts the following props:
 
 The below configurator allows you to select which zones of the page you want to display, this is useful for testing the different slots and how they interact with each other.
 
+> [!INFO]
+> The Page component is designed to be flexible and can be used in a variety of ways, this means that as you add or remove slots, it will automatically adjust the layout to accommodate the available content.
+
 <ul class="lx-bg--surface-base lx-rounded--md lx-padding--md" style="display: flex; gap: 0rem; flex-wrap: wrap;">
 	<li style="list-style: none; width: 49%; margin-top: 0;" v-for="option in availableOptions" :key="option">
 		<label>
@@ -65,25 +68,16 @@ The below configurator allows you to select which zones of the page you want to 
 
 ## Slots
 
-The Page component uses slots to position content with the page layout, you can use the above configurator to see the different layouts.
+The Page component provides the following slots for content placement:
 
-> [!NOTE]
-> The next section will not show any examples due to the full-page nature of this, you can of course use the `no-fill` prop to prevent full height, but it's not great for showcasing the slots.
-
-## Slot: Banner
-
-The banner slot is typically used for a large, attention-grabbing section at the top of the page. It can be used to display a hero image, a call-to-action, or important information that you want to highlight.
-
-<details>
-<summary>Show code</summary>
-
-```html
-<LxPage>
-	<template #banner>
-		<p>
-			This is the banner slot.
-		</p>
-	</template>
-</LxPage>
-```
-</details>
+- `banner`: A slot for displaying a banner at the top of the page, this is ideal for important announcements or promotions.
+- `header`: A slot for the main header of the page, this is ideal for displaying the page title or other important information.
+- `sub-header`: A slot for a secondary header, this is ideal for displaying additional information or context about the page.
+- `navigation-header`: A slot for the header of the navigation section, this is ideal for displaying a title or other information about the navigation.
+- `navigation`: A slot for the main navigation of the page, this is ideal for displaying links to other pages or sections of the application.
+- `navigation-footer`: A slot for the footer of the navigation section, this is ideal for displaying additional links or information about the navigation.
+- `main-header`: A slot for the header of the main content area, this is ideal for displaying a title or other information about the main content.
+- `default`: The default slot for the main content of the page, this is where the main content of the page should be placed.
+- `main-footer`: A slot for the footer of the main content area, this is ideal for displaying additional information or links related to the main content.
+- `aside`: A slot for an aside section, this is ideal for displaying additional information or links that are related to the main content but not essential to the main flow of the page.
+- `footer`: A slot for the footer of the page, this is ideal for displaying copyright information, links to terms of service, or other important information that should be available on every page.

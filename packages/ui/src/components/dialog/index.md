@@ -1,2 +1,0 @@
-Dialogs are functional components that display content in a layer above the main application. They are used to capture user attention and can contain various types of content, such as forms, messages, or interactive elements.
-Modal dialogs require user interaction before they can be dismissed, while non-modal dialogs allow users to interact with the main application while the dialog is open. Dialogs can be used for a variety of purposes, including confirming actions, displaying information, or collecting user input.

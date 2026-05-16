@@ -46,39 +46,47 @@ Status: {{ value ? 'On' : 'Off' }}
 
 ## Variants
 
-The Switch component supports the following variants:
+The Switch component supports the following variants (and their active state):
 
 <LxFlex wrap>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="primary" />
+		<LxSwitch variant="primary" :model-value="true" />
 		<p class="lx-margin--none">Primary</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="secondary" />
+		<LxSwitch variant="secondary" :model-value="true" />
 		<p class="lx-margin--none">Secondary</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="accent" />
+		<LxSwitch variant="accent" :model-value="true" />
 		<p class="lx-margin--none">Accent</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="info" />
+		<LxSwitch variant="info" :model-value="true" />
 		<p class="lx-margin--none">Info</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="success" />
+		<LxSwitch variant="success" :model-value="true" />
 		<p class="lx-margin--none">Success</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="danger" />
+		<LxSwitch variant="danger" :model-value="true" />
 		<p class="lx-margin--none">Danger</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="white" />
+		<LxSwitch variant="white" :model-value="true" />
 		<p class="lx-margin--none">White</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="black" />
+		<LxSwitch variant="black" :model-value="true" />
 		<p class="lx-margin--none">Black</p>
 	</LxFlex>
 </LxFlex>
@@ -90,34 +98,42 @@ The Switch component supports the following variants:
 <LxFlex wrap>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="primary" />
+		<LxSwitch variant="primary" :model-value="true" />
 		<p class="lx-margin--none">Primary</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="secondary" />
+		<LxSwitch variant="secondary" :model-value="true" />
 		<p class="lx-margin--none">Secondary</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="accent" />
+		<LxSwitch variant="accent" :model-value="true" />
 		<p class="lx-margin--none">Accent</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="info" />
+		<LxSwitch variant="info" :model-value="true" />
 		<p class="lx-margin--none">Info</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="success" />
+		<LxSwitch variant="success" :model-value="true" />
 		<p class="lx-margin--none">Success</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="danger" />
+		<LxSwitch variant="danger" :model-value="true" />
 		<p class="lx-margin--none">Danger</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="white" />
+		<LxSwitch variant="white" :model-value="true" />
 		<p class="lx-margin--none">White</p>
 	</LxFlex>
 	<LxFlex direction="column" gap="0">
 		<LxSwitch variant="black" />
+		<LxSwitch variant="black" :model-value="true" />
 		<p class="lx-margin--none">Black</p>
 	</LxFlex>
 </LxFlex>

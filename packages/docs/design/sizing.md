@@ -89,6 +89,8 @@ The sizing system is split into two layers:
 
 This keeps typography and spacing flexible while still making controls line up cleanly on the same row.
 
+[[toc]]
+
 ## Space Sizes
 
 The space sizes are the primitive spacing tokens used for padding, margin, and gap utilities.

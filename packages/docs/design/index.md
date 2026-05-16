@@ -22,13 +22,13 @@ The design system also includes a set of size options for spacing, borders, etc 
 
 [Read more here](./sizing.md)
 
-# Fonts & Typography
+## Fonts & Typography
 
 The design system includes a set of typography styles that can be used across all components, these include a range of font sizes, weights, and styles that can be used to create a consistent typographic hierarchy across all components.
 
 [Read more here](./typography.md)
 
-# Motion & Animation
+## Motion & Animation
 
 The design system also includes a set of motion and animation guidelines that can be used across all components, these include recommendations for animation duration, easing, and types of animations that can be used to create a consistent motion language across all components.
 
