@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import LxFlex from '../../ui/src/components/flex/LxFlex.vue';
 
-	const colours = ['primary', 'secondary', 'accent', 'info', 'success', 'warning', 'danger', 'white', 'black'];
+	const colours = ['primary', 'secondary', 'accent', 'info', 'success', 'warning', 'danger', 'text', 'white', 'black'];
 	const shades = ['lighter', 'light', '', 'dark', 'darker'];
 	const surfaces = ['base', 'raised', 'sunken', 'overlay', 'border', 'inverse'];
 

@@ -16,7 +16,7 @@ export type TLxIconStyle = (
 
 export type TLxIconProps = {
 	name: string,
-	iconStyle?: TLxIconStyle,
+	variant?: TLxIconStyle,
 	size?: TSizes,
 	spin?: boolean,
 	pulse?: boolean,

@@ -64,6 +64,8 @@ video {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	text-size-adjust: none;
+	color: var(--lx-colour-text);
+	font-family: var(--lx-font-family-primary);
 }
 
 footer,
@@ -76,6 +78,8 @@ main {
 
 body {
 	line-height: 1;
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 ol,
@@ -108,24 +112,40 @@ input {
 
 h1 {
 	font-size: var(--lx-font-size-2xl);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 h2 {
 	font-size: var(--lx-font-size-xl);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 h3 {
 	font-size: var(--lx-font-size-lg);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 h4 {
 	font-size: var(--lx-font-size-md);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 h5 {
 	font-size: var(--lx-font-size-sm);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
 }
 
 h6 {
 	font-size: var(--lx-font-size-xs);
+	font-family: var(--lx-font-family-primary);
+	color: var(--lx-colour-text);
+}
+
+code, pre {
+	font-family: var(--lx-font-family-monospace);
 }

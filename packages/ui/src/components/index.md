@@ -2,6 +2,9 @@
 
 The Luaris framework includes a growing library of reusable UI components built with Vue 3 and TypeScript. These components are designed to work seamlessly with the design system and provide a consistent user experience across applications.
 
+> [!WARNING]
+> Unfortunately, Vitepress adds a lot of overhead styles to the page which can interfere with the appearance of the components, so if you notice classes being added to elements, this may be purely for documentation purposes and avoiding conflicting styles.
+
 [[toc]]
 
 ## Legend
@@ -16,7 +19,7 @@ The below table describes the current status of each planned component in the li
 
 | Status | Component | Description |
 | --- | --- | --- |
-| ❌ | [Accordion](./accordion/index.md) | A component for displaying collapsible content sections, allowing users to expand and collapse information as needed. |
+| ✅ | [Accordion](./accordion/index.md) | A component for displaying collapsible content sections, allowing users to expand and collapse information as needed. |
 | ❌ | [Alert](./alert/index.md) | A component for displaying important messages or notifications to users, with support for different types (success, error, warning, info) and optional dismiss functionality. |
 | ❌ | [App](./app/index.md) | The root layout component for the application, providing a consistent structure and context for all pages and components, including built-in support for accessibility features, toasts, and global state management. |
 | ❌ | [Avatar](./avatar/index.md) | A component for displaying user profile pictures or icons, with support for different sizes, shapes (circle, square), and fallback options when an image is not available. |
@@ -33,7 +36,8 @@ The below table describes the current status of each planned component in the li
 | ❌ | [Context Menu](./context-menu/index.md) | A right-click context menu that can be attached to any element, supports nested submenus, and is fully keyboard accessible. |
 | ❌ | [Data Table](./data-table/index.md) | A component for displaying tabular data with support for sorting, filtering, pagination, and customizable columns. |
 | ❌ | [Date Picker](./date-picker/index.md) | A component that allows users to select a date from a calendar interface, with support for different date formats and optional time selection. |
-| �❌ | [Date Range Picker](./date-range-picker/index.md) | An extension of the date picker that allows users to select a range of dates, with support for predefined ranges (e.g. last 7 days, this month) and custom range selection. |
+| ❌ | [Date Range Picker](./date-range-picker/index.md) | An extension of the date picker that allows users to select a range of dates, with support for predefined ranges (e.g. last 7 days, this month) and custom range selection. |
+| ✅ | [Details](./details/index.md) | A component for displaying additional information in a collapsible section, similar to the HTML `<details>` element, with support for custom styling and content. |
 | ❌ | [Dialog](./dialog/index.md) | A modal dialog component that can be used for confirmations, forms, or any content that needs to be displayed in a layer above the main app content, including modal support. |
 | ❌ | [Divider](./divider/index.md) | A simple component for visually separating content sections with a horizontal line. |
 | ❌ | [Drawer](./drawer/index.md) | A sliding panel component that can be used for navigation, filters, or additional content, with support for different placements (left, right, top, bottom) and responsive behavior. |

@@ -43,7 +43,7 @@ export default defineConfig({
 				text: 'Components',
 				link: '/components/index.md',
 				items: [
-					// { text: 'Accordion', link: '/components/accordion/' },
+					{ text: 'Accordion', link: '/components/accordion/' },
 					// { text: 'Alert', link: '/components/alert/' },
 					// { text: 'App', link: '/components/app/' }, // Root layout component, used with accessibility controls built in for toasts, etc, will provide context/features down the tree.
 					// { text: 'Avatar', link: '/components/avatar/' },
@@ -61,6 +61,7 @@ export default defineConfig({
 					// { text: 'Data Table', link: '/components/data-table/' },
 					// { text: 'Date Picker', link: '/components/date-picker/' },
 					// { text: 'Date Range Picker', link: '/components/date-range-picker/' },
+					{ text: 'Details', link: '/components/details/' },
 					// { text: 'Dialog', link: '/components/dialog/' }, // A modal dialog component that can be used for confirmations, forms, or any content that needs to be displayed in a layer above the main app content, including modal support.
 					// { text: 'Divider', link: '/components/divider/' },
 					// { text: 'Drawer', link: '/components/drawer/' },

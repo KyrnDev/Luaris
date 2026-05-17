@@ -16,7 +16,6 @@ $colour-surface-raised: #ffffff;
 $colour-surface-sunken: #e8eef5;
 $colour-surface-overlay: rgb(15 23 42 / 0.64);
 $colour-surface-border: #d3dce8;
-$colour-surface-inverse: #0f172a;
 
 $theme-light: (
 	'colour': (
@@ -29,6 +28,7 @@ $theme-light: (
 		'danger': $colour-danger,
 		'white': $colour-white,
 		'black': $colour-black,
+		'text': $colour-black,
 		'transparent': transparent,
 		'on': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
@@ -84,7 +84,6 @@ $theme-light: (
 			'sunken': $colour-surface-sunken,
 			'overlay': $colour-surface-overlay,
 			'border': $colour-surface-border,
-			'inverse': $colour-surface-inverse,
 		),
 	),
 	'size': (

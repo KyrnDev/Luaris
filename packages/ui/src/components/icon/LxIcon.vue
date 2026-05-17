@@ -15,7 +15,7 @@
 	import { computed } from 'vue';
 
 	const props = withDefaults(defineProps<TLxIconProps>(), {
-		iconStyle: 'solid',
+		variant: 'solid',
 		size: 'md',
 		spin: false,
 		pulse: false,
@@ -38,26 +38,57 @@
 		'sharp-duotone': ['fa-sharp-duotone'],
 	};
 
+	const iconStyleClasses = new Set(Object.values(stylePrefixMap).flat());
+	const iconUtilityClasses = new Set(['fa-spin', 'fa-pulse', 'fa-fw']);
+
+	const parsedNameClasses = computed(() => {
+		const rawName = props.name.trim();
+		if (!rawName) return [];
+
+		const rawTokens = rawName.split(/\s+/).filter(Boolean);
+
+		return rawTokens.map(token => {
+			if (token.startsWith('fa-')) return token;
+			if (rawTokens.length === 1) return `fa-${token}`;
+			return token;
+		});
+	});
+
+	const hasExplicitStyle = computed(() => {
+		return parsedNameClasses.value.some(iconClass => iconStyleClasses.has(iconClass));
+	});
+
+	const resolvedBaseClasses = computed(() => {
+		const classes = hasExplicitStyle.value
+			? [...parsedNameClasses.value]
+			: [...stylePrefixMap[props.variant], ...parsedNameClasses.value];
+
+		return [...new Set(classes)];
+	});
+
 	const getSize = computed(() => {
 		return `var(--lx-size-control-icon-${props.size})`;
 	});
 
 	const accessibleLabel = computed(() => {
 		if (props.label) return props.label;
-		return props.name.replaceAll('-', ' ');
+
+		const iconClass = [...parsedNameClasses.value].reverse().find(token => {
+			return token.startsWith('fa-') && !iconStyleClasses.has(token) && !iconUtilityClasses.has(token);
+		});
+
+		if (!iconClass) return props.name.replaceAll('-', ' ');
+		return iconClass.replace(/^fa-/, '').replaceAll('-', ' ');
 	});
 
 	const iconClasses = computed(() => {
-		const classes = [
-			...stylePrefixMap[props.iconStyle],
-			`fa-${props.name}`,
-		];
+		const classes = [...resolvedBaseClasses.value];
 
 		if (props.spin) classes.push('fa-spin');
 		if (props.pulse) classes.push('fa-pulse');
 		if (props.fixedWidth) classes.push('fa-fw');
 
-		return classes;
+		return [...new Set(classes)];
 	});
 
 	const { decorative } = props;

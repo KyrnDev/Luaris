@@ -57,7 +57,10 @@ samp {
 	font-family: var(--lx-font-family-mono);
 }
 
-@layer lx-token-classes {
-	@include helpers.lx-emit-token-classes(light.$theme-light);
+:root,
+html,
+html[data-theme='light'],
+html[data-theme='dark'],
+html[data-theme='high-contrast'] {
 	@include utils.lx-emit-utility-helpers();
 }

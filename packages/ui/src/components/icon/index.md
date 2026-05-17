@@ -14,8 +14,8 @@ The Icon component accepts the following props:
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | `''` | The name of the icon to display. This should be the Font Awesome icon name, without the `fa-` prefix. For example, `home` for the `fa-home` icon. |
-| `iconStyle` | `string` | `'solid'` | The style of the icon. This should be one of the Font Awesome styles, such as `solid`, `regular`, `light`, `duotone`, or `brands`. |
+| `name` | `string` | `''` | The icon identifier or Font Awesome class string. Supports values such as `car`, `fa-car`, `fa-regular fa-car`, or `fa-duotone fa-car`. |
+| `variant` | `string` | `'solid'` | The fallback style used only when `name` does not already include an explicit Font Awesome style class. |
 | `size` | [TSizes](/types/theme.html#type-tsizes) | `'md'` | The size of the icon. This can be one of the following: `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`. |
 | `spin` | `boolean` | `false` | Whether the icon should spin. |
 | `pulse` | `boolean` | `false` | Whether the icon should pulse. |
@@ -26,65 +26,87 @@ The Icon component accepts the following props:
 ## Styles
 
 <div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
-	<LxIcon name="home" iconStyle="solid" />
-	<LxIcon name="home" iconStyle="regular" />
-	<LxIcon name="home" iconStyle="light" />
-	<LxIcon name="home" iconStyle="duotone" />
-	<LxIcon name="github" iconStyle="brands" />
+	<LxIcon name="home" variant="solid" />
+	<LxIcon name="home" variant="regular" />
+	<LxIcon name="home" variant="light" />
+	<LxIcon name="home" variant="duotone" />
+	<LxIcon name="github" variant="brands" />
 </div>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxIcon name="home" iconStyle="solid" />
-<LxIcon name="home" iconStyle="regular" />
-<LxIcon name="home" iconStyle="light" />
-<LxIcon name="home" iconStyle="duotone" />
-<LxIcon name="github" iconStyle="brands" />
+<LxIcon name="home" variant="solid" />
+<LxIcon name="home" variant="regular" />
+<LxIcon name="home" variant="light" />
+<LxIcon name="home" variant="duotone" />
+<LxIcon name="github" variant="brands" />
+```
+</details>
+
+## Name Formats
+
+You can pass either a simple icon name or the full Font Awesome class string. If the `name` already includes a style class such as `fa-regular` or `fa-duotone`, the component will preserve it and will not prepend the fallback `variant`.
+
+<div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+	<LxIcon name="car" />
+	<LxIcon name="fa-car" />
+	<LxIcon name="fa-regular fa-car" />
+	<LxIcon name="fa-duotone fa-car" />
+</div>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxIcon name="car" />
+<LxIcon name="fa-car" />
+<LxIcon name="fa-regular fa-car" />
+<LxIcon name="fa-duotone fa-car" />
 ```
 </details>
 
 ## Sizes
 
 <div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
-	<LxIcon name="home" iconStyle="solid" size="2xs" />
-	<LxIcon name="home" iconStyle="solid" size="xs" />
-	<LxIcon name="home" iconStyle="solid" size="sm" />
-	<LxIcon name="home" iconStyle="solid" size="md" />
-	<LxIcon name="home" iconStyle="solid" size="lg" />
-	<LxIcon name="home" iconStyle="solid" size="xl" />
-	<LxIcon name="home" iconStyle="solid" size="2xl" />
-	<LxIcon name="home" iconStyle="solid" size="3xl" />
+	<LxIcon name="home" variant="solid" size="2xs" />
+	<LxIcon name="home" variant="solid" size="xs" />
+	<LxIcon name="home" variant="solid" size="sm" />
+	<LxIcon name="home" variant="solid" size="md" />
+	<LxIcon name="home" variant="solid" size="lg" />
+	<LxIcon name="home" variant="solid" size="xl" />
+	<LxIcon name="home" variant="solid" size="2xl" />
+	<LxIcon name="home" variant="solid" size="3xl" />
 </div>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxIcon name="home" iconStyle="solid" size="2xs" />
-<LxIcon name="home" iconStyle="solid" size="xs" />
-<LxIcon name="home" iconStyle="solid" size="sm" />
-<LxIcon name="home" iconStyle="solid" size="md" />
-<LxIcon name="home" iconStyle="solid" size="lg" />
-<LxIcon name="home" iconStyle="solid" size="xl" />
-<LxIcon name="home" iconStyle="solid" size="2xl" />
-<LxIcon name="home" iconStyle="solid" size="3xl" />
+<LxIcon name="home" variant="solid" size="2xs" />
+<LxIcon name="home" variant="solid" size="xs" />
+<LxIcon name="home" variant="solid" size="sm" />
+<LxIcon name="home" variant="solid" size="md" />
+<LxIcon name="home" variant="solid" size="lg" />
+<LxIcon name="home" variant="solid" size="xl" />
+<LxIcon name="home" variant="solid" size="2xl" />
+<LxIcon name="home" variant="solid" size="3xl" />
 ```
 </details>
 
 ## States
 
 <div style="display: flex; gap: 0.1rem; flex-wrap: wrap;">
-	<LxIcon name="spinner" iconStyle="solid" spin />
-	<LxIcon name="spinner" iconStyle="solid" pulse />
+	<LxIcon name="spinner" variant="solid" spin />
+	<LxIcon name="spinner" variant="solid" pulse />
 </div>
 
 <details>
 <summary>Show code</summary>
 
 ```html
-<LxIcon name="spinner" iconStyle="solid" spin />
-<LxIcon name="spinner" iconStyle="solid" pulse />
+<LxIcon name="spinner" variant="solid" spin />
+<LxIcon name="spinner" variant="solid" pulse />
 ```
 </details>

@@ -101,7 +101,7 @@ Additionally, you can use the `contentBackgroundColour` prop to set a custom bac
 
 <LxFlex class="lx-padding-y--md" wrap>
 	<LxCard v-for="colour in SURFACE_COLOURS" :key="colour" :contentBackgroundColour="colour" style="flex: 0 0 30%;">
-		<p :style="{ color: `var(--lx-colour-${colour === 'inverse' ? 'black' : 'white'})` }">{{ colour }}</p>
+		<p :style="{ color: 'var(--lx-colour-white)' }">{{ colour }}</p>
 	</LxCard>
 </LxFlex>
 
@@ -111,7 +111,7 @@ Additionally, you can use the `contentBackgroundColour` prop to set a custom bac
 ```html
 <LxFlex wrap>
 	<LxCard v-for="colour in SURFACE_COLOURS" :key="colour" :contentBackgroundColour="colour" style="flex: 0 0 30%;">
-		<p :style="{ color: `var(--lx-colour-${colour === 'inverse' ? 'black' : 'white'})` }">{{ colour }}</p>
+		<p :style="{ color: 'var(--lx-colour-white)' }">{{ colour }}</p>
 	</LxCard>
 </LxFlex>
 ```

@@ -20,7 +20,7 @@ The colour types include definitions for the different colour categories and the
 
 ### Type: `TSurfaceColours`
 
-`base`, `raised`, `sunken`, `overlay`, `border`, `inverse`
+`base`, `raised`, `sunken`, `overlay`, `border`
 
 ### Type: `TThemes`
 

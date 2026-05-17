@@ -24,6 +24,7 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 		'danger': $colour-danger,
 		'white': $colour-white,
 		'black': $colour-black,
+		'text': $colour-white,
 		'transparent': transparent,
 		'on': (
 			'primary': contrast.lx-contrast-colour($colour-primary),
@@ -79,7 +80,6 @@ $theme-dark: map.deep-merge(light.$theme-light, (
 			'sunken': #0b1118,
 			'overlay': rgb(2 8 23 / 0.76),
 			'border': #2d3b4b,
-			'inverse': #f8fafc,
 		),
 	),
 ));
