@@ -148,3 +148,8 @@ body {
 		background-color: var(--lx-colour-surface-sunken) !important;
 	}
 }
+
+.vp-doc p {
+	margin: 0;
+	padding: 0;
+}

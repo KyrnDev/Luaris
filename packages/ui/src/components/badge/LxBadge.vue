@@ -1,11 +1,5 @@
 <template>
-	<span
-		class="lx-badge"
-		:class="[
-			`lx-badge--${variant}`,
-			`lx-badge--${size}`,
-		]"
-	>
+	<span class="lx-badge">
 		{{ label }}
 		<slot v-if="$slots.default" />
 	</span>

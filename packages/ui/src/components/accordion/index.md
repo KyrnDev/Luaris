@@ -8,13 +8,6 @@
 	const controlledOpen = ref(true);
 </script>
 
-<style scoped>
-	p {
-		margin: 0;
-		padding: 0;
-	}
-</style>
-
 # Accordion
 
 The Accordion component is a structured set of collapsible items built with the same shared colour, sizing, and disclosure rules as the platform details component. Use it when you want related sections to coordinate as a group, either allowing one panel at a time or multiple open panels.
@@ -35,6 +28,7 @@ By default, accordion items are visually connected into a single stacked control
 | `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The default control size for child items. |
 | `gap` | [TSizes](/types/theme.html#type-tsizes) | `md` | The vertical gap between accordion items when `connected` is `false`. |
 | `contentPadding` | [TSizes](/types/theme.html#type-tsizes) | `size` | The default content padding for child items. |
+| `contentLineHeight` | [TFontLineHeights](/types/theme.html#type-tfontlineheights) | `normal` | The default line-height token for child item content. |
 | `contentBackgroundColour` | [TSurfaceColours](/types/theme.html#type-tsurfacecolours) \| `transparent` | `raised`, or `transparent` when `variant="transparent"` | The default content surface for child items. |
 | `borderRadius` | [TRadiusSize](/types/theme.html#type-tradiussize) | `md` | The default outer border radius for child items. |
 | `borderWidth` | [TBorderWidths](/types/theme.html#type-tborderwidths) | `thin` | The default border width for child items. |
@@ -49,6 +43,7 @@ By default, accordion items are visually connected into a single stacked control
 | `variant` | [TColours](/types/theme.html#type-tcolours) \| [TSurfaceColours](/types/theme.html#type-tsurfacecolours) | inherits from `LxAccordion` | Overrides the summary surface for this item. |
 | `size` | [TSizes](/types/theme.html#type-tsizes) | inherits from `LxAccordion` | Overrides the shared control size for this item. |
 | `contentPadding` | [TSizes](/types/theme.html#type-tsizes) | inherits from `LxAccordion`, then `size` | Overrides the content padding for this item. |
+| `contentLineHeight` | [TFontLineHeights](/types/theme.html#type-tfontlineheights) | inherits from `LxAccordion` | Overrides the line-height token for this item content. |
 | `contentBackgroundColour` | [TSurfaceColours](/types/theme.html#type-tsurfacecolours) \| `transparent` | inherits from `LxAccordion` | Overrides the content surface for this item. |
 | `borderRadius` | [TRadiusSize](/types/theme.html#type-tradiussize) | inherits from `LxAccordion` | Overrides the outer border radius for this item. |
 | `borderWidth` | [TBorderWidths](/types/theme.html#type-tborderwidths) | inherits from `LxAccordion` | Overrides the border width for this item. |

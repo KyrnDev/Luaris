@@ -48,6 +48,7 @@
 		size: 'md',
 		content: '',
 		contentPadding: undefined,
+		contentLineHeight: 'normal',
 		contentBackgroundColour: undefined,
 		borderRadius: 'md',
 		borderWidth: 'thin',
@@ -66,6 +67,7 @@
 	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
 	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size})`);
 	const getContentPadding = computed(() => `var(--lx-size-space-${props.contentPadding ?? props.size})`);
+	const getContentLineHeight = computed(() => `var(--lx-font-line-height-${props.contentLineHeight})`);
 	const getBorderRadius = computed(() => `var(--lx-size-radius-${props.borderRadius})`);
 	const isTransparentVariant = computed(() => props.variant === 'transparent');
 	const resolvedContentBackgroundColour = computed(() => props.contentBackgroundColour ?? (isTransparentVariant.value ? 'transparent' : 'raised'));
@@ -179,6 +181,11 @@
 			padding: v-bind(getContentPadding);
 			background-color: v-bind(getContentBackground);
 			color: var(--lx-colour-text);
+			line-height: v-bind(getContentLineHeight);
+
+			:deep(*) {
+				line-height: inherit;
+			}
 		}
 	}
 </style>

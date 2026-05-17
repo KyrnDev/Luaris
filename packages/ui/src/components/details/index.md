@@ -7,13 +7,6 @@
 	const controlledOpen = ref(true);
 </script>
 
-<style scoped>
-	p {
-		margin: 0;
-		padding: 0;
-	}
-</style>
-
 # Details
 
 The Details component is a collapsible section that can be used to display additional information or content. It is similar to the HTML `<details>` element, but with support for custom styling and content.
@@ -32,6 +25,7 @@ The Details component accepts the following props:
 | `icon` | `string?` | `undefined` | Optional summary icon displayed before the title. |
 | `content` | `string` | `''` | Optional plain text content used when no `content` or default slot is provided. |
 | `contentPadding` | [TSizes](/types/theme.html#type-tsizes) | `size` | Optional content padding token. When omitted, the content padding follows the current `size`. |
+| `contentLineHeight` | [TFontLineHeights](/types/theme.html#type-tfontlineheights) | `normal` | The line-height token used for the content area. |
 | `contentBackgroundColour` | [TSurfaceColours](/types/theme.html#type-tsurfacecolours) \| `transparent` | `raised`, or `transparent` when `variant="transparent"` | The surface colour used for the expanded content area. |
 | `borderRadius` | [TRadiusSize](/types/theme.html#type-tradiussize) | `md` | The outer border radius of the details container. |
 | `borderWidth` | [TBorderWidths](/types/theme.html#type-tborderwidths) | `thin` | The border width used for the container and open-state divider. |

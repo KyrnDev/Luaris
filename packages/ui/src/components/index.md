@@ -20,7 +20,7 @@ The below table describes the current status of each planned component in the li
 | Status | Component | Description |
 | --- | --- | --- |
 | ✅ | [Accordion](./accordion/index.md) | A component for displaying collapsible content sections, allowing users to expand and collapse information as needed. |
-| ❌ | [Alert](./alert/index.md) | A component for displaying important messages or notifications to users, with support for different types (success, error, warning, info) and optional dismiss functionality. |
+| ✅ | [Alert](./alert/index.md) | A component for displaying important messages or notifications to users, with support for different types (success, error, warning, info) and optional dismiss functionality. |
 | ❌ | [App](./app/index.md) | The root layout component for the application, providing a consistent structure and context for all pages and components, including built-in support for accessibility features, toasts, and global state management. |
 | ❌ | [Avatar](./avatar/index.md) | A component for displaying user profile pictures or icons, with support for different sizes, shapes (circle, square), and fallback options when an image is not available. |
 | ✅ | [Badge](./badge/index.md) | A small badge component for displaying counts, statuses, or labels. |

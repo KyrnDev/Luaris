@@ -1,6 +1,7 @@
 import type {
 	TBorderWidths,
 	TColours,
+	TFontLineHeights,
 	TRadiusSize,
 	TSizes,
 	TSurfaceColours,
@@ -13,6 +14,7 @@ export type TLxDetailsProps = {
 	variant?: TColours | TSurfaceColours,
 	size?: TSizes,
 	contentPadding?: TSizes,
+	contentLineHeight?: TFontLineHeights,
 	contentBackgroundColour?: TSurfaceColours | 'transparent',
 	borderRadius?: TRadiusSize,
 	borderWidth?: TBorderWidths,

@@ -8,6 +8,7 @@
 		:variant="resolvedVariant"
 		:size="resolvedSize"
 		:content-padding="resolvedContentPadding"
+		:content-line-height="resolvedContentLineHeight"
 		:content-background-colour="resolvedContentBackgroundColour"
 		:border-radius="resolvedBorderRadius"
 		:border-width="resolvedBorderWidth"
@@ -41,6 +42,7 @@
 		variant: undefined,
 		size: undefined,
 		contentPadding: undefined,
+		contentLineHeight: undefined,
 		contentBackgroundColour: undefined,
 		borderRadius: undefined,
 		borderWidth: undefined,
@@ -56,6 +58,7 @@
 	const resolvedVariant = computed<TLxAccordionVariant>(() => props.variant ?? accordionContext?.defaultVariant.value ?? 'raised');
 	const resolvedSize = computed(() => props.size ?? accordionContext?.defaultSize.value ?? 'md');
 	const resolvedContentPadding = computed(() => props.contentPadding ?? accordionContext?.defaultContentPadding.value ?? resolvedSize.value);
+	const resolvedContentLineHeight = computed(() => props.contentLineHeight ?? accordionContext?.defaultContentLineHeight.value ?? 'normal');
 	const resolvedContentBackgroundColour = computed(() => props.contentBackgroundColour ?? accordionContext?.defaultContentBackgroundColour.value);
 	const resolvedBorderRadius = computed(() => props.borderRadius ?? accordionContext?.defaultBorderRadius.value ?? 'md');
 	const resolvedBorderWidth = computed(() => props.borderWidth ?? accordionContext?.defaultBorderWidth.value ?? 'thin');
