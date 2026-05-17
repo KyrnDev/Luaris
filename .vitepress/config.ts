@@ -46,7 +46,7 @@ export default defineConfig({
 					{ text: 'Accordion', link: '/components/accordion/' },
 					{ text: 'Alert', link: '/components/alert/' },
 					// { text: 'App', link: '/components/app/' }, // Root layout component, used with accessibility controls built in for toasts, etc, will provide context/features down the tree.
-					// { text: 'Avatar', link: '/components/avatar/' },
+					{ text: 'Avatar', link: '/components/avatar/' },
 					{ text: 'Badge', link: '/components/badge/' },
 					// { text: 'Breadcrumbs', link: '/components/breadcrumbs/' },
 					{ text: 'Button', link: '/components/button/' },
