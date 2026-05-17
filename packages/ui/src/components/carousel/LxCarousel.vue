@@ -57,7 +57,9 @@
 								:index="getAbsoluteIndex(virtualStartPage + renderedIndex, itemIndex)"
 								:page-index="virtualStartPage + renderedIndex"
 							/>
-							<template v-else>{{ item.title }}</template>
+							<template v-else>
+								{{ item.title }}
+							</template>
 						</figcaption>
 					</figure>
 				</div>
@@ -199,7 +201,7 @@
 		return pageIndex === currentPage.value ? 'eager' : 'lazy';
 	};
 
-	watch(totalPages, (pageCount) => {
+	watch(totalPages, pageCount => {
 		if (pageCount === 0) {
 			currentPage.value = 0;
 			return;
