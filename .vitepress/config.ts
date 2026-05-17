@@ -52,7 +52,7 @@ export default defineConfig({
 					{ text: 'Button', link: '/components/button/' },
 					// { text: 'Calendar', link: '/components/calendar/' }, // Entirely custom calendar component with support for multiple views (month, year, decade) and range selection, and even support for calendar events.
 					{ text: 'Card', link: '/components/card/' },
-					// { text: 'Carousel', link: '/components/carousel/' },
+					{ text: 'Carousel', link: '/components/carousel/' },
 					// { text: 'Checkbox', link: '/components/checkbox/' },
 					// { text: 'Color Picker', link: '/components/colour-picker/' },
 					// { text: 'Combobox', link: '/components/combobox/' },

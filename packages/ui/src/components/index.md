@@ -28,7 +28,7 @@ The below table describes the current status of each planned component in the li
 | ✅ | [Button](./button/index.md) | A versatile and customizable button component for various actions in your application. |
 | ❌ | [Calendar](./calendar/index.md) | An interactive calendar component that supports multiple views (month, year, decade) and range selection, with optional support for calendar events. |
 | ✅ | [Card](./card/index.md) | A card component for displaying content in a structured and visually appealing way. |
-| ❌ | [Carousel](./carousel/index.md) | A component for displaying a series of content items, such as images or cards, in a horizontal scrollable format with navigation controls. |
+| ✅ | [Carousel](./carousel/index.md) | A component for displaying paged image sequences with token-based controls, dots, and lightweight virtualization. |
 | ❌ | [Checkbox](./checkbox/index.md) | A component for selecting one or more options from a set, with support for indeterminate state and custom styling. |
 | ❌ | [Color Picker](./colour-picker/index.md) | A component that allows users to select a colour from a palette or input a custom colour value, with support for different formats (hex, rgba, hsl). |
 | ❌ | [Combobox](./combobox/index.md) | A component that combines a dropdown list with an input field, allowing users to select from predefined options or enter their own value, with support for autocomplete and keyboard navigation. |
