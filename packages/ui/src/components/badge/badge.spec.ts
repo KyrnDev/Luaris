@@ -30,11 +30,23 @@ describe('LxBadge', () => {
 	it('renders with default classes when no props are provided', () => {
 		const wrapper = mount(LxBadge);
 		const badge = wrapper.get('.lx-badge');
+		const setupState = (wrapper.vm.$ as typeof wrapper.vm.$ & {
+			setupState: {
+				getSize: string,
+				getControlHeight: string,
+				getControlPaddingX: string,
+				getVariant: string,
+				getTextColour: string,
+			},
+		}).setupState;
 
 		expect(badge.classes()).toContain('lx-badge');
-		expect(badge.classes()).toContain('lx-badge--primary');
-		expect(badge.classes()).toContain('lx-badge--md');
 		expect(badge.text()).toBe('');
+		expect(setupState.getSize).toBe('var(--lx-font-size-md)');
+		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-md)');
+		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-md)');
+		expect(setupState.getVariant).toBe('var(--lx-colour-primary)');
+		expect(setupState.getTextColour).toBe('var(--lx-colour-on-primary)');
 	});
 
 	it('renders the label prop content', () => {
@@ -47,7 +59,7 @@ describe('LxBadge', () => {
 		expect(wrapper.get('.lx-badge').text()).toBe('Beta');
 	});
 
-	it('applies custom variant and size classes', () => {
+	it('applies custom variant and size token values', () => {
 		const wrapper = mount(LxBadge, {
 			props: {
 				label: 'New',
@@ -56,10 +68,22 @@ describe('LxBadge', () => {
 			},
 		});
 		const badge = wrapper.get('.lx-badge');
+		const setupState = (wrapper.vm.$ as typeof wrapper.vm.$ & {
+			setupState: {
+				getSize: string,
+				getControlHeight: string,
+				getControlPaddingX: string,
+				getVariant: string,
+				getTextColour: string,
+			},
+		}).setupState;
 
-		expect(badge.classes()).toContain('lx-badge--success');
-		expect(badge.classes()).toContain('lx-badge--lg');
 		expect(badge.text()).toBe('New');
+		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
+		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');
+		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-lg)');
+		expect(setupState.getVariant).toBe('var(--lx-colour-success)');
+		expect(setupState.getTextColour).toBe('var(--lx-colour-on-success)');
 	});
 
 	it('renders default slot content after the label', () => {
@@ -90,7 +114,7 @@ describe('LxBadge', () => {
 		expect(badge.find('.count').exists()).toBe(true);
 	});
 
-	it('updates classes and text when props change', async () => {
+	it('updates token values and text when props change', async () => {
 		const wrapper = mount(LxBadge, {
 			props: {
 				label: 'Draft',
@@ -116,10 +140,6 @@ describe('LxBadge', () => {
 			},
 		}).setupState;
 
-		expect(badge.classes()).toContain('lx-badge--danger');
-		expect(badge.classes()).toContain('lx-badge--lg');
-		expect(badge.classes()).not.toContain('lx-badge--warning');
-		expect(badge.classes()).not.toContain('lx-badge--sm');
 		expect(badge.text()).toBe('Published');
 		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');

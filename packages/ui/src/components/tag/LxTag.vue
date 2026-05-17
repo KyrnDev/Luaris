@@ -1,5 +1,5 @@
 <template>
-	<span class="lx-tag" :class="[`lx-tag--${variant}`, `lx-tag--${size}`]">
+	<span class="lx-tag">
 		<span v-if="$slots.leading" class="lx-tag__leading"><slot name="leading" /></span>
 		<slot>{{ label }}</slot>
 
