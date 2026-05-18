@@ -40,6 +40,7 @@ export type TLxAccordionProps = {
 
 export type TLxAccordionContext = {
 	multiple: Ref<boolean>,
+	groupName: ComputedRef<string | undefined>,
 	defaultVariant: ComputedRef<TLxAccordionVariant>,
 	defaultSize: ComputedRef<TSizes>,
 	defaultContentPadding: ComputedRef<TSizes | undefined>,
@@ -47,9 +48,6 @@ export type TLxAccordionContext = {
 	defaultContentBackgroundColour: ComputedRef<TSurfaceColours | 'transparent' | undefined>,
 	defaultBorderRadius: ComputedRef<TRadiusSize>,
 	defaultBorderWidth: ComputedRef<TBorderWidths>,
-	registerItem: (id: string, setOpen: (value: boolean) => void) => void,
-	unregisterItem: (id: string) => void,
-	notifyOpen: (id: string) => void,
 };
 
 export const LX_ACCORDION_CONTEXT_KEY: InjectionKey<TLxAccordionContext> = Symbol('lx-accordion-context');

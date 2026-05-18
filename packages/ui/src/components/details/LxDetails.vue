@@ -1,5 +1,6 @@
 <template>
 	<details
+		:name="props.name || undefined"
 		:open="open"
 		class="lx-details"
 		:class="{

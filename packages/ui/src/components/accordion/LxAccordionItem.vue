@@ -2,6 +2,7 @@
 	<LxDetails
 		v-model:open="open"
 		class="lx-accordion-item"
+		:name="accordionContext?.groupName.value"
 		:title="props.title"
 		:icon="props.icon"
 		:content="props.content"
@@ -13,7 +14,6 @@
 		:border-radius="resolvedBorderRadius"
 		:border-width="resolvedBorderWidth"
 		:disabled="props.disabled"
-		@update:open="handleOpenUpdate"
 	>
 		<template v-if="$slots.summary" #summary>
 			<slot name="summary" />
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 	import type { TLxAccordionItemProps, TLxAccordionVariant } from './types';
-	import { computed, inject, onBeforeUnmount, onMounted, useId } from 'vue';
+	import { computed, inject } from 'vue';
 	import { LxDetails } from '../details';
 	import { LX_ACCORDION_CONTEXT_KEY } from './types';
 
@@ -52,8 +52,6 @@
 
 	const open = defineModel<boolean>('open', { default: false });
 	const accordionContext = inject(LX_ACCORDION_CONTEXT_KEY, null);
-	const generatedId = useId();
-	const itemId = computed(() => props.value || generatedId);
 
 	const resolvedVariant = computed<TLxAccordionVariant>(() => props.variant ?? accordionContext?.defaultVariant.value ?? 'raised');
 	const resolvedSize = computed(() => props.size ?? accordionContext?.defaultSize.value ?? 'md');
@@ -62,22 +60,4 @@
 	const resolvedContentBackgroundColour = computed(() => props.contentBackgroundColour ?? accordionContext?.defaultContentBackgroundColour.value);
 	const resolvedBorderRadius = computed(() => props.borderRadius ?? accordionContext?.defaultBorderRadius.value ?? 'md');
 	const resolvedBorderWidth = computed(() => props.borderWidth ?? accordionContext?.defaultBorderWidth.value ?? 'thin');
-
-	const setOpen = (value: boolean) => {
-		open.value = value;
-	};
-
-	onMounted(() => {
-		accordionContext?.registerItem(itemId.value, setOpen);
-		if (open.value) accordionContext?.notifyOpen(itemId.value);
-	});
-
-	onBeforeUnmount(() => {
-		accordionContext?.unregisterItem(itemId.value);
-	});
-
-	const handleOpenUpdate = (value: boolean) => {
-		open.value = value;
-		if (value) accordionContext?.notifyOpen(itemId.value);
-	};
 </script>

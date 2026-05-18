@@ -8,6 +8,7 @@ import type {
 } from '../../types/theme';
 
 export type TLxDetailsProps = {
+	name?: string,
 	title?: string,
 	icon?: string,
 	content?: string,

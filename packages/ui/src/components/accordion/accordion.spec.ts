@@ -46,22 +46,17 @@ describe('LxAccordion', () => {
 	it('keeps only one item open when multiple is disabled', async () => {
 		const wrapper = mount(TestAccordion);
 		const details = wrapper.findAll('details');
+		const groupName = details[0].attributes('name');
+
+		expect(groupName).toBeTruthy();
+		expect(details[1].attributes('name')).toBe(groupName);
 
 		(details[0].element as HTMLDetailsElement).open = true;
 		await details[0].trigger('toggle');
 		expect(wrapper.findAllComponents(LxAccordionItem)[0].emitted('update:open')).toEqual([[true]]);
-
-		(details[1].element as HTMLDetailsElement).open = true;
-		await details[1].trigger('toggle');
-
-		const firstEmits = wrapper.findAllComponents(LxAccordionItem)[0].emitted('update:open');
-		const secondEmits = wrapper.findAllComponents(LxAccordionItem)[1].emitted('update:open');
-
-		expect(firstEmits).toEqual([[true], [false]]);
-		expect(secondEmits).toEqual([[true]]);
 	});
 
-	it('allows multiple items to stay open when multiple is enabled', async () => {
+	it('does not assign a shared details name when multiple is enabled', () => {
 		const wrapper = mount(TestAccordion, {
 			props: {
 				multiple: true,
@@ -69,16 +64,7 @@ describe('LxAccordion', () => {
 		});
 		const details = wrapper.findAll('details');
 
-		(details[0].element as HTMLDetailsElement).open = true;
-		await details[0].trigger('toggle');
-
-		(details[1].element as HTMLDetailsElement).open = true;
-		await details[1].trigger('toggle');
-
-		const firstEmits = wrapper.findAllComponents(LxAccordionItem)[0].emitted('update:open');
-		const secondEmits = wrapper.findAllComponents(LxAccordionItem)[1].emitted('update:open');
-
-		expect(firstEmits).toEqual([[true]]);
-		expect(secondEmits).toEqual([[true]]);
+		expect(details[0].attributes('name')).toBeUndefined();
+		expect(details[1].attributes('name')).toBeUndefined();
 	});
 });

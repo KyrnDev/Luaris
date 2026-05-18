@@ -7,6 +7,7 @@
 <script setup lang="ts">
 	import type { TLxAccordionProps } from './types';
 	import { computed, provide } from 'vue';
+	import { randomId } from '../../helpers/utilities';
 	import { LX_ACCORDION_CONTEXT_KEY } from './types';
 
 	const props = withDefaults(defineProps<TLxAccordionProps>(), {
@@ -23,27 +24,11 @@
 	});
 
 	const multiple = computed(() => props.multiple);
-	const itemSetters = new Map<string, (value: boolean) => void>();
-
-	const registerItem = (id: string, setOpen: (value: boolean) => void) => {
-		itemSetters.set(id, setOpen);
-	};
-
-	const unregisterItem = (id: string) => {
-		itemSetters.delete(id);
-	};
-
-	const notifyOpen = (id: string) => {
-		if (multiple.value) return;
-
-		itemSetters.forEach((setOpen, itemId) => {
-			if (itemId === id) return;
-			setOpen(false);
-		});
-	};
+	const accordionGroupId = `lx-accordion-${randomId()}`;
 
 	provide(LX_ACCORDION_CONTEXT_KEY, {
 		multiple,
+		groupName: computed(() => (props.multiple ? undefined : accordionGroupId)),
 		defaultVariant: computed(() => props.variant),
 		defaultSize: computed(() => props.size),
 		defaultContentPadding: computed(() => props.contentPadding),
@@ -51,9 +36,6 @@
 		defaultContentBackgroundColour: computed(() => props.contentBackgroundColour),
 		defaultBorderRadius: computed(() => props.borderRadius),
 		defaultBorderWidth: computed(() => props.borderWidth),
-		registerItem,
-		unregisterItem,
-		notifyOpen,
 	});
 
 	const getGap = computed(() => (props.connected ? '0' : `var(--lx-size-space-${props.gap})`));
