@@ -100,7 +100,7 @@ $theme: (
 			'3xl': 3.5rem,
 		),
 
-		'control-padding-x': (
+		'control-padding-inline': (
 			'2xs': 0.375rem,
 			'xs': 0.5rem,
 			'sm': 0.625rem,
@@ -109,6 +109,17 @@ $theme: (
 			'xl': 1rem,
 			'2xl': 1.25rem,
 			'3xl': 1.5rem,
+		),
+
+		'control-padding-block': (
+			'2xs': 0.375rem,
+			'xs': 0.375rem,
+			'sm': 0.375rem,
+			'md': 0.4375rem,
+			'lg': 0.4375rem,
+			'xl': 0.4375rem,
+			'2xl': 0.4375rem,
+			'3xl': 0.1875rem,
 		),
 
 		'control-gap': (

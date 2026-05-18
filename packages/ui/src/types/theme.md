@@ -53,11 +53,17 @@ Used for primitive spacing tokens such as `--lx-size-space-*`.
 
 Used for semantic control height tokens such as `--lx-size-control-height-*`. These tokens define the overall outer height for controls that should align on the same row.
 
-### Type: `TControlPaddingSizes`
+### Type: `TControlPaddingInlineSizes`
 
 `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
 
-Used for semantic horizontal control padding tokens such as `--lx-size-control-padding-x-*`.
+Used for semantic inline control padding tokens such as `--lx-size-control-padding-inline-*`.
+
+### Type: `TControlPaddingBlockSizes`
+
+`2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+Used for semantic block control padding tokens such as `--lx-size-control-padding-block-*`.
 
 ### Type: `TControlGaps`
 

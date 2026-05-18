@@ -14,7 +14,8 @@ describe('LxBadge', () => {
 			setupState: {
 				getSize: string,
 				getControlHeight: string,
-				getControlPaddingX: string,
+				getControlPaddingInline: string,
+				getControlPaddingBlock: string,
 				getVariant: string,
 				getTextColour: string,
 			},
@@ -22,7 +23,8 @@ describe('LxBadge', () => {
 
 		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');
-		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-lg)');
+		expect(setupState.getControlPaddingInline).toBe('var(--lx-size-control-padding-inline-lg)');
+		expect(setupState.getControlPaddingBlock).toBe('var(--lx-size-control-padding-block-lg)');
 		expect(setupState.getVariant).toBe('var(--lx-colour-success)');
 		expect(setupState.getTextColour).toBe('var(--lx-colour-on-success)');
 	});
@@ -34,7 +36,8 @@ describe('LxBadge', () => {
 			setupState: {
 				getSize: string,
 				getControlHeight: string,
-				getControlPaddingX: string,
+				getControlPaddingInline: string,
+				getControlPaddingBlock: string,
 				getVariant: string,
 				getTextColour: string,
 			},
@@ -44,7 +47,8 @@ describe('LxBadge', () => {
 		expect(badge.text()).toBe('');
 		expect(setupState.getSize).toBe('var(--lx-font-size-md)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-md)');
-		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-md)');
+		expect(setupState.getControlPaddingInline).toBe('var(--lx-size-control-padding-inline-md)');
+		expect(setupState.getControlPaddingBlock).toBe('var(--lx-size-control-padding-block-md)');
 		expect(setupState.getVariant).toBe('var(--lx-colour-primary)');
 		expect(setupState.getTextColour).toBe('var(--lx-colour-on-primary)');
 	});
@@ -72,7 +76,8 @@ describe('LxBadge', () => {
 			setupState: {
 				getSize: string,
 				getControlHeight: string,
-				getControlPaddingX: string,
+				getControlPaddingInline: string,
+				getControlPaddingBlock: string,
 				getVariant: string,
 				getTextColour: string,
 			},
@@ -81,7 +86,8 @@ describe('LxBadge', () => {
 		expect(badge.text()).toBe('New');
 		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');
-		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-lg)');
+		expect(setupState.getControlPaddingInline).toBe('var(--lx-size-control-padding-inline-lg)');
+		expect(setupState.getControlPaddingBlock).toBe('var(--lx-size-control-padding-block-lg)');
 		expect(setupState.getVariant).toBe('var(--lx-colour-success)');
 		expect(setupState.getTextColour).toBe('var(--lx-colour-on-success)');
 	});
@@ -134,7 +140,8 @@ describe('LxBadge', () => {
 			setupState: {
 				getSize: string,
 				getControlHeight: string,
-				getControlPaddingX: string,
+				getControlPaddingInline: string,
+				getControlPaddingBlock: string,
 				getVariant: string,
 				getTextColour: string,
 			},
@@ -143,7 +150,8 @@ describe('LxBadge', () => {
 		expect(badge.text()).toBe('Published');
 		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');
-		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-lg)');
+		expect(setupState.getControlPaddingInline).toBe('var(--lx-size-control-padding-inline-lg)');
+		expect(setupState.getControlPaddingBlock).toBe('var(--lx-size-control-padding-block-lg)');
 		expect(setupState.getVariant).toBe('var(--lx-colour-danger)');
 		expect(setupState.getTextColour).toBe('var(--lx-colour-on-danger)');
 	});

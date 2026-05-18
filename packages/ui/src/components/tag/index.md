@@ -66,6 +66,7 @@ The Tag component can emit the following events:
 ## Sizes
 
 <LxFlex wrap>
+	<LxTag size="2xs">2X Small</LxTag>
 	<LxTag size="xs">Extra Small</LxTag>
 	<LxTag size="sm">Small</LxTag>
 	<LxTag size="md">Medium</LxTag>
@@ -80,6 +81,7 @@ The Tag component can emit the following events:
 
 ```html
 <LxFlex wrap>
+	<LxTag size="2xs">2X Small</LxTag>
 	<LxTag size="xs">Extra Small</LxTag>
 	<LxTag size="sm">Small</LxTag>
 	<LxTag size="md">Medium</LxTag>

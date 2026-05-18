@@ -50,10 +50,7 @@ The button component supports various styles through its `variant` prop. Each va
 
 ```html
 <LxFlex gap="0.1rem" wrap>
-	<LxFlex>
-		<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
-
-	</LxFlex>
+	<LxButton class="lx-margin-right--sm" label="Primary" variant="primary" />
 	<LxButton class="lx-margin-right--sm" label="Secondary" variant="secondary" />
 	<LxButton class="lx-margin-right--sm" label="Accent" variant="accent" />
 	<LxButton class="lx-margin-right--sm" label="Info" variant="info" />
@@ -263,7 +260,7 @@ You can also use the LxButton's default slot to create more complex button desig
 <summary>Show code</summary>
 
 ```html
-<LxButton class="lx-margin-top--lg lx-padding-y--sm">
+<LxButton class="lx-margin-top--lg">
 	<LxFlex direction="column" align="start" gap="0.1rem">
 		<h4 class="lx-margin--none">Some useful title</h4>
 		<p>Some inner content here.</p>

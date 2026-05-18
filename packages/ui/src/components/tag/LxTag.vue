@@ -33,7 +33,8 @@
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size ?? 'md'})`);
 	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size ?? 'md'})`);
-	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size ?? 'md'})`);
+	const getControlPaddingInline = computed(() => `var(--lx-size-control-padding-inline-${props.size ?? 'md'})`);
+	const getControlPaddingBlock = computed(() => `var(--lx-size-control-padding-block-${props.size ?? 'md'})`);
 	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size ?? 'md'})`);
 	const getColour = computed(() => `var(--lx-colour-${props.variant ?? 'primary'})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant ?? 'primary'})`);
@@ -51,10 +52,10 @@
 		display: inline-flex;
 		font-weight: var(--lx-font-weight-medium);
 		font-size: v-bind(getSize);
-		height: v-bind(getControlHeight);
-		padding: 0 v-bind(getControlPaddingX);
+		min-height: v-bind(getControlHeight);
+		padding: v-bind(getControlPaddingBlock) v-bind(getControlPaddingInline);
 		gap: v-bind(getControlGap);
-		line-height: 1.2;
+		line-height: 1;
 	}
 
 	.lx-tag :deep(.lx-button) {

@@ -69,7 +69,8 @@
 	const pressedState = computed(() => props.active ?? undefined);
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
 	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
-	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
+	const getControlPaddingInline = computed(() => `var(--lx-size-control-padding-inline-${props.size})`);
+	const getControlPaddingBlock = computed(() => `var(--lx-size-control-padding-block-${props.size})`);
 	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 	const getWidth = computed(() => (props.fullWidth ? '100%' : 'auto'));
@@ -90,11 +91,11 @@
 	.lx-button {
 		box-sizing: border-box;
 		font-size: v-bind(getSize);
-		line-height: 1.2;
+		line-height: 1;
 		color: v-bind(getTextColour);
 		background-color: v-bind(getBackgroundColour);
 		min-height: v-bind(getControlHeight);
-		padding: 0 v-bind(getControlPaddingX);
+		padding: v-bind(getControlPaddingBlock) v-bind(getControlPaddingInline);
 		width: v-bind(getWidth);
 		border: v-bind(getBorderThickness) solid v-bind(getBackgroundColour);
 		border-radius: v-bind(getBorderRadius);

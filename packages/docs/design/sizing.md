@@ -22,7 +22,7 @@
 			{ name: '2xl', value: '3rem', px: '48px' },
 			{ name: '3xl', value: '3.5rem', px: '56px' },
 		],
-		controlPaddingX: [
+		controlPaddingInline: [
 			{ name: '2xs', value: '0.375rem' },
 			{ name: 'xs', value: '0.5rem' },
 			{ name: 'sm', value: '0.625rem' },
@@ -31,6 +31,16 @@
 			{ name: 'xl', value: '1rem' },
 			{ name: '2xl', value: '1.25rem' },
 			{ name: '3xl', value: '1.5rem' },
+		],
+		controlPaddingBlock: [
+			{ name: '2xs', value: '0.375rem' },
+			{ name: 'xs', value: '0.375rem' },
+			{ name: 'sm', value: '0.375rem' },
+			{ name: 'md', value: '0.4375rem' },
+			{ name: 'lg', value: '0.4375rem' },
+			{ name: 'xl', value: '0.4375rem' },
+			{ name: '2xl', value: '0.4375rem' },
+			{ name: '3xl', value: '0.1875rem' },
 		],
 		controlGap: [
 			{ name: '2xs', value: '0.25rem' },
@@ -85,7 +95,7 @@ The design system uses a shared sizing scale from `2xs` to `3xl`, plus semantic 
 The sizing system is split into two layers:
 
 - primitive tokens such as `space` and `font size`
-- semantic control tokens such as `control height`, `control padding`, `control gap`, and `control icon`
+- semantic control tokens such as `control height`, `control padding inline`, `control padding block`, `control gap`, and `control icon`
 
 This keeps typography and spacing flexible while still making controls line up cleanly on the same row.
 
@@ -128,7 +138,7 @@ For example, `md` typography is `16px`, while `md` controls are `32px` tall.
 
 ## Control Heights
 
-The control height tokens define the overall outer height for aligned controls. Components such as buttons, badges, tags, and switches should use these values for their visible height.
+The control height tokens define the minimum target height for aligned controls. Text-bearing controls such as buttons, badges, tags, and details summaries should usually use these values as a `min-height`, then rely on control padding and line-height so custom content can expand cleanly when needed.
 
 <LxFlex align="start" direction="column" gap="0.5rem">
 	<LxFlex v-for="control in sizes.controlHeight" :key="control.name" align="center" class="lx-width--full">
@@ -144,12 +154,12 @@ The control height tokens define the overall outer height for aligned controls. 
 	</LxFlex>
 </LxFlex>
 
-## Control Padding X
+## Control Padding Inline
 
-The horizontal control padding tokens define the left and right padding for text-bearing controls.
+The inline control padding tokens define the left and right padding for text-bearing controls.
 
 <LxFlex align="start" direction="column" gap="0.5rem">
-	<LxFlex v-for="padding in sizes.controlPaddingX" :key="padding.name" align="center" class="lx-width--full">
+	<LxFlex v-for="padding in sizes.controlPaddingInline" :key="padding.name" align="center" class="lx-width--full">
 		<p style="flex: 1; margin: 0;">{{ padding.name }} ({{ padding.value }})</p>
 		<div style="height: 2rem; flex: 2; background-color: var(--lx-colour-surface-sunken); display: flex; align-items: center;">
 			<div
@@ -163,9 +173,33 @@ The horizontal control padding tokens define the left and right padding for text
 	</LxFlex>
 </LxFlex>
 
+## Control Padding Block
+
+The block control padding tokens define the top and bottom padding for text-bearing controls. These work with the control-height tokens so a one-line control lands on the intended size by default, while still allowing richer content to grow naturally.
+
+<LxFlex align="start" direction="column" gap="0.5rem">
+	<LxFlex v-for="padding in sizes.controlPaddingBlock" :key="padding.name" align="center" class="lx-width--full">
+		<p style="flex: 1; margin: 0;">{{ padding.name }} ({{ padding.value }})</p>
+		<div style="height: 3rem; flex: 2; background-color: var(--lx-colour-surface-sunken); display: flex; align-items: center; justify-content: center;">
+			<div
+				:style="{
+					paddingBlock: padding.value,
+					paddingInline: '0.75rem',
+					backgroundColor: 'var(--lx-colour-primary)',
+					color: 'var(--lx-colour-on-primary)',
+					borderRadius: 'var(--lx-size-radius-md)',
+					lineHeight: '1',
+				}"
+			>
+				Label
+			</div>
+		</div>
+	</LxFlex>
+</LxFlex>
+
 ## Control Gaps
 
-The control gap tokens define internal spacing between icons, labels, and other inline control content.
+The control gap tokens define internal spacing between icons, labels, and other inline control content. They are intentionally separate from the primitive `space` scale, which is meant for layout spacing such as stack gaps, margins, and section padding.
 
 <LxFlex align="start" direction="column" gap="0.5rem">
 	<LxFlex v-for="gap in sizes.controlGap" :key="gap.name" align="center" class="lx-width--full">

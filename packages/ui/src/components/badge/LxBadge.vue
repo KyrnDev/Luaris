@@ -16,7 +16,8 @@
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
 	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
-	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
+	const getControlPaddingInline = computed(() => `var(--lx-size-control-padding-inline-${props.size})`);
+	const getControlPaddingBlock = computed(() => `var(--lx-size-control-padding-block-${props.size})`);
 	const getVariant = computed(() => `var(--lx-colour-${props.variant})`);
 	const getTextColour = computed(() => `var(--lx-colour-on-${props.variant})`);
 </script>
@@ -32,9 +33,9 @@
 		text-align: center;
 		white-space: nowrap;
 		vertical-align: middle;
-		line-height: 1.2;
-		height: v-bind(getControlHeight);
-		padding: 0 v-bind(getControlPaddingX);
+		line-height: 1;
+		min-height: v-bind(getControlHeight);
+		padding: v-bind(getControlPaddingBlock) v-bind(getControlPaddingInline);
 		background-color: v-bind(getVariant);
 		color: v-bind(getTextColour);
 		font-size: v-bind(getSize);

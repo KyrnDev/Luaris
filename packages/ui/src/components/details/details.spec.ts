@@ -18,7 +18,8 @@ describe('LxDetails', () => {
 			setupState: {
 				getSize: string,
 				getControlHeight: string,
-				getControlPaddingX: string,
+				getControlPaddingInline: string,
+				getControlPaddingBlock: string,
 				getControlGap: string,
 				getContentPadding: string,
 				getBorderRadius: string,
@@ -31,7 +32,8 @@ describe('LxDetails', () => {
 
 		expect(setupState.getSize).toBe('var(--lx-font-size-lg)');
 		expect(setupState.getControlHeight).toBe('var(--lx-size-control-height-lg)');
-		expect(setupState.getControlPaddingX).toBe('var(--lx-size-control-padding-x-lg)');
+		expect(setupState.getControlPaddingInline).toBe('var(--lx-size-control-padding-inline-lg)');
+		expect(setupState.getControlPaddingBlock).toBe('var(--lx-size-control-padding-block-lg)');
 		expect(setupState.getControlGap).toBe('var(--lx-size-control-gap-lg)');
 		expect(setupState.getContentPadding).toBe('var(--lx-size-space-xl)');
 		expect(setupState.getBorderRadius).toBe('var(--lx-size-radius-lg)');

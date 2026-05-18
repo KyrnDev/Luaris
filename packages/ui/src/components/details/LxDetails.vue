@@ -64,7 +64,8 @@
 
 	const getSize = computed(() => `var(--lx-font-size-${props.size})`);
 	const getControlHeight = computed(() => `var(--lx-size-control-height-${props.size})`);
-	const getControlPaddingX = computed(() => `var(--lx-size-control-padding-x-${props.size})`);
+	const getControlPaddingInline = computed(() => `var(--lx-size-control-padding-inline-${props.size})`);
+	const getControlPaddingBlock = computed(() => `var(--lx-size-control-padding-block-${props.size})`);
 	const getControlGap = computed(() => `var(--lx-size-control-gap-${props.size})`);
 	const getContentPadding = computed(() => `var(--lx-size-space-${props.contentPadding ?? props.size})`);
 	const getContentLineHeight = computed(() => `var(--lx-font-line-height-${props.contentLineHeight})`);
@@ -123,7 +124,7 @@
 			align-items: center;
 			gap: v-bind(getControlGap);
 			cursor: pointer;
-			padding: 0 v-bind(getControlPaddingX);
+			padding: v-bind(getControlPaddingBlock) v-bind(getControlPaddingInline);
 			font-size: v-bind(getSize);
 			font-weight: var(--lx-font-weight-medium);
 			color: v-bind(getSummaryTextColour);
