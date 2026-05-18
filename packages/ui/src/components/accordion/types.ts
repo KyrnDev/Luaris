@@ -27,7 +27,7 @@ export type TLxAccordionItemProps = {
 
 export type TLxAccordionProps = {
 	multiple?: boolean,
-	connected?: boolean,
+	disconnected?: boolean,
 	variant?: TLxAccordionVariant,
 	size?: TSizes,
 	gap?: TSizes,

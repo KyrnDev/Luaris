@@ -1,5 +1,5 @@
 <template>
-	<div class="lx-accordion" :class="{ 'lx-accordion--connected': props.connected }">
+	<div class="lx-accordion" :class="{ 'lx-accordion--connected': !props.disconnected }">
 		<slot />
 	</div>
 </template>
@@ -12,7 +12,7 @@
 
 	const props = withDefaults(defineProps<TLxAccordionProps>(), {
 		multiple: false,
-		connected: true,
+		disconnected: false,
 		variant: 'raised',
 		size: 'md',
 		gap: 'md',
@@ -38,7 +38,7 @@
 		defaultBorderWidth: computed(() => props.borderWidth),
 	});
 
-	const getGap = computed(() => (props.connected ? '0' : `var(--lx-size-space-${props.gap})`));
+	const getGap = computed(() => (props.disconnected ? `var(--lx-size-space-${props.gap})` : '0'));
 </script>
 
 <style lang="scss" scoped>

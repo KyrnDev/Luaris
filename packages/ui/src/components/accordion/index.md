@@ -12,7 +12,7 @@
 
 The Accordion component is a structured set of collapsible items built with the same shared colour, sizing, and disclosure rules as the platform details component. Use it when you want related sections to coordinate as a group, either allowing one panel at a time or multiple open panels.
 
-By default, accordion items are visually connected into a single stacked control. If you want separated items instead, use `connected="false"` or compose multiple `LxDetails` components directly.
+By default, accordion items are visually connected into a single stacked control. If you want separated items instead, use `disconnected` or compose multiple `LxDetails` components directly.
 
 [[toc]]
 
@@ -23,10 +23,10 @@ By default, accordion items are visually connected into a single stacked control
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `multiple` | `boolean` | `false` | Whether multiple accordion items can stay open at the same time. |
-| `connected` | `boolean` | `true` | Whether accordion items should render as one connected stack instead of separated panels. |
+| `disconnected` | `boolean` | `false` | Whether accordion items should render as separated panels instead of a connected stack. |
 | `variant` | [TColours](/types/theme.html#type-tcolours) \| [TSurfaceColours](/types/theme.html#type-tsurfacecolours) | `raised` | The default summary surface for child items. |
 | `size` | [TSizes](/types/theme.html#type-tsizes) | `md` | The default control size for child items. |
-| `gap` | [TSizes](/types/theme.html#type-tsizes) | `md` | The vertical gap between accordion items when `connected` is `false`. |
+| `gap` | [TSizes](/types/theme.html#type-tsizes) | `md` | The vertical gap between accordion items when `disconnected` is `true`. |
 | `contentPadding` | [TSizes](/types/theme.html#type-tsizes) | `size` | The default content padding for child items. |
 | `contentLineHeight` | [TFontLineHeights](/types/theme.html#type-tfontlineheights) | `normal` | The default line-height token for child item content. |
 | `contentBackgroundColour` | [TSurfaceColours](/types/theme.html#type-tsurfacecolours) \| `transparent` | `raised`, or `transparent` when `variant="transparent"` | The default content surface for child items. |
@@ -173,7 +173,7 @@ By default, an accordion behaves as a single-open group. Set `multiple` to allow
 
 ## Connected Or Separate
 
-Accordions are connected by default so the group reads as one control. Set `connected` to `false` when you explicitly want separated cards instead.
+Accordions are connected by default so the group reads as one control. Set the `disconnected` prop when you explicitly want separated cards instead.
 
 <LxFlex direction="column" gap="xl" class="lx-margin-top--xl">
 	<LxAccordion>
@@ -188,7 +188,7 @@ Accordions are connected by default so the group reads as one control. Set `conn
 			</template>
 		</LxAccordionItem>
 	</LxAccordion>
-	<LxAccordion :connected="false" gap="md">
+	<LxAccordion disconnected gap="md">
 		<LxAccordionItem title="Separate item 1" icon="square">
 			<template #content>
 				<p>This behaves more like a curated stack of details panels.</p>
@@ -219,7 +219,7 @@ Accordions are connected by default so the group reads as one control. Set `conn
 	</LxAccordionItem>
 </LxAccordion>
 
-<LxAccordion :connected="false" gap="md">
+<LxAccordion disconnected gap="md">
 	<LxAccordionItem title="Separate item 1" icon="square">
 		<template #content>
 			<p>This behaves more like a curated stack of details panels.</p>
