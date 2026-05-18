@@ -1,14 +1,26 @@
 <template>
 	<button
 		class="lx-button"
-		:class="[`lx-button-hover--${hoverMode}`]"
+		:class="[
+			`lx-button-hover--${hoverMode}`,
+			{
+				'lx-button--loading': loading,
+			},
+		]"
 		:type="props.type"
 		:disabled="isDisabled"
 		:aria-busy="props.loading || undefined"
 		:aria-label="accessibleLabel"
 		:aria-pressed="pressedState"
 	>
-		<span v-if="props.loading" class="lx-button__spinner" aria-hidden="true" />
+		<LxIcon
+			v-if="props.loading"
+			name="spinner"
+			size="sm"
+			class="lx-button__icon lx-button__icon--loading"
+			aria-hidden="true"
+			spin
+		/>
 
 		<span v-if="(props.icon || $slots.icon) && props.iconOrder === 'left'" class="lx-button__icon" aria-hidden="true">
 			<template v-if="$slots.icon">
@@ -81,7 +93,7 @@
 		line-height: 1.2;
 		color: v-bind(getTextColour);
 		background-color: v-bind(getBackgroundColour);
-		height: v-bind(getControlHeight);
+		min-height: v-bind(getControlHeight);
 		padding: 0 v-bind(getControlPaddingX);
 		width: v-bind(getWidth);
 		border: v-bind(getBorderThickness) solid v-bind(getBackgroundColour);
@@ -98,7 +110,10 @@
 
 		&:disabled {
 			background-color: v-bind(getDisabledBackgroundColour);
-			cursor: not-allowed;
+
+			&:not(.lx-button--loading) {
+				cursor: not-allowed;
+			}
 		}
 
 		&:focus-visible {
@@ -116,6 +131,10 @@
 
 		&-hover--invert:not(:disabled):hover {
 			background-color: var(--lx-colour-transparent);
+		}
+
+		&--loading {
+			cursor: wait;
 		}
 	}
 </style>

@@ -1,6 +1,6 @@
 @use './helpers/emit-variables' as helpers;
-@use './themes/light';
-@use './themes/dark';
+@use './themes/light' as light;
+@use './themes/dark' as dark;
 @use './utils/helpers' as utils;
 @use './utils/reset';
 
@@ -10,21 +10,21 @@
 html,
 html[data-theme='light'] {
 	color-scheme: light;
-	@include helpers.lx-emit-variables(light.$theme-light);
-	@include utils.lx-emit-colour-helpers(light.$theme-light);
+	@include helpers.lx-emit-variables(light.$theme);
+	@include utils.lx-emit-colour-helpers(light.$theme);
 }
 
 html[data-theme='dark'] {
 	color-scheme: dark;
-	@include helpers.lx-emit-variables(dark.$theme-dark);
-	@include utils.lx-emit-colour-helpers(dark.$theme-dark);
+	@include helpers.lx-emit-variables(dark.$theme);
+	@include utils.lx-emit-colour-helpers(dark.$theme);
 }
 
 @media (prefers-color-scheme: dark) {
 	html:not([data-theme]) {
 		color-scheme: dark;
-		@include helpers.lx-emit-variables(dark.$theme-dark);
-		@include utils.lx-emit-colour-helpers(dark.$theme-dark);
+		@include helpers.lx-emit-variables(dark.$theme);
+		@include utils.lx-emit-colour-helpers(dark.$theme);
 	}
 }
 

@@ -208,7 +208,7 @@ The button component also supports slots for more custom content.
 
 ### Slot: Default
 
-You can use the button's default slot like a normal slot.
+You can use the default slot to provide custom content for the button label, which allows for more complex layouts or additional elements within the button.
 
 <LxButton class="lx-margin-right--sm" variant="primary">
 	Custom Label
@@ -244,6 +244,30 @@ Can allow you to add a custom icon to the button, such as an SVG or a font icon 
 	<template #icon>
 		<i class="fa-duotone fa-car lx-font-size--xl" />
 	</template>
+</LxButton>
+```
+</details>
+
+### Custom Button Design
+
+You can also use the LxButton's default slot to create more complex button designs, i.e.
+
+<LxButton class="lx-margin-top--lg lx-padding-y--sm">
+	<LxFlex direction="column" align="start" gap="0.1rem">
+		<h4 class="lx-margin--none">Some useful title</h4>
+		<p>Some inner content here.</p>
+	</LxFlex>
+</LxButton>
+
+<details>
+<summary>Show code</summary>
+
+```html
+<LxButton class="lx-margin-top--lg lx-padding-y--sm">
+	<LxFlex direction="column" align="start" gap="0.1rem">
+		<h4 class="lx-margin--none">Some useful title</h4>
+		<p>Some inner content here.</p>
+	</LxFlex>
 </LxButton>
 ```
 </details>

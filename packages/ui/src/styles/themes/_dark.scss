@@ -1,85 +1,82 @@
 @use 'sass:map';
-@use 'sass:color';
-@use '../helpers/contrast' as contrast;
-@use './light';
+@use './light' as light;
 
-$colour-primary: #7aa2c7;
-$colour-secondary: #8fa0b3;
-$colour-accent: #f2a65a;
-$colour-info: #56b6d7;
-$colour-success: #4eb38a;
-$colour-warning: #d9a441;
-$colour-danger: #f06a6a;
-$colour-white: #ffffff;
-$colour-black: #000000;
-
-$theme-dark: map.deep-merge(light.$theme-light, (
+$theme: map.deep-merge(light.$theme, (
 	'colour': (
-		'primary': $colour-primary,
-		'secondary': $colour-secondary,
-		'accent': $colour-accent,
-		'info': $colour-info,
-		'success': $colour-success,
-		'warning': $colour-warning,
-		'danger': $colour-danger,
-		'white': $colour-white,
-		'black': $colour-black,
-		'text': $colour-white,
+		'primary': #7aa2c7,
+		'secondary': #8fa0b3,
+		'accent': #f2a65a,
+		'info': #56b6d7,
+		'success': #4eb38a,
+		'warning': #d9a441,
+		'danger': #f06a6a,
+		'white': #ffffff,
+		'black': #000000,
+		'text': #ffffff,
 		'transparent': transparent,
-		'on': (
-			'primary': contrast.lx-contrast-colour($colour-primary),
-			'secondary': contrast.lx-contrast-colour($colour-secondary),
-			'accent': contrast.lx-contrast-colour($colour-accent),
-			'info': contrast.lx-contrast-colour($colour-info),
-			'success': contrast.lx-contrast-colour($colour-success),
-			'warning': contrast.lx-contrast-colour($colour-warning),
-			'danger': contrast.lx-contrast-colour($colour-danger),
-			'white': contrast.lx-contrast-colour($colour-white),
-			'black': contrast.lx-contrast-colour($colour-black),
-			'transparent': contrast.lx-contrast-colour($colour-black),
-		),
-		'disabled': (
-			'primary': rgba(color.scale($colour-primary, $lightness: -70%), 0.8),
-			'secondary': rgba(color.scale($colour-secondary, $lightness: -70%), 0.8),
-			'accent': rgba(color.scale($colour-accent, $lightness: -70%), 0.8),
-			'info': rgba(color.scale($colour-info, $lightness: -70%), 0.8),
-			'success': rgba(color.scale($colour-success, $lightness: -70%), 0.8),
-			'warning': rgba(color.scale($colour-warning, $lightness: -70%), 0.8),
-			'danger': rgba(color.scale($colour-danger, $lightness: -70%), 0.8),
-			'white': rgba(color.scale($colour-white, $lightness: -70%), 0.8),
-			'black': rgba(color.scale($colour-black, $lightness: -70%), 0.8),
-			'transparent': color.scale(transparent, $lightness: -70%),
-		),
-		'active': (
-			'primary': color.scale($colour-primary, $lightness: 30%),
-			'secondary': color.scale($colour-secondary, $lightness: 30%),
-			'accent': color.scale($colour-accent, $lightness: 30%),
-			'info': color.scale($colour-info, $lightness: 30%),
-			'success': color.scale($colour-success, $lightness: 30%),
-			'warning': color.scale($colour-warning, $lightness: 30%),
-			'danger': color.scale($colour-danger, $lightness: 30%),
-			'white': color.scale($colour-white, $lightness: -30%),
-			'black': color.scale($colour-black, $lightness: 30%),
-			'transparent': color.scale(transparent, $lightness: 30%),
-		),
-		'hover': (
-			'primary': color.scale($colour-primary, $lightness: 30%),
-			'secondary': color.scale($colour-secondary, $lightness: 30%),
-			'accent': color.scale($colour-accent, $lightness: 30%),
-			'info': color.scale($colour-info, $lightness: 30%),
-			'success': color.scale($colour-success, $lightness: 30%),
-			'warning': color.scale($colour-warning, $lightness: 30%),
-			'danger': color.scale($colour-danger, $lightness: 30%),
-			'white': color.scale($colour-white, $lightness: -30%),
-			'black': color.scale($colour-black, $lightness: 30%),
-			'transparent': color.scale(transparent, $lightness: 30%),
-		),
+
 		'surface': (
 			'base': #18191a,
 			'raised': #222227,
 			'sunken': #0b1118,
 			'overlay': rgb(2 8 23 / 0.76),
 			'border': #2d3b4b,
+		),
+
+		'on': (
+			'primary': contrast-color(var(--lx-colour-primary)),
+			'secondary': contrast-color(var(--lx-colour-secondary)),
+			'accent': contrast-color(var(--lx-colour-accent)),
+			'info': contrast-color(var(--lx-colour-info)),
+			'success': contrast-color(var(--lx-colour-success)),
+			'warning': contrast-color(var(--lx-colour-warning)),
+			'danger': contrast-color(var(--lx-colour-danger)),
+			'white': contrast-color(var(--lx-colour-white)),
+			'black': contrast-color(var(--lx-colour-black)),
+			'text': contrast-color(var(--lx-colour-text)),
+			'transparent': var(--lx-colour-text),
+		),
+
+		'disabled': (
+			'primary': color-mix(in srgb, var(--lx-colour-primary), black 50%),
+			'secondary': color-mix(in srgb, var(--lx-colour-secondary), black 50%),
+			'accent': color-mix(in srgb, var(--lx-colour-accent), black 50%),
+			'info': color-mix(in srgb, var(--lx-colour-info), black 50%),
+			'success': color-mix(in srgb, var(--lx-colour-success), black 50%),
+			'warning': color-mix(in srgb, var(--lx-colour-warning), black 50%),
+			'danger': color-mix(in srgb, var(--lx-colour-danger), black 50%),
+			'white': color-mix(in srgb, var(--lx-colour-white), black 50%),
+			'black': color-mix(in srgb, var(--lx-colour-black), black 50%),
+			'text': color-mix(in srgb, var(--lx-colour-text), black 50%),
+			'transparent': transparent,
+		),
+
+		'active': (
+			'primary': color-mix(in srgb, var(--lx-colour-primary), black 30%),
+			'secondary': color-mix(in srgb, var(--lx-colour-secondary), black 30%),
+			'accent': color-mix(in srgb, var(--lx-colour-accent), black 30%),
+			'info': color-mix(in srgb, var(--lx-colour-info), black 30%),
+			'success': color-mix(in srgb, var(--lx-colour-success), black 30%),
+			'warning': color-mix(in srgb, var(--lx-colour-warning), black 30%),
+			'danger': color-mix(in srgb, var(--lx-colour-danger), black 30%),
+			'white': color-mix(in srgb, var(--lx-colour-white), black -30%),
+			'black': color-mix(in srgb, var(--lx-colour-black), black 30%),
+			'text': color-mix(in srgb, var(--lx-colour-text), black 30%),
+			'transparent': transparent,
+		),
+
+		'hover': (
+			'primary': color-mix(in srgb, var(--lx-colour-primary), black 30%),
+			'secondary': color-mix(in srgb, var(--lx-colour-secondary), black 30%),
+			'accent': color-mix(in srgb, var(--lx-colour-accent), black 30%),
+			'info': color-mix(in srgb, var(--lx-colour-info), black 30%),
+			'success': color-mix(in srgb, var(--lx-colour-success), black 30%),
+			'warning': color-mix(in srgb, var(--lx-colour-warning), black 30%),
+			'danger': color-mix(in srgb, var(--lx-colour-danger), black 30%),
+			'white': color-mix(in srgb, var(--lx-colour-white), black -30%),
+			'black': color-mix(in srgb, var(--lx-colour-black), black 30%),
+			'text': color-mix(in srgb, var(--lx-colour-text), black 30%),
+			'transparent': transparent,
 		),
 	),
 ));
