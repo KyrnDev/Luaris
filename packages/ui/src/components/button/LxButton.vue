@@ -76,6 +76,7 @@
 	const getWidth = computed(() => (props.fullWidth ? '100%' : 'auto'));
 	const getBackgroundColour = computed(() => `var(--lx-colour-${props.variant})`);
 	const getHoverBackgroundColour = computed(() => `var(--lx-colour-hover-${props.variant})`);
+	const getInvertHoverTextColour = computed(() => `var(--lx-colour-${props.variant})`);
 	const getDisabledBackgroundColour = computed(() => `var(--lx-colour-disabled-${props.variant})`);
 	const getBorderThickness = computed(() => (props.hoverMode === 'invert' ? `var(--lx-size-border-width-thick)` : '0'));
 
@@ -106,7 +107,9 @@
 		cursor: pointer;
 		min-width: 24px;
 		transition:
+			color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
 			background-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
+			border-color var(--lx-motion-duration-fast) var(--lx-motion-easing-standard),
 			box-shadow var(--lx-motion-duration-fast) var(--lx-motion-easing-standard);
 
 		&:disabled {
@@ -131,7 +134,9 @@
 		}
 
 		&-hover--invert:not(:disabled):hover {
+			color: v-bind(getInvertHoverTextColour);
 			background-color: var(--lx-colour-transparent);
+			border-color: v-bind(getInvertHoverTextColour);
 		}
 
 		&--loading {
