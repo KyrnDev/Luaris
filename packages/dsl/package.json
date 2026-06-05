@@ -1,0 +1,22 @@
+{
+	"name": "@luaris/dsl",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"exports": {
+		".": {
+			"types": "./src/index.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"build": "bun run scripts/generate.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/node": "^25.9.1"
+	},
+	"peerDependencies": {
+		"typescript": "^6"
+	}
+}

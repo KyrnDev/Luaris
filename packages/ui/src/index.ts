@@ -10,5 +10,4 @@ export * from './components/icon';
 export * from './components/page';
 export * from './components/switch';
 export * from './components/tag';
-export * from './components/theme-switcher';
 export * from './directives';

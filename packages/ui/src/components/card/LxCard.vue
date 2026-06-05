@@ -1,17 +1,17 @@
 <template>
-	<div class="lx-card">
-		<div v-if="$slots.header" class="lx-card__header">
+	<section class="lx-card">
+		<header v-if="$slots.header" class="lx-card__header">
 			<slot name="header" />
-		</div>
+		</header>
 
 		<div class="lx-card__content">
 			<slot />
 		</div>
 
-		<div v-if="$slots.footer" class="lx-card__footer">
+		<footer v-if="$slots.footer" class="lx-card__footer">
 			<slot name="footer" />
-		</div>
-	</div>
+		</footer>
+	</section>
 </template>
 
 <script setup lang="ts">
