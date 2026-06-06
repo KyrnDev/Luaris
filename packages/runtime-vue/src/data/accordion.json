@@ -1,0 +1,81 @@
+{
+  "key": "accordion1",
+  "component": "LxAccordion",
+  "props": {
+    "multiple": false,
+    "disconnected": false,
+    "variant": "raised",
+    "size": "md",
+    "gap": "md",
+    "contentPadding": "md",
+    "contentLineHeight": "normal",
+    "contentBackgroundColour": "transparent",
+    "borderRadius": "md",
+    "borderWidth": "thin"
+  },
+  "attributes": {},
+  "slots": {
+    "default": [
+      {
+        "key": "item1",
+        "component": "LxAccordionItem",
+        "props": {
+          "title": "",
+          "icon": "",
+          "content": "",
+          "variant": "raised",
+          "size": "md",
+          "contentPadding": "md",
+          "contentLineHeight": "normal",
+          "contentBackgroundColour": "transparent",
+          "borderRadius": "md",
+          "borderWidth": "thin"
+        },
+        "attributes": {},
+        "slots": {
+          "default": [
+            {
+              "key": "text",
+              "component": "p",
+              "props": {},
+              "attributes": {},
+              "slots": {}
+            }
+          ],
+          "summary": [],
+          "content": []
+        }
+      },
+      {
+        "key": "item2",
+        "component": "LxAccordionItem",
+        "props": {
+          "title": "",
+          "icon": "",
+          "content": "",
+          "variant": "raised",
+          "size": "md",
+          "contentPadding": "md",
+          "contentLineHeight": "normal",
+          "contentBackgroundColour": "transparent",
+          "borderRadius": "md",
+          "borderWidth": "thin"
+        },
+        "attributes": {},
+        "slots": {
+          "default": [
+            {
+              "key": "text",
+              "component": "p",
+              "props": {},
+              "attributes": {},
+              "slots": {}
+            }
+          ],
+          "summary": [],
+          "content": []
+        }
+      }
+    ]
+  }
+}

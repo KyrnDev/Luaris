@@ -7,7 +7,7 @@ export class LxComponent<
 	TAttributes = HTMLAttributes,
 	TSlots = Record<string, ILxComponentBase[]>,
 > {
-	public component!: TComponent;
+	public component: TComponent = 'p' as TComponent;
 	public key: string;
 	public props: TProps = {} as TProps;
 	public attributes: TAttributes = {} as TAttributes;

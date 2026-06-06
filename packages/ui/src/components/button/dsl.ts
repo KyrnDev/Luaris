@@ -3,7 +3,7 @@ import type { TLxButtonProps } from './types';
 import type { ButtonHTMLAttributes } from 'vue';
 
 export type ILxButtonComponent = ILxComponentBase & {
-	component: 'button',
+	component: 'LxButton',
 	props: TLxButtonProps,
 	attributes: ButtonHTMLAttributes,
 	slots: {

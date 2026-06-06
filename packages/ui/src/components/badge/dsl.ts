@@ -2,7 +2,7 @@ import type { ILxComponentBase } from '../../dsl/component';
 import type { TLxBadgeProps } from './types';
 
 export type TLxBadgeComponent = ILxComponentBase & {
-	component: 'badge',
+	component: 'LxBadge',
 	props: TLxBadgeProps,
 	slots: {
 		default: ILxComponentBase[],

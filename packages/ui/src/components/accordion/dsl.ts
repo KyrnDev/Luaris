@@ -3,7 +3,7 @@ import type { TLxAccordionProps, TLxAccordionItemProps } from './types';
 import type { DetailsHTMLAttributes } from 'vue';
 
 export type ILxAccordionComponent = ILxComponentBase & {
-	component: 'accordion',
+	component: 'LxAccordion',
 	props: TLxAccordionProps,
 	slots: {
 		default: ILxComponentBase[],
@@ -11,7 +11,7 @@ export type ILxAccordionComponent = ILxComponentBase & {
 };
 
 export type ILxAccordionItemComponent = ILxComponentBase & {
-	component: 'accordion-item',
+	component: 'LxAccordionItem',
 	props: TLxAccordionItemProps,
 	attributes: DetailsHTMLAttributes,
 	slots: {

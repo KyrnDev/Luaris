@@ -2,7 +2,7 @@ import type { ILxComponentBase } from '../../dsl/component';
 import type { TLxCardProps } from './types';
 
 export type ILxCardComponent = ILxComponentBase & {
-	component: 'card',
+	component: 'LxCard',
 	props: TLxCardProps,
 	slots: {
 		header: ILxComponentBase[],

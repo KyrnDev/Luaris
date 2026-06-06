@@ -2,7 +2,7 @@ import type { ILxComponentBase } from '../../dsl/component';
 import type { TLxSwitchProps } from './types';
 
 export type ILxSwitchComponent = ILxComponentBase & {
-	component: 'switch',
+	component: 'LxSwitch',
 	props: TLxSwitchProps,
 	slots: undefined,
 };

@@ -20,6 +20,9 @@ const optionalEntries = {
 	...(existsSync(resolve(__dirname, 'src/directives/index.ts'))
 		? { directives: resolve(__dirname, 'src/directives/index.ts') }
 		: {}),
+	...(existsSync(resolve(__dirname, 'src/register.ts'))
+		? { register: resolve(__dirname, 'src/register.ts') }
+		: {}),
 };
 
 export default defineConfig({

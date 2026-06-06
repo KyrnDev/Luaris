@@ -3,7 +3,7 @@ import type { TLxDetailsProps } from './types';
 import type { DetailsHTMLAttributes } from 'vue';
 
 export type ILxDetailsComponent = ILxComponentBase & {
-	component: 'details',
+	component: 'LxDetails',
 	props: TLxDetailsProps,
 	attributes: DetailsHTMLAttributes,
 	slots: {

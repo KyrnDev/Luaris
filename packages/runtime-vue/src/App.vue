@@ -1,9 +1,8 @@
 <template>
-	<LxButton>
-		Hello
-	</LxButton>
+	<LxRuntime :schema="schema" />
 </template>
 
 <script setup lang="ts">
-	import { LxButton } from '@luaris/ui';
+	import schema from './data/accordion.json' with { type: 'json' };
+	import LxRuntime from './components/LxRuntime.vue';
 </script>

@@ -2,7 +2,7 @@ import type { ILxComponentBase } from '../../dsl/component';
 import type { TLxPageProps } from './types';
 
 export type ILxPageComponent = ILxComponentBase & {
-	component: 'page',
+	component: 'LxPage',
 	props: TLxPageProps,
 	slots: {
 		'banner': ILxComponentBase[],
