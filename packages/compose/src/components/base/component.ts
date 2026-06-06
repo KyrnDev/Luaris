@@ -1,11 +1,11 @@
 import type { HTMLAttributes } from 'vue';
-import type { ILxComponentBase } from '@luaris/dsl';
+import type { TLxSlotChild } from '@luaris/dsl';
 
 export class LxComponent<
 	TComponent extends string = string,
 	TProps = Partial<HTMLElement>,
 	TAttributes = HTMLAttributes,
-	TSlots = Record<string, ILxComponentBase[]>,
+	TSlots = Record<string, TLxSlotChild[]>,
 > {
 	public component: TComponent = 'p' as TComponent;
 	public key: string;

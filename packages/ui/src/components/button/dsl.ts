@@ -1,4 +1,4 @@
-import type { ILxComponentBase } from '../../dsl/component';
+import type { ILxComponentBase, TLxSlotChild } from '../../dsl/component';
 import type { TLxButtonProps } from './types';
 import type { ButtonHTMLAttributes } from 'vue';
 
@@ -7,7 +7,7 @@ export type ILxButtonComponent = ILxComponentBase & {
 	props: TLxButtonProps,
 	attributes: ButtonHTMLAttributes,
 	slots: {
-		icon: ILxComponentBase[],
-		default: ILxComponentBase[],
+		icon: TLxSlotChild[],
+		default: TLxSlotChild[],
 	},
 };

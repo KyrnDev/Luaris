@@ -1,4 +1,4 @@
-import type { ILxComponentBase } from '../../dsl/component';
+import type { ILxComponentBase, TLxSlotChild } from '../../dsl/component';
 import type { TLxAccordionProps, TLxAccordionItemProps } from './types';
 import type { DetailsHTMLAttributes } from 'vue';
 
@@ -6,7 +6,7 @@ export type ILxAccordionComponent = ILxComponentBase & {
 	component: 'LxAccordion',
 	props: TLxAccordionProps,
 	slots: {
-		default: ILxComponentBase[],
+		default: TLxSlotChild[],
 	},
 };
 
@@ -15,8 +15,8 @@ export type ILxAccordionItemComponent = ILxComponentBase & {
 	props: TLxAccordionItemProps,
 	attributes: DetailsHTMLAttributes,
 	slots: {
-		default: ILxComponentBase[],
-		summary: ILxComponentBase[],
-		content: ILxComponentBase[],
+		default: TLxSlotChild[],
+		summary: TLxSlotChild[],
+		content: TLxSlotChild[],
 	},
 };

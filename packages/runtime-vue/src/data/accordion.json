@@ -39,7 +39,11 @@
               "component": "p",
               "props": {},
               "attributes": {},
-              "slots": {}
+              "slots": {
+                "default": [
+                  "Hello from a paragraph"
+                ]
+              }
             }
           ],
           "summary": [],
@@ -64,13 +68,7 @@
         "attributes": {},
         "slots": {
           "default": [
-            {
-              "key": "text",
-              "component": "p",
-              "props": {},
-              "attributes": {},
-              "slots": {}
-            }
+            "Direct accordion body content"
           ],
           "summary": [],
           "content": []

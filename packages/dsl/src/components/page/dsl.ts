@@ -1,20 +1,20 @@
-import type { ILxComponentBase } from '../../dsl/component';
+import type { ILxComponentBase, TLxSlotChild } from '../../dsl/component';
 import type { TLxPageProps } from './types';
 
 export type ILxPageComponent = ILxComponentBase & {
 	component: 'LxPage',
 	props: TLxPageProps,
 	slots: {
-		'banner': ILxComponentBase[],
-		'header': ILxComponentBase[],
-		'sub-header': ILxComponentBase[],
-		'navigation-header': ILxComponentBase[],
-		'navigation': ILxComponentBase[],
-		'navigation-footer': ILxComponentBase[],
-		'main-header': ILxComponentBase[],
-		'default': ILxComponentBase[],
-		'main-footer': ILxComponentBase[],
-		'aside': ILxComponentBase[],
-		'footer': ILxComponentBase[],
+		'banner': TLxSlotChild[],
+		'header': TLxSlotChild[],
+		'sub-header': TLxSlotChild[],
+		'navigation-header': TLxSlotChild[],
+		'navigation': TLxSlotChild[],
+		'navigation-footer': TLxSlotChild[],
+		'main-header': TLxSlotChild[],
+		'default': TLxSlotChild[],
+		'main-footer': TLxSlotChild[],
+		'aside': TLxSlotChild[],
+		'footer': TLxSlotChild[],
 	},
 };

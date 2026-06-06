@@ -5,23 +5,43 @@
 		component: string,
 		props?: Record<string, unknown>,
 		attributes?: Record<string, unknown>,
-		slots?: Record<string, SchemaNode[]>,
+		slots?: Record<string, Array<SchemaNode | string>>,
 	};
+
+	type SchemaChild = SchemaNode | string;
 
 	const props = defineProps<{
 		schema: SchemaNode,
 	}>();
 
-	const renderNode = (node: SchemaNode) => {
-		const component = resolveComponent(node.component);
+	const isNativeElement = (component: string) => /^[a-z]/.test(component);
 
+	const renderChild = (child: SchemaChild) => {
+		if (typeof child === 'string') {
+			return child;
+		}
+
+		return h(LxRuntime, {
+			schema: child,
+		});
+	};
+
+	const renderNode = (node: SchemaNode) => {
+		if (isNativeElement(node.component)) {
+			return h(node.component, {
+				...node.attributes,
+				...node.props,
+			}, (node.slots?.default ?? []).map(renderChild));
+		}
+
+		const component = resolveComponent(node.component);
 		const slots = Object.fromEntries(
-			Object.entries(node.slots ?? {}).map(([slotName, children]) => [
-				slotName,
-				() => children.map(child => h(LxRuntime, {
-					schema: child,
-				})),
-			]),
+			Object.entries(node.slots ?? {})
+				.filter(([, children]) => children.length > 0)
+				.map(([slotName, children]) => [
+					slotName,
+					() => children.map(renderChild),
+				]),
 		);
 
 		return h(component, {

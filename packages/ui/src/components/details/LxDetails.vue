@@ -90,7 +90,7 @@
 	});
 
 	const handleSummaryClick = (event: MouseEvent) => {
-		if (!props.disabled && hasSummary.value) return;
+		if (!props.disabled) return;
 		event.preventDefault();
 	};
 
@@ -98,7 +98,7 @@
 		const element = event.currentTarget as HTMLDetailsElement | null;
 		if (!element) return;
 
-		if (props.disabled || !hasSummary.value) {
+		if (props.disabled) {
 			element.open = false;
 			open.value = false;
 			return;
